@@ -1,5 +1,5 @@
 ---
-title: "Documento Técnico N°5: Medición de la contribución económica del turismo"
+title: "Documento Técnico N°6: Ciencia de Datos para el Turismo"
 subtitle: "El turismo desde la perspectiva de la oferta: actividad y empleo" 
 author: "Dirección Nacional de Mercados y Estadísticas -  Subsecretaría de Desarrollo Estratégico"
 date: "`r format(Sys.Date(), format = '%d de %B de %Y')`"
@@ -9,7 +9,7 @@ classoption: openany
 bibliography: [book.bib, packages.bib]
 csl: estudios-hispanicos.csl
 link-citations: yes
-description: "Ciencia de Datos para Turismo"
+description: "Ciencia de Datos para el Turismo"
 ---
 
 # Presentación {.unnumbered}
