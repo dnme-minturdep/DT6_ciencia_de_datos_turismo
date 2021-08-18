@@ -1,0 +1,27 @@
+bookdown::gitbook:
+  split_by: "section"       # Páginas por secciones (en lugar de capítulos)
+  split_bib: no   # No agrega bliblio al final de cada capitulo
+  includes:
+    before_body: assets/hero-image.html
+  css: style.css
+  pandoc_args: [ "--csl", "estudios-hispanicos.csl" ]
+  config:
+    toc:
+      before: |
+        <li class="toc-logo"><a href="./"><img src="imagenes/escudo_mintur.png"></a></li>
+      after: |
+        <li><a href="http://datos.yvera.gob.ar/" target="blank">Datos Abiertos de Turismo</a></li>
+        <li><a href="http://www.yvera.gob.ar/estadistica" target="blank">Estadísticas de Turismo</a></li>
+    download: ["pdf", "epub"]
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+    before_body: before_body.tex
+  latex_engine: xelatex
+  citation_package: none
+  pandoc_args: [ "--csl", "estudios-hispanicos.csl" ]
+  keep_tex: yes
+bookdown::epub_book: 
+  pandoc_args: [ "--csl", "estudios-hispanicos.csl" ]
+  cover_image: portada6.jpg
+
