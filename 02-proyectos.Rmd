@@ -1,4 +1,4 @@
-## Trabajar con proyectos en RStudio
+# Trabajar con proyectos en RStudio
 
 Trabajar con proyectos de RStudio no solo hace tus análisis más ordenados y reproducibles, también hacen tu vida más simple. 
 
