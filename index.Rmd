@@ -32,9 +32,9 @@ Además de este, se encuentra disponible una serie de documentos técnicos que a
 
 La ciencia de datos es una disciplina que ha brindado nuevas y maravillosas posibilidades a muchas industrias por medio de la explotación de datos. Junto con estas posibilidades, también ha traído consigo cambios y desafíos constantes. La industria del turismo no es una excepción.
 
-En este documento técnico realizaremos una introducción al concepto de ciencia de datos y otros conceptos relacionados (como aprendizaje automático e inteligencia artificial), el proceso de la ciencia de datos y el lenguaje de programación R como la caja de herramientas princiaples para poder llevar adelante cada tarea y etapa de este proceso.
+En este documento técnico realizaremos una introducción al concepto de ciencia de datos y su proceso. Introduciremos el lenguaje de programación R como la caja de herramientas principales para poder llevar adelante cada tarea y etapa de este proceso.
 
-El documento se divide en xx capítulos, el primero es más teórico-conceptual y los demás presentan ejemplos prácticos y ejercicios para introducir y practicar los conceptos mencionados.
+El documento se divide en xx capítulos con ejemplos prácticos y ejercicios (desafíos) para introducir y practicar los conceptos mencionados.
 
 
 ```{r include=FALSE}
