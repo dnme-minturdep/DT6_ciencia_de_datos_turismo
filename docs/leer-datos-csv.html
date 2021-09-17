@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.1 Leer datos csv | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
+  <meta name="description" content="Ciencia de Datos para el Turismo" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.1 Leer datos csv | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Ciencia de Datos para el Turismo" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.1 Leer datos csv | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  
+  <meta name="twitter:description" content="Ciencia de Datos para el Turismo" />
+  
+
+<meta name="author" content="Dirección Nacional de Mercados y Estadísticas - Subsecretaría de Desarrollo Estratégico" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lectura-de-datos-ordenados.html"/>
+<link rel="next" href="vectores.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="imagenes/escudo_mintur.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#documento-técnico-nº6---resumen"><i class="fa fa-check"></i>Documento Técnico Nº6 - Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a><ul>
+<li class="chapter" data-level="1.1" data-path="por-qué-r.html"><a href="por-qué-r.html"><i class="fa fa-check"></i><b>1.1</b> ¿Por qué R?</a></li>
+<li class="chapter" data-level="1.2" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#orientándose-en-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Orientándose en RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#hablando-con-r"><i class="fa fa-check"></i><b>1.2.2</b> Hablando con R</a></li>
+<li class="chapter" data-level="1.2.3" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#extendiendo-r"><i class="fa fa-check"></i><b>1.2.3</b> Extendiendo R</a></li>
+<li class="chapter" data-level="1.2.4" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#buscando-ayuda"><i class="fa fa-check"></i><b>1.2.4</b> Buscando ayuda</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#qué-ventajas-tiene"><i class="fa fa-check"></i><b>2.0.1</b> ¿Qué ventajas tiene?</a></li>
+<li class="chapter" data-level="2.0.2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#abrir-un-proyecto"><i class="fa fa-check"></i><b>2.0.2</b> Abrir un proyecto</a></li>
+<li class="chapter" data-level="2.0.3" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#cómo-se-organiza"><i class="fa fa-check"></i><b>2.0.3</b> ¿Cómo se organiza?</a></li>
+<li class="chapter" data-level="2.0.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#borrón-y-cuenta-nueva-todos-los-días"><i class="fa fa-check"></i><b>2.0.4</b> Borrón y cuenta nueva… todos los días!</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a {RMarkdown}</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#creando-archivos-.rmd"><i class="fa fa-check"></i><b>3.0.1</b> Creando archivos .Rmd</a></li>
+<li class="chapter" data-level="3.0.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#estructura-de-un-.rmd"><i class="fa fa-check"></i><b>3.0.2</b> Estructura de un .Rmd</a></li>
+<li class="chapter" data-level="3.0.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#markdown"><i class="fa fa-check"></i><b>3.0.3</b> Markdown</a></li>
+<li class="chapter" data-level="3.0.4" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#bloques-de-código"><i class="fa fa-check"></i><b>3.0.4</b> Bloques de código</a></li>
+<li class="chapter" data-level="3.0.5" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#texto-en-línea"><i class="fa fa-check"></i><b>3.0.5</b> Texto en línea</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a><ul>
+<li class="chapter" data-level="4.1" data-path="leer-datos-csv.html"><a href="leer-datos-csv.html"><i class="fa fa-check"></i><b>4.1</b> Leer datos csv</a></li>
+<li class="chapter" data-level="4.2" data-path="vectores.html"><a href="vectores.html"><i class="fa fa-check"></i><b>4.2</b> Vectores</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="vectores.html"><a href="vectores.html#vectorización"><i class="fa fa-check"></i><b>4.2.1</b> Vectorización</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="leer-datos-de-excel.html"><a href="leer-datos-de-excel.html"><i class="fa fa-check"></i><b>4.3</b> Leer datos de excel</a></li>
+<li class="chapter" data-level="4.4" data-path="formatos-de-tablas.html"><a href="formatos-de-tablas.html"><i class="fa fa-check"></i><b>4.4</b> Formatos de tablas</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="http://datos.yvera.gob.ar/" target="blank">Datos Abiertos de Turismo</a></li>
+<li><a href="http://www.yvera.gob.ar/estadistica" target="blank">Estadísticas de Turismo</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documento Técnico N°6: Ciencia de Datos para el Turismo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="imagenes/cabezal.png">
+</div>
+<div id="leer-datos-csv" class="section level2">
+<h2><span class="header-section-number">4.1</span> Leer datos csv</h2>
+<p>Existen muchas funciones distintas para leer datos dependiendo del formato en el que están guardados. Para datos tabulares, la forma más útil es el formato csv, que es un archivo de texto plano con datos separados por coma.</p>
+<p>Para importar datos hace falta escribir el código correspondiente pero también podés aprovechar el entorno gráfico de RStudio:</p>
+<div class="alert alert-secondary">
+<p>File → Import Dataset → From Text (readr)…</p>
+</div>
+<p>Esto nos va abrir una ventana donde podemos elegir el archivo que queremos importar (en este caso el archivo <code>paises.csv</code> que está dentro de la capeta <code>datos</code> del proyecto) y otros detalles.</p>
+<div class="figure">
+<img src="img/importar-paises.png" alt="" />
+<p class="caption">Diálogo de importar datos</p>
+</div>
+<p>En la pantalla principal vas a poder previsualizar los datos y ver que pinta tienen. Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos <code>paises</code>), si la primera fila contiene los nombres de las columnas (<code>First Row as Names</code>), qué delimitador tienen los datos (en este caso <code>comma</code>, pero podría ser punto y coma u otro), etc…</p>
+<p>Y abajo a la derecha es el código que vas a necesitar para efectivamente importar los datos. Podrías apretar el botón “Import” para leer los datos pero si bien es posible, al mismo tiempo esas líneas de código no se guardan en ningún lado y entonces nuestro trabajo luego no se puede reproducir desde un script. Por eso, te proponemos que copies ese código, cierres esa ventana con el botón “Cancel”, y pegues el código en el archivo donde estés trabajando. Cuando lo ejecutes, se va a generar la variable <code>paises</code> con los datos.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="leer-datos-csv.html#cb1-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb1-2"><a href="leer-datos-csv.html#cb1-2"></a>paises &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   pais = col_character(),
+##   continente = col_character(),
+##   anio = col_double(),
+##   esperanza_de_vida = col_double(),
+##   poblacion = col_double(),
+##   pib_per_capita = col_double()
+## )</code></pre>
+<div class="alert alert-success">
+<p><strong>Nota</strong>: Notar que en este caso el código para leer los datos consta de dos líneas. La primera carga el paquete <code>readr</code> y el segundo usa la función <code>read_csv()</code> (del paquete readr) para leer el archivo .csv.
+No es necesario cargar el paquete cada vez que vas a leer un archivo, pero asegurate de incluir esta línea al comienzo de tu archivo.</p>
+</div>
+<div class="alert alert-success">
+<p><strong>Nota</strong>: La interfaz de usuario de RStudio sirve para autogenerar el código que lee el archivo. Una vez que lo tenés, no necesitás abrirla de nuevo.</p>
+</div>
+<p>Todo ese texto naranja/rojo es intimidante pero no te preocupes, es sólo un mensaje que nos informa que los datos se leyeron y qué tipo de dato tiene cada columna. Podemos explorar la estructura de la variable <code>paises</code> usando la función <code>str()</code> (de <em>structure</em> en inglés).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="leer-datos-csv.html#cb3-1"></a><span class="kw">str</span>(paises)</span></code></pre></div>
+<pre><code>## tibble [1,704 x 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ pais             : chr [1:1704] &quot;Afganistán&quot; &quot;Afganistán&quot; &quot;Afganistán&quot; &quot;Afganistán&quot; ...
+##  $ continente       : chr [1:1704] &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; ...
+##  $ anio             : num [1:1704] 1952 1957 1962 1967 1972 ...
+##  $ esperanza_de_vida: num [1:1704] 28.8 30.3 32 34 36.1 ...
+##  $ poblacion        : num [1:1704] 8425333 9240934 10267083 11537966 13079460 ...
+##  $ pib_per_capita   : num [1:1704] 779 821 853 836 740 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   pais = col_character(),
+##   ..   continente = col_character(),
+##   ..   anio = col_double(),
+##   ..   esperanza_de_vida = col_double(),
+##   ..   poblacion = col_double(),
+##   ..   pib_per_capita = col_double()
+##   .. )</code></pre>
+<p>Esto nos dice un montón. La primera línea dice que es una <code>tibble</code>, que es un caso especial de la estructura de datos tabular básica de R llamada <code>data.frame</code>. Tiene 1704 filas (las <strong>observaciones</strong>) y 6 columnas (o <strong>variables</strong> que describen las observaciones). Las siguientes líneas nos dicen los nombres de las columnas (“pais”, “continente”, “anio”, “esperanza_de_vida”, “poblacion” y “pbi_per_capita”), su tipo de dato (<code>chr</code> o <code>num</code>), la longitud (<code>[1:1704]</code>) y sus primeros elementos. Cada columna de la tabla <code>paises</code> es un <strong>vector</strong>. Dado que los vectores son como los “ladrillos” que hacen a los data.frames, merecen una atención especial.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lectura-de-datos-ordenados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vectores.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["DT6.pdf", "DT6.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

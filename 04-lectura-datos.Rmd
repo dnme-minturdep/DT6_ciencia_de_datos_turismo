@@ -1,0 +1,221 @@
+# Lectura de datos ordenados
+
+## Leer datos csv
+
+Existen muchas funciones distintas para leer datos dependiendo del formato en el que están guardados. Para datos tabulares, la forma más útil es el formato csv, que es un archivo de texto plano con datos separados por coma. 
+
+Para importar datos hace falta escribir el código correspondiente pero también podés aprovechar el entorno gráfico de RStudio:
+
+::: {.alert .alert-secondary}
+File → Import Dataset → From Text (readr)...
+:::
+
+Esto nos va abrir una ventana donde podemos elegir el archivo que queremos importar (en este caso el archivo `paises.csv` que está dentro de la capeta `datos` del proyecto) y otros detalles.
+
+![Diálogo de importar datos](img/importar-paises.png)
+
+En la pantalla principal vas a poder previsualizar los datos y ver que pinta tienen. Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos `paises`), si la primera fila contiene los nombres de las columnas (`First Row as Names`), qué delimitador tienen los datos (en este caso `comma`, pero podría ser punto y coma u otro), etc... 
+
+Y abajo a la derecha es el código que vas a necesitar para efectivamente importar los datos. Podrías apretar el botón "Import" para leer los datos pero si bien es posible, al mismo tiempo esas líneas de código no se guardan en ningún lado y entonces nuestro trabajo luego no se puede reproducir desde un script. Por eso, te proponemos que copies ese código, cierres esa ventana con el botón "Cancel", y pegues el código en el archivo donde estés trabajando. Cuando lo ejecutes, se va a generar la variable `paises` con los datos.  
+
+
+```{r}
+library(readr)
+paises <- read_csv("datos/paises.csv")
+```
+
+::: {.alert .alert-success}
+**Nota**: Notar que en este caso el código para leer los datos consta de dos líneas. La primera carga el paquete `readr` y el segundo usa la función `read_csv()` (del paquete readr) para leer el archivo .csv.
+No es necesario cargar el paquete cada vez que vas a leer un archivo, pero asegurate de incluir esta línea al comienzo de tu archivo.
+:::
+
+::: {.alert .alert-success}
+**Nota**: La interfaz de usuario de RStudio sirve para autogenerar el código que lee el archivo. Una vez que lo tenés, no necesitás abrirla de nuevo. 
+:::
+
+Todo ese texto naranja/rojo es intimidante pero no te preocupes, es sólo un mensaje que nos informa que los datos se leyeron y qué tipo de dato tiene cada columna. Podemos explorar la estructura de la variable `paises` usando la función `str()` (de *structure* en inglés). 
+
+```{r}
+str(paises)
+```
+
+Esto nos dice un montón. La primera línea dice que es una `tibble`, que es un caso especial de la estructura de datos tabular básica de R llamada `data.frame`. Tiene 1704 filas (las **observaciones**) y 6 columnas (o **variables** que describen las observaciones). Las siguientes líneas nos dicen los nombres de las columnas ("pais", "continente", "anio", "esperanza_de_vida", "poblacion" y "pbi_per_capita"), su tipo de dato (`chr` o `num`), la longitud (`[1:1704]`) y sus primeros elementos. Cada columna de la tabla `paises` es un **vector**. Dado que los vectores son como los "ladrillos" que hacen a los data.frames, merecen una atención especial.
+
+
+## Vectores
+
+Un vector en R es esencialmente una lista ordenada de cosas, con la condición especial de que todos los elementos en un vector tienen que ser del mismo tipo de datos básico.
+
+R tiene 5 tipos de datos básicos: 
+
+* `double` (doble): números reales, por ejemplo 3.14159 o 1.5
+* `integer` (entero): números enteros, como 1 o 5
+* `complex` (complejo): números complejos, por ejemplo i + 2
+* `logical` (lógico): verdadero `TRUE` o `FALSE`
+* `character` (caracter): cadena de caracteres, como "hola R!"
+
+Existen otros pero son formas un poco más sofisticadas de estos tipos básicos. Por ejemplo, el formato POSIXct (de tiempo) se guarda como doble, representando la cantidad de segundos pasados desde el 01/01/1970. 
+
+Una forma conveniente de crear un vector es con la función `c()` (de *combinar *).
+
+```{r}
+x <- c(1, 2, 3, 4)
+x
+```
+
+`x` es una serie con 4 elementos. Si usamos la función `str()`:
+
+```{r}
+str(x)
+```
+
+Esta salida nos está informando que `x` es de tipo numérico (un nombre para dobles y enteros). Los vectores sólo pueden ser de un solo tipo. Por lo tanto, si intentás combinar un caracter con números, R va a tratar de "coercer" u obligar todo los elementos a que sean de un tipo común:
+
+```{r}
+x <- c("uno", 2)
+str(x)
+```
+
+Ahora el vector `x` es de tipo caracter y el número 2 se convirtió en el caracter "2". Este tipo de conversión automática puede ser fuente de muchos dolores de cabeza! Por ejemplo, ¿qué creés que va a pasar si tratás de sumarle 1 a la variable x?
+
+```{r, error = TRUE}
+x + 1
+```
+
+¡Un error! ¿Cuál es el problema? El mensaje de error nos da una pista usamos un "argumento no numérico". R puede hacer `2 + 1`, pero `"2" + 1` no significa nada! 
+
+Las reglas de coerción son: logical -> integer -> numeric -> complex -> character, donde -> se puede leer como se transforma en. Para forzar la coerción en contra de esta cadena podés usar las funciones `as...`. 
+
+```{r}
+as.numeric(x)
+```
+
+¡Pero no siempre funciona! Recordá que `x` tiene los valores "uno" y "2". R pudo convertir "2" en 2, pero no sabe cómo transformar "uno" en un elemento numérico. Lo que devuelve es un vector que en el lugar de "2" tiene 2, pero en el lugar de "uno" tiene `NA`, que es un tipo de elemento especial que representa un valor faltante. Pero R avisa, así que no es traidor: el warning advierte que la coerción introdujo valores faltantes.
+
+
+### Vectorización
+
+La mayoría de las funciones de R pueden trabajar sobre vectores y lo hacen **elemento a elemento**. Esto significa que si creás estos dos vectores:
+
+```{r}
+x <- 1:4   # 1:4 crea un vector que empieza en 1 y termina en 4,
+y <- 6:9
+```
+
+```{r}
+x
+```
+```{r}
+y
+```
+
+y los sumás
+
+```{r}
+x + y
+```
+
+el resultado es un vector de la misma longitud de `x` e `y` que en cada posición tiene la suma de cada elemento de `x` e `y`
+
+```
+x:  1  2  3  4
+    +  +  +  +
+y:  6  7  8  9
+---------------
+    7  9 11 13
+```
+
+Lo mismo sucede al multiplicar vectores
+
+```{r}
+x*y
+```
+```
+x:  1   2   3   4
+    *   *   *   *
+y:  6   7   8   9
+-----------------
+    6  14  24  36
+```
+
+Si los vectores no tiene la misma longitud, los elementos del más corto se "reciclan".
+
+```{r}
+y <- c(6, 7, 8)
+x * y
+```
+```
+x:  1   2   3   4
+    *   *   *   *
+y:  6   7   8   6
+-----------------
+    6  14  24  24
+```
+
+R emite una advertencia **sólo si la longitud del vector largo no es múltiplo de la longitud del vector corto**. Casi siempre el reciclado de vectores es señal de que algo salió mal. La única excepción es cuando el vector corto es de longitud 1. Por ejemplo, es totalmente razonable usar `x * 2` para duplicar los elementos de x. 
+
+
+## Leer datos de excel
+
+Si tenés la vista avispada, habrás notado que en el menú de "Import Dataset" hay una opción para leer datos de Excel. En efecto, RStudio provee la misma ayuda para leer este tipo de datos:
+
+::: {.alert .alert-secondary}
+File → Import Dataset → From Excel...
+:::
+
+![](img/importar-paises-xl.png)
+
+Notá que entre las opciones de abajo a la izquierda aparecen dos variables importantes. Podés seleccionar de qué hoja leer los datos y qué rango usar. Esto seguro que te va a ser muy útil para esos archivos de Excel con múltiples tablas en un archivo, o incluso múltiples tablas en cada hoja!
+
+En este caso paises.xlsx es un Excel buena onda, y el código para leer los datos es muy simple:
+
+```{r}
+library(readxl)
+paises <- read_excel("datos/paises.xlsx")
+```
+
+Con la función `str()` podés confirmar que los datos leídos son los mismos que para el csv.
+
+```{r}
+str(paises)
+```
+
+::: {.alert .alert-info}
+**Desafío: Lee un archivo**
+
+1. Lee el archivo `paises.xlsx`, pero solo las primeras 30 lineas
+2. ¿Qué cambió en código que devuelve RStudio? 
+3. Revisa la documentación de la función `read_excel()` para identificar otros argumentos que puedan resultarte útiles.
+:::
+
+
+## Formatos de tablas
+
+Pensá un momento en la estructura de los datos de `paises`. Tiene seis columnas, pero sólo tres de ellas contienen valores observados (`esperanza_de_vida`, `poblacion` y `pib_per_capita`) y las otras tres son las "coordenadas": `pais`, `continente` y `anio` son columnas que identifican la observación. De hecho, la columna `pais` tiene un montón de datos repetidos! 
+
+Esto es un ejemplo de formato "largo" (o "tidy" en inglés). La idea básica de datos "largos" es que: 
+
+* cada fila es una observación
+* cada columna es una variable
+
+La tabla `paises` es bastante larga (tiene 1704 filas y 6 columnas!) pero podría ser más larga aún.
+
+
+```{r, message=FALSE}
+paises_largo <- read_csv("datos/paises_largo.csv")
+str(paises_largo)
+```
+
+La tabla `paises_largo` tiene ¡5112 filas! Tiene un valor para cada país, año y variable. Es decir, las tres columnas que contenían valores numéricos (`esperanza_de_vida`, `poblacion` y `pib_per_capita`), en esta tabla son una sola columna llamada "valor". 
+
+Pero también pueden ser podría ser más "ancha":
+
+```{r, message=FALSE}
+paises_ancho <- read_csv("datos/paises_ancho.csv")
+str(paises_ancho)
+```
+
+`paises_ancho` tiene una sola fila para cada país, y los datos de cada variable y año está en una columna propia. 
+
+Ninguna estructura de datos es "la correcta"; distintos análisis y distintas funciones se llevan mejor con los datos en distinto "grado de longitud". Es muy normal empezar con datos largos, tener que pasarlos a anchos para hacer un análisis y luego volver a pasar a largos (tan normal que hay [un paquete de R que encapsula ese proceso](https://github.com/dgrtwo/widyr)). 
+
