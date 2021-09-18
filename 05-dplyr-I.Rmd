@@ -1,0 +1,228 @@
+# Manipulación de datos ordenados 
+
+## Usando {dplyr} - Primera parte
+
+El paquete {dplyr} provee una enorme cantidad de funciones útiles para manipular y analizar datos de manera intuitiva y expresiva. 
+
+El espíritu detrás de {dplyr} es que la enorme mayoría de los análisis, por más complicados que sean, involucran combinar y encadenar una serie relativamente acotada de acciones (o verbos). En este curso vamos a centrarnos las cinco más comunes:
+
+  * `select()`: selecciona columnas de una tabla.
+  * `filter()`: selecciona (o filtra) filas de una tabla a partir de una o más condiciones lógicas.
+  * `group_by()`: agrupa una tabla en base al valor de una o más columnas.
+  * `mutate()`: agrega nuevas columnas a una tabla.
+  * `summarise()`: calcula estadísticas para cada grupo de una tabla.
+  
+
+::: {.alert .alert-success}
+**dplyr y tablas dinámicas:**
+
+A grosso modo, las operaciones de {dplyr} permiten hacer en R lo que se hace en tablas dinámicas (pivot tables) en Excel. `filter()` vendría a ser como la sección de "Filtros", `group_by()`, la sección de "Filas", `select()`, la sección de "Columnas" y `summarise()`, la parte de "Valores". 
+:::
+
+##**Cambiar este ejemplo**
+
+::: {.alert .alert-info}
+**Primer desafío:**
+
+Te dieron una tabla con datos de temperatura mínima y máxima para distintas estaciones meteorológicas de todo el país durante los 365 días de un año. Las columnas son: `id_estacion`, `temperatura_maxima`, `temperatura_minima` y `provincia`. En base a esos datos, te piden que computen la temperatura media anual de cada estación únicamente de las estaciones de La Pampa. 
+
+¿En qué orden ejecutarías estos pasos para obtener el resultado deseado?
+
+* usar `summarise()` para calcular la estadística `mean(temperatura_media)` para cada `id_estacion`
+* usar `group_by()` para agrupar por la columna `id_estacion`
+* usar `mutate()` para agregar una columna llamada `temperatura_media` que sea `(temperatura_minima + temperatura_maxima)/2`.
+* usar `filter()` para seleccionar solo las filas donde la columnas `provincia` es igual a "La Pampa"
+:::
+
+Para usar {dplyr} primero hay que instalarlo (esto hay que hacerlo una sola vez) con el comando:
+
+```{r, eval = FALSE}
+install.packages('dplyr')
+```
+
+y luego cargarlo en memoria con
+
+```{r}
+library(dplyr)
+```
+
+Volvé a cargar los datos de países (para un recordatorio, podés ir a [Lectura de datos ordenados](04-lectura-datos.html)):
+
+```{r}
+library(readr)
+paises <- read_csv("datos/paises.csv")
+```
+
+## Seleccionando columnas con `select()`
+
+Para quedarse únicamente con las columnas de año, país y PBI per cápita, usá `select()`
+  
+```{r}
+select(paises, anio, pais, pib_per_capita)
+```
+
+¿Dónde quedó este resultado? Si te fijás en la variable `paises`, ésta está intacta:
+
+```{r}
+paises
+```
+
+`select()` y el resto de las funciones de {dplyr} siempre generan una nueva tabla y nunca modifican la tabla original. Para guardar la tabla con las tres columnas `anio`, `pais` y `pbi_per_capita` tenés que asignar el resultado a una nueva variable.
+
+```{r}
+anio_pais_pbi <- select(paises, anio, pais, pib_per_capita)
+anio_pais_pbi
+```
+
+![Cómo funciona `select()`](img/dplyr-select.png)
+
+## Filtrando filas con `filter()`
+
+Ahora podés usar `filter()` para quedarte con sólo unas filas. Por ejemplo, para ver los datos de Argentina:
+
+```{r}
+filter(anio_pais_pbi, pais == "Argentina")
+```
+
+La mayoría de los análisis consisten en varios pasos (en el primer desafío usaste 4 pasos para *Cambiar el ejemplo: calcular las temperaturas medias de una serie de estaciones*). La única tabla que te interesa es la última, por lo que ir asignando variables nuevas en cada paso intermedio es tedioso y poco práctico. Para eso se usa el operador 'pipe' (`%>%`). 
+
+El operador 'pipe' (`%>%`) agarra el resultado de una función y se lo pasa a la siguiente. Esto permite escribir el código como una cadena de funciones que van operando sobre el resultado de la anterior.
+
+Las dos operaciones anteriores (seleccionar tres columnas y luego filtrar las filas correspondientes a Argentina) se pueden escribir uno después del otro y sin asignar los resultados intermedios a nuevas variables de esta forma:
+
+```{r}
+paises %>% 
+  select(anio, pais, pib_per_capita) %>% 
+  filter(pais == "Argentina")
+```
+
+La forma de "leer" esto es "Tomá la variable `paises`, **después** aplicale `select(anio, pais, pib_per_capita)`, **después** aplicale `filter(pais == "Argentina")`". 
+
+Cómo vimos, el primero argumento de todas las funciones de dplyr espera un data.frame y justamente el operador `%>%` toma el data.frame `paises` y se lo pasa al primer argumento de `select()`. Luego el data.frame resultante de seleccionar las columnas anio, país y pib_per_capita *pasa* como el primer argumento de la función `filter()` gracias al `%>%`.
+
+
+::: {.alert .alert-success}
+**Tip:**
+
+En RStudio podés escribir `%>%` usando el atajo de teclado Ctr + Shift + M. ¡Probalo!
+:::
+
+
+::: {.alert .alert-info}
+**Desafío:**
+
+Completá esta cadena para producir una tabla que contenga los valores de expectativa de vida, país y año únicamente para los países africanos. 
+
+```{r, eval = FALSE}
+paises %>% 
+  filter(continente == ___) %>%
+  select(___, ___, ___)
+```
+
+:::
+
+## Agrupando y reduciendo con `group_by() %>% summarise()`
+
+Si querés calcular la expectativa de vida media para cada continente, tenés que usar el combo `group_by() %>% summarise()`. Es decir, primero agrupar la tabla según la columna continente y luego calcular un promedio para cada grupo.
+
+Para agrupar la tabla países según el continente usamos el siguiente código:
+
+```{r}
+paises %>% 
+  group_by(continente) 
+```
+
+A primera vista parecería que la función no hizo nada, pero fijate que el resultado ahora dice que tiene grupos ("Groups: "), y nos dice qué columna es la que agrupa los datos ("continente") y cuántos grupos hay ("5"). Las operaciones subsiguientes que le hagamos a esta tabla van a hacerse *para cada grupo*. 
+
+Para ver esto en acción, usá `summarise()` para computar el promedio de la esperanza de vida:
+
+```{r}
+paises %>% 
+  group_by(continente) %>% 
+  summarise(esperanza_de_vida_media = mean(esperanza_de_vida))
+```
+
+¡Tadá! `summarise()` devuelve una tabla con una columna para el continente y otra nueva, llamada "esperanza_de_vida_media" que contiene el promedio de `esperanza_de_vida` para cada grupo. Esta operación es equivalente a esta tabla dinámica en Excel:
+
+<figure>
+<video width=770px controls>
+  <source src="img/pivot-vid.webm" type="video/webm">
+</video>
+</figure>
+
+`group_by()` permite agrupar en base a múltiples columnas y `summarise()` permite generar múltiples columnas de resumen. El siguiente código calcula la esperanza de vida media y su desvío estándar para cada continente y cada año.
+
+```{r}
+paises %>% 
+  group_by(continente, anio) %>% 
+  summarise(esperanza_de_vida_media = mean(esperanza_de_vida),
+            esperanza_de_vida_sd = sd(esperanza_de_vida))
+```
+
+El resultado va a siempre ser una tabla con la misma cantidad de filas que grupos y una cantidad de columnas igual a la cantidad de columnas usadas para agrupar y los estadísticos computados. 
+
+::: {.alert .alert-info}
+**Desafío:**
+
+¿Cuál te imaginás que va a ser el resultado del siguiente código? ¿Cuántas filas y columnas va a tener? (Tratá de pensarlo antes de correrlo.)
+
+```{r, eval = FALSE}
+paises %>% 
+  summarise(esperanza_de_vida_media = mean(esperanza_de_vida))
+```
+:::
+
+El combo `group_by() %>% summarise()` se puede resumir en esta figura. Las filas de una tabla se dividen en grupos, y luego cada grupo se "resume" en una fila en función del estadístico usado. 
+
+![](img/group_by-summarize.png)
+
+Al igual que hicimos "cuentas" usando algunas variables numéricas para obtener información nueva, también podemos utilizar variables categóricas. No tiene sentido calcular `mean(continente)` ya que contienen caracteres, pero tal vez nos interese *contar* la cantidad de observaciones por continente:
+
+```{r}
+paises %>% 
+  group_by(continente) %>% 
+  summarise(cantidad = n())
+```
+
+
+## Creando nuevas columnas con `mutate()`
+
+Todo esto está bien para hacer cálculos con columnas previamente existentes, pero muchas veces tenés que crear nuevas columnas. 
+
+La tabla `paises` tiene información de PBI per cápita y de población, por lo que es posible computar el PBI de cada país multiplicando los valores de estas columnas. `mutate()` permite agregar una nueva columna llamada "pbi" con esa información:
+
+```{r}
+paises %>% 
+  mutate(pbi = pib_per_capita*poblacion)
+```
+
+Recordá que las funciones de {dplyr} nunca modifican la tabla original. `mutate()` devolvió una nueva tabla que es igual a la tabla `paises` pero con la columna "pbi" agregada. La tabla `paises` sigue intacta.
+
+## Desagrupando con `ungroup()`
+
+En general, la mayoría de las funciones de {dplyr} "entienden" cuando una tabla está agrupada y realizan las operaciones para cada grupo. 
+
+::: {.alert .alert-info}
+**Desafío:**
+
+¿Cuál de estos dos códigos agrega una columna llamada "pbi_continente" con el pbi promedio del continente correspondiente a cada país? ¿Qué hace el otro?
+
+```{r, eval = FALSE}
+paises %>% 
+  group_by(continente) %>% 
+  mutate(pbi_continente = mean(pib_per_capita*poblacion)) 
+
+paises %>% 
+  mutate(pbi_continente = mean(pib_per_capita*poblacion)) 
+```
+:::
+
+En otras palabras, los resultados de `mutate()`, `filter()`, `summarise()` y otras funciones cambian según si la tabla está agrupada o no. Como a veces uno se puede olvidar que quedaron grupos, es conveniente usar la función `ungroup()` una vez que dejás de trabajar con grupos:
+
+```{r}
+paises %>% 
+  group_by(continente) %>% 
+  mutate(pbi_continente = mean(pib_per_capita*poblacion)) %>% 
+  ungroup()
+```
+
