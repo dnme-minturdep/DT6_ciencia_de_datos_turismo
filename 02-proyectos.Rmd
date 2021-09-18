@@ -1,69 +1,77 @@
 # Trabajar con proyectos en RStudio
 
-Trabajar con proyectos de RStudio no solo hace tus análisis más ordenados y reproducibles, también hacen tu vida más simple. 
+Trabajar con proyectos de RStudio no solo hace tus análisis más ordenados y reproducibles, también hacen tu vida más simple.
 
-Al comienzo posiblemente tengan un script y uno o dos archivos con datos, pero es posible que rápidamente te encuentres con una docena de archivos con nombres parecidos pero que pertenecen a análisis totalmente distintos. Antes de que la cosa comience a complicarse te proponemos trabajar con proyectos.  
+Al comienzo posiblemente tengan un script y uno o dos archivos con datos, pero es posible que rápidamente te encuentres con una docena de archivos con nombres parecidos pero que pertenecen a análisis totalmente distintos.
+Antes de que la cosa comience a complicarse te proponemos trabajar con proyectos.
 
 ### ¿Qué ventajas tiene?
 
-- Te permite ”cuidar” los datos que usas al ordenarnos en carpetas que diferencien entre la versión original o cruda y los datos limpios o los resultados finales. 
-- Te permite compartir tu trabajo fácilmente con otras personas. Solo tendrías que compartir la carpeta del proyecto sabiendo que incluye todo lo necesario para que cualquier persona reproduzca tu análisis.
-- Te permite publicar de manera ordenada tu código si vas a presentar o publicar tu trabajo.
-- Te permite continuar con lo que estabas haciendo hace una semana o hace un mes como si el tiempo no hubiera pasado. De alguna manera es un regalo para tu yo futuro.
+-   Te permite "cuidar" los datos que usas al ordenarnos en carpetas que diferencien entre la versión original o cruda y los datos limpios o los resultados finales.
+-   Te permite compartir tu trabajo fácilmente con otras personas. Solo tendrías que compartir la carpeta del proyecto sabiendo que incluye todo lo necesario para que cualquier persona reproduzca tu análisis.
+-   Te permite publicar de manera ordenada tu código si vas a presentar o publicar tu trabajo.
+-   Te permite continuar con lo que estabas haciendo hace una semana o hace un mes como si el tiempo no hubiera pasado. De alguna manera es un regalo para tu yo futuro.
 
 ::: {.alert .alert-info}
 **Primer desafío: Crea un nuevo proyecto en RStudio**
 
-1. Hacé click en el menú “Archivo” (“File”) y luego en “Nuevo Proyecto” (“New Project”).
-2. Hacé click en “Nueva Carpeta” (“New Directory”).
-3. Hacé click en “Nuevo Proyecto” (“New Project”).
-4. Escribí el nombre de la carpeta que alojará a tu proyecto, por ejemplo “mi_proyecto”
-5. Si aparece (y sabés usarlo), seleccioná “Crear un repositorio de git” (“Create a git repository”).
-6. Hacé click en “Crear Proyecto” (“Create Project”).
+1.  Hacé click en el menú "Archivo" ("File") y luego en "Nuevo Proyecto" ("New Project").
+2.  Hacé click en "Nueva Carpeta" ("New Directory").
+3.  Hacé click en "Nuevo Proyecto" ("New Project").
+4.  Escribí el nombre de la carpeta que alojará a tu proyecto, por ejemplo "mi_proyecto"
+5.  Si aparece (y sabés usarlo), seleccioná "Crear un repositorio de git" ("Create a git repository").
+6.  Hacé click en "Crear Proyecto" ("Create Project").
 :::
 
-Si todo salió bien, ahora deberías tener una nueva carpeta que se llama *mi_proyecto*. Pero si bien es una carpeta común y corriente, le llamamos proyecto porque además contiene un archivo con el mismo nombre *mi_proyecto.Rproj* (o solo *mi_proyecto* si en tu computadora no ves la extensión de los archivos). 
+Si todo salió bien, ahora deberías tener una nueva carpeta que se llama *mi_proyecto*.
+Pero si bien es una carpeta común y corriente, le llamamos proyecto porque además contiene un archivo con el mismo nombre *mi_proyecto.Rproj* (o solo *mi_proyecto* si en tu computadora no ves la extensión de los archivos).
 
 ### Abrir un proyecto
 
-La manera más simple de abrir un proyecto es abriendo la carpeta que lo contiene y haciendo doble click sobre el archivo *mi_proyecto.Rproj*. Al hacer esto se abrirá RStudio y la sesión de R en la misma carpeta y, por defecto, cualquier archivo que quieras abrir o guardar lo hará en esa misma ubicación. Esto ayuda a mantener tu trabajo ordenado y que luego sea simple retomar o compartir lo que hiciste. 
+La manera más simple de abrir un proyecto es abriendo la carpeta que lo contiene y haciendo doble click sobre el archivo *mi_proyecto.Rproj*.
+Al hacer esto se abrirá RStudio y la sesión de R en la misma carpeta y, por defecto, cualquier archivo que quieras abrir o guardar lo hará en esa misma ubicación.
+Esto ayuda a mantener tu trabajo ordenado y que luego sea simple retomar o compartir lo que hiciste.
 
-RStudio permite tener varios proyectos abiertos, y esto es posible porque justamente cada proyecto tiene su propia carpeta. Si en algún momento trabajas con proyectos en paralelo vas a poder hacerlo sin que el código o los resultados de un análisis interfieran con otro.
+RStudio permite tener varios proyectos abiertos, y esto es posible porque justamente cada proyecto tiene su propia carpeta.
+Si en algún momento trabajas con proyectos en paralelo vas a poder hacerlo sin que el código o los resultados de un análisis interfieran con otro.
 
 ::: {.alert .alert-info}
 **Segundo desafío: Abrí tu nuevo proyecto desde el explorador de archivos**
 
-1. Cerrá RStudio
-2. Desde el explorador de archivos, buscá la carpeta donde creaste tu proyecto.
-3. Hacé doble click en el archivo que tiene el nombre de tu proyecto (y que termina con *.Rproj*) que encontrarás en esa carpeta.
+1.  Cerrá RStudio
+2.  Desde el explorador de archivos, buscá la carpeta donde creaste tu proyecto.
+3.  Hacé doble click en el archivo que tiene el nombre de tu proyecto (y que termina con *.Rproj*) que encontrarás en esa carpeta.
 :::
 
 ### ¿Cómo se organiza?
 
 No existe una "mejor" forma de organizar un proyecto pero acá van algunos principios generales que nos hacen la vida más simple::
 
-* **Tratar los datos como sólo de lectura**
-Es posible que la toma de los datos que querés analizar te haya costado mucho trabajo, o te haya costado conseguirlos. Trabajar con datos de forma interactiva (por ejemplo, en Excel) tiene la ventaja de permitirte hacer algunos análisis rápidamente pero al mismo tiempo tiene la desventaja de que esos datos pueden ser modificados fácilmente. Esto significa que a veces no conozcas de la procedencia de los datos, o no recuerdes como los modificaste desde que los obtuviste. Por lo tanto, es una buena idea tratar los datos como "sólo de lectura" y nunca modificar los archivos originales.
-* **Limpieza de datos**
-En muchos casos tus datos estarán "sucios", necesitarán un preprocesamiento importante para organizarlos en un formato que  R (o cualquier otro lenguaje de programación) pueda analizados fácilmente. Esta tarea se denomina a veces "amasado" o "masticado de datos". Es una buena costumbre guardar el código que te permitió limpiar estos datos por si los volvieras a necesitar. También es recomendable guardar esa versión de los datos limpios, de "sólo lectura", para que puedas usarlos en tu análisis sin necesidad de repetir cada vez todo el proceso de limpieza de los datos.
-* **Tratar las salidas o resultados generados como descartables**
-Cualquier resultado (gráficos, tablas, valores) debe poder repetirse o rehacerse a partir del código guardado. Si bien las pruebas rápidas para *ver si el código funciona* se pueden hacer en la consola, es importante guardar el código que genera los resultados y asegurarnos de que sean reproducibles. Aún mejor, si organizas esos resultados en distintas sub-carpetas, luego tendrás todo aún más ordenado.
+-   **Tratar los datos como sólo de lectura** Es posible que la toma de los datos que querés analizar te haya costado mucho trabajo, o te haya costado conseguirlos. Trabajar con datos de forma interactiva (por ejemplo, en Excel) tiene la ventaja de permitirte hacer algunos análisis rápidamente pero al mismo tiempo tiene la desventaja de que esos datos pueden ser modificados fácilmente. Esto significa que a veces no conozcas de la procedencia de los datos, o no recuerdes como los modificaste desde que los obtuviste. Por lo tanto, es una buena idea tratar los datos como "sólo de lectura" y nunca modificar los archivos originales.
+-   **Limpieza de datos** En muchos casos tus datos estarán "sucios", necesitarán un preprocesamiento importante para organizarlos en un formato que R (o cualquier otro lenguaje de programación) pueda analizados fácilmente. Esta tarea se denomina a veces "amasado" o "masticado de datos". Es una buena costumbre guardar el código que te permitió limpiar estos datos por si los volvieras a necesitar. También es recomendable guardar esa versión de los datos limpios, de "sólo lectura", para que puedas usarlos en tu análisis sin necesidad de repetir cada vez todo el proceso de limpieza de los datos.
+-   **Tratar las salidas o resultados generados como descartables** Cualquier resultado (gráficos, tablas, valores) debe poder repetirse o rehacerse a partir del código guardado. Si bien las pruebas rápidas para *ver si el código funciona* se pueden hacer en la consola, es importante guardar el código que genera los resultados y asegurarnos de que sean reproducibles. Aún mejor, si organizas esos resultados en distintas sub-carpetas, luego tendrás todo aún más ordenado.
 
 ### Borrón y cuenta nueva... todos los días!
 
-¿Cómo nos aseguramos de que el análisis sea realmente reproducible? Esta es una pregunta bastante amplia y hay muchas herramientas para resolver este problema. Por ahora nos vamos a concentrar en que al menos en tu computadora puedas repetir los cálculos o el análisis desde cero. Y además de organizar proyectos y no modificar los datos originales, ¿cómo podés asegurarte de que guardaste todo el código que estuviste escribiendo y usaste? La manera más directa es reiniciar la sesión de R y correr el código de nuevo, si da error o no devuelve lo que esperabas significa que te faltó guardar algún paso. 
+¿Cómo nos aseguramos de que el análisis sea realmente reproducible?
+Esta es una pregunta bastante amplia y hay muchas herramientas para resolver este problema.
+Por ahora nos vamos a concentrar en que al menos en tu computadora puedas repetir los cálculos o el análisis desde cero.
+Y además de organizar proyectos y no modificar los datos originales, ¿cómo podés asegurarte de que guardaste todo el código que estuviste escribiendo y usaste?
+La manera más directa es reiniciar la sesión de R y correr el código de nuevo, si da error o no devuelve lo que esperabas significa que te faltó guardar algún paso.
 
-:::{.alert .alert-success}
+::: {.alert .alert-success}
 Tip: Podés reiniciar la sesión de R con el atajo `Ctrl+Shif+F10`
 :::
 
-Esto puede pasar si por ejemplo leemos una base de datos en memoria pero no guardamos el código que lo hace. Mientras estemos trabajando, R tendrá esa base de datos en memoria y podremos hacer cálculos y gráficos. Por defecto además RStudio va a recordar las variables que estés usando mañana o pasado en un archivo oculto (.RData) a menos que le indiques lo contrario. Y si bien suena práctico volver a R al otro día y tener el análisis tal cual lo dejamos, esto puede significar que nunca nos demos cuenta que nos faltó guardar una línea de código clave en nuestro análisis.
-
+Esto puede pasar si por ejemplo leemos una base de datos en memoria pero no guardamos el código que lo hace.
+Mientras estemos trabajando, R tendrá esa base de datos en memoria y podremos hacer cálculos y gráficos.
+Por defecto además RStudio va a recordar las variables que estés usando mañana o pasado en un archivo oculto (.RData) a menos que le indiques lo contrario.
+Y si bien suena práctico volver a R al otro día y tener el análisis tal cual lo dejamos, esto puede significar que nunca nos demos cuenta que nos faltó guardar una línea de código clave en nuestro análisis.
 
 ::: {.alert .alert-info}
-**Tercer desafío: Configurá RStudio** 
+**Tercer desafío: Configurá RStudio**
 
-1. Hacé click en el menú “Herramientas (“Tools”) y luego “Opciones globales” (“Global Options”).
-2. Destildá la opción “Recuperar .RData al inicio de la sesión” (“Restore .RData into workspace at startup”).
-3. Hacé click en “Aplicar” (“Apply”).
+1.  Hacé click en el menú "Herramientas ("Tools") y luego "Opciones globales" ("Global Options").
+2.  Destildá la opción "Recuperar .RData al inicio de la sesión" ("Restore .RData into workspace at startup").
+3.  Hacé click en "Aplicar" ("Apply").
 :::
