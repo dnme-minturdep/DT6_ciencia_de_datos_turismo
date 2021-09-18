@@ -11,7 +11,13 @@ Cómo siempre será necesario cargar los paquetes que vamos a usar y ya que esta
 ```{r message=FALSE, warning=FALSE}
 library(readr)
 library(ggplot2)
-paises <- read_csv("datos/paises.csv")
+library(dplyr)
+
+turistas_destinos_url <- "http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/b8f0f46d-eb2f-4d68-a182-e66778bbf89a/download/tur_int_turistas_residentes_destino_serie.csv"
+turistas_destinos <- readr::read_csv(turistas_destinos_url)
+
+turistas_destinos <- turistas_destinos %>% 
+  mutate(indice_tiempo = lubridate::ym(indice_tiempo))
 ```
 
 La función principal de ggplot2 es justamente `ggplot()` que nos permite *iniciar* el gráfico y además definir las características *globales*.
@@ -19,13 +25,13 @@ El primer argumento de esta función serán los datos que queremos visualizar, s
 En este caso usamos `paises`.
 
 El segundo argumento se llama mapping justamente porque *mapea* o *dibuja* los ejes del gráfico y **siempre** va acompañado de la función `aes()`.
-La función `aes()` recibe las propiedades estéticas del gráfico (o *aesthetic* en inglés) a partir de las variables (o columnas) del data.frame estamos usando.
+La función `aes()` recibe las propiedades estéticas del gráfico (o *aesthetic* en inglés) a partir de las variables (o columnas) del data frame estamos usando.
 En este caso le indicamos que en el eje **x** querremos graficar la variable `pib_per_capita` y en eje **y** la variable `esperanza_de_vida`.
 
 Pero esta sola función no es suficiente, solo genera la primera capa: el área del gráfico.
 
 ```{r}
-ggplot(data = paises, mapping = aes(x = pib_per_capita, y = esperanza_de_vida))
+ggplot(data = turistas_destinos, mapping = aes(x = indice_tiempo, y = turistas))
 ```
 
 ## Segunda capa: geometrías
@@ -34,7 +40,7 @@ Necesitamos agregar una nueva capa a nuestro gráfico, los elementos geométrico
 Para esto *sumamos* una función geom, por ejemplo si queremos representar los datos con puntos usaremos `geom_point()`
 
 ```{r}
-ggplot(data = paises, mapping = aes(x = pib_per_capita, y = esperanza_de_vida)) +
+ggplot(data = turistas_destinos, mapping = aes(x = indice_tiempo, y = turistas)) +
   geom_point()
 ```
 
@@ -53,8 +59,8 @@ Este gráfico tiene muchísima información porque tiene un punto por cada país
 Pero por ahora no podemos identificar esos países, necesitamos agregar información al gráfico.
 
 ```{r}
-ggplot(data = paises, mapping = aes(x = anio, y = esperanza_de_vida)) +
-  geom_point()
+# ggplot(data = paises, mapping = aes(x = anio, y = esperanza_de_vida)) +
+#   geom_point()
 ```
 
 ## Mapear variables a elementos
@@ -62,8 +68,8 @@ ggplot(data = paises, mapping = aes(x = anio, y = esperanza_de_vida)) +
 Una posible solución sería utilizar otras variables de nuestros datos, por ejemplo `continente` y *mapear* el color de los puntos de a cuerdo al continente que pertenecen.
 
 ```{r}
-ggplot(data = paises, mapping = aes(x = anio, y = esperanza_de_vida)) +
-  geom_point(aes(color = continente))
+ggplot(data = turistas_destinos, mapping = aes(x = indice_tiempo, y = turistas)) +
+  geom_point(aes(color = region_destino))
 ```
 
 Ahh, ahora está un poco mejor.
@@ -77,8 +83,8 @@ Algo muy importante a tener en cuenta: **los puntos toman un color de acuerdo a 
 Este gráfico posiblemente no sea muy adecuado si queremos visualizar la *evolución* de una variable a lo largo del tiempo, necesitamos cambiar la geometría a lineas usando `geom_line()`
 
 ```{r}
-ggplot(data = paises, mapping = aes(x = anio, y = esperanza_de_vida)) +
-  geom_line(aes(color = continente))
+ggplot(data = turistas_destinos, mapping = aes(x = indice_tiempo, y = turistas)) +
+  geom_line(aes(color = region_destino))
 ```
 
 Por suerte las funciones `geom_*()` tienen más o menos nombres amigables.
@@ -111,9 +117,9 @@ Acá surge una característica importante de las capas: pueden tener apariencia 
 Al mismo tiempo, si quisiéramos que todas las capas tenga la misma apariencia podemos incluir el argumento `color =`en la función global `ggpplot()` o repetirlo en cada capa.
 
 ```{r}
-ggplot(paises, aes(anio, esperanza_de_vida)) +
-  geom_line(aes(color = continente, group = pais)) +
-  geom_point()
+# ggplot(paises, aes(anio, esperanza_de_vida)) +
+#   geom_line(aes(color = continente, group = pais)) +
+#   geom_point()
 ```
 
 ::: {.alert .alert-success}
