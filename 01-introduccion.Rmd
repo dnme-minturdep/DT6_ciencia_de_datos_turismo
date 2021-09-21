@@ -7,7 +7,7 @@ En este caso el turismo.
 
 El proceso de ciencia de datos en el cual nos vamos a basar se puede ver en el siguiente diagrama:
 
-> Agregar proceso de r4ds y citar.
+![Mapa conceptual del proceso de ciencia de datos](img/ciencia-de-datos.png)
 
 Primero, debes **importar** tus datos hacia la herramienta donde vas a procesarlos.
 Típicamente, esto implica tomar datos que están guardados en un archivo o base de datos y cargarlos en tu software para poder trabajar con ellos.
