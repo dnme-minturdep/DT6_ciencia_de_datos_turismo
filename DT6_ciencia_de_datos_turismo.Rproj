@@ -13,3 +13,7 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
+
+MarkdownWrap: Sentence
+
+SpellingDictionary: es_ES

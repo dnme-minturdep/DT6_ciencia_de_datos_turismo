@@ -1,0 +1,182 @@
+## Tablas
+
+Por defecto, la forma en que R Markdown muestra tablas es bastante feo porque muestra lo que verías si corrieras el código en la consola.
+
+```{r, message=FALSE}
+library(dplyr)
+paises <- readr::read_csv("datos/paises.csv")
+paises_seleccion <- paises %>% 
+  filter(pais %in% c("Argentina", "Uruguay", "Chile")) %>% 
+  filter(anio %in% c(2007, 2002)) %>%
+  select(-continente)
+paises_seleccion
+```
+
+## Tablas simples con `kable`
+
+Existen varios paquetes para mostrar tablas lindas pero una forma simple y sin vueltas es usando la función `kable` del paquete {knitr}.
+Sólo usando esta función ya devuelve una tabla más que razonable:
+
+```{r}
+library(knitr)
+kable(paises_seleccion)
+```
+
+La mayoría de las veces, el nombre de las columnas que queremos mostrar no va a ser igual que el nombre de las columnas en R.
+En la tabla `paises`, los nombres están en minúscula, sin espacios y sin "caracteres especiales" como "ñ" o "í".
+Esto es útil para comunicarse con R, pero no está bueno para comunicados a seres humanos.
+El argumento `col.names` permite especificar el nombre de las columnas para mostrar:
+
+```{r}
+kable(paises_seleccion, 
+      col.names = c("País", "Año", "Esperanza de vida", "Población", "PBI per cápita"))
+```
+
+En Español, en general usamos la coma para separar los decimales y el punto como separador de miles.
+Para eso, hay que modificar el argumento `format.args` de esta manera:
+
+```{r}
+kable(paises_seleccion, 
+      col.names = c("País", "Año", "Esperanza de vida", "Población", "PBI per cápita"),
+      format.args = list(decimal.mark = ",", big.mark = "."))
+```
+
+Uff... pero ponerle el punto de miles a los años queda raro.
+La solución es convertir la columna `anio` en caracter.
+De esta manera, no se ve afectada por el formato numérico.
+
+```{r}
+paises_seleccion %>% 
+  mutate(anio = as.character(anio)) %>% 
+  kable(col.names = c("País", "Año", "Esperanza de vida", "Población", "PBI per cápita"),
+        format.args = list(decimal.mark = ",", big.mark = "."))
+```
+
+hacer `kable`, que es una función diseñada para ser simple y hacer pocas cosas.
+Para hacer cosas un poco mas complicadas está el paquete {kableExtra}.
+
+## Supertablas con {kableExtra}
+
+El paquete {kableExtra}, como su nombre lo indica, nació para extender el poder de la función `kable`.
+
+```{r}
+library(kableExtra)  # instalar con install.packages("kableExtra")
+```
+
+```{r}
+paises_tabla <- paises_seleccion %>% 
+  mutate(anio = as.character(anio)) %>% 
+  kable(col.names = c("País", "Año", "Esperanza de vida", "Población", "PBI per cápita"),
+        format.args = list(decimal.mark = ",", big.mark = "."))
+```
+
+La primera columna de la tabla de arriba es un tanto redundante.
+Sería mejor agrupar las filas según el país.
+Esto se consigue con la función `collapse_rows`:
+
+```{r}
+paises_tabla %>% 
+  collapse_rows(columns = 1, valign = "top")  %>% 
+  kable_styling() 
+```
+
+El primer argumento es el número de la columna que queremos agrupar.
+En este caso, la columna `pais` es la primera.
+El segundo argumento es la alineación vertical.
+Por defecto, `collapse_rows` pone las etiquetas en el centro, pero la convención más general es ponerlas arriba.
+
+¿Qué es esa `kable_styling()`?
+{kableExtra} permite cambiar el estilo de las tablas muy fácilmente.
+`kable_styling` es el estilo por defecto, que es igual al que produce `kable`, pero tiene muchos otros.
+Si viste tablas hechas en LaTeX, quizás este estilo te resulte familiar:
+
+```{r}
+paises_tabla %>% 
+  collapse_rows(columns = 1, valign = "top")  %>% 
+  kable_classic_2()
+```
+
+La función `column_spec` permite cambiar los parámetros gráficos de una o más columnas.
+En este caso cambiamos la primera columna (`column = 1`) para que las palabras aparezcan italizadas (`italic = TRUE`):
+
+```{r}
+paises_tabla %>% 
+  column_spec(column = 1, italic = TRUE) %>%
+  collapse_rows(columns = 1, valign = "top")  %>%
+  kable_styling() 
+```
+
+Lo notable de `column_spec` es que en sus argumentos se pueden poner vectores de manera de generar formato condicional.
+Para resaltar con negrita únicamente el país "Argentina":
+
+```{r}
+paises_tabla %>% 
+  column_spec(column = 1, bold = (paises_seleccion$pais == "Argentina")) %>%
+  collapse_rows(columns = 1, valign = "top")  %>%
+  kable_styling() 
+```
+
+Conviene detenerse para mirar un poco con detalle el código.
+La llamada a `column_spec` está cambiando el formato de la columna 1.
+En particular, va a determinar si el texto es en negrita (bold) o no.
+Y la forma para determinarlo es el vector `paises$pais == "Argentina"`.
+¿Qué es ese vector?
+
+```{r}
+paises_seleccion$pais == "Argentina"
+```
+
+Por lo tanto, `column_spec(column = 1, bold = (paises$pais == "Argentina"))` va a hacer que las dos primera filas de la columna uno estén en negrita, y las demás no.
+Luego, `collapse_rows` colapsa las filas según el país y entonces esas dos primeras filas se transforman en una.
+
+Esto da un montón de flexibilidad en el estilo del texto.
+Por ejemplo, se puede hacer que el color del texto cambie según el valor usando `column_spec` y `spec_color`.
+
+```{r}
+paises_tabla %>% 
+  column_spec(3, color = spec_color(paises_seleccion$esperanza_de_vida)) %>% 
+  collapse_rows(columns = 1, valign = "top")  %>%
+  kable_styling() 
+```
+
+La función nueva, `spec_color` genera colores a partir de un vector.
+Podés ver cómo funciona en esta linea:
+
+```{r}
+spec_color(paises_seleccion$esperanza_de_vida)
+```
+
+Esos números son representaciones en hexadecimal de los colores que ves en la tabla.
+Podés pasarle cualquier serie de colores, no sólo la creada con `spec_color`.
+
+Así como se puede cambiar el estilo de las columnas con `column_spec`, se puede cambiar el estilo de las filas con `row_spec`.
+Por ejemplo, se puede resaltar cada 2 líneas con este código:
+
+```{r}
+paises_tabla %>% 
+  row_spec(row = seq(2, nrow(paises_seleccion), by = 2), background = "azure") %>% 
+  collapse_rows(columns = 1, valign = "top")  %>%
+  kable_styling() 
+```
+
+`row_spec` está cambiando el fondo (background) al color "azure" (que es ese celestito) a las filas indicadas por `seq(2, nrow(paises_seleccion), by = 2)`.
+¿Qué es eso?
+`seq` genera una secuencia (de **seq**uence) de números empezando en 2, terminando en la cantidad de filas de `paises_seleccion` y saltando de a dos.
+En resumen:
+
+```{r}
+seq(2, nrow(paises_seleccion), by = 2)
+```
+
+Como caso especial, se puede usar `row = 0` en `row_spec` para cambiar el formato del encabezado.
+
+```{r}
+paises_tabla %>% 
+  row_spec(row = 0, underline = TRUE) %>% 
+  collapse_rows(columns = 1, valign = "top")  %>%
+  kable_styling() 
+```
+
+Esto es sólo una mínima parte de lo que se puede hacer con el paquete {kableExtra}.
+Para ejemplos mucho más detallados, te recomendamos leer [la viñeta completa](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
+
