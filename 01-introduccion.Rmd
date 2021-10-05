@@ -2,18 +2,18 @@
 
 > "Disciplina **emergente** que se basa en el conocimiento en **metodología estadística y ciencias de la computación** para crear predicciones, clasificaciones e ideas impactantes para una amplia gama de campos tradicionales"
 
-No existe un acuerdo sobre una definición formal de ciencia de datos, pero la mayoría de estas definiciones concuerda en que tiene al menos tres pilares: el conocimiento estadístico, el conocimiento de ciencias de la computación y el conocimiento del negocio sobre el cual se va a aplicar.
+No existe un acuerdo sobre una definición formal de ciencia de datos, pero la mayoría de estas definiciones concuerda en que tiene al menos tres pilares: el conocimiento estadístico, el conocimiento de ciencias de la computación y el conocimiento de área sobre el cual se va a aplicar.
 En este caso el turismo.
 
 El proceso de ciencia de datos en el cual nos vamos a basar se puede ver en el siguiente diagrama:
 
-![Mapa conceptual del proceso de ciencia de datos](img/ciencia-de-datos.png)
+<!-- ![Mapa conceptual del proceso de ciencia de datos](img/ciencia-de-datos.png) -->
 
 Primero, debes **importar** tus datos hacia la herramienta donde vas a procesarlos.
 Típicamente, esto implica tomar datos que están guardados en un archivo o base de datos y cargarlos en tu software para poder trabajar con ellos.
 
 Una vez que has importado los datos, el siguiente paso es **ordenarlos** para que tengan un formato adecuado para su análisis.
-Este formato pensado para el análisis tiene la característica que, en los set de datos ordenados, *cada columna es una variable y cada fila una observación*.
+Este formato pensado para el análisis tiene la característica que, en los conjuntos de datos ordenados, *cada columna es una variable y cada fila una observación*.
 Tener datos ordenados nos provee una estructura consistente, preparada para analizarlos y podemos enfocar nuestros esfuerzos en las preguntas que queremos contestar con nuestros datos y no tener que acomodarlos cada vez que la pregunta cambie.
 
 Cuando tus datos están ordenados, podemos necesitar *transformarlos*.
@@ -28,12 +28,12 @@ También puede ayudarte a replantear tus preguntas o darte cuenta si necesitas r
 
 Los modelos son herramientas complementarias a la visualización.
 Una vez que tus preguntas son lo suficientemente precisas, puedes utilizar un modelo para responderlas.
-Los modelos son herramientas matemáticas o computacionales y tienen supuestos para poder aplicarlos, asi que la tarea de seleccionar el modelo adecuado para nuestro problema es una parte importante de este proceso, como también lo es su implemtación e interpretación posterior.
+Los modelos son herramientas estadísticas o computacionales y tienen supuestos para poder aplicarlos, así que la tarea de seleccionar el modelo adecuado para nuestro problema es una parte importante de este proceso, como también lo es su implantación e interpretación posterior.
 
 El último paso en el proceso de la ciencia de datos es la **comunicación**, una parte crítica de cualquier proyecto de análisis de datos, porque es cuando vas a mostrar tus resultados a otras personas y necesitas que puedan comprenderlos y encontrarlos útiles para utilizarlos.
 
 Alrededor de todas estas herramientas se encuentra la **programación** como herramienta transversal en el proyecto de ciencia de datos.
-No necesitas ser una personas experta en programación para hacer ciencia de datos, pero aprender más sobre programar te ayudará a automatizar tareas recurrentes, compartir tu trabajo de forma reusable y aprovechar el trabajo de otros para resolver problemas similares con mayor facilidad y rapidez.
+No necesitás ser una persona experta en programación para hacer ciencia de datos, pero aprender más sobre programar te ayudará a automatizar tareas recurrentes, compartir tu trabajo de forma reusable y aprovechar el trabajo de otros para resolver problemas similares con mayor facilidad y rapidez.
 
 En este cuadernillo te mostraremos como realizar cada una de estas etapas utilizando el software R y te dejaremos links donde puedes aprender y profundizar más cada aspecto de este proceso.
 
@@ -166,7 +166,7 @@ x + 2
 :::
 
 Ponerle nombre a las variables es a veces la parte más difícil de escribir código.
-A R no le viene bien cualquier nombre de variable siempre y cuando no empiece con un número o un "\_".
+A R le viene bien cualquier nombre de variable siempre y cuando no empiece con un número o un "\_".
 Pero a los seres humanos que lean el código y tengan que interpretarlos les va a resultas más fácil entender qué hace la variable `promedio_noches_estadia` que la variable `xxy1`.
 
 El consejo es tratar en lo posible usar nombre descriptivos y consistentes.
@@ -185,7 +185,7 @@ De esta manera, vas a poder entender tu código con más facilidad.
 R es un lenguaje creado por personas que practican la estadística y pensado para la estadística, por lo que ya viene con un montón de métodos estadísticos incorporados, como `mean()` o `median()`.
 Pero hay tantos métodos estadísticos como gente haciendo estadística así que es imposible que estén todos.
 La solución es que podés "agregarle" a R funciones que no vienen instaladas por defecto pero que escribieron otras personas en forma de "paquetes".
-Este es el poder de **la comunidad de R**!
+¡Este es el poder de **la comunidad de R**!
 
 Para instalar paquetes de R, la forma mas fácil es con la función `install.packages()`.
 Entonces, por ejemplo,
@@ -204,11 +204,12 @@ library(readr)
 le decís a R que cargue las funciones que vienen en el paquete readr para usarlas.
 
 ::: {.alert .alert-info}
-**Desafío**: Instalá el paquete {readr} con el comando `install.packages("readr")`
+**Desafío**: Instalá el paquete {readr} con el comando `install.packages("readr") en la consola.`
 :::
 
 ::: {.alert .alert-success}
-**Nota**: Si cerrás y volveś a abrir R, vas a tener que usar `library(readr)` nuevamente para acceder a la funcionalidad del paquete readr
+**Nota**: Si cerrás y volveś a abrir R, vas a tener que usar `library(readr)` nuevamente para acceder a la funcionalidad del paquete readr.
+Sólo hace falta correr `install.packages("readr")` una vez por máquina.
 :::
 
 ### Buscando ayuda
