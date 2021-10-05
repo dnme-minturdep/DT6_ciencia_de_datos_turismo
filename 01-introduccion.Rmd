@@ -13,7 +13,7 @@ Primero, debes **importar** tus datos hacia la herramienta donde vas a procesarl
 Típicamente, esto implica tomar datos que están guardados en un archivo o base de datos y cargarlos en tu software para poder trabajar con ellos.
 
 Una vez que has importado los datos, el siguiente paso es **ordenarlos** para que tengan un formato adecuado para su análisis.
-Este formato pensado para el análisis tiene la característica que, en los sets de datos ordenados, *cada columna es una variable y cada fila una observación*.
+Este formato pensado para el análisis tiene la característica que, en los conjuntos de datos ordenados, *cada columna es una variable y cada fila una observación*.
 Tener datos ordenados nos provee una estructura consistente, preparada para analizarlos y podemos enfocar nuestros esfuerzos en las preguntas que queremos contestar con nuestros datos y no tener que acomodarlos cada vez que la pregunta cambie.
 
 Cuando tus datos están ordenados, podemos necesitar *transformarlos*.
