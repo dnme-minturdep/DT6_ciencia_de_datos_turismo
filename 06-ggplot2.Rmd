@@ -460,27 +460,43 @@ ggplot(gastos) +
 
 Esta nueva capa con `facet_wrap()` divide al gráfico inicial en 8 paneles o *facets*, uno por cada región.
 Esta función requiere saber que variable será la responsable de separar los paneles y para eso se usa la **notación de fórmula** de R: `~ region_destino`.
-Esto se lee como generar paneles *"en función de region_destino"*.
+Esto se lee como generar paneles *en función de* `region_destino`.
 
-¿Y si quisiéramos generar paneles a partir de 2 variables?
-Para eso existe `facet_grid()`.
-En este gráfico generamos paneles viendo la *"relación entre el corte y el color"* y por ejemplo en el primer panel arriba a la izquierda podremos observar los diamantes que son al mismo tiempo de color D y corte Regular.
-En este caso *mapear* la variable color al color de los diamantes no parece ser necesario ya que cada columna ya nos permite identificar eso, sin embargo en algunos casos ayuda a leer el gráfico más rápido.
+Una hipótesis razonable podría ser que la distribución de ingresos en cada región también varía según el trimestre. 
+Para ver esto, habría que hacer el gráfico de barras para cada combinación de región de destino y trimestre. 
+En ggplot2 esto se resuelve agregando más variables que definan los paneles "sumando" variables en la fórmula
 
 ```{r}
 ggplot(gastos) +
   geom_bar(aes(quintil, y = stat(prop)),  position = "dodge") +
-  facet_grid(region_destino~trimestre)
+  facet_wrap(~ region_destino + trimestre)
 ```
+
+Esto se lee como generar paneles *"en función de* `region_destino` y `trimestre`".
+
+Una alternativa que funciona mejor cuando se hacen paneles en función de dos o más variables es que en vez de organizar los paneles uno luego del otro, tengan una organización. 
+Por ejemplo, que los paneles se organicen en filas según la región de destino y en columna según el trimestre. 
+Para eso hay que reemplazar `facet_wrap()` por `facet_grid()` y cambiar la formula un poco. 
+
+```{r}
+ggplot(gastos) +
+  geom_bar(aes(quintil, y = stat(prop)),  position = "dodge") +
+  facet_grid(region_destino ~ trimestre)
+```
+
+¿Ves como quedan los paneles más organizados y fácil es de leer? 
+Esta organización permite comparar regiones para un trimestre en particular comparando gráficos en la vertical, y comparar trimestres para una misma región leyendo los gráficos en horizontal. 
+
+La formula `region_destino ~ trimestre` indica que `region_destino` define las filas y `trimestre` define las columnas. 
+
 
 ::: {.alert .alert-info}
 **Tercer desafío**
 
-Generá boxplots para analizar como se comporta el `precio` según la `claridad` para cada tipo de `corte` como se ve acá.
+Generá boxplots para analizar como se comporta el `gasto` de cada familia en función del quintil al que pertenecen para cada región.   
 
 ```{r echo=FALSE}
-
-ggplot(gastos, aes(factor(quintil), gasto)) +
+ggplot(gastos, aes(quintil, gasto)) +
   geom_boxplot() + 
   scale_y_log10() +
   facet_wrap(~region_destino) 
