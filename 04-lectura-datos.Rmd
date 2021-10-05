@@ -1,5 +1,89 @@
 # Lectura de datos ordenados
 
+## Descargando datos 
+
+Antes de poder leer cualquier dato en R, primero hay que encontrarlo y descargarlo. 
+El Ministerio de Turismo mantiene un portal de datos abierto llamado [Yvera](http://datos.yvera.gob.ar/) donde podés buscar y descargar datos relacionados con el turismo en Argentina. 
+
+En esta sección vamos a descargar una serie de tiempo de los principales indicadores producidos por la Administración de Parques Nacionales. 
+
+Primero, navegá a [http://datos.yvera.gob.ar/](http://datos.yvera.gob.ar/), donde te vas a encontrar con la páigna principal de Yvera. 
+
+(ref:yvera-principal-alt) Captura de pantalla de la página principal de la plataforma de datos abiertos Yvera.
+
+```{r echo=FALSE, fig.alt="(ref:yvera-principal-alt)"}
+knitr::include_graphics("imagenes/yvera-principal.png")
+```
+
+La base de datos que vamos a descargar está en el área de Turismo Naturaleza, así que hacé click en [ese ícono](http://datos.yvera.gob.ar/dataset?groups=turismo-naturaleza) para navegar a la sección de datasets correspondiente.  
+
+(ref:yvera-parques-alt) Captura de pantalla de la página principal de búsqueda de yvera, mostrando la base de datos de Parques Nacionales.
+
+```{r echo=FALSE, fig.alt="(ref:yvera-parques-alt)"}
+knitr::include_graphics("imagenes/yvera-parques.png")
+```
+
+
+Al momento que escribimos esta guía sólo el set de datos de Parques Nacionales es el único disponible en el tema Turismo Naturaleza. 
+Hacé click ahí para ir a [la página de este set de datos](http://datos.yvera.gob.ar/dataset/parques-nacionales).
+
+(ref:yvera-parques-data-alt) Captura de pantalla de la página con los datos relacionados con parques nacionales.
+
+```{r echo=FALSE, fig.alt="(ref:yvera-parques-data-alt)"}
+knitr::include_graphics("imagenes/yvera-parques-data.png")
+```
+
+Este set de datos tiene distintos recursos.
+Varios son datos, como "Visitas a los Parques Nacionales según tipo de residencia del visitante" o "Visitas a los Parques Nacionales por región de destino según tipo de residencia del visitante", pero también hay un recurso llamado "Ficha Técnica: Parques Nacionales". 
+Este es [un PDF](http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/06e92813-b7d7-4702-8298-d73db3dbdce0/download/2021.01.05_pn.pdf) con la descripción de los datos así como consideraciones metodológicas relevantes. 
+Es importante que si vas a usar datos siempre mires la ficha técnica para hacerte una idea de las limitaciones metodológicas que pueden tener estos datos. 
+
+Por ahora vamos a descargar la [serie de tiempo](http://datos.yvera.gob.ar/dataset/parques-nacionales/archivo/78aea6ed-761c-4659-bdf2-7fcb0f616fad). 
+
+(ref:yvera-parques-serie-alt) Captura de pantalla de la página de la serie de tiempo de parques nacionales.
+
+```{r echo=FALSE, fig.alt="(ref:yvera-parques-serie-alt)"}
+knitr::include_graphics("imagenes/yvera-parques-serie.png")
+```
+
+
+En esta pantalla te vas a encontrar con una descripción del set de datos y sus variables. 
+Para descargar los datos hay que hacer click en el botón que dice "[DESCARGAR](http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv)". 
+Guardalo en una carpeta dentro del proyecto (recomedamos organizar los datos en una carpeta llamada "datos") y ya está listo para leer. 
+
+
+Pero si tuvieras que realizar un informe mensual sobre Parques Nacionales tendrías que hacer toda esta descarga manual cada vez que se actualiza el informe. 
+La gracia de usar código es automatizar todo lo más posible así que en vez de descargar manualmente el archivo, se puede descargar automáticamente desde el código de R. 
+
+Para eso, primero necesitás la dirección (URL) del set de datos.
+Eso se consigue yendo a [la página del set de datos](http://datos.yvera.gob.ar/dataset/parques-nacionales) y en vez de hacer click en DESCAGAR, haciendo 
+
+::: {.alert .alert-secondary}
+Click derecho → Copiar dirección del enlace
+:::
+
+La URL de la serie de parques nacionales es `http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv`. 
+Guaramos eso en una variable en R
+
+```{r}
+parques_url <- "http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv"
+```
+
+Y también definimos la ruta donde descargar el archivo
+
+
+```{r}
+parques_archivo <- "datos/parques.csv"
+```
+
+Y finalmente usamos la función `download.file()` para descargar el archivo. 
+
+```{r, eval=FALSE}
+download.file(url = parques_url, destfile = parques_archivo)  
+```
+
+Y esto va a descargar la última versión de la serie de Parques Nacionales. 
+
 ## Leer datos csv
 
 Existen muchas funciones distintas para leer datos dependiendo del formato en el que están guardados.
@@ -11,25 +95,27 @@ Para importar datos hace falta escribir el código correspondiente pero también
 File → Import Dataset → From Text (readr)...
 :::
 
-Esto nos va abrir una ventana donde podemos elegir el archivo que queremos importar (en este caso el archivo `paises.csv` que está dentro de la capeta `datos` del proyecto) y otros detalles.
+Esto te va abrir una ventana donde podrás elegir el archivo a importar (en este caso el archivo `parques.csv` que está dentro de la capeta `datos` del proyecto) y otros detalles.
 
-![Diálogo de importar datos](img/importar-paises.png)
+```{r, fig.alt = "Diálogo de importar datos de RStudio."}
+knitr::include_graphics("img/importar-parques.png")
+```
 
 En la pantalla principal vas a poder previsualizar los datos y ver que pinta tienen.
-Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos `paises`), si la primera fila contiene los nombres de las columnas (`First Row as Names`), qué delimitador tienen los datos (en este caso `comma`, pero podría ser punto y coma u otro), etc...
+Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos `parques`), si la primera fila contiene los nombres de las columnas (`First Row as Names`), qué delimitador tienen los datos (en este caso `comma`, pero podría ser punto y coma u otro), etc...
 
 Y abajo a la derecha es el código que vas a necesitar para efectivamente importar los datos.
-Podrías apretar el botón "Import" para leer los datos pero si bien es posible, al mismo tiempo esas líneas de código no se guardan en ningún lado y entonces nuestro trabajo luego no se puede reproducir desde un script.
+Podrías apretar el botón "Import" para leer los datos pero si bien es posible, al mismo tiempo esas líneas de código no se guardan en ningún lado y entonces nuestro trabajo luego no se puede reproducir.
 Por eso, te proponemos que copies ese código, cierres esa ventana con el botón "Cancel", y pegues el código en el archivo donde estés trabajando.
-Cuando lo ejecutes, se va a generar la variable `paises` con los datos.
+Cuando lo ejecutes, se va a generar la variable `parques` con los datos.
 
 ```{r}
 library(readr)
-paises <- read_csv("datos/paises.csv")
+parques <- read_csv("datos/parques.csv")
 ```
 
 ::: {.alert .alert-success}
-**Nota**: Notar que en este caso el código para leer los datos consta de dos líneas.
+**Nota**: Notá que en este caso el código para leer los datos consta de dos líneas.
 La primera carga el paquete `readr` y el segundo usa la función `read_csv()` (del paquete readr) para leer el archivo .csv.
 No es necesario cargar el paquete cada vez que vas a leer un archivo, pero asegurate de incluir esta línea al comienzo de tu archivo.
 :::
@@ -40,144 +126,16 @@ Una vez que lo tenés, no necesitás abrirla de nuevo.
 :::
 
 Todo ese texto naranja/rojo es intimidante pero no te preocupes, es sólo un mensaje que nos informa que los datos se leyeron y qué tipo de dato tiene cada columna.
-Podemos explorar la estructura de la variable `paises` usando la función `str()` (de *structure* en inglés).
+Podemos explorar la estructura de la variable `parques` usando la función `str()` (de *structure* en inglés).
 
 ```{r}
-str(paises)
+str(parques)
 ```
 
 Esto nos dice un montón.
 La primera línea dice que es una `tibble`, que es un caso especial de la estructura de datos tabular básica de R llamada `data.frame`.
-Tiene 1704 filas (las **observaciones**) y 6 columnas (o **variables** que describen las observaciones).
-Las siguientes líneas nos dicen los nombres de las columnas ("pais", "continente", "anio", "esperanza_de_vida", "poblacion" y "pbi_per_capita"), su tipo de dato (`chr` o `num`), la longitud (`[1:1704]`) y sus primeros elementos.
-Cada columna de la tabla `paises` es un **vector**.
-Dado que los vectores son como los "ladrillos" que hacen a los data.frames, merecen una atención especial.
-
-## Vectores
-
-Un vector en R es esencialmente una lista ordenada de cosas, con la condición especial de que todos los elementos en un vector tienen que ser del mismo tipo de datos básico.
-
-R tiene 5 tipos de datos básicos:
-
--   `double` (doble): números reales, por ejemplo 3.14159 o 1.5
--   `integer` (entero): números enteros, como 1 o 5
--   `complex` (complejo): números complejos, por ejemplo i + 2
--   `logical` (lógico): verdadero `TRUE` o `FALSE`
--   `character` (caracter): cadena de caracteres, como "hola R!"
-
-Existen otros pero son formas un poco más sofisticadas de estos tipos básicos.
-Por ejemplo, el formato POSIXct (de tiempo) se guarda como doble, representando la cantidad de segundos pasados desde el 01/01/1970.
-
-Una forma conveniente de crear un vector es con la función `c()` (de *combinar* ).
-
-```{r}
-x <- c(1, 2, 3, 4)
-x
-```
-
-`x` es una serie con 4 elementos.
-Si usamos la función `str()`:
-
-```{r}
-str(x)
-```
-
-Esta salida nos está informando que `x` es de tipo numérico (un nombre para dobles y enteros).
-Los vectores sólo pueden ser de un solo tipo.
-Por lo tanto, si intentás combinar un caracter con números, R va a tratar de "coercer" u obligar todo los elementos a que sean de un tipo común:
-
-```{r}
-x <- c("uno", 2)
-str(x)
-```
-
-Ahora el vector `x` es de tipo caracter y el número 2 se convirtió en el caracter "2".
-Este tipo de conversión automática puede ser fuente de muchos dolores de cabeza!
-Por ejemplo, ¿qué creés que va a pasar si tratás de sumarle 1 a la variable x?
-
-```{r, error = TRUE}
-x + 1
-```
-
-¡Un error!
-¿Cuál es el problema?
-El mensaje de error nos da una pista usamos un "argumento no numérico".
-R puede hacer `2 + 1`, pero `"2" + 1` no significa nada!
-
-Las reglas de coerción son: logical -\> integer -\> numeric -\> complex -\> character, donde -\> se puede leer como se transforma en.
-Para forzar la coerción en contra de esta cadena podés usar las funciones `as...`.
-
-```{r}
-as.numeric(x)
-```
-
-¡Pero no siempre funciona!
-Recordá que `x` tiene los valores "uno" y "2".
-R pudo convertir "2" en 2, pero no sabe cómo transformar "uno" en un elemento numérico.
-Lo que devuelve es un vector que en el lugar de "2" tiene 2, pero en el lugar de "uno" tiene `NA`, que es un tipo de elemento especial que representa un valor faltante.
-Pero R avisa, así que no es traidor: el warning advierte que la coerción introdujo valores faltantes.
-
-### Vectorización
-
-La mayoría de las funciones de R pueden trabajar sobre vectores y lo hacen **elemento a elemento**.
-Esto significa que si creás estos dos vectores:
-
-```{r}
-x <- 1:4   # 1:4 crea un vector que empieza en 1 y termina en 4,
-y <- 6:9
-```
-
-```{r}
-x
-```
-
-```{r}
-y
-```
-
-y los sumás
-
-```{r}
-x + y
-```
-
-el resultado es un vector de la misma longitud de `x` e `y` que en cada posición tiene la suma de cada elemento de `x` e `y`
-
-    x:  1  2  3  4
-        +  +  +  +
-    y:  6  7  8  9
-    ---------------
-        7  9 11 13
-
-Lo mismo sucede al multiplicar vectores
-
-```{r}
-x*y
-```
-
-    x:  1   2   3   4
-        *   *   *   *
-    y:  6   7   8   9
-    -----------------
-        6  14  24  36
-
-Si los vectores no tiene la misma longitud, los elementos del más corto se "reciclan".
-
-```{r}
-y <- c(6, 7, 8)
-x * y
-```
-
-    x:  1   2   3   4
-        *   *   *   *
-    y:  6   7   8   6
-    -----------------
-        6  14  24  24
-
-R emite una advertencia **sólo si la longitud del vector largo no es múltiplo de la longitud del vector corto**.
-Casi siempre el reciclado de vectores es señal de que algo salió mal.
-La única excepción es cuando el vector corto es de longitud 1.
-Por ejemplo, es totalmente razonable usar `x * 2` para duplicar los elementos de x.
+Tiene `r nrow(parques)` filas (las **observaciones**) y `r ncol(parques)` columnas (o **variables** que describen las observaciones).
+Las siguientes líneas nos dicen los nombres de las columnas (`r knitr::combine_words(colnames(parques)[1:3], and = "")`, etc...), su tipo de dato (`chr` o `num`), la longitud (`r paste0("[1:", nrow(parques), "]")`) y sus primeros elementos.
 
 ## Leer datos de excel
 
@@ -214,6 +172,8 @@ str(paises)
 2.  ¿Qué cambió en código que devuelve RStudio?
 3.  Revisa la documentación de la función `read_excel()` para identificar otros argumentos que puedan resultarte útiles.
 :::
+
+
 
 ## Formatos de tablas
 
