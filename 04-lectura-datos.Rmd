@@ -146,66 +146,32 @@ En efecto, RStudio provee la misma ayuda para leer este tipo de datos:
 File → Import Dataset → From Excel...
 :::
 
-![](img/importar-paises-xl.png)
+```{r, fig.alt = "Diálogo de importar datos de RStudio."}
+knitr::include_graphics("img/importar-parques-xls.png")
+```
 
 Notá que entre las opciones de abajo a la izquierda aparecen dos variables importantes.
 Podés seleccionar de qué hoja leer los datos y qué rango usar.
 Esto seguro que te va a ser muy útil para esos archivos de Excel con múltiples tablas en un archivo, o incluso múltiples tablas en cada hoja!
 
-En este caso paises.xlsx es un Excel buena onda, y el código para leer los datos es muy simple:
+En este caso parques.xlsx es un Excel buena onda, y el código para leer los datos es muy simple:
 
 ```{r}
 library(readxl)
-paises <- read_excel("datos/paises.xlsx")
+parques <- read_excel("datos/parques.xlsx")
 ```
 
 Con la función `str()` podés confirmar que los datos leídos son los mismos que para el csv.
 
 ```{r}
-str(paises)
+str(parques)
 ```
 
 ::: {.alert .alert-info}
 **Desafío: Lee un archivo**
 
-1.  Lee el archivo `paises.xlsx`, pero solo las primeras 30 lineas
+1.  Lee el archivo `parques.xlsx`, pero solo las primeras 30 lineas
 2.  ¿Qué cambió en código que devuelve RStudio?
 3.  Revisa la documentación de la función `read_excel()` para identificar otros argumentos que puedan resultarte útiles.
 :::
 
-
-
-## Formatos de tablas
-
-Pensá un momento en la estructura de los datos de `paises`.
-Tiene seis columnas, pero sólo tres de ellas contienen valores observados (`esperanza_de_vida`, `poblacion` y `pib_per_capita`) y las otras tres son las "coordenadas": `pais`, `continente` y `anio` son columnas que identifican la observación.
-De hecho, la columna `pais` tiene un montón de datos repetidos!
-
-Esto es un ejemplo de formato "largo" (o "tidy" en inglés).
-La idea básica de datos "largos" es que:
-
--   cada fila es una observación
--   cada columna es una variable
-
-La tabla `paises` es bastante larga (tiene 1704 filas y 6 columnas!) pero podría ser más larga aún.
-
-```{r, message=FALSE}
-paises_largo <- read_csv("datos/paises_largo.csv")
-str(paises_largo)
-```
-
-La tabla `paises_largo` tiene ¡5112 filas!
-Tiene un valor para cada país, año y variable.
-Es decir, las tres columnas que contenían valores numéricos (`esperanza_de_vida`, `poblacion` y `pib_per_capita`), en esta tabla son una sola columna llamada "valor".
-
-Pero también pueden ser podría ser más "ancha":
-
-```{r, message=FALSE}
-paises_ancho <- read_csv("datos/paises_ancho.csv")
-str(paises_ancho)
-```
-
-`paises_ancho` tiene una sola fila para cada país, y los datos de cada variable y año está en una columna propia.
-
-Ninguna estructura de datos es "la correcta"; distintos análisis y distintas funciones se llevan mejor con los datos en distinto "grado de longitud".
-Es muy normal empezar con datos largos, tener que pasarlos a anchos para hacer un análisis y luego volver a pasar a largos (tan normal que hay [un paquete de R que encapsula ese proceso](https://github.com/dgrtwo/widyr)).
