@@ -506,12 +506,21 @@ ggplot(gastos, aes(quintil, gasto)) +
 
 ## Gráficos de líneas suavizas
 
+Antes viste este gráfico que parece mostrar que la cantidad de visitantes residentes estuvo aumentando entre 2008 y 2020 hasta que las restricciones por la pandemia hicieron que esta cantidad se desplomara. 
 
-Cómo vimos antes, los gráficos de líneas suavizadas (smoothers) ajustan un modelo a los datos y luego grafican las predicciones del modelo. Sin entrar en muchos detalles, se puede aplicar distintos modelos y la elección del mismo dependerá de los datos.
+```{r}
+parques %>% 
+  group_by(trimestre = lubridate::month(indice_tiempo), region) %>% 
+  mutate(residentes = residentes - mean(residentes)) %>% 
+  ggplot(aes(indice_tiempo, residentes)) +
+  geom_line(aes(color= region)) 
+```
 
+Una forma de guiar al ojo a ver esta tendencia e ignorar las fluctuaciones trimestre a trimestre es usando una línea suave. 
+Las líneas de suavizado ajustan un modelo a los datos y luego grafican las predicciones del modelo. 
+Sin entrar en muchos detalles, se puede aplicar distintos modelos y la elección del mismo dependerá de los datos.
 
-
-Este gráfico entonces parece mostrar que la esperanza de vida fue aumentado a lo largo de los años pero sería interesante ver esa relación más explícitamente agregando una nueva capa con `geom_smooth()`.
+En ggplot2 se puede agregar una línea suave agregando una capa con `geom_smooth()`.
 
 ```{r}
 parques %>% 
@@ -523,7 +532,9 @@ parques %>%
   geom_smooth()
 ```
 
-Como dice en el mensaje, por defecto `geom_smooth()` suaviza los datos usando el método *loess* (regresión lineal local) cuando hay menos de 1000 datos.
+(Este gráfico además filtra sólo la región de Patagonia para que se vea más claramente.)
+
+Como dice en el mensaje, por defecto `geom_smooth()` suaviza los datos usando el método *loess* ([regresión lineal local](https://es.wikipedia.org/wiki/Regresi%C3%B3n_local)). 
 Seguramente va a ser muy común que quieras ajustar una regresión lineal global.
 En ese caso, hay que poner `method = "lm"`:
 
@@ -537,18 +548,18 @@ parques %>%
   geom_smooth(method = "lm")
 ```
 
-En gris nos muestra el intervalo de confianza al rededor de este suavizado que en este caso es bastante grande porque tenemos pocos datos!
+El área gris muestra el intervalo de confianza al rededor de este suavizado. 
 
 Cómo cualquier geom, podemos modificar el color, el grosor de la línea y casi cualquier cosa que se te ocurra.
 
 
+
 ```{r}
 parques %>% 
-  filter(region == "patagonia") %>% 
   group_by(trimestre = lubridate::month(indice_tiempo), region) %>% 
   mutate(residentes = residentes - mean(residentes)) %>% 
   ggplot(aes(indice_tiempo, residentes)) +
   geom_line(aes(color = region)) +
-  geom_smooth()
+  geom_smooth(aes(color = region))
 ```
 
