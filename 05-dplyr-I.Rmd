@@ -1,8 +1,8 @@
 # Manipulación de datos ordenados
 
-El paquete {dplyr} provee una enorme cantidad de funciones útiles para manipular y analizar datos de manera intuitiva y expresiva.
+El paquete **dplyr** provee una enorme cantidad de funciones útiles para manipular y analizar datos de manera intuitiva y expresiva.
 
-El espíritu detrás de {dplyr} es que la enorme mayoría de los análisis, por más complicados que sean, involucran combinar y encadenar una serie relativamente acotada de acciones (o verbos).
+El espíritu detrás de dplyr es que la enorme mayoría de los análisis, por más complicados que sean, involucran combinar y encadenar una serie relativamente acotada de acciones (o verbos).
 En este curso vamos a centrarnos las cinco más comunes:
 
 -   `select()`: selecciona columnas de una tabla.
@@ -14,31 +14,30 @@ En este curso vamos a centrarnos las cinco más comunes:
 ::: {.alert .alert-success}
 **dplyr y tablas dinámicas:**
 
-A grosso modo, las operaciones de {dplyr} permiten hacer en R lo que se hace en tablas dinámicas (pivot tables) en Excel.
+A grosso modo, las operaciones de dplyr permiten hacer en R lo que se hace en tablas dinámicas (pivot tables) en Excel.
 `filter()` vendría a ser como la sección de "Filtros", `group_by()`, la sección de "Filas", `select()`, la sección de "Columnas" y `summarise()`, la parte de "Valores".
 :::
 
-**Cambiar este ejemplo**
 
 ::: {.alert .alert-info}
 **Primer desafío:**
 
-Te dieron una tabla con datos de temperatura mínima y máxima para distintas estaciones meteorológicas de todo el país durante los 365 días de un año.
-Las columnas son: `id_estacion`, `temperatura_maxima`, `temperatura_minima` y `provincia`.
-En base a esos datos, te piden que computen la temperatura media anual de cada estación únicamente de las estaciones de La Pampa.
+Te dieron una tabla con datos de cantidad mensual de visitantes residentes y visitantes no residentes para cada provincia. 
+Las columnas son: `año`, `mes`, `provincia`, `visitantes_residentes` y `visitantes_no_residentes`. 
+En base a esos datos, te piden que computes la proporción promedio de visitantes que son residentes para cada provincia en enero. 
 
 ¿En qué orden ejecutarías estos pasos para obtener el resultado deseado?
 
--   usar `summarise()` para calcular la estadística `mean(temperatura_media)` para cada `id_estacion`
--   usar `group_by()` para agrupar por la columna `id_estacion`
--   usar `mutate()` para agregar una columna llamada `temperatura_media` que sea `(temperatura_minima + temperatura_maxima)/2`.
--   usar `filter()` para seleccionar solo las filas donde la columnas `provincia` es igual a "La Pampa"
+-   usar `summarise()` para calcular la estadística `mean(proporcion_residentes)` para cada `provincia`
+-   usar `group_by()` para agrupar por la columna `provincia`
+-   usar `mutate()` para agregar una columna llamada `proporcion_residentes` que sea `visitantes_residentes/(visitantes_residentes + visitantes_no_residentes)`.
+-   usar `filter()` para seleccionar solo las filas donde la columna `mes` es igual a 1. 
 :::
 
-Para usar {dplyr} primero hay que instalarlo (esto hay que hacerlo una sola vez) con el comando:
+Para usar dplyr primero hay que instalarlo (esto hay que hacerlo una sola vez por computadora) con el comando:
 
 ```{r, eval = FALSE}
-install.packages('dplyr')
+install.packages("dplyr")
 ```
 
 y luego cargarlo en memoria con
@@ -47,34 +46,34 @@ y luego cargarlo en memoria con
 library(dplyr)
 ```
 
-Volvé a cargar los datos de países (para un recordatorio, podés ir a [Lectura de datos ordenados](04-lectura-datos.html)):
+Volvé a cargar los datos de parques (para un recordatorio, podés ir a [Lectura de datos ordenados](lectura-de-datos-ordenados.html)):
 
 ```{r}
 library(readr)
-paises <- read_csv("datos/paises.csv")
+parques <- read_csv("datos/parques.csv")
 ```
 
 ## Seleccionando columnas con `select()`
 
-Para quedarse únicamente con las columnas de año, país y PBI per cápita, usá `select()`
+Para quedarse únicamente con las columnas de índice de tiempo, residentes y no residentes, usá `select()`
 
 ```{r}
-select(paises, anio, pais, pib_per_capita)
+select(parques, indice_tiempo, residentes, no_residentes)
 ```
 
 ¿Dónde quedó este resultado?
-Si te fijás en la variable `paises`, ésta está intacta:
+Si te fijás en la variable `parques`, ésta está intacta:
 
 ```{r}
-paises
+parques
 ```
 
-`select()` y el resto de las funciones de {dplyr} siempre generan una nueva tabla y nunca modifican la tabla original.
-Para guardar la tabla con las tres columnas `anio`, `pais` y `pbi_per_capita` tenés que asignar el resultado a una nueva variable.
+`select()` y el resto de las funciones de dplyr siempre generan una nueva tabla y nunca modifican la tabla original.
+Para guardar la tabla con las tres columnas `indice_tiempo`, `residentes` y `no_residentes` tenés que asignar el resultado a una nueva variable.
 
 ```{r}
-anio_pais_pbi <- select(paises, anio, pais, pib_per_capita)
-anio_pais_pbi
+parques_visitantes <- select(parques, indice_tiempo, residentes, no_residentes)
+parques_visitantes
 ```
 
 ![Cómo funciona `select()`](img/dplyr-select.png)
@@ -82,13 +81,13 @@ anio_pais_pbi
 ## Filtrando filas con `filter()`
 
 Ahora podés usar `filter()` para quedarte con sólo unas filas.
-Por ejemplo, para ver los datos de Argentina:
+Por ejemplo, para ver los meses con más de 500000 visitantes residentes. 
 
 ```{r}
-filter(anio_pais_pbi, pais == "Argentina")
+filter(parques_visitantes, residentes > 500000)
 ```
 
-La mayoría de los análisis consisten en varios pasos (en el primer desafío usaste 4 pasos para *Cambiar el ejemplo: calcular las temperaturas medias de una serie de estaciones*).
+La mayoría de los análisis consisten en varios pasos que van generando tablas intermedias (en el primer desafío usaste 4 pasos para calcular la proporción media de visitantes residentes)
 La única tabla que te interesa es la última, por lo que ir asignando variables nuevas en cada paso intermedio es tedioso y poco práctico.
 Para eso se usa el operador 'pipe' (`%>%`).
 
@@ -98,15 +97,19 @@ Esto permite escribir el código como una cadena de funciones que van operando s
 Las dos operaciones anteriores (seleccionar tres columnas y luego filtrar las filas correspondientes a Argentina) se pueden escribir uno después del otro y sin asignar los resultados intermedios a nuevas variables de esta forma:
 
 ```{r}
-paises %>% 
-  select(anio, pais, pib_per_capita) %>% 
-  filter(pais == "Argentina")
+parques %>% 
+  select(indice_tiempo, residentes, no_residentes) %>% 
+  filter(residentes > 500000)
 ```
 
-La forma de "leer" esto es "Tomá la variable `paises`, **después** aplicale `select(anio, pais, pib_per_capita)`, **después** aplicale `filter(pais == "Argentina")`".
+La forma de "leer" esto es "Tomá la variable `parques`, **después** aplicale `select(indice_tiempo, residentes, no_residentes)`, **después** aplicale `filter(residentes > 500000)`". 
 
-Cómo vimos, el primero argumento de todas las funciones de dplyr espera un data.frame y justamente el operador `%>%` toma el data.frame `paises` y se lo pasa al primer argumento de `select()`.
-Luego el data.frame resultante de seleccionar las columnas anio, país y pib_per_capita *pasa* como el primer argumento de la función `filter()` gracias al `%>%`.
+Cómo vimos, el primer argumento de todas las funciones de dplyr es el data frame sobre el cual van a operar, pero notá que en las líneas con `select()` y `filter()` no escribís la tabla explícitamente.  
+Esto es porque la pipe implícitamente pasa el resultado de las líneas anteriores como el primer argumento de la función siguiente. 
+
+Toma el data frame `paises` y se lo pasa al primer argumento de `select()`.
+Luego el data frame resultante de esa operación pasa como el primer argumento de la función `filter()` gracias al `%>%`.
+
 
 ::: {.alert .alert-success}
 **Tip:**
@@ -118,12 +121,12 @@ En RStudio podés escribir `%>%` usando el atajo de teclado Ctr + Shift + M.
 ::: {.alert .alert-info}
 **Desafío:**
 
-Completá esta cadena para producir una tabla que contenga los valores de expectativa de vida, país y año únicamente para los países africanos.
+Completá esta cadena para producir una tabla que contenga los meses donde no hubo visitantes residentes de Buenos Aires y 
 
 ```{r, eval = FALSE}
-paises %>% 
-  filter(continente == ___) %>%
-  select(___, ___, ___)
+parques %>% 
+  filter(buenos_aires_residentes == ___) %>% 
+  select(____, _____)
 ```
 :::
 
@@ -215,13 +218,13 @@ paises %>%
   mutate(pbi = pib_per_capita*poblacion)
 ```
 
-Recordá que las funciones de {dplyr} nunca modifican la tabla original.
+Recordá que las funciones de dplyr nunca modifican la tabla original.
 `mutate()` devolvió una nueva tabla que es igual a la tabla `paises` pero con la columna "pbi" agregada.
 La tabla `paises` sigue intacta.
 
 ## Desagrupando con `ungroup()`
 
-En general, la mayoría de las funciones de {dplyr} "entienden" cuando una tabla está agrupada y realizan las operaciones para cada grupo.
+En general, la mayoría de las funciones de dplyr "entienden" cuando una tabla está agrupada y realizan las operaciones para cada grupo.
 
 ::: {.alert .alert-info}
 **Desafío:**
