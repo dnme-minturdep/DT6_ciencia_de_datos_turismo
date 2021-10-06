@@ -79,7 +79,7 @@ Muchos de los errores a la hora de knitear ocurren porque el archivo tiene probl
 
 El código de R que va a leer datos, analizarlos y generar figuras, tablas o números se organiza en bloques (o `chunks`) delimitados por tres acentos graves (```` ``` ````) y se diferencia del resto de archivo con un fondo gris.
 Todo lo que incluyas entre estos delimitadores será interpretado por R como código e intentará ejecutarlo al *knitear* el archivo.
-Cualquier resultado del código (gráficos, tablas, texto, etc...) será insertado en el documento
+Cualquier resultado del código (gráficos, tablas, texto, etc...) será insertado en el documento final en el mismo orden que están en el archivo R Markdown.
 
 ::: {.alert .alert-success}
 Para insertar un nuevo chunk podés:
