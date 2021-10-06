@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.2 Vectores | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
+  <meta name="description" content="Ciencia de Datos para el Turismo" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.2 Vectores | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Ciencia de Datos para el Turismo" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.2 Vectores | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  
+  <meta name="twitter:description" content="Ciencia de Datos para el Turismo" />
+  
+
+<meta name="author" content="Dirección Nacional de Mercados y Estadísticas - Subsecretaría de Desarrollo Estratégico" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="leer-datos-csv.html"/>
+<link rel="next" href="leer-datos-de-excel.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="imagenes/escudo_mintur.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#documento-técnico-nº6---resumen"><i class="fa fa-check"></i>Documento Técnico Nº6 - Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a><ul>
+<li class="chapter" data-level="1.1" data-path="por-qué-r.html"><a href="por-qué-r.html"><i class="fa fa-check"></i><b>1.1</b> ¿Por qué R?</a></li>
+<li class="chapter" data-level="1.2" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#orientándose-en-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Orientándose en RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#hablando-con-r"><i class="fa fa-check"></i><b>1.2.2</b> Hablando con R</a></li>
+<li class="chapter" data-level="1.2.3" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#extendiendo-r"><i class="fa fa-check"></i><b>1.2.3</b> Extendiendo R</a></li>
+<li class="chapter" data-level="1.2.4" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#buscando-ayuda"><i class="fa fa-check"></i><b>1.2.4</b> Buscando ayuda</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#qué-ventajas-tiene"><i class="fa fa-check"></i><b>2.0.1</b> ¿Qué ventajas tiene?</a></li>
+<li class="chapter" data-level="2.0.2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#abrir-un-proyecto"><i class="fa fa-check"></i><b>2.0.2</b> Abrir un proyecto</a></li>
+<li class="chapter" data-level="2.0.3" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#cómo-se-organiza"><i class="fa fa-check"></i><b>2.0.3</b> ¿Cómo se organiza?</a></li>
+<li class="chapter" data-level="2.0.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#borrón-y-cuenta-nueva-todos-los-días"><i class="fa fa-check"></i><b>2.0.4</b> Borrón y cuenta nueva… todos los días!</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a {RMarkdown}</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#creando-archivos-.rmd"><i class="fa fa-check"></i><b>3.0.1</b> Creando archivos .Rmd</a></li>
+<li class="chapter" data-level="3.0.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#estructura-de-un-.rmd"><i class="fa fa-check"></i><b>3.0.2</b> Estructura de un .Rmd</a></li>
+<li class="chapter" data-level="3.0.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#markdown"><i class="fa fa-check"></i><b>3.0.3</b> Markdown</a></li>
+<li class="chapter" data-level="3.0.4" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#bloques-de-código"><i class="fa fa-check"></i><b>3.0.4</b> Bloques de código</a></li>
+<li class="chapter" data-level="3.0.5" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#texto-en-línea"><i class="fa fa-check"></i><b>3.0.5</b> Texto en línea</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a><ul>
+<li class="chapter" data-level="4.1" data-path="leer-datos-csv.html"><a href="leer-datos-csv.html"><i class="fa fa-check"></i><b>4.1</b> Leer datos csv</a></li>
+<li class="chapter" data-level="4.2" data-path="vectores.html"><a href="vectores.html"><i class="fa fa-check"></i><b>4.2</b> Vectores</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="vectores.html"><a href="vectores.html#vectorización"><i class="fa fa-check"></i><b>4.2.1</b> Vectorización</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="leer-datos-de-excel.html"><a href="leer-datos-de-excel.html"><i class="fa fa-check"></i><b>4.3</b> Leer datos de excel</a></li>
+<li class="chapter" data-level="4.4" data-path="formatos-de-tablas.html"><a href="formatos-de-tablas.html"><i class="fa fa-check"></i><b>4.4</b> Formatos de tablas</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="http://datos.yvera.gob.ar/" target="blank">Datos Abiertos de Turismo</a></li>
+<li><a href="http://www.yvera.gob.ar/estadistica" target="blank">Estadísticas de Turismo</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documento Técnico N°6: Ciencia de Datos para el Turismo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="imagenes/cabezal.png">
+</div>
+<div id="vectores" class="section level2">
+<h2><span class="header-section-number">4.2</span> Vectores</h2>
+<p>Un vector en R es esencialmente una lista ordenada de cosas, con la condición especial de que todos los elementos en un vector tienen que ser del mismo tipo de datos básico.</p>
+<p>R tiene 5 tipos de datos básicos:</p>
+<ul>
+<li><code>double</code> (doble): números reales, por ejemplo 3.14159 o 1.5</li>
+<li><code>integer</code> (entero): números enteros, como 1 o 5</li>
+<li><code>complex</code> (complejo): números complejos, por ejemplo i + 2</li>
+<li><code>logical</code> (lógico): verdadero <code>TRUE</code> o <code>FALSE</code></li>
+<li><code>character</code> (caracter): cadena de caracteres, como “hola R!”</li>
+</ul>
+<p>Existen otros pero son formas un poco más sofisticadas de estos tipos básicos. Por ejemplo, el formato POSIXct (de tiempo) se guarda como doble, representando la cantidad de segundos pasados desde el 01/01/1970.</p>
+<p>Una forma conveniente de crear un vector es con la función <code>c()</code> (de <em>combinar </em>).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="vectores.html#cb5-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb5-2"><a href="vectores.html#cb5-2"></a>x</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<p><code>x</code> es una serie con 4 elementos. Si usamos la función <code>str()</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="vectores.html#cb7-1"></a><span class="kw">str</span>(x)</span></code></pre></div>
+<pre><code>##  num [1:4] 1 2 3 4</code></pre>
+<p>Esta salida nos está informando que <code>x</code> es de tipo numérico (un nombre para dobles y enteros). Los vectores sólo pueden ser de un solo tipo. Por lo tanto, si intentás combinar un caracter con números, R va a tratar de “coercer” u obligar todo los elementos a que sean de un tipo común:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="vectores.html#cb9-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;uno&quot;</span>, <span class="dv">2</span>)</span>
+<span id="cb9-2"><a href="vectores.html#cb9-2"></a><span class="kw">str</span>(x)</span></code></pre></div>
+<pre><code>##  chr [1:2] &quot;uno&quot; &quot;2&quot;</code></pre>
+<p>Ahora el vector <code>x</code> es de tipo caracter y el número 2 se convirtió en el caracter “2”. Este tipo de conversión automática puede ser fuente de muchos dolores de cabeza! Por ejemplo, ¿qué creés que va a pasar si tratás de sumarle 1 a la variable x?</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="vectores.html#cb11-1"></a>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<pre><code>## Error in x + 1: argumento no-numérico para operador binario</code></pre>
+<p>¡Un error! ¿Cuál es el problema? El mensaje de error nos da una pista usamos un “argumento no numérico”. R puede hacer <code>2 + 1</code>, pero <code>"2" + 1</code> no significa nada!</p>
+<p>Las reglas de coerción son: logical -&gt; integer -&gt; numeric -&gt; complex -&gt; character, donde -&gt; se puede leer como se transforma en. Para forzar la coerción en contra de esta cadena podés usar las funciones <code>as...</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="vectores.html#cb13-1"></a><span class="kw">as.numeric</span>(x)</span></code></pre></div>
+<pre><code>## Warning: NAs introducidos por coerción</code></pre>
+<pre><code>## [1] NA  2</code></pre>
+<p>¡Pero no siempre funciona! Recordá que <code>x</code> tiene los valores “uno” y “2”. R pudo convertir “2” en 2, pero no sabe cómo transformar “uno” en un elemento numérico. Lo que devuelve es un vector que en el lugar de “2” tiene 2, pero en el lugar de “uno” tiene <code>NA</code>, que es un tipo de elemento especial que representa un valor faltante. Pero R avisa, así que no es traidor: el warning advierte que la coerción introdujo valores faltantes.</p>
+<div id="vectorización" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Vectorización</h3>
+<p>La mayoría de las funciones de R pueden trabajar sobre vectores y lo hacen <strong>elemento a elemento</strong>. Esto significa que si creás estos dos vectores:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="vectores.html#cb16-1"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>   <span class="co"># 1:4 crea un vector que empieza en 1 y termina en 4,</span></span>
+<span id="cb16-2"><a href="vectores.html#cb16-2"></a>y &lt;-<span class="st"> </span><span class="dv">6</span><span class="op">:</span><span class="dv">9</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="vectores.html#cb17-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="vectores.html#cb19-1"></a>y</span></code></pre></div>
+<pre><code>## [1] 6 7 8 9</code></pre>
+<p>y los sumás</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="vectores.html#cb21-1"></a>x <span class="op">+</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>## [1]  7  9 11 13</code></pre>
+<p>el resultado es un vector de la misma longitud de <code>x</code> e <code>y</code> que en cada posición tiene la suma de cada elemento de <code>x</code> e <code>y</code></p>
+<pre><code>x:  1  2  3  4
+    +  +  +  +
+y:  6  7  8  9
+---------------
+    7  9 11 13</code></pre>
+<p>Lo mismo sucede al multiplicar vectores</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="vectores.html#cb24-1"></a>x<span class="op">*</span>y</span></code></pre></div>
+<pre><code>## [1]  6 14 24 36</code></pre>
+<pre><code>x:  1   2   3   4
+    *   *   *   *
+y:  6   7   8   9
+-----------------
+    6  14  24  36</code></pre>
+<p>Si los vectores no tiene la misma longitud, los elementos del más corto se “reciclan”.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="vectores.html#cb27-1"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)</span>
+<span id="cb27-2"><a href="vectores.html#cb27-2"></a>x <span class="op">*</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>## Warning in x * y: longitud de objeto mayor no es múltiplo de la longitud de uno
+## menor</code></pre>
+<pre><code>## [1]  6 14 24 24</code></pre>
+<pre><code>x:  1   2   3   4
+    *   *   *   *
+y:  6   7   8   6
+-----------------
+    6  14  24  24</code></pre>
+<p>R emite una advertencia <strong>sólo si la longitud del vector largo no es múltiplo de la longitud del vector corto</strong>. Casi siempre el reciclado de vectores es señal de que algo salió mal. La única excepción es cuando el vector corto es de longitud 1. Por ejemplo, es totalmente razonable usar <code>x * 2</code> para duplicar los elementos de x.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="leer-datos-csv.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="leer-datos-de-excel.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["DT6.pdf", "DT6.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

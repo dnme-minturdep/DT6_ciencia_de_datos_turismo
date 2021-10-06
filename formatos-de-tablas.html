@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.4 Formatos de tablas | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
+  <meta name="description" content="Ciencia de Datos para el Turismo" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.4 Formatos de tablas | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Ciencia de Datos para el Turismo" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.4 Formatos de tablas | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  
+  <meta name="twitter:description" content="Ciencia de Datos para el Turismo" />
+  
+
+<meta name="author" content="Dirección Nacional de Mercados y Estadísticas - Subsecretaría de Desarrollo Estratégico" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="leer-datos-de-excel.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="imagenes/escudo_mintur.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#documento-técnico-nº6---resumen"><i class="fa fa-check"></i>Documento Técnico Nº6 - Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a><ul>
+<li class="chapter" data-level="1.1" data-path="por-qué-r.html"><a href="por-qué-r.html"><i class="fa fa-check"></i><b>1.1</b> ¿Por qué R?</a></li>
+<li class="chapter" data-level="1.2" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#orientándose-en-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Orientándose en RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#hablando-con-r"><i class="fa fa-check"></i><b>1.2.2</b> Hablando con R</a></li>
+<li class="chapter" data-level="1.2.3" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#extendiendo-r"><i class="fa fa-check"></i><b>1.2.3</b> Extendiendo R</a></li>
+<li class="chapter" data-level="1.2.4" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#buscando-ayuda"><i class="fa fa-check"></i><b>1.2.4</b> Buscando ayuda</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#qué-ventajas-tiene"><i class="fa fa-check"></i><b>2.0.1</b> ¿Qué ventajas tiene?</a></li>
+<li class="chapter" data-level="2.0.2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#abrir-un-proyecto"><i class="fa fa-check"></i><b>2.0.2</b> Abrir un proyecto</a></li>
+<li class="chapter" data-level="2.0.3" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#cómo-se-organiza"><i class="fa fa-check"></i><b>2.0.3</b> ¿Cómo se organiza?</a></li>
+<li class="chapter" data-level="2.0.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#borrón-y-cuenta-nueva-todos-los-días"><i class="fa fa-check"></i><b>2.0.4</b> Borrón y cuenta nueva… todos los días!</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a {RMarkdown}</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#creando-archivos-.rmd"><i class="fa fa-check"></i><b>3.0.1</b> Creando archivos .Rmd</a></li>
+<li class="chapter" data-level="3.0.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#estructura-de-un-.rmd"><i class="fa fa-check"></i><b>3.0.2</b> Estructura de un .Rmd</a></li>
+<li class="chapter" data-level="3.0.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#markdown"><i class="fa fa-check"></i><b>3.0.3</b> Markdown</a></li>
+<li class="chapter" data-level="3.0.4" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#bloques-de-código"><i class="fa fa-check"></i><b>3.0.4</b> Bloques de código</a></li>
+<li class="chapter" data-level="3.0.5" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#texto-en-línea"><i class="fa fa-check"></i><b>3.0.5</b> Texto en línea</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a><ul>
+<li class="chapter" data-level="4.1" data-path="leer-datos-csv.html"><a href="leer-datos-csv.html"><i class="fa fa-check"></i><b>4.1</b> Leer datos csv</a></li>
+<li class="chapter" data-level="4.2" data-path="vectores.html"><a href="vectores.html"><i class="fa fa-check"></i><b>4.2</b> Vectores</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="vectores.html"><a href="vectores.html#vectorización"><i class="fa fa-check"></i><b>4.2.1</b> Vectorización</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="leer-datos-de-excel.html"><a href="leer-datos-de-excel.html"><i class="fa fa-check"></i><b>4.3</b> Leer datos de excel</a></li>
+<li class="chapter" data-level="4.4" data-path="formatos-de-tablas.html"><a href="formatos-de-tablas.html"><i class="fa fa-check"></i><b>4.4</b> Formatos de tablas</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="http://datos.yvera.gob.ar/" target="blank">Datos Abiertos de Turismo</a></li>
+<li><a href="http://www.yvera.gob.ar/estadistica" target="blank">Estadísticas de Turismo</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documento Técnico N°6: Ciencia de Datos para el Turismo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="imagenes/cabezal.png">
+</div>
+<div id="formatos-de-tablas" class="section level2">
+<h2><span class="header-section-number">4.4</span> Formatos de tablas</h2>
+<p>Pensá un momento en la estructura de los datos de <code>paises</code>. Tiene seis columnas, pero sólo tres de ellas contienen valores observados (<code>esperanza_de_vida</code>, <code>poblacion</code> y <code>pib_per_capita</code>) y las otras tres son las “coordenadas”: <code>pais</code>, <code>continente</code> y <code>anio</code> son columnas que identifican la observación. De hecho, la columna <code>pais</code> tiene un montón de datos repetidos!</p>
+<p>Esto es un ejemplo de formato “largo” (o “tidy” en inglés). La idea básica de datos “largos” es que:</p>
+<ul>
+<li>cada fila es una observación</li>
+<li>cada columna es una variable</li>
+</ul>
+<p>La tabla <code>paises</code> es bastante larga (tiene 1704 filas y 6 columnas!) pero podría ser más larga aún.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="formatos-de-tablas.html#cb34-1"></a>paises_largo &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises_largo.csv&quot;</span>)</span>
+<span id="cb34-2"><a href="formatos-de-tablas.html#cb34-2"></a><span class="kw">str</span>(paises_largo)</span></code></pre></div>
+<pre><code>## tibble [5,112 x 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ pais      : chr [1:5112] &quot;Afganistán&quot; &quot;Afganistán&quot; &quot;Afganistán&quot; &quot;Afganistán&quot; ...
+##  $ continente: chr [1:5112] &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; ...
+##  $ anio      : num [1:5112] 1952 1957 1962 1967 1972 ...
+##  $ variable  : chr [1:5112] &quot;esperanza_de_vida&quot; &quot;esperanza_de_vida&quot; &quot;esperanza_de_vida&quot; &quot;esperanza_de_vida&quot; ...
+##  $ valor     : num [1:5112] 28.8 30.3 32 34 36.1 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   pais = col_character(),
+##   ..   continente = col_character(),
+##   ..   anio = col_double(),
+##   ..   variable = col_character(),
+##   ..   valor = col_double()
+##   .. )</code></pre>
+<p>La tabla <code>paises_largo</code> tiene ¡5112 filas! Tiene un valor para cada país, año y variable. Es decir, las tres columnas que contenían valores numéricos (<code>esperanza_de_vida</code>, <code>poblacion</code> y <code>pib_per_capita</code>), en esta tabla son una sola columna llamada “valor”.</p>
+<p>Pero también pueden ser podría ser más “ancha”:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="formatos-de-tablas.html#cb36-1"></a>paises_ancho &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises_ancho.csv&quot;</span>)</span>
+<span id="cb36-2"><a href="formatos-de-tablas.html#cb36-2"></a><span class="kw">str</span>(paises_ancho)</span></code></pre></div>
+<pre><code>## tibble [142 x 38] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ continente            : chr [1:142] &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; ...
+##  $ pais                  : chr [1:142] &quot;Algeria&quot; &quot;Angola&quot; &quot;Benin&quot; &quot;Botswana&quot; ...
+##  $ pib_per_capita_1952   : num [1:142] 2449 3521 1063 851 543 ...
+##  $ pib_per_capita_1957   : num [1:142] 3014 3828 960 918 617 ...
+##  $ pib_per_capita_1962   : num [1:142] 2551 4269 949 984 723 ...
+##  $ pib_per_capita_1967   : num [1:142] 3247 5523 1036 1215 795 ...
+##  $ pib_per_capita_1972   : num [1:142] 4183 5473 1086 2264 855 ...
+##  $ pib_per_capita_1977   : num [1:142] 4910 3009 1029 3215 743 ...
+##  $ pib_per_capita_1982   : num [1:142] 5745 2757 1278 4551 807 ...
+##  $ pib_per_capita_1987   : num [1:142] 5681 2430 1226 6206 912 ...
+##  $ pib_per_capita_1992   : num [1:142] 5023 2628 1191 7954 932 ...
+##  $ pib_per_capita_1997   : num [1:142] 4797 2277 1233 8647 946 ...
+##  $ pib_per_capita_2002   : num [1:142] 5288 2773 1373 11004 1038 ...
+##  $ pib_per_capita_2007   : num [1:142] 6223 4797 1441 12570 1217 ...
+##  $ esperanza_de_vida_1952: num [1:142] 43.1 30 38.2 47.6 32 ...
+##  $ esperanza_de_vida_1957: num [1:142] 45.7 32 40.4 49.6 34.9 ...
+##  $ esperanza_de_vida_1962: num [1:142] 48.3 34 42.6 51.5 37.8 ...
+##  $ esperanza_de_vida_1967: num [1:142] 51.4 36 44.9 53.3 40.7 ...
+##  $ esperanza_de_vida_1972: num [1:142] 54.5 37.9 47 56 43.6 ...
+##  $ esperanza_de_vida_1977: num [1:142] 58 39.5 49.2 59.3 46.1 ...
+##  $ esperanza_de_vida_1982: num [1:142] 61.4 39.9 50.9 61.5 48.1 ...
+##  $ esperanza_de_vida_1987: num [1:142] 65.8 39.9 52.3 63.6 49.6 ...
+##  $ esperanza_de_vida_1992: num [1:142] 67.7 40.6 53.9 62.7 50.3 ...
+##  $ esperanza_de_vida_1997: num [1:142] 69.2 41 54.8 52.6 50.3 ...
+##  $ esperanza_de_vida_2002: num [1:142] 71 41 54.4 46.6 50.6 ...
+##  $ esperanza_de_vida_2007: num [1:142] 72.3 42.7 56.7 50.7 52.3 ...
+##  $ poblacion_1952        : num [1:142] 9279525 4232095 1738315 442308 4469979 ...
+##  $ poblacion_1957        : num [1:142] 10270856 4561361 1925173 474639 4713416 ...
+##  $ poblacion_1962        : num [1:142] 11000948 4826015 2151895 512764 4919632 ...
+##  $ poblacion_1967        : num [1:142] 12760499 5247469 2427334 553541 5127935 ...
+##  $ poblacion_1972        : num [1:142] 14760787 5894858 2761407 619351 5433886 ...
+##  $ poblacion_1977        : num [1:142] 17152804 6162675 3168267 781472 5889574 ...
+##  $ poblacion_1982        : num [1:142] 20033753 7016384 3641603 970347 6634596 ...
+##  $ poblacion_1987        : num [1:142] 23254956 7874230 4243788 1151184 7586551 ...
+##  $ poblacion_1992        : num [1:142] 26298373 8735988 4981671 1342614 8878303 ...
+##  $ poblacion_1997        : num [1:142] 29072015 9875024 6066080 1536536 10352843 ...
+##  $ poblacion_2002        : num [1:142] 31287142 10866106 7026113 1630347 12251209 ...
+##  $ poblacion_2007        : num [1:142] 33333216 12420476 8078314 1639131 14326203 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   continente = col_character(),
+##   ..   pais = col_character(),
+##   ..   pib_per_capita_1952 = col_double(),
+##   ..   pib_per_capita_1957 = col_double(),
+##   ..   pib_per_capita_1962 = col_double(),
+##   ..   pib_per_capita_1967 = col_double(),
+##   ..   pib_per_capita_1972 = col_double(),
+##   ..   pib_per_capita_1977 = col_double(),
+##   ..   pib_per_capita_1982 = col_double(),
+##   ..   pib_per_capita_1987 = col_double(),
+##   ..   pib_per_capita_1992 = col_double(),
+##   ..   pib_per_capita_1997 = col_double(),
+##   ..   pib_per_capita_2002 = col_double(),
+##   ..   pib_per_capita_2007 = col_double(),
+##   ..   esperanza_de_vida_1952 = col_double(),
+##   ..   esperanza_de_vida_1957 = col_double(),
+##   ..   esperanza_de_vida_1962 = col_double(),
+##   ..   esperanza_de_vida_1967 = col_double(),
+##   ..   esperanza_de_vida_1972 = col_double(),
+##   ..   esperanza_de_vida_1977 = col_double(),
+##   ..   esperanza_de_vida_1982 = col_double(),
+##   ..   esperanza_de_vida_1987 = col_double(),
+##   ..   esperanza_de_vida_1992 = col_double(),
+##   ..   esperanza_de_vida_1997 = col_double(),
+##   ..   esperanza_de_vida_2002 = col_double(),
+##   ..   esperanza_de_vida_2007 = col_double(),
+##   ..   poblacion_1952 = col_double(),
+##   ..   poblacion_1957 = col_double(),
+##   ..   poblacion_1962 = col_double(),
+##   ..   poblacion_1967 = col_double(),
+##   ..   poblacion_1972 = col_double(),
+##   ..   poblacion_1977 = col_double(),
+##   ..   poblacion_1982 = col_double(),
+##   ..   poblacion_1987 = col_double(),
+##   ..   poblacion_1992 = col_double(),
+##   ..   poblacion_1997 = col_double(),
+##   ..   poblacion_2002 = col_double(),
+##   ..   poblacion_2007 = col_double()
+##   .. )</code></pre>
+<p><code>paises_ancho</code> tiene una sola fila para cada país, y los datos de cada variable y año está en una columna propia.</p>
+<p>Ninguna estructura de datos es “la correcta”; distintos análisis y distintas funciones se llevan mejor con los datos en distinto “grado de longitud”. Es muy normal empezar con datos largos, tener que pasarlos a anchos para hacer un análisis y luego volver a pasar a largos (tan normal que hay <a href="https://github.com/dgrtwo/widyr">un paquete de R que encapsula ese proceso</a>).</p>
+
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="leer-datos-de-excel.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["DT6.pdf", "DT6.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
