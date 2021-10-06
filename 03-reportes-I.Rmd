@@ -137,7 +137,7 @@ Usando el archivo con el que venís trabajando insertá un nuevo chunk y:
 
 Finalmente, es posible que te encuentres mencionando resultados en el texto, por ejemplo algo así como "el porcentaje de ocupación para el mes de enero fue del 95%".
 Y también es posible que ese valor cambie si utilizas una base de datos distinta o si luego generas un informe pero para un mes siguiente.
-Las chances de de que te olvides de actualizar ese "95" son super altas, por eso RMarkdown también tiene la posibilidad de incorporar texto en línea.
+Las chances de de que te olvides de actualizar ese "95" son super altas, por eso R Markdown también tiene la posibilidad de incorporar código en línea con el texto.
 
 Si tenés una una variable `ocupacion` que vale "95%":
 
