@@ -72,7 +72,7 @@ define dos variables principales, "title" y "output".
 
 ::: {.alert .alert-success}
 Es muy importante mantener el escalonado, o *identación* de los elementos, ya que ésta define la jerarquía de cada elemento.
-Muchos errores comunes a la hora de knitear tienen su causa en problemas en la identación del encabezado.
+Muchos de los errores a la hora de knitear ocurren porque el archivo tiene problemas en la identación del encabezado.
 :::
 
 ### Bloques de código
