@@ -4,7 +4,7 @@ Es posible que en tu trabajo tengas que presentar informes o resultados de tu an
 Tal vez te hayas encontrando guardando una y otra vez gráficos y tablas o copiando resultados de un archivo al otro hasta que el informe quedó como querías.
 Los archivos y el paquete **RMarkdown** vienen al rescate.
 
-Un archivo de rmarkdown (generalmente con la extensión `.Rmd`), a diferencia de un script `.R`, es un archivo de texto plano que combina código de R que genera resultados (gráficos, tablas, etc...) y el texto que lo describe.
+Un archivo de R Markdown (generalmente con la extensión `.Rmd`), a diferencia de un script `.R`, es un archivo de texto plano que combina código de R que genera resultados (gráficos, tablas, etc...) y el texto que lo describe.
 Al poder intercalar cálculos y gráficos con su análisis o explicación, se unifica el flujo de trabajo y deja de ser necesario guardar figuras o tablas para luego insertarlas en un documento de texto.
 Esto es muy importante si buscamos que nuestro trabajo sea reproducible, pero además ahorra tiempo.
 
