@@ -1,5 +1,88 @@
 # Lectura de datos ordenados
 
+## Descargando datos 
+
+Antes de poder leer cualquier dato en R, primero hay que encontrarlo y descargarlo. 
+El Ministerio de Turismo mantiene un portal de datos abierto llamado [Yvera](http://datos.yvera.gob.ar/) donde podés buscar y descargar datos relacionados con el turismo en Argentina. 
+
+En esta sección vamos a descargar una serie de tiempo a partir de la Encuesta de Viajes y Turismo de los Hogares (EVyTH).
+
+Primero, ingresá a [http://datos.yvera.gob.ar/](http://datos.yvera.gob.ar/), donde te vas a encontrar con la páigna principal de Yvera.
+
+(ref:yvera-principal-alt) Captura de pantalla de la página principal de la plataforma de datos abiertos Yvera.
+
+```{r echo=FALSE, fig.alt="(ref:yvera-principal-alt)"}
+knitr::include_graphics("imagenes/yvera-principal.png")
+```
+
+La base de datos que vamos a descargar está en el área de Turismo Interno así que hacé click en [ese ícono](http://datos.yvera.gob.ar/dataset?groups=turismo-interno) para navegar a la sección de datasets correspondiente.  
+
+(ref:yvera-edad-alt) Captura de pantalla de la página principal de búsqueda de yvera, mostrando los datos asociados a Turismo Interno.
+
+```{r echo=FALSE, fig.alt="(ref:yvera-edad-alt)"}
+knitr::include_graphics("img/yvera-interno.png")
+```
+
+
+Al momento que escribimos esta guía el primer set de datos que aparece es la Encuesta de Viajes y Turismo de los Hogares (EVyTH). Hacé click ahí para ir a [la página de este set de datos](http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth).
+
+(ref:yvera-edad-data-alt) Captura de pantalla de la página con los datos relacionados la EVyTH.
+
+```{r echo=FALSE, fig.alt="(ref:yvera-edad-data-alt)"}
+knitr::include_graphics("img/yvera-evyth.png")
+```
+
+Este set de datos tiene distintos recursos.
+Varios son datos, como "Turistas residentes por región de destino del viaje" o "Turistas residentes por edad", pero también hay un recurso llamado "Ficha Técnica: EVyTH". 
+Este es [un PDF](http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/f41af122-ca31-4654-907b-a9cd57b80651/download/2021.01.05_evyth.pdf) con la descripción de los datos así como consideraciones metodológicas relevantes. 
+Es importante que si vas a usar datos siempre mires la ficha técnica para hacerte una idea de las limitaciones metodológicas que pueden tener estos datos. 
+
+Por ahora vamos a descargar la [serie de Turistas residentes por edad](http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth/archivo/abdacfcd-4a6c-4283-9abb-c1352def52e1). 
+
+(ref:yvera-edad-serie-alt) Captura de pantalla de la página de la serie de tiempo de turistas residentes por edad.
+
+```{r echo=FALSE, fig.alt="(ref:yvera-edad-serie-alt)"}
+knitr::include_graphics("img/yvera-evyth-edad.png")
+```
+
+
+En esta pantalla te vas a encontrar con una descripción del set de datos y sus variables. 
+Para descargar los datos hay que hacer click en el botón que dice "[DESCARGAR](http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/abdacfcd-4a6c-4283-9abb-c1352def52e1/download/tur_int_turistas_residentes_edad_serie.csv)". 
+Guardalo en una carpeta dentro del proyecto (recomedamos organizar los datos en una carpeta llamada "datos") y ya está listo para leer. 
+
+
+Pero si tuvieras que realizar un informe mensual sobre estos datos tendrías que hacer toda esta descarga manual cada vez que se actualiza el informe. 
+La gracia de usar código es automatizar todo lo más posible, así que en vez de descargar manualmente el archivo, se puede descargar automáticamente desde el código de R. 
+
+Para eso, primero necesitás la dirección (URL) del set de datos.
+Eso se consigue yendo a [la página del set de datos](http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth/archivo/abdacfcd-4a6c-4283-9abb-c1352def52e1) y en vez de hacer click en DESCAGAR, haciendo 
+
+::: {.alert .alert-secondary}
+Click derecho → Copiar dirección del enlace
+:::
+
+La URL de la esta serie es `http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/abdacfcd-4a6c-4283-9abb-c1352def52e1/download/tur_int_turistas_residentes_edad_serie.csv`. 
+Guaramos eso en una variable en R
+
+```{r}
+turistas_edad_url <- "http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/abdacfcd-4a6c-4283-9abb-c1352def52e1/download/tur_int_turistas_residentes_edad_serie.csv"
+```
+
+Y también definimos la ruta donde descargar el archivo
+
+
+```{r}
+turistas_edad_archivo <- "datos/turistas_edad.csv"
+```
+
+Y finalmente usamos la función `download.file()` para descargar el archivo. 
+
+```{r, eval=FALSE}
+download.file(url = turistas_edad_url, destfile = turistas_edad_archivo)  
+```
+
+Y esto va a descargar la última versión de los datos. 
+
 ## Leer datos csv
 
 Existen muchas funciones distintas para leer datos dependiendo del formato en el que están guardados.
@@ -11,27 +94,29 @@ Para importar datos hace falta escribir el código correspondiente pero también
 File → Import Dataset → From Text (readr)...
 :::
 
-Esto nos va abrir una ventana donde podemos elegir el archivo que queremos importar (en este caso el archivo `paises.csv` que está dentro de la capeta `datos` del proyecto) y otros detalles.
+Esto te va abrir una ventana donde podrás elegir el archivo a importar (en este caso el archivo `turistas_edad.csv` que está dentro de la capeta `datos` del proyecto) y otros detalles.
 
-![Diálogo de importar datos](img/importar-paises.png)
+```{r, fig.alt = "Diálogo de importar datos de RStudio."}
+knitr::include_graphics("img/importar-edad-xlsx.png")
+```
 
 En la pantalla principal vas a poder previsualizar los datos y ver que pinta tienen.
-Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos `paises`), si la primera fila contiene los nombres de las columnas (`First Row as Names`), qué delimitador tienen los datos (en este caso `comma`, pero podría ser punto y coma u otro), etc...
+Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos `turistas_edad`), si la primera fila contiene los nombres de las columnas (`First Row as Names`), qué delimitador tienen los datos (en este caso `comma`, pero podría ser punto y coma u otro), etc...
 
 Y abajo a la derecha es el código que vas a necesitar para efectivamente importar los datos.
-Podrías apretar el botón "Import" para leer los datos pero si bien es posible, al mismo tiempo esas líneas de código no se guardan en ningún lado y entonces nuestro trabajo luego no se puede reproducir desde un script.
+Podrías apretar el botón "Import" para leer los datos pero si bien es posible, al mismo tiempo esas líneas de código no se guardan en ningún lado y entonces nuestro trabajo luego no se puede reproducir.
 Por eso, te proponemos que copies ese código, cierres esa ventana con el botón "Cancel", y pegues el código en el archivo donde estés trabajando.
-Cuando lo ejecutes, se va a generar la variable `paises` con los datos.
+Cuando lo ejecutes, se va a generar la variable `turistas_edad` con los datos.
 
 ```{r}
 library(readr)
-paises <- read_csv("datos/paises.csv")
+turistas_edad <- read_csv("datos/turistas_edad.csv")
 ```
 
 ::: {.alert .alert-success}
-**Nota**: Notar que en este caso el código para leer los datos consta de dos líneas.
-La primera carga el paquete `readr` y el segundo usa la función `read_csv()` (del paquete readr) para leer el archivo .csv.
-No es necesario cargar el paquete cada vez que vas a leer un archivo, pero asegurate de incluir esta línea al comienzo de tu archivo.
+**Nota**: Notá que en este caso el código para leer los datos consta de dos líneas.
+La primera carga el paquete **readr** y el segundo usa la función `read_csv()` (del paquete readr) para leer el archivo .csv.
+No es necesario cargar el paquete cada vez que vas a leer un archivo, pero asegurate de incluir esta línea en el primer bloque de código de tu archivo.
 :::
 
 ::: {.alert .alert-success}
@@ -40,144 +125,16 @@ Una vez que lo tenés, no necesitás abrirla de nuevo.
 :::
 
 Todo ese texto naranja/rojo es intimidante pero no te preocupes, es sólo un mensaje que nos informa que los datos se leyeron y qué tipo de dato tiene cada columna.
-Podemos explorar la estructura de la variable `paises` usando la función `str()` (de *structure* en inglés).
+Podemos explorar la estructura de la variable `turistas_edad` usando la función `str()` (de *structure* en inglés).
 
 ```{r}
-str(paises)
+str(turistas_edad)
 ```
 
 Esto nos dice un montón.
 La primera línea dice que es una `tibble`, que es un caso especial de la estructura de datos tabular básica de R llamada `data.frame`.
-Tiene 1704 filas (las **observaciones**) y 6 columnas (o **variables** que describen las observaciones).
-Las siguientes líneas nos dicen los nombres de las columnas ("pais", "continente", "anio", "esperanza_de_vida", "poblacion" y "pbi_per_capita"), su tipo de dato (`chr` o `num`), la longitud (`[1:1704]`) y sus primeros elementos.
-Cada columna de la tabla `paises` es un **vector**.
-Dado que los vectores son como los "ladrillos" que hacen a los data.frames, merecen una atención especial.
-
-## Vectores
-
-Un vector en R es esencialmente una lista ordenada de cosas, con la condición especial de que todos los elementos en un vector tienen que ser del mismo tipo de datos básico.
-
-R tiene 5 tipos de datos básicos:
-
--   `double` (doble): números reales, por ejemplo 3.14159 o 1.5
--   `integer` (entero): números enteros, como 1 o 5
--   `complex` (complejo): números complejos, por ejemplo i + 2
--   `logical` (lógico): verdadero `TRUE` o `FALSE`
--   `character` (caracter): cadena de caracteres, como "hola R!"
-
-Existen otros pero son formas un poco más sofisticadas de estos tipos básicos.
-Por ejemplo, el formato POSIXct (de tiempo) se guarda como doble, representando la cantidad de segundos pasados desde el 01/01/1970.
-
-Una forma conveniente de crear un vector es con la función `c()` (de *combinar* ).
-
-```{r}
-x <- c(1, 2, 3, 4)
-x
-```
-
-`x` es una serie con 4 elementos.
-Si usamos la función `str()`:
-
-```{r}
-str(x)
-```
-
-Esta salida nos está informando que `x` es de tipo numérico (un nombre para dobles y enteros).
-Los vectores sólo pueden ser de un solo tipo.
-Por lo tanto, si intentás combinar un caracter con números, R va a tratar de "coercer" u obligar todo los elementos a que sean de un tipo común:
-
-```{r}
-x <- c("uno", 2)
-str(x)
-```
-
-Ahora el vector `x` es de tipo caracter y el número 2 se convirtió en el caracter "2".
-Este tipo de conversión automática puede ser fuente de muchos dolores de cabeza!
-Por ejemplo, ¿qué creés que va a pasar si tratás de sumarle 1 a la variable x?
-
-```{r, error = TRUE}
-x + 1
-```
-
-¡Un error!
-¿Cuál es el problema?
-El mensaje de error nos da una pista usamos un "argumento no numérico".
-R puede hacer `2 + 1`, pero `"2" + 1` no significa nada!
-
-Las reglas de coerción son: logical -\> integer -\> numeric -\> complex -\> character, donde -\> se puede leer como se transforma en.
-Para forzar la coerción en contra de esta cadena podés usar las funciones `as...`.
-
-```{r}
-as.numeric(x)
-```
-
-¡Pero no siempre funciona!
-Recordá que `x` tiene los valores "uno" y "2".
-R pudo convertir "2" en 2, pero no sabe cómo transformar "uno" en un elemento numérico.
-Lo que devuelve es un vector que en el lugar de "2" tiene 2, pero en el lugar de "uno" tiene `NA`, que es un tipo de elemento especial que representa un valor faltante.
-Pero R avisa, así que no es traidor: el warning advierte que la coerción introdujo valores faltantes.
-
-### Vectorización
-
-La mayoría de las funciones de R pueden trabajar sobre vectores y lo hacen **elemento a elemento**.
-Esto significa que si creás estos dos vectores:
-
-```{r}
-x <- 1:4   # 1:4 crea un vector que empieza en 1 y termina en 4,
-y <- 6:9
-```
-
-```{r}
-x
-```
-
-```{r}
-y
-```
-
-y los sumás
-
-```{r}
-x + y
-```
-
-el resultado es un vector de la misma longitud de `x` e `y` que en cada posición tiene la suma de cada elemento de `x` e `y`
-
-    x:  1  2  3  4
-        +  +  +  +
-    y:  6  7  8  9
-    ---------------
-        7  9 11 13
-
-Lo mismo sucede al multiplicar vectores
-
-```{r}
-x*y
-```
-
-    x:  1   2   3   4
-        *   *   *   *
-    y:  6   7   8   9
-    -----------------
-        6  14  24  36
-
-Si los vectores no tiene la misma longitud, los elementos del más corto se "reciclan".
-
-```{r}
-y <- c(6, 7, 8)
-x * y
-```
-
-    x:  1   2   3   4
-        *   *   *   *
-    y:  6   7   8   6
-    -----------------
-        6  14  24  24
-
-R emite una advertencia **sólo si la longitud del vector largo no es múltiplo de la longitud del vector corto**.
-Casi siempre el reciclado de vectores es señal de que algo salió mal.
-La única excepción es cuando el vector corto es de longitud 1.
-Por ejemplo, es totalmente razonable usar `x * 2` para duplicar los elementos de x.
+Tiene `r nrow(turistas_edad)` filas (las **observaciones**) y `r ncol(turistas_edad)` columnas (o **variables** que describen las observaciones).
+Las siguientes líneas nos dicen los nombres de las columnas (`r knitr::combine_words(colnames(turistas_edad), and = "y ")`), su tipo de dato (`chr` o `num`), la longitud (`r paste0("[1:", nrow(turistas_edad), "]")`) y sus primeros elementos.
 
 ## Leer datos de excel
 
@@ -188,64 +145,33 @@ En efecto, RStudio provee la misma ayuda para leer este tipo de datos:
 File → Import Dataset → From Excel...
 :::
 
-![](img/importar-paises-xl.png)
+**CAMBIAR**
+```{r, fig.alt = "Diálogo de importar datos de RStudio."}
+knitr::include_graphics("img/importar-edad-xlsx.png")
+```
 
 Notá que entre las opciones de abajo a la izquierda aparecen dos variables importantes.
 Podés seleccionar de qué hoja leer los datos y qué rango usar.
 Esto seguro que te va a ser muy útil para esos archivos de Excel con múltiples tablas en un archivo, o incluso múltiples tablas en cada hoja!
 
-En este caso paises.xlsx es un Excel buena onda, y el código para leer los datos es muy simple:
+En este caso turistas_edad.xlsx es un Excel buena onda, y el código para leer los datos es muy simple:
 
 ```{r}
 library(readxl)
-paises <- read_excel("datos/paises.xlsx")
+turistas_edad <- read_excel("datos/turistas_edad.xlsx")
 ```
 
 Con la función `str()` podés confirmar que los datos leídos son los mismos que para el csv.
 
 ```{r}
-str(paises)
+str(turistas_edad)
 ```
 
 ::: {.alert .alert-info}
 **Desafío: Lee un archivo**
 
-1.  Lee el archivo `paises.xlsx`, pero solo las primeras 30 lineas
+1.  Lee el archivo `turistas_edad.xlsx`, pero solo las primeras 30 lineas
 2.  ¿Qué cambió en código que devuelve RStudio?
 3.  Revisa la documentación de la función `read_excel()` para identificar otros argumentos que puedan resultarte útiles.
 :::
 
-## Formatos de tablas
-
-Pensá un momento en la estructura de los datos de `paises`.
-Tiene seis columnas, pero sólo tres de ellas contienen valores observados (`esperanza_de_vida`, `poblacion` y `pib_per_capita`) y las otras tres son las "coordenadas": `pais`, `continente` y `anio` son columnas que identifican la observación.
-De hecho, la columna `pais` tiene un montón de datos repetidos!
-
-Esto es un ejemplo de formato "largo" (o "tidy" en inglés).
-La idea básica de datos "largos" es que:
-
--   cada fila es una observación
--   cada columna es una variable
-
-La tabla `paises` es bastante larga (tiene 1704 filas y 6 columnas!) pero podría ser más larga aún.
-
-```{r, message=FALSE}
-paises_largo <- read_csv("datos/paises_largo.csv")
-str(paises_largo)
-```
-
-La tabla `paises_largo` tiene ¡5112 filas!
-Tiene un valor para cada país, año y variable.
-Es decir, las tres columnas que contenían valores numéricos (`esperanza_de_vida`, `poblacion` y `pib_per_capita`), en esta tabla son una sola columna llamada "valor".
-
-Pero también pueden ser podría ser más "ancha":
-
-```{r, message=FALSE}
-paises_ancho <- read_csv("datos/paises_ancho.csv")
-str(paises_ancho)
-```
-
-`paises_ancho` tiene una sola fila para cada país, y los datos de cada variable y año está en una columna propia.
-
-Ninguna estructura de datos es "la correcta"; distintos análisis y distintas funciones se llevan mejor con los datos en distinto "grado de longitud".
-Es muy normal empezar con datos largos, tener que pasarlos a anchos para hacer un análisis y luego volver a pasar a largos (tan normal que hay [un paquete de R que encapsula ese proceso](https://github.com/dgrtwo/widyr)).
