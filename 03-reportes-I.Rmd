@@ -1,63 +1,59 @@
-# Introducción a {RMarkdown}
+# Introducción a RMarkdown
 
 Es posible que en tu trabajo tengas que presentar informes o resultados de tu análisis de datos.
 Tal vez te hayas encontrando guardando una y otra vez gráficos y tablas o copiando resultados de un archivo al otro hasta que el informe quedó como querías.
-Los archivos y el paquete `RMarkdown` vienen al rescate.
+Los archivos y el paquete **RMarkdown** vienen al rescate.
 
-Un archivo `RMarkdown` a diferencia de un script `.R` permite incluir código en bloques o *chunks* y texto plano o con formato simple de leer usando [markdown](https://markdown.es/sintaxis-markdown/).
-A poder intercalar cálculos y gráficos con su análisis o explicación, se unifica el flujo de trabajo y deja de ser necesario guardar figuras o tablas para luego insertarlas en un documento de texto.
+Un archivo de R Markdown (generalmente con la extensión `.Rmd`), a diferencia de un script `.R`, es un archivo de texto plano que combina código de R que genera resultados (gráficos, tablas, etc...) y el texto que lo describe.
+Al poder intercalar cálculos y gráficos con su análisis o explicación, se unifica el flujo de trabajo y deja de ser necesario guardar figuras o tablas para luego insertarlas en un documento de texto.
 Esto es muy importante si buscamos que nuestro trabajo sea reproducible, pero además ahorra tiempo.
 
-Aún si nunca necesitaras presentar un informe, trabajar con archivos de este tipo te permite volcar todo tu trabajo en un solo lugar y te asegura que cundo vuelvas a revisar mañana o el año que viene, tendrás el código y tus ideas organizadas.
+## Creando archivos .Rmd
 
-### Creando archivos .Rmd
-
-Para crear un nuevo archivo de R Markdown usá el menú desplegable de RStudio:
+En RStudio podés crear un nuevo archivo de R Markdown con el menú desplegable:
 
 ::: {.alert .alert-secondary}
 File → New File → R Markdown
 :::
 
-Y se abrirá un menú donde podés agregar el título y tu nombre.
-Por ahora vamos a usar el formato html como salida, charlaremos de las distintas posibilidades que ofrece más adelante.
+Y se abrirá un menú donde podés agregar el título de tu informe y tu nombre.
+Por ahora vamos a usar el formato HTML como salida, pero más adelante vas a ver que hay muchos otros formatos de salida posibles.
 
 ![](img/nuevo-rmd.png)
 
-Al aceptar, se abrirá un nuevo archivo pero que no está vacío.
-RStudio ofrece una plantilla a partir de la cual empezar a trabajar.
+Al aceptar, se abrirá un nuevo archivo con una plantilla de ejemplo (en inglés).
 
 ::: {.alert .alert-info}
-**Primer desafío: Crea un nuevo archivo R Markdown**
+**Primer desafío: Creá un nuevo archivo R Markdown**
 
 Revisá la plantilla que trae el documento.
 ¿Podés identificar los bloques de código?
 :::
 
-Para generar el archivo de salida el paquete `knitr` (que viene de *tejer* en inglés) y algunos otros ejecutará el código en una sesión independiente de R e interpretará el texto, su formato y cualquier otra cosa que agreguemos (por ejemplo imágenes o links externos).
+Para generar el archivo de salida, el paquete **knitr** (que viene de *tejer* en inglés) ejecutará el código en una sesión independiente de R e interpretará el texto, su formato y cualquier otra cosa que agreguemos (por ejemplo imágenes o links externos).
 Esto significa que nuestro archivo debe tener **todo** lo necesario para generar el análisis y si nos olvidamos de algo va a dar error.
 
 Por esta razón es recomendable *knitear* el archivo seguido, para encontrarnos con los errores a tiempo y de paso asegurarnos que el análisis es reproducible.
 
 ::: {.alert .alert-info}
-**Segundo desafío: "knitea" tu R Markdown**
+**Segundo desafío: kniteá tu R Markdown**
 
-Aprovechando la plantilla de RStudio, obtené el archivo de salida en formato html haciendo click en el botón **knit** (el que tiene un ovillo de lana y un par de agujas!)
+Aprovechando la plantilla de RStudio, obtené el archivo de salida en formato HTML haciendo click en el botón **knit** (el que tiene un ovillo de lana y un par de agujas!).
 :::
 
-### Estructura de un .Rmd
+## Estructura de un .Rmd
 
 Cualquier archivo de este tipo tiene 3 partes principales:
 
--   El encabezado o *yaml* que determina que pinta tendrá el archivo de salida, por ejemplo en formato html. También se puede incluir información sobre el autor, la fecha, si queremos o no una tabla de contenidos y muchas cosas más.
--   El texto o textos ya que puede estar a lo largo de todo el documento. Para darle formato a los títulos o por ejemplo resaltar parte del texto usando negrita se usa `Markdown`, un *lenguaje* que a diferencia de html es legible aún si no está compilado o en su versión final.
--   El código en bloques o `chuncks`. Dentro de un chunk el código de R puede ejecutarse al igual que en un script normal y cualquier comentario o explicación debe tener al principio un `#` para que R lo interprete correctamente.
-
 ![](img/rmd-ejemplo-secciones.png)
 
-Podés encontrar este archivo de ejemplo [acá](files/mi-primer-rmarkdown.Rmd).
+(Podés encontrar este archivo de ejemplo [acá](files/mi-primer-rmarkdown.Rmd).)
 
-::: {.alert .alert-success}
-Al agregar nuevas opciones en el YAML, se crean jerarquías que se identifican escalonando (o *indentando*) los renglones.
+### Encabezado
+
+El encabezado es una serie de instrucciones organizadas entre tres guiones (`---`) que determinan las propiedades globales del documento, como el título, el formato de salida, información de autoría, etc... También ahí se pueden cambiar opciones asociadas al formato de salida, como el estilo de la tabla de contenidos o índice.
+
+Éstas propiedades se definen en un formato llamado [YAML](https://es.wikipedia.org/wiki/YAML), el cual permite definir listas jerarquizadas de una forma humanamente legible.
 Por ejemplo:
 
 ``` {.yaml}
@@ -71,16 +67,107 @@ output:
 ---
 ```
 
-Es muy importante que no modifiques esto ya que de otra forma al hacer `knit` dará error.
+define dos variables principales, "title" y "output".
+"Output" a su vez contiene un elemento "htm_document", el cual contiene tres elementos: "code_download", "toc" y "toc_float".
+
+::: {.alert .alert-success}
+Es muy importante mantener el escalonado, o *identación* de los elementos, ya que ésta define la jerarquía de cada elemento.
+Muchos de los errores a la hora de knitear ocurren porque el archivo tiene problemas en la identación del encabezado.
 :::
 
-### Markdown
+### Bloques de código
 
-Markdown permite escribir una página web al igual que html pero de manera simple de leer.
-Si nuestro archivo de salida es un html, luego el paquete `knitr` se encargará de reemplazar las marcas de markdown por el código de html correspondiente.
-Pero como dijimos más arriba también será posible generar otro tipo de archivos de salida.
+El código de R que va a leer datos, analizarlos y generar figuras, tablas o números se organiza en bloques (o `chunks`) delimitados por tres acentos graves (```` ``` ````) y se diferencia del resto de archivo con un fondo gris.
+Todo lo que incluyas entre estos delimitadores será interpretado por R como código e intentará ejecutarlo al *knitear* el archivo.
+Cualquier resultado del código (gráficos, tablas, texto, etc...) será insertado en el documento final en el mismo orden que están en el archivo R Markdown.
 
-Por ejemplo podrás resaltar con **negrita** usando dos asteriscos así: `**negrita**` o *italizada* con un asterisco de cada lado: `*italics*`.
+::: {.alert .alert-success}
+Para insertar un nuevo chunk podés:
+
+-   Usar el botón **Insert**
+-   El atajo de teclado Ctrl+Alt+I
+-   Escribir a mano!
+:::
+
+El código en cada bloque se ejecuta como si fuera ejecutado en la terminal y todo resultado se muestra en el documento (ya vamos a ver formas de controlar esto).
+Por ejemplo, este bloque de código
+
+    ```{r sumar}`r ''`
+    1 + 1
+    ```
+
+va a insertar esto en el documento de salida:
+
+    [1] 2
+
+::: {.alert .alert-success}
+Es muy importante no romper los límites de los bloques.
+Un problema común es accidentalmente eliminar un acento grave al final de un bloque de código y que luego el documento no knitee correctamente.
+Si al knitear te sale un error como "attempt to use zero-length variable name", revisá bien que todos tus bloques de código estén correctamente definidos.
+:::
+
+Los bloques pueden tener nombre, lo cual es útil para identificar donde ocurren los errores al momento de *knitear* pero también para tener una pista de lo que hace el código que incluye.
+
+Si bien el código se corre cuando uno knitea, cuando estés escribiendo un informe es muy cómodo ir corriendo bloques individuales interactivamente como si fuera en la consola.
+
+Para correr una línea de código, tendrás que pararte sobre esa línea y apretar:
+
+::: {.alert .alert-secondary}
+Ctrl+Enter
+:::
+
+Pero también podés correr el código de todo el chunk con:
+
+::: {.alert .alert-secondary}
+Ctrl+Shift+Enter
+:::
+
+Los resultados van a aparecer inmediatamente debajo del bloque.
+
+::: {.alert .alert-info}
+**Cuarto desafío: Sumá un chunk a tu archivo**
+
+Usando el archivo con el que venís trabajando insertá un nuevo chunk y:
+
+1.  Cargá el paquete readr.
+2.  Creá una variable que se llame `variable_prueba` y asignale un valor.
+3.  Mostrá ese valor.
+4.  Volvé a *knitear* el archivo para ver el resultado
+:::
+
+Finalmente, es posible que te encuentres mencionando resultados en el texto, por ejemplo algo así como "el porcentaje de ocupación para el mes de enero fue del 95%".
+Y también es posible que ese valor cambie si utilizas una base de datos distinta o si luego generas un informe pero para un mes siguiente.
+Las chances de de que te olvides de actualizar ese "95" son super altas, por eso R Markdown también tiene la posibilidad de incorporar código en línea con el texto.
+
+Si tenés una una variable `ocupacion` que vale "95%":
+
+```{r}
+ocupacion <- "95%"
+```
+
+Para mencionarla en el texto entonces escribirías:
+
+> El porcentaje de ocupación para el mes de enero fue del `` ``r "r"` ocupacion` ``.
+ 
+y el resultado en el documento kniteado sería 
+
+> El porcentaje de ocupación para el mes de enero fue del `r ocupacion`.
+
+
+prueba: `` `r ocupacion` ``
+
+
+### El texto propio del documento.
+
+Este es el texto dirigido a las personas que van a leer el reporte.
+Incluirá una introducción, descripción de los datos y de los resultados; es lo que escribirías en el archivo de Word.
+
+A diferencia de Word, el formato del texto se define usando [markdown](<https://es.wikipedia.org/wiki/Markdown>], que es un lenguaje simple que permite indicar si un texto va en negrita, cursiva, es un título, etc...usando símbolos especiales dentro del texto.
+
+## Markdown
+
+Markdown permite escribir en texto plano pero definiendo el formato usando símbolos.
+Por ejemplo podés resaltar con **negrita** usando dos asteriscos así: `**negrita**` o *italizada* con un asterisco de cada lado: `*itálicas*`.
 
 También podés hacer una lista de elementos utilizando asteriscos:
 
@@ -121,6 +208,10 @@ Esto además define secciones dentro del documento:
     ### Otro subtítulo de menor jerarquía
     #### Otro más, y podría seguir!
 
+Podés escribir estos símbolos a mano o usando el Editor Visual de RStudio (sólo disponible para la versión 1.4 en adelante) haciendo click en el ícono de compás que está a la derecha del documento (![icono del editor visual](img/icono-editor-visual.png)) . 
+El Editor Visual permite dar formato al texto usando markdown sin saber usar markdown.
+
+
 ::: {.alert .alert-info}
 **Tercer desafío: Agregale texto a tu archivo**
 
@@ -130,11 +221,14 @@ Luego volvé a apretar el botón **knit** para ver el resultado.
 
 Markdown permite muchas otras cosas, por ejemplo:
 
-Podés agregar un link a una página externa: `[texto que se muestra con el link](http://the-web-page.com)`.
+Podés agregar un link a una página externa: `[texto que se muestra con el link](http://google.com)`. 
+Resultado: [texto que se muestra con el link](http://google.com)
 
-Podés incluir una imagen: `![pie de figura](http://url/for/file)`
+Podés incluir una imagen: `![descripción de la figura](https://placekitten.com/200/100)`: Resultado: 
 
-Y también podés agregar ecuaciones en LaTeX en la misma línea (esto:`$E = mc^2$` se ve así: $E = mc^2$) o en una línea propia.
+![descripción de la figura](https://placekitten.com/200/100)
+
+Y también podés agregar ecuaciones (usando [LaTeX](https://es.wikipedia.org/wiki/LaTeX)) en la misma línea (esto:`$E = mc^2$` se ve así: $E = mc^2$) o en una línea propia.
 Esto:
 
     $$
@@ -152,62 +246,3 @@ Podés revisar la guía rápida de Markdown desde RStudio (en inglés):
 
 Help → Markdown Quick Reference
 :::
-
-### Bloques de código
-
-Los bloques de código o **chunks** se definen usando 3 acentos grave al principio y al final:
-
-    `r ''````{r nombre-del-chunk}
-
-Y se diferencia del resto de archivo con un fondo gris.
-
-::: {.alert .alert-success}
-Para insertar un nuevo chunk podés:
-
--   Usar el botón **Insert**
--   El atajo de teclado Ctrl+Alt+I
--   Escribir a mano!
-:::
-
-Como viste en el ejemplo, los chucks pueden tener nombre y esto es útil para identificar donde ocurren los errores al momento de *knitear* pero también para tener una pista de lo que hace el código que incluye.
-
-Todo lo que incluyas entre los acentos graves será interpretado por R como código e intentará ejecutarlo al *knitear* el archivo.
-Pero también podemos correr el código interactivamente como en la consola, con la diferencia de que ahora el resultado (ya sea un valor, un gráfico o cualquier otra cosa) aparecerá inmediatamente por debajo del bloque de código.
-Para correr una línea de código, tendrás que pararte sobre esa línea y apretar:
-
-::: {.alert .alert-secondary}
-Ctrl+Enter
-:::
-
-Pero también podés correr el código de todo el chunk con:
-
-::: {.alert .alert-secondary}
-Ctrl+Shift+Enter
-:::
-
-::: {.alert .alert-info}
-**Cuarto desafío: Sumá un chunk a tu archivo**
-
-Usando el archivo con el que venís trabajando insertá un nuevo chunk y:
-
-1.  Cargá el paquete {readr}.
-2.  Creá una variable que se llame `variable-prueba` y asignale un valor.
-3.  Mostrá ese valor.
-4.  Volvé a *knitear* el archivo para ver el resultado
-:::
-
-### Texto en línea
-
-Finalmente es posible que te encuentres mencionando resultados en el texto, por ejemplo algo así como "el porcentaje de ocupación para el mes de enero fue del 95%".
-Y también es posible que ese valor cambie si utilizas una base de datos distinta o si luego generas un informe pero para un mes siguiente.
-Las chances de de que te olvides de actualizar ese "95" son super altas, por eso RMarkdown también tiene la posibilidad de incorporar texto en línea.
-
-Imaginemos que tenés una variable `ocupacion` a la cual le asignamos el valor "95":
-
-```{r}
-ocupacion <- 95
-```
-
-Para mencionarla en el texto entonces tenemos que poner el nombre de esa variable entre dos acentos graves y avisar que se trata de código de R des esta manera `` ``r "r"` ocupacion` ``.
-Entonces si en algún momento cambia el valor de la variable, la próxima vez que *knites* el documento se actualizará en el texto. 
-
