@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 11 Apariencia de gráficos | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
+  <meta name="description" content="Ciencia de Datos para el Turismo" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 11 Apariencia de gráficos | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Ciencia de Datos para el Turismo" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 11 Apariencia de gráficos | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  
+  <meta name="twitter:description" content="Ciencia de Datos para el Turismo" />
+  
+
+<meta name="author" content="Dirección Nacional de Mercados y Estadísticas - Subsecretaría de Desarrollo Estratégico" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="supertablas-con-kableextra.html"/>
+<link rel="next" href="escalas.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="imagenes/escudo_mintur.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#documento-técnico-nº6---resumen"><i class="fa fa-check"></i>Documento Técnico Nº6 - Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a><ul>
+<li class="chapter" data-level="1.1" data-path="por-qué-r.html"><a href="por-qué-r.html"><i class="fa fa-check"></i><b>1.1</b> ¿Por qué R?</a></li>
+<li class="chapter" data-level="1.2" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#orientándose-en-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Orientándose en RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#hablando-con-r"><i class="fa fa-check"></i><b>1.2.2</b> Hablando con R</a></li>
+<li class="chapter" data-level="1.2.3" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#extendiendo-r"><i class="fa fa-check"></i><b>1.2.3</b> Extendiendo R</a></li>
+<li class="chapter" data-level="1.2.4" data-path="cómo-decirle-a-r-qué-hacer.html"><a href="cómo-decirle-a-r-qué-hacer.html#buscando-ayuda"><i class="fa fa-check"></i><b>1.2.4</b> Buscando ayuda</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#qué-ventajas-tiene"><i class="fa fa-check"></i><b>2.0.1</b> ¿Qué ventajas tiene?</a></li>
+<li class="chapter" data-level="2.0.2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#abrir-un-proyecto"><i class="fa fa-check"></i><b>2.0.2</b> Abrir un proyecto</a></li>
+<li class="chapter" data-level="2.0.3" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#cómo-se-organiza"><i class="fa fa-check"></i><b>2.0.3</b> ¿Cómo se organiza?</a></li>
+<li class="chapter" data-level="2.0.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#ordenando-aún-más"><i class="fa fa-check"></i><b>2.0.4</b> Ordenando aún más</a></li>
+<li class="chapter" data-level="2.0.5" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#borrón-y-cuenta-nueva-todos-los-días"><i class="fa fa-check"></i><b>2.0.5</b> Borrón y cuenta nueva… todos los días!</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a RMarkdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="creando-archivos-rmd.html"><a href="creando-archivos-rmd.html"><i class="fa fa-check"></i><b>3.1</b> Creando archivos .Rmd</a></li>
+<li class="chapter" data-level="3.2" data-path="estructura-de-un-rmd.html"><a href="estructura-de-un-rmd.html"><i class="fa fa-check"></i><b>3.2</b> Estructura de un .Rmd</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="estructura-de-un-rmd.html"><a href="estructura-de-un-rmd.html#encabezado"><i class="fa fa-check"></i><b>3.2.1</b> Encabezado</a></li>
+<li class="chapter" data-level="3.2.2" data-path="estructura-de-un-rmd.html"><a href="estructura-de-un-rmd.html#bloques-de-código"><i class="fa fa-check"></i><b>3.2.2</b> Bloques de código</a></li>
+<li class="chapter" data-level="3.2.3" data-path="estructura-de-un-rmd.html"><a href="estructura-de-un-rmd.html#el-texto-propio-del-documento."><i class="fa fa-check"></i><b>3.2.3</b> El texto propio del documento.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="markdown.html"><a href="markdown.html"><i class="fa fa-check"></i><b>3.3</b> Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a><ul>
+<li class="chapter" data-level="4.1" data-path="descargando-datos.html"><a href="descargando-datos.html"><i class="fa fa-check"></i><b>4.1</b> Descargando datos</a></li>
+<li class="chapter" data-level="4.2" data-path="leer-datos-csv.html"><a href="leer-datos-csv.html"><i class="fa fa-check"></i><b>4.2</b> Leer datos csv</a></li>
+<li class="chapter" data-level="4.3" data-path="leer-datos-de-excel.html"><a href="leer-datos-de-excel.html"><i class="fa fa-check"></i><b>4.3</b> Leer datos de excel</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html"><i class="fa fa-check"></i><b>5</b> Manipulación de datos ordenados</a><ul>
+<li class="chapter" data-level="5.1" data-path="seleccionando-columnas-con-select.html"><a href="seleccionando-columnas-con-select.html"><i class="fa fa-check"></i><b>5.1</b> Seleccionando columnas con <code>select()</code></a></li>
+<li class="chapter" data-level="5.2" data-path="filtrando-filas-con-filter.html"><a href="filtrando-filas-con-filter.html"><i class="fa fa-check"></i><b>5.2</b> Filtrando filas con <code>filter()</code></a></li>
+<li class="chapter" data-level="5.3" data-path="agrupando-y-reduciendo-con-group-by-summarise.html"><a href="agrupando-y-reduciendo-con-group-by-summarise.html"><i class="fa fa-check"></i><b>5.3</b> Agrupando y reduciendo con <code>group_by() %&gt;% summarise()</code></a></li>
+<li class="chapter" data-level="5.4" data-path="creando-nuevas-columnas-con-mutate.html"><a href="creando-nuevas-columnas-con-mutate.html"><i class="fa fa-check"></i><b>5.4</b> Creando nuevas columnas con <code>mutate()</code></a></li>
+<li class="chapter" data-level="5.5" data-path="desagrupando-con-ungroup.html"><a href="desagrupando-con-ungroup.html"><i class="fa fa-check"></i><b>5.5</b> Desagrupando con <code>ungroup()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html"><i class="fa fa-check"></i><b>6</b> Gráficos con ggplot2</a><ul>
+<li class="chapter" data-level="6.1" data-path="primera-capa-el-área-del-gráfico.html"><a href="primera-capa-el-área-del-gráfico.html"><i class="fa fa-check"></i><b>6.1</b> Primera capa: el área del gráfico</a></li>
+<li class="chapter" data-level="6.2" data-path="segunda-capa-geometrías.html"><a href="segunda-capa-geometrías.html"><i class="fa fa-check"></i><b>6.2</b> Segunda capa: geometrías</a></li>
+<li class="chapter" data-level="6.3" data-path="mapear-variables-a-elementos.html"><a href="mapear-variables-a-elementos.html"><i class="fa fa-check"></i><b>6.3</b> Mapear variables a elementos</a></li>
+<li class="chapter" data-level="6.4" data-path="otras-geometrías.html"><a href="otras-geometrías.html"><i class="fa fa-check"></i><b>6.4</b> Otras geometrías</a></li>
+<li class="chapter" data-level="6.5" data-path="relación-entre-variables.html"><a href="relación-entre-variables.html"><i class="fa fa-check"></i><b>6.5</b> Relación entre variables</a></li>
+<li class="chapter" data-level="6.6" data-path="transformaciones-estadísticas.html"><a href="transformaciones-estadísticas.html"><i class="fa fa-check"></i><b>6.6</b> Transformaciones estadísticas</a></li>
+<li class="chapter" data-level="6.7" data-path="gráficos-de-frecuencias.html"><a href="gráficos-de-frecuencias.html"><i class="fa fa-check"></i><b>6.7</b> Gráficos de frecuencias</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="gráficos-de-frecuencias.html"><a href="gráficos-de-frecuencias.html#posición"><i class="fa fa-check"></i><b>6.7.1</b> Posición</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="gráficos-de-líneas-suavizas.html"><a href="gráficos-de-líneas-suavizas.html"><i class="fa fa-check"></i><b>6.8</b> Gráficos de líneas suavizas</a></li>
+<li class="chapter" data-level="6.9" data-path="gráficos-de-caja.html"><a href="gráficos-de-caja.html"><i class="fa fa-check"></i><b>6.9</b> Gráficos de caja</a></li>
+<li class="chapter" data-level="6.10" data-path="graficando-en-múltiples-paneles.html"><a href="graficando-en-múltiples-paneles.html"><i class="fa fa-check"></i><b>6.10</b> Graficando en múltiples paneles</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="7.1" data-path="de-ancho-a-largo-con-pivot-longer.html"><a href="de-ancho-a-largo-con-pivot-longer.html"><i class="fa fa-check"></i><b>7.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="7.2" data-path="de-largo-a-ancho-con-pivot-wider.html"><a href="de-largo-a-ancho-con-pivot-wider.html"><i class="fa fa-check"></i><b>7.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="7.3" data-path="uniendo-tablas.html"><a href="uniendo-tablas.html"><i class="fa fa-check"></i><b>7.3</b> Uniendo tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><i class="fa fa-check"></i><b>8</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="8.1" data-path="de-ancho-a-largo-con-pivot-longer-1.html"><a href="de-ancho-a-largo-con-pivot-longer-1.html"><i class="fa fa-check"></i><b>8.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="8.2" data-path="de-largo-a-ancho-con-pivot-wider-1.html"><a href="de-largo-a-ancho-con-pivot-wider-1.html"><i class="fa fa-check"></i><b>8.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="8.3" data-path="uniendo-tablas-1.html"><a href="uniendo-tablas-1.html"><i class="fa fa-check"></i><b>8.3</b> Uniendo tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="reportes-ii.html"><a href="reportes-ii.html"><i class="fa fa-check"></i><b>9</b> Reportes II</a><ul>
+<li class="chapter" data-level="9.1" data-path="eligiendo-el-formato-de-salida.html"><a href="eligiendo-el-formato-de-salida.html"><i class="fa fa-check"></i><b>9.1</b> Eligiendo el formato de salida</a></li>
+<li class="chapter" data-level="9.2" data-path="personalizando-la-salida.html"><a href="personalizando-la-salida.html"><i class="fa fa-check"></i><b>9.2</b> Personalizando la salida</a></li>
+<li class="chapter" data-level="9.3" data-path="reportes-parametrizados.html"><a href="reportes-parametrizados.html"><i class="fa fa-check"></i><b>9.3</b> Reportes parametrizados</a></li>
+<li class="chapter" data-level="9.4" data-path="control-de-chunks.html"><a href="control-de-chunks.html"><i class="fa fa-check"></i><b>9.4</b> Control de chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>10</b> Tablas</a><ul>
+<li class="chapter" data-level="10.1" data-path="tablas-simples-con-kable.html"><a href="tablas-simples-con-kable.html"><i class="fa fa-check"></i><b>10.1</b> Tablas simples con <code>kable</code></a></li>
+<li class="chapter" data-level="10.2" data-path="supertablas-con-kableextra.html"><a href="supertablas-con-kableextra.html"><i class="fa fa-check"></i><b>10.2</b> Supertablas con {kableExtra}</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html"><i class="fa fa-check"></i><b>11</b> Apariencia de gráficos</a><ul>
+<li class="chapter" data-level="11.1" data-path="escalas.html"><a href="escalas.html"><i class="fa fa-check"></i><b>11.1</b> Escalas</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="escalas.html"><a href="escalas.html#escala-de-colores-y-otras"><i class="fa fa-check"></i><b>11.1.1</b> Escala de colores y otras</a></li>
+<li class="chapter" data-level="11.1.2" data-path="escalas.html"><a href="escalas.html#escalas-de-ejes"><i class="fa fa-check"></i><b>11.1.2</b> Escalas de ejes</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="elementos-de-texto.html"><a href="elementos-de-texto.html"><i class="fa fa-check"></i><b>11.2</b> Elementos de texto</a></li>
+<li class="chapter" data-level="11.3" data-path="temas.html"><a href="temas.html"><i class="fa fa-check"></i><b>11.3</b> Temas</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><b><a href="http://www.yvera.gob.ar/estadistica" target="blank">Estadísticas de Turismo</a></b></li>
+<li><a href="http://datos.yvera.gob.ar/" target="blank">Datos Abiertos de Turismo</a></li>
+<li><a href="https://tableros.yvera.tur.ar/" target="blank">Tableros y Reportes</a></li>
+<li><a href="https://www.yvera.tur.ar/estadistica/informe" target="blank">Informes</a></li>
+<li><a href="https://armonizacion.yvera.tur.ar/" target="blank">Armonización</a></li>
+<li><a href="https://bitacora.yvera.tur.ar/" target="blank">Bitácora</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documento Técnico N°6: Ciencia de Datos para el Turismo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="imagenes/cabezal.png">
+</div>
+<div id="apariencia-de-gráficos" class="section level1">
+<h1><span class="header-section-number">Capítulo 11</span> Apariencia de gráficos</h1>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="apariencia-de-gráficos.html#cb216-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb216-2"><a href="apariencia-de-gráficos.html#cb216-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="supertablas-con-kableextra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="escalas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["DT6.pdf", "DT6.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
