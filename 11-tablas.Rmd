@@ -1,4 +1,4 @@
-## Tablas
+# Tablas
 
 Por defecto, la forma en que R Markdown muestra tablas es bastante feo porque muestra lo que verías si corrieras el código en la consola.
 

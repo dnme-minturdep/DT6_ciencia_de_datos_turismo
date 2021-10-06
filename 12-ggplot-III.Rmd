@@ -1,4 +1,4 @@
-## Apariencia de gráficos
+# Apariencia de gráficos
 
 
 ```{r}

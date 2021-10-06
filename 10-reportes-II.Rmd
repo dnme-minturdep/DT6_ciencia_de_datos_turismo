@@ -1,4 +1,4 @@
-## Reportes II
+# Reportes II
 
 ```{r, include=FALSE}
 chunk <- "```"

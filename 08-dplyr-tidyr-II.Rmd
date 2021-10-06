@@ -1,4 +1,4 @@
-## Manipulación de datos ordenados usando {dplyr} y {tidyr} II
+# Manipulación de datos ordenados usando {dplyr} y {tidyr} II
 
 En [la última sección de lectura de datos](04-lectura-datos.html#Formatos_de_tablas) viste el concepto de datos "anchos" y "largos".
 
