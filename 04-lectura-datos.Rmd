@@ -12,7 +12,7 @@ Primero, ingresá a [http://datos.yvera.gob.ar/](http://datos.yvera.gob.ar/), do
 (ref:yvera-principal-alt) Captura de pantalla de la página principal de la plataforma de datos abiertos Yvera.
 
 ```{r echo=FALSE, fig.alt="(ref:yvera-principal-alt)"}
-knitr::include_graphics("imagenes/yvera-principal.png")
+knitr::include_graphics("img/yvera-principal.png")
 ```
 
 La base de datos que vamos a descargar está en el área de Turismo Interno así que hacé click en [ese ícono](http://datos.yvera.gob.ar/dataset?groups=turismo-interno) para navegar a la sección de datasets correspondiente.  
