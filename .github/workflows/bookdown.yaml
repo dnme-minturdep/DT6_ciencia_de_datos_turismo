@@ -20,8 +20,13 @@ jobs:
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-renv@v1
+      # - uses: r-lib/actions/setup-renv@v1
 
+      - name: Install renv dependencies
+        run: |
+          R -e 'renv::restore()'
+        shell: bash
+        
       - name: Cache bookdown results
         uses: actions/cache@v2
         with:
