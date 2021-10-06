@@ -5,9 +5,9 @@
 Antes de poder leer cualquier dato en R, primero hay que encontrarlo y descargarlo. 
 El Ministerio de Turismo mantiene un portal de datos abierto llamado [Yvera](http://datos.yvera.gob.ar/) donde podés buscar y descargar datos relacionados con el turismo en Argentina. 
 
-En esta sección vamos a descargar una serie de tiempo a partir de laEncuesta de Viajes y Turismo de los Hogares (EVyTH).
+En esta sección vamos a descargar una serie de tiempo a partir de la Encuesta de Viajes y Turismo de los Hogares (EVyTH).
 
-Primero, navegá a [http://datos.yvera.gob.ar/](http://datos.yvera.gob.ar/), donde te vas a encontrar con la páigna principal de Yvera. 
+Primero, ingresá a [http://datos.yvera.gob.ar/](http://datos.yvera.gob.ar/), donde te vas a encontrar con la páigna principal de Yvera.
 
 (ref:yvera-principal-alt) Captura de pantalla de la página principal de la plataforma de datos abiertos Yvera.
 
@@ -115,8 +115,8 @@ turistas_edad <- read_csv("datos/turistas_edad.csv")
 
 ::: {.alert .alert-success}
 **Nota**: Notá que en este caso el código para leer los datos consta de dos líneas.
-La primera carga el paquete `readr` y el segundo usa la función `read_csv()` (del paquete readr) para leer el archivo .csv.
-No es necesario cargar el paquete cada vez que vas a leer un archivo, pero asegurate de incluir esta línea al comienzo de tu archivo.
+La primera carga el paquete **readr** y el segundo usa la función `read_csv()` (del paquete readr) para leer el archivo .csv.
+No es necesario cargar el paquete cada vez que vas a leer un archivo, pero asegurate de incluir esta línea en el primer bloque de código de tu archivo.
 :::
 
 ::: {.alert .alert-success}
