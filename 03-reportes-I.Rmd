@@ -51,7 +51,7 @@ Cualquier archivo de este tipo tiene 3 partes principales:
 
 ### Encabezado
 
-El encabezado es una serie de líneas puestas entre tres guiones (`---`) que determinan las propiedades globales del documento, como el título, el formato de salida, información de autoría, etc... También ahí se pueden cambiar opciones del formato de salida, como el estilo de la tabla de contenidos.
+El encabezado es una serie de instrucciones organizadas entre tres guiones (`---`) que determinan las propiedades globales del documento, como el título, el formato de salida, información de autoría, etc... También ahí se pueden cambiar opciones asociadas al formato de salida, como el estilo de la tabla de contenidos o índice.
 
 Éstas propiedades se definen en un formato llamado [YAML](https://es.wikipedia.org/wiki/YAML), el cual permite definir listas jerarquizadas de una forma humanamente legible.
 Por ejemplo:
@@ -129,13 +129,13 @@ Los resultados van a aparecer inmediatamente debajo del bloque.
 
 Usando el archivo con el que venís trabajando insertá un nuevo chunk y:
 
-1.  Cargá el paquete {readr}.
+1.  Cargá el paquete readr.
 2.  Creá una variable que se llame `variable_prueba` y asignale un valor.
 3.  Mostrá ese valor.
 4.  Volvé a *knitear* el archivo para ver el resultado
 :::
 
-Finalmente es posible que te encuentres mencionando resultados en el texto, por ejemplo algo así como "el porcentaje de ocupación para el mes de enero fue del 95%".
+Finalmente, es posible que te encuentres mencionando resultados en el texto, por ejemplo algo así como "el porcentaje de ocupación para el mes de enero fue del 95%".
 Y también es posible que ese valor cambie si utilizas una base de datos distinta o si luego generas un informe pero para un mes siguiente.
 Las chances de de que te olvides de actualizar ese "95" son super altas, por eso RMarkdown también tiene la posibilidad de incorporar texto en línea.
 
@@ -145,7 +145,7 @@ Si tenés una una variable `ocupacion` que vale "95%":
 ocupacion <- "95%"
 ```
 
-Para mencionarla en el texto entonces escribirías :
+Para mencionarla en el texto entonces escribirías:
 
 > El porcentaje de ocupación para el mes de enero fue del `` ``r "r"` ocupacion` ``.
  
@@ -159,7 +159,7 @@ prueba: `` `r ocupacion` ``
 
 ### El texto propio del documento.
 
-Este es el texto dirigido a los humanos que van a leer el reporte.
+Este es el texto dirigido a las personas que van a leer el reporte.
 Incluirá una introducción, descripción de los datos y de los resultados; es lo que escribirías en el archivo de Word.
 
 A diferencia de Word, el formato del texto se define usando [markdown](<https://es.wikipedia.org/wiki/Markdown>], que es un lenguaje simple que permite indicar si un texto va en negrita, cursiva, es un título, etc...usando símbolos especiales dentro del texto.
