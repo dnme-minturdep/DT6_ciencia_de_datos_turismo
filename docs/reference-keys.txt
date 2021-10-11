@@ -10,13 +10,17 @@ qué-ventajas-tiene
 abrir-un-proyecto
 cómo-se-organiza
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ordenando-aún-más
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 borrón-y-cuenta-nueva-todos-los-días
 introducción-a-rmarkdown
 creando-archivos-.rmd
 estructura-de-un-.rmd
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 encabezado
 bloques-de-código
@@ -27,6 +31,8 @@ descargando-datos
 leer-datos-csv
 leer-datos-de-excel
 =======
+=======
+>>>>>>> Stashed changes
 markdown
 bloques-de-código
 texto-en-línea
@@ -36,6 +42,9 @@ vectores
 vectorización
 leer-datos-de-excel
 formatos-de-tablas
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 manipulación-de-datos-ordenados
 seleccionando-columnas-con-select
@@ -53,9 +62,15 @@ transformaciones-estadísticas
 gráficos-de-frecuencias
 posición
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 gráficos-de-líneas-suavizas
 gráficos-de-caja
 graficando-en-múltiples-paneles
+=======
+gráficos-de-caja
+graficando-en-múltiples-paneles
+gráficos-de-líneas-suavizas
+>>>>>>> Stashed changes
 =======
 gráficos-de-caja
 graficando-en-múltiples-paneles
@@ -84,10 +99,13 @@ escalas-de-ejes
 elementos-de-texto
 temas
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 desafíos-de-práctica
 desafío-1
 desafío-2
 desafío-3
 desafío-4
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
