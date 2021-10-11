@@ -1,6 +1,6 @@
 ---
 title: "Documento Técnico N°6: Ciencia de Datos para el Turismo"
-subtitle: "Herramientas Computacionales para el Snálisis de Datos" 
+subtitle: "Herramientas Computacionales para el Análisis de Datos" 
 author: "Dirección Nacional de Mercados y Estadísticas -  Subsecretaría de Desarrollo Estratégico"
 date: "`r format(Sys.Date(), format = '%d de %B de %Y')`"
 site: bookdown::bookdown_site
