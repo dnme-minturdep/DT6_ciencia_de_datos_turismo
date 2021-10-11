@@ -24,7 +24,7 @@ A grosso modo, las operaciones de dplyr permiten hacer en R lo que se hace en ta
 
 Te dieron una tabla con datos de cantidad mensual de visitantes residentes y visitantes no residentes para cada provincia. 
 Las columnas son: `año`, `mes`, `provincia`, `visitantes_residentes` y `visitantes_no_residentes`. 
-En base a esos datos, te piden que computes la proporción promedio de visitantes que son residentes para cada provincia en enero. 
+En base a esos datos, te piden que calcules la proporción promedio de visitantes que son residentes para cada provincia en enero. 
 
 ¿En qué orden ejecutarías estos pasos para obtener el resultado deseado?
 
@@ -62,7 +62,7 @@ select(turistas_edad, indice_tiempo, turistas)
 ```
 
 ¿Dónde quedó este resultado?
-Si te fijás en la variable `turistas_edad`, ésta está intacta:
+Si te fijás en la tabla `turistas_edad`, su formato no cambió, sigue teniendo todas las columnas originales a pesar de nuestro select:
 
 ```{r}
 turistas_edad
