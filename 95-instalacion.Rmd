@@ -1,11 +1,9 @@
-# (APPENDIX) Apéndice {-}
+# Instalando R y RStudio
 
 En esta sección presentamos instrucciones de instalación de R y RStudio para Windows y derivados de Ubuntu. 
 Notá que dado que tanto R como RStudio publican nuevas versiones periódicamente, es posible que estas instrucciones queden desactualizadas con el tiempo. 
 
-# Instalando R y RStudio
-
-## Instalando R
+## Instalando R {-}
 
 ### Windows {-}
 
@@ -68,7 +66,7 @@ knitr::include_graphics("img/r-terminal.png")
 ```
 
 
-## Instalando RStudio
+## Instalando RStudio {-}
 
 Andá a https://www.rstudio.com/products/rstudio/download/#download. 
 Abajo de todo está el listado de instaladores para cada plataforma; descargá la que corresponda a tu sistema operativo.
