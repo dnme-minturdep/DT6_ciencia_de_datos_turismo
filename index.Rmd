@@ -1,6 +1,6 @@
 ---
 title: "Documento Técnico N°6: Ciencia de Datos para el Turismo"
-subtitle: "El turismo desde la perspectiva de la oferta: actividad y empleo" 
+subtitle: "Herramientas Computacionales para el Snálisis de Datos" 
 author: "Dirección Nacional de Mercados y Estadísticas -  Subsecretaría de Desarrollo Estratégico"
 date: "`r format(Sys.Date(), format = '%d de %B de %Y')`"
 site: bookdown::bookdown_site
@@ -34,7 +34,7 @@ La ciencia de datos es una disciplina que ha brindado nuevas y maravillosas posi
 
 En este documento técnico realizaremos una introducción al concepto de ciencia de datos y su proceso. Introduciremos el lenguaje de programación R como la caja de herramientas principales para poder llevar adelante cada tarea y etapa de este proceso.
 
-El documento se divide en xx capítulos con ejemplos prácticos y ejercicios (desafíos) para introducir y practicar los conceptos mencionados.
+El documento se divide en 11 capítulos con ejemplos prácticos y ejercicios (desafíos) para introducir y practicar los conceptos mencionados.
 
 
 ```{r include=FALSE}
