@@ -9,29 +9,33 @@ Notá que dado que tanto R como RStudio publican nuevas versiones periódicament
 
 ### Windows {-}
 
-Entrá a https://cran.r-project.org/bin/windows/base/ y bajate el instalador haciendo click en el link grandote que dice “Download R x.x.x for Windows”. 
-Una vez que se bajó, hacé doble click en el archivo y seguí las instrucciones del instalador.
+1. Entrá a https://cran.r-project.org/bin/windows/base/ y bajate el instalador haciendo click en el link grandote que dice “Download R x.x.x for Windows”. 
 
-Una vez que se termine de instalar, te va a aparecer un ícono como este en el escritorio o en los programas instalados R Programming Language icon PNG and SVG Vector Free Download
 
-Al ejecturalo, les tiene que aparecer algo como esto: 
+2. Una vez que se bajó, hacé doble click en el archivo y seguí las instrucciones del instalador.
+
+Una vez que se termine de instalar, te va a aparecer un ícono como este en el escritorio o en los programas instalados: ![Logo de R](img/r-logo.jpeg){height=20px}.
+
+Al ejecutarlo, les tiene que aparecer algo como esto: 
 
 ```{r, echo=FALSE, fig.alt = "Captura de la consola de R en windows."}
 knitr::include_graphics("img/r-en-windows.png")
 ```
 
+Si ves una ventana así significa que ya tenés instalado R, pero seguí leyendo! 
+**Todavía falta unos pasos** para poder sacarle todo el jugo.
 
+Para instalar algunos paquetes de R vas a necesitar instalar un programa adicional llamado rtools. 
 
-Para instalar algunos paquetes de R vas a necesitar instalar un programa adicional llamado rtools. Entrá a https://cran.r-project.org/bin/windows/Rtools/ y descargate el instalador en donde dice "On Windows 64-bit:  rtoolsxx-x86_64.exe (recommended: includes both i386 and x64 compilers)"
+1. Entrá a https://cran.r-project.org/bin/windows/Rtools/ y descargate el instalador en donde dice "On Windows 64-bit:  rtoolsxx-x86_64.exe (recommended: includes both i386 and x64 compilers)"
 
-Finalmente abrí la consola de R, poné esto y apretá enter:
+2. Abrí la consola de R, poné esto y apretá enter:
 
 ```{r, eval = FALSE}
 writeLines('PATH="${RTOOLS40_HOME}\\usr\\bin;${PATH}"', con = "~/.Renviron")
 ```
 
-
-Finalmente, para chequear que todo esté bien, cerrá R, volvé a abrirlo, escribí esto en la cosola y apretá enter:
+3. Finalmente, para chequear que todo esté bien, cerrá R, volvé a abrirlo, escribí esto en la cosola y apretá enter:
 
 ```{r, eval = FALSE}
 Sys.which("make")
@@ -55,7 +59,6 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD
 sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
 sudo sudo apt install r-base r-base-dev
 ```
-
 
 Si todo salió bien, tenés que tener instalado R en tu máquina y podés ejecutarlo con el comando `R` en la consola.
 
