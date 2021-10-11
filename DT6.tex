@@ -4,10 +4,21 @@
 %
 \documentclass[
   openany]{book}
+\title{Documento Técnico N°6: Ciencia de Datos para el Turismo}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{El turismo desde la perspectiva de la oferta: actividad y empleo}
+\author{Dirección Nacional de Mercados y Estadísticas - Subsecretaría de Desarrollo Estratégico}
+\date{11 de octubre de 2021}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -141,20 +152,9 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-
-\title{Documento Técnico N°6: Ciencia de Datos para el Turismo}
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-\subtitle{El turismo desde la perspectiva de la oferta: actividad y empleo}
-\author{Dirección Nacional de Mercados y Estadísticas - Subsecretaría de Desarrollo Estratégico}
-\date{29 de septiembre de 2021}
 
 \begin{document}
 \maketitle
@@ -207,7 +207,7 @@ El documento se divide en xx capítulos con ejemplos prácticos y ejercicios (de
 ``Disciplina \textbf{emergente} que se basa en el conocimiento en \textbf{metodología estadística y ciencias de la computación} para crear predicciones, clasificaciones e ideas impactantes para una amplia gama de campos tradicionales''
 \end{quote}
 
-No existe un acuerdo sobre una definición formal de ciencia de datos, pero la mayoría de estas definiciones concuerda en que tiene al menos tres pilares: el conocimiento estadístico, el conocimiento de ciencias de la computación y el conocimiento del negocio sobre el cual se va a aplicar.
+No existe un acuerdo sobre una definición formal de ciencia de datos, pero la mayoría de estas definiciones concuerda en que tiene al menos tres pilares: el conocimiento estadístico, el conocimiento de ciencias de la computación y el conocimiento de área sobre el cual se va a aplicar.
 En este caso el turismo.
 
 El proceso de ciencia de datos en el cual nos vamos a basar se puede ver en el siguiente diagrama:
@@ -216,7 +216,7 @@ Primero, debes \textbf{importar} tus datos hacia la herramienta donde vas a proc
 Típicamente, esto implica tomar datos que están guardados en un archivo o base de datos y cargarlos en tu software para poder trabajar con ellos.
 
 Una vez que has importado los datos, el siguiente paso es \textbf{ordenarlos} para que tengan un formato adecuado para su análisis.
-Este formato pensado para el análisis tiene la característica que, en los set de datos ordenados, \emph{cada columna es una variable y cada fila una observación}.
+Este formato pensado para el análisis tiene la característica que, en los conjuntos de datos ordenados, \emph{cada columna es una variable y cada fila una observación}.
 Tener datos ordenados nos provee una estructura consistente, preparada para analizarlos y podemos enfocar nuestros esfuerzos en las preguntas que queremos contestar con nuestros datos y no tener que acomodarlos cada vez que la pregunta cambie.
 
 Cuando tus datos están ordenados, podemos necesitar \emph{transformarlos}.
@@ -231,12 +231,12 @@ También puede ayudarte a replantear tus preguntas o darte cuenta si necesitas r
 
 Los modelos son herramientas complementarias a la visualización.
 Una vez que tus preguntas son lo suficientemente precisas, puedes utilizar un modelo para responderlas.
-Los modelos son herramientas matemáticas o computacionales y tienen supuestos para poder aplicarlos, asi que la tarea de seleccionar el modelo adecuado para nuestro problema es una parte importante de este proceso, como también lo es su implemtación e interpretación posterior.
+Los modelos son herramientas estadísticas o computacionales y tienen supuestos para poder aplicarlos, así que la tarea de seleccionar el modelo adecuado para nuestro problema es una parte importante de este proceso, como también lo es su implantación e interpretación posterior.
 
 El último paso en el proceso de la ciencia de datos es la \textbf{comunicación}, una parte crítica de cualquier proyecto de análisis de datos, porque es cuando vas a mostrar tus resultados a otras personas y necesitas que puedan comprenderlos y encontrarlos útiles para utilizarlos.
 
 Alrededor de todas estas herramientas se encuentra la \textbf{programación} como herramienta transversal en el proyecto de ciencia de datos.
-No necesitas ser una personas experta en programación para hacer ciencia de datos, pero aprender más sobre programar te ayudará a automatizar tareas recurrentes, compartir tu trabajo de forma reusable y aprovechar el trabajo de otros para resolver problemas similares con mayor facilidad y rapidez.
+No necesitás ser una persona experta en programación para hacer ciencia de datos, pero aprender más sobre programar te ayudará a automatizar tareas recurrentes, compartir tu trabajo de forma reusable y aprovechar el trabajo de otros para resolver problemas similares con mayor facilidad y rapidez.
 
 En este cuadernillo te mostraremos como realizar cada una de estas etapas utilizando el software R y te dejaremos links donde puedes aprender y profundizar más cada aspecto de este proceso.
 
@@ -418,7 +418,7 @@ Esto le dice a R que te ``imprima'' el contenido de la variable x.
 \end{Shaded}
 
 Ponerle nombre a las variables es a veces la parte más difícil de escribir código.
-A R no le viene bien cualquier nombre de variable siempre y cuando no empiece con un número o un ``\_''.
+A R le viene bien cualquier nombre de variable siempre y cuando no empiece con un número o un ``\_''.
 Pero a los seres humanos que lean el código y tengan que interpretarlos les va a resultas más fácil entender qué hace la variable \texttt{promedio\_noches\_estadia} que la variable \texttt{xxy1}.
 
 El consejo es tratar en lo posible usar nombre descriptivos y consistentes.
@@ -436,7 +436,7 @@ De esta manera, vas a poder entender tu código con más facilidad.
 R es un lenguaje creado por personas que practican la estadística y pensado para la estadística, por lo que ya viene con un montón de métodos estadísticos incorporados, como \texttt{mean()} o \texttt{median()}.
 Pero hay tantos métodos estadísticos como gente haciendo estadística así que es imposible que estén todos.
 La solución es que podés ``agregarle'' a R funciones que no vienen instaladas por defecto pero que escribieron otras personas en forma de ``paquetes''.
-Este es el poder de \textbf{la comunidad de R}!
+¡Este es el poder de \textbf{la comunidad de R}!
 
 Para instalar paquetes de R, la forma mas fácil es con la función \texttt{install.packages()}.
 Entonces, por ejemplo,
@@ -458,9 +458,10 @@ Luego, usando el comando
 
 le decís a R que cargue las funciones que vienen en el paquete readr para usarlas.
 
-\textbf{Desafío}: Instalá el paquete \{readr\} con el comando \texttt{install.packages("readr")}
+\textbf{Desafío}: Instalá el paquete \{readr\} con el comando \texttt{install.packages("readr")\ en\ la\ consola.}
 
-\textbf{Nota}: Si cerrás y volveś a abrir R, vas a tener que usar \texttt{library(readr)} nuevamente para acceder a la funcionalidad del paquete readr
+\textbf{Nota}: Si cerrás y volveś a abrir R, vas a tener que usar \texttt{library(readr)} nuevamente para acceder a la funcionalidad del paquete readr.
+Sólo hace falta correr \texttt{install.packages("readr")} una vez por máquina.
 
 \hypertarget{buscando-ayuda}{%
 \subsection{Buscando ayuda}\label{buscando-ayuda}}
@@ -517,7 +518,7 @@ Puede que haya cosas que aún no entiendas, pero tratá de captar la idea genera
 
 Trabajar con proyectos de RStudio no solo hace tus análisis más ordenados y reproducibles, también hacen tu vida más simple.
 
-Al comienzo posiblemente tengan un script y uno o dos archivos con datos, pero es posible que rápidamente te encuentres con una docena de archivos con nombres parecidos pero que pertenecen a análisis totalmente distintos.
+Al comienzo posiblemente tengas un script y uno o dos archivos con datos, pero es posible que rápidamente te encuentres con una docena de archivos con nombres parecidos pero que pertenecen a análisis totalmente distintos.
 Antes de que la cosa comience a complicarse te proponemos trabajar con proyectos.
 
 \hypertarget{quuxe9-ventajas-tiene}{%
@@ -528,7 +529,7 @@ Antes de que la cosa comience a complicarse te proponemos trabajar con proyectos
 \item
   Te permite ``cuidar'' los datos que usas al ordenarnos en carpetas que diferencien entre la versión original o cruda y los datos limpios o los resultados finales.
 \item
-  Te permite compartir tu trabajo fácilmente con otras personas. Solo tendrías que compartir la carpeta del proyecto sabiendo que incluye todo lo necesario para que cualquier persona reproduzca tu análisis.
+  Te permite compartir tu trabajo fácilmente con otras personas. Solo tendrías que compartir la carpeta del proyecto sabiendo que incluye todo lo necesario para que cualquiera reproduzca tu análisis.
 \item
   Te permite publicar de manera ordenada tu código si vas a presentar o publicar tu trabajo.
 \item
@@ -588,12 +589,40 @@ No existe una ``mejor'' forma de organizar un proyecto pero acá van algunos pri
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Tratar los datos como sólo de lectura} Es posible que la toma de los datos que querés analizar te haya costado mucho trabajo, o te haya costado conseguirlos. Trabajar con datos de forma interactiva (por ejemplo, en Excel) tiene la ventaja de permitirte hacer algunos análisis rápidamente pero al mismo tiempo tiene la desventaja de que esos datos pueden ser modificados fácilmente. Esto significa que a veces no conozcas de la procedencia de los datos, o no recuerdes como los modificaste desde que los obtuviste. Por lo tanto, es una buena idea tratar los datos como ``sólo de lectura'' y nunca modificar los archivos originales.
+  \textbf{Tratar los datos como sólo de lectura} Es posible que la toma de los datos que querés analizar te haya costado mucho trabajo, o te haya costado conseguirlos. Trabajar con datos de forma interactiva (por ejemplo, en Excel) tiene la ventaja de permitirte hacer algunos análisis rápidamente pero al mismo tiempo tiene la desventaja de que esos datos pueden ser modificados fácilmente. Esto significa que a veces no conozcas de la procedencia de los datos, o no recuerdes cómo los modificaste desde que los obtuviste. Por lo tanto, es una buena idea tratar los datos como ``sólo de lectura'' y nunca modificar los archivos originales.
 \item
   \textbf{Limpieza de datos} En muchos casos tus datos estarán ``sucios'', necesitarán un preprocesamiento importante para organizarlos en un formato que R (o cualquier otro lenguaje de programación) pueda analizados fácilmente. Esta tarea se denomina a veces ``amasado'' o ``masticado de datos''. Es una buena costumbre guardar el código que te permitió limpiar estos datos por si los volvieras a necesitar. También es recomendable guardar esa versión de los datos limpios, de ``sólo lectura'', para que puedas usarlos en tu análisis sin necesidad de repetir cada vez todo el proceso de limpieza de los datos.
 \item
   \textbf{Tratar las salidas o resultados generados como descartables} Cualquier resultado (gráficos, tablas, valores) debe poder repetirse o rehacerse a partir del código guardado. Si bien las pruebas rápidas para \emph{ver si el código funciona} se pueden hacer en la consola, es importante guardar el código que genera los resultados y asegurarnos de que sean reproducibles. Aún mejor, si organizas esos resultados en distintas sub-carpetas, luego tendrás todo aún más ordenado.
 \end{itemize}
+
+\hypertarget{ordenando-auxfan-muxe1s}{%
+\subsection{Ordenando aún más}\label{ordenando-auxfan-muxe1s}}
+
+Si tenés alguna experiencia programando con R es posible que tengas estás lineas al comienzo de alguno de tus scripts o si nunca las usaste, seguro viste que alguien más lo hacia:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"/Users/pao/una\_carpeta/al/proyecto\_importante"}\NormalTok{)}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+La primera línea \emph{setea} o le avisa a R cual será la carpeta donde va a trabajar. \emph{Con el uso de proyectos esto está prácticamente solucionado} porque al abrir el proyecto ya sea desde el explorador de archivos haciendo doble click en el archivo con extensión \emph{Rproj} o desde RStudio, R sabrá que ese directorio será el de trabajo.
+
+Pero también te dijimos que era una buena práctica organizar las diferentes partes del proyecto en subcarpetas, como por ejemplo colocar los datos en una subcarpeta llamada ``datos'', los informes en otra y tal vez las figuras en una subcarpeta distinta dentro del proyecto. ¿Cómo hacemos para que R lea un archivo que no está en la carpeta de trabajo? Podríamos escribir el camino hacia ese archivo, por ejemplo \texttt{"datos/mi\_archivo\_de\_datos.csv"} pero si queremos compartir el código a otra persona que tal vez tiene un sistema operativo distinto y usa la barra invertida \texttt{\textbackslash{}} va a estar en problemas al intentar correr esa línea.
+
+Para solucionar estos problemas existe el paquete \texttt{\{here\}}, que funciona independientemente del sistema operativo. Su función principal \texttt{here()} recibe como argumentos el camino hacia el archivo que se quiere leer, siempre entre comillas y separados por comas, así:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mis\_datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"datos"}\NormalTok{, }\StringTok{"mi\_archivo\_de\_datos.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Internamente este paquete puede identificar cual es el directorio de trabajo (por ejemplo detectando que hay un archivo \emph{.Rproj}) y busca a partir de ahí la subcarpeta ``datos'' y adentro de ella el archivo ``mi\_archivo\_de\_datos.csv''.
+
+La segunda línea del código inicial se usa para borrar los elementos que creamos en el análisis normalmente cuando cambiamos de tema o empezamos a trabajar con algo distinto. Esto está bien porque no queremos arrastrar análisis que hicimos en un proyecto a otro, necesitamos que sean autocontenidos y \emph{reproducibles}. El problema es que este comando \textbf{no} borra los paquetes activados o las opciones usuario que hayamos seteado.
 
 \hypertarget{borruxf3n-y-cuenta-nueva-todos-los-duxedas}{%
 \subsection{Borrón y cuenta nueva\ldots{} todos los días!}\label{borruxf3n-y-cuenta-nueva-todos-los-duxedas}}
@@ -606,7 +635,7 @@ La manera más directa es reiniciar la sesión de R y correr el código de nuevo
 
 Tip: Podés reiniciar la sesión de R con el atajo \texttt{Ctrl+Shif+F10}
 
-Esto puede pasar si por ejemplo leemos una base de datos en memoria pero no guardamos el código que lo hace.
+Esto puede pasar si por ejemplo leés una base de datos en memoria pero no guardás el código que lo hace.
 Mientras estemos trabajando, R tendrá esa base de datos en memoria y podremos hacer cálculos y gráficos.
 Por defecto además RStudio va a recordar las variables que estés usando mañana o pasado en un archivo oculto (.RData) a menos que le indiques lo contrario.
 Y si bien suena práctico volver a R al otro día y tener el análisis tal cual lo dejamos, esto puede significar que nunca nos demos cuenta que nos faltó guardar una línea de código clave en nuestro análisis.
@@ -617,7 +646,7 @@ Y si bien suena práctico volver a R al otro día y tener el análisis tal cual 
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Hacé click en el menú ``Herramientas (''Tools``) y luego''Opciones globales" (``Global Options'').
+  Hacé click en el menú ``Herramientas (''Tools'') y luego ``Opciones globales'' (``Global Options'').
 \item
   Destildá la opción ``Recuperar .RData al inicio de la sesión'' (``Restore .RData into workspace at startup'').
 \item
@@ -631,7 +660,7 @@ Es posible que en tu trabajo tengas que presentar informes o resultados de tu an
 Tal vez te hayas encontrando guardando una y otra vez gráficos y tablas o copiando resultados de un archivo al otro hasta que el informe quedó como querías.
 Los archivos y el paquete \textbf{RMarkdown} vienen al rescate.
 
-Un archivo de rmarkdown (generalmente con la extensión \texttt{.Rmd}), a diferencia de un script \texttt{.R}, es un archivo de texto plano que combina código de R que genera resultados (gráficos, tablas, etc\ldots) y el texto que lo describe.
+Un archivo de R Markdown (generalmente con la extensión \texttt{.Rmd}), a diferencia de un script \texttt{.R}, es un archivo de texto plano que combina código de R que genera resultados (gráficos, tablas, etc\ldots) y el texto que lo describe.
 Al poder intercalar cálculos y gráficos con su análisis o explicación, se unifica el flujo de trabajo y deja de ser necesario guardar figuras o tablas para luego insertarlas en un documento de texto.
 Esto es muy importante si buscamos que nuestro trabajo sea reproducible, pero además ahorra tiempo.
 
@@ -675,7 +704,7 @@ Cualquier archivo de este tipo tiene 3 partes principales:
 \hypertarget{encabezado}{%
 \subsection{Encabezado}\label{encabezado}}
 
-El encabezado es una serie de líneas puestas entre tres guiones (\texttt{-\/-\/-}) que determinan las propiedades globales del documento, como el título, el formato de salida, información de autoría, etc\ldots{} También ahí se pueden cambiar opciones del formato de salida, como el estilo de la tabla de contenidos.
+El encabezado es una serie de instrucciones organizadas entre tres guiones (\texttt{-\/-\/-}) que determinan las propiedades globales del documento, como el título, el formato de salida, información de autoría, etc\ldots{} También ahí se pueden cambiar opciones asociadas al formato de salida, como el estilo de la tabla de contenidos o índice.
 
 Éstas propiedades se definen en un formato llamado \href{https://es.wikipedia.org/wiki/YAML}{YAML}, el cual permite definir listas jerarquizadas de una forma humanamente legible.
 Por ejemplo:
@@ -697,14 +726,14 @@ define dos variables principales, ``title'' y ``output''.
 ``Output'' a su vez contiene un elemento ``htm\_document'', el cual contiene tres elementos: ``code\_download'', ``toc'' y ``toc\_float''.
 
 Es muy importante mantener el escalonado, o \emph{identación} de los elementos, ya que ésta define la jerarquía de cada elemento.
-Muchos errores comunes a la hora de knitear tienen su causa en problemas en la identación del encabezado.
+Muchos de los errores a la hora de knitear ocurren porque el archivo tiene problemas en la identación del encabezado.
 
 \hypertarget{bloques-de-cuxf3digo}{%
 \subsection{Bloques de código}\label{bloques-de-cuxf3digo}}
 
 El código de R que va a leer datos, analizarlos y generar figuras, tablas o números se organiza en bloques (o \texttt{chunks}) delimitados por tres acentos graves (\texttt{\textasciigrave{}\textasciigrave{}\textasciigrave{}}) y se diferencia del resto de archivo con un fondo gris.
 Todo lo que incluyas entre estos delimitadores será interpretado por R como código e intentará ejecutarlo al \emph{knitear} el archivo.
-Cualquier resultado del código (gráficos, tablas, texto, etc\ldots) será insertado en el documento
+Cualquier resultado del código (gráficos, tablas, texto, etc\ldots) será insertado en el documento final en el mismo orden que están en el archivo R Markdown.
 
 Para insertar un nuevo chunk podés:
 
@@ -759,7 +788,7 @@ Usando el archivo con el que venís trabajando insertá un nuevo chunk y:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Cargá el paquete \{readr\}.
+  Cargá el paquete readr.
 \item
   Creá una variable que se llame \texttt{variable\_prueba} y asignale un valor.
 \item
@@ -768,9 +797,9 @@ Usando el archivo con el que venís trabajando insertá un nuevo chunk y:
   Volvé a \emph{knitear} el archivo para ver el resultado
 \end{enumerate}
 
-Finalmente es posible que te encuentres mencionando resultados en el texto, por ejemplo algo así como ``el porcentaje de ocupación para el mes de enero fue del 95\%''.
+Finalmente, es posible que te encuentres mencionando resultados en el texto, por ejemplo algo así como ``el porcentaje de ocupación para el mes de enero fue del 95\%''.
 Y también es posible que ese valor cambie si utilizas una base de datos distinta o si luego generas un informe pero para un mes siguiente.
-Las chances de de que te olvides de actualizar ese ``95'' son super altas, por eso RMarkdown también tiene la posibilidad de incorporar texto en línea.
+Las chances de de que te olvides de actualizar ese ``95'' son super altas, por eso R Markdown también tiene la posibilidad de incorporar código en línea con el texto.
 
 Si tenés una una variable \texttt{ocupacion} que vale ``95\%'':
 
@@ -780,7 +809,7 @@ Si tenés una una variable \texttt{ocupacion} que vale ``95\%'':
 \end{Highlighting}
 \end{Shaded}
 
-Para mencionarla en el texto entonces escribirías :
+Para mencionarla en el texto entonces escribirías:
 
 \begin{quote}
 El porcentaje de ocupación para el mes de enero fue del \texttt{\textasciigrave{}r\ ocupacion\textasciigrave{}}.
@@ -797,7 +826,7 @@ prueba: \texttt{95\%}
 \hypertarget{el-texto-propio-del-documento.}{%
 \subsection{El texto propio del documento.}\label{el-texto-propio-del-documento.}}
 
-Este es el texto dirigido a los humanos que van a leer el reporte.
+Este es el texto dirigido a las personas que van a leer el reporte.
 Incluirá una introducción, descripción de los datos y de los resultados; es lo que escribirías en el archivo de Word.
 
 A diferencia de Word, el formato del texto se define usando \protect\hyperlink{markdown}{markdown}(\url{https://es.wikipedia.org/wiki/Markdown}{]}, que es un lenguaje simple que permite indicar si un texto va en negrita, cursiva, es un título, etc\ldots usando símbolos especiales dentro del texto.
@@ -911,6 +940,82 @@ Help → Markdown Quick Reference
 \hypertarget{lectura-de-datos-ordenados}{%
 \chapter{Lectura de datos ordenados}\label{lectura-de-datos-ordenados}}
 
+\hypertarget{descargando-datos}{%
+\section{Descargando datos}\label{descargando-datos}}
+
+Antes de poder leer cualquier dato en R, primero hay que encontrarlo y descargarlo.
+El Ministerio de Turismo mantiene un portal de datos abierto llamado \href{http://datos.yvera.gob.ar/}{Yvera} donde podés buscar y descargar datos relacionados con el turismo en Argentina.
+
+En esta sección vamos a descargar una serie de tiempo a partir de la Encuesta de Viajes y Turismo de los Hogares (EVyTH).
+
+Primero, ingresá a \url{http://datos.yvera.gob.ar/}, donde te vas a encontrar con la páigna principal de Yvera.
+
+
+
+\begin{center}\includegraphics[width=1\linewidth]{img/yvera-principal} \end{center}
+
+La base de datos que vamos a descargar está en el área de Turismo Interno así que hacé click en \href{http://datos.yvera.gob.ar/dataset?groups=turismo-interno}{ese ícono} para navegar a la sección de datasets correspondiente.
+
+
+
+\begin{center}\includegraphics[width=1\linewidth]{img/yvera-interno} \end{center}
+
+Al momento que escribimos esta guía el primer set de datos que aparece es la Encuesta de Viajes y Turismo de los Hogares (EVyTH). Hacé click ahí para ir a \href{http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth}{la página de este set de datos}.
+
+
+
+\begin{center}\includegraphics[width=1\linewidth]{img/yvera-evyth} \end{center}
+
+Este set de datos tiene distintos recursos.
+Varios son datos, como ``Turistas residentes por región de destino del viaje'' o ``Turistas residentes por edad'', pero también hay un recurso llamado ``Ficha Técnica: EVyTH''.
+Este es \href{http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/f41af122-ca31-4654-907b-a9cd57b80651/download/2021.01.05_evyth.pdf}{un PDF} con la descripción de los datos así como consideraciones metodológicas relevantes.
+Es importante que si vas a usar datos siempre mires la ficha técnica para hacerte una idea de las limitaciones metodológicas que pueden tener estos datos.
+
+Por ahora vamos a descargar la \href{http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth/archivo/abdacfcd-4a6c-4283-9abb-c1352def52e1}{serie de Turistas residentes por edad}.
+
+
+
+\begin{center}\includegraphics[width=1\linewidth]{img/yvera-evyth-edad} \end{center}
+
+En esta pantalla te vas a encontrar con una descripción del set de datos y sus variables.
+Para descargar los datos hay que hacer click en el botón que dice ``\href{http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/abdacfcd-4a6c-4283-9abb-c1352def52e1/download/tur_int_turistas_residentes_edad_serie.csv}{DESCARGAR}''.
+Guardalo en una carpeta dentro del proyecto (recomedamos organizar los datos en una carpeta llamada ``datos'') y ya está listo para leer.
+
+Pero si tuvieras que realizar un informe mensual sobre estos datos tendrías que hacer toda esta descarga manual cada vez que se actualiza el informe.
+La gracia de usar código es automatizar todo lo más posible, así que en vez de descargar manualmente el archivo, se puede descargar automáticamente desde el código de R.
+
+Para eso, primero necesitás la dirección (URL) del set de datos.
+Eso se consigue yendo a \href{http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth/archivo/abdacfcd-4a6c-4283-9abb-c1352def52e1}{la página del set de datos} y en vez de hacer click en DESCAGAR, haciendo
+
+Click derecho → Copiar dirección del enlace
+
+La URL de la esta serie es \texttt{http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/abdacfcd-4a6c-4283-9abb-c1352def52e1/download/tur\_int\_turistas\_residentes\_edad\_serie.csv}.
+Guaramos eso en una variable en R
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{turistas\_edad\_url }\OtherTok{\textless{}{-}} \StringTok{"http://datos.yvera.gob.ar/dataset/945e10f1{-}eee7{-}48a2{-}b0ef{-}8aff11df8814/resource/abdacfcd{-}4a6c{-}4283{-}9abb{-}c1352def52e1/download/tur\_int\_turistas\_residentes\_edad\_serie.csv"}
+\end{Highlighting}
+\end{Shaded}
+
+Y también definimos la ruta donde descargar el archivo
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{turistas\_edad\_archivo }\OtherTok{\textless{}{-}} \StringTok{"datos/turistas\_edad.csv"}
+\end{Highlighting}
+\end{Shaded}
+
+Y finalmente usamos la función \texttt{download.file()} para descargar el archivo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{download.file}\NormalTok{(}\AttributeTok{url =}\NormalTok{ turistas\_edad\_url, }\AttributeTok{destfile =}\NormalTok{ turistas\_edad\_archivo)  }
+\end{Highlighting}
+\end{Shaded}
+
+Y esto va a descargar la última versión de los datos.
+
 \hypertarget{leer-datos-csv}{%
 \section{Leer datos csv}\label{leer-datos-csv}}
 
@@ -921,38 +1026,40 @@ Para importar datos hace falta escribir el código correspondiente pero también
 
 File → Import Dataset → From Text (readr)\ldots{}
 
-Esto nos va abrir una ventana donde podemos elegir el archivo que queremos importar (en este caso el archivo \texttt{paises.csv} que está dentro de la capeta \texttt{datos} del proyecto) y otros detalles.
+Esto te va abrir una ventana donde podrás elegir el archivo a importar (en este caso el archivo \texttt{turistas\_edad.csv} que está dentro de la capeta \texttt{datos} del proyecto) y otros detalles.
 
-\begin{figure}
-\centering
-\includegraphics{img/importar-paises.png}
-\caption{Diálogo de importar datos}
-\end{figure}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"img/importar{-}edad{-}xlsx.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{img/importar-edad-xlsx} \end{center}
 
 En la pantalla principal vas a poder previsualizar los datos y ver que pinta tienen.
-Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos \texttt{paises}), si la primera fila contiene los nombres de las columnas (\texttt{First\ Row\ as\ Names}), qué delimitador tienen los datos (en este caso \texttt{comma}, pero podría ser punto y coma u otro), etc\ldots{}
+Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos \texttt{turistas\_edad}), si la primera fila contiene los nombres de las columnas (\texttt{First\ Row\ as\ Names}), qué delimitador tienen los datos (en este caso \texttt{comma}, pero podría ser punto y coma u otro), etc\ldots{}
 
 Y abajo a la derecha es el código que vas a necesitar para efectivamente importar los datos.
-Podrías apretar el botón ``Import'' para leer los datos pero si bien es posible, al mismo tiempo esas líneas de código no se guardan en ningún lado y entonces nuestro trabajo luego no se puede reproducir desde un script.
+Podrías apretar el botón ``Import'' para leer los datos pero si bien es posible, al mismo tiempo esas líneas de código no se guardan en ningún lado y entonces nuestro trabajo luego no se puede reproducir.
 Por eso, te proponemos que copies ese código, cierres esa ventana con el botón ``Cancel'', y pegues el código en el archivo donde estés trabajando.
-Cuando lo ejecutes, se va a generar la variable \texttt{paises} con los datos.
+Cuando lo ejecutes, se va a generar la variable \texttt{turistas\_edad} con los datos.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(readr)}
-\NormalTok{paises }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"datos/paises.csv"}\NormalTok{)}
+\NormalTok{turistas\_edad }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"datos/turistas\_edad.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Rows: 1704 Columns: 6
+## Rows: 180 Columns: 3
 \end{verbatim}
 
 \begin{verbatim}
 ## -- Column specification --------------------------------------------------------
 ## Delimiter: ","
-## chr (2): pais, continente
-## dbl (4): anio, esperanza_de_vida, poblacion, pib_per_capita
+## chr (2): indice_tiempo, edad
+## dbl (1): turistas
 \end{verbatim}
 
 \begin{verbatim}
@@ -961,261 +1068,40 @@ Cuando lo ejecutes, se va a generar la variable \texttt{paises} con los datos.
 ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 \end{verbatim}
 
-\textbf{Nota}: Notar que en este caso el código para leer los datos consta de dos líneas.
-La primera carga el paquete \texttt{readr} y el segundo usa la función \texttt{read\_csv()} (del paquete readr) para leer el archivo .csv.
-No es necesario cargar el paquete cada vez que vas a leer un archivo, pero asegurate de incluir esta línea al comienzo de tu archivo.
+\textbf{Nota}: Notá que en este caso el código para leer los datos consta de dos líneas.
+La primera carga el paquete \textbf{readr} y el segundo usa la función \texttt{read\_csv()} (del paquete readr) para leer el archivo .csv.
+No es necesario cargar el paquete cada vez que vas a leer un archivo, pero asegurate de incluir esta línea en el primer bloque de código de tu archivo.
 
 \textbf{Nota}: La interfaz de usuario de RStudio sirve para autogenerar el código que lee el archivo.
 Una vez que lo tenés, no necesitás abrirla de nuevo.
 
 Todo ese texto naranja/rojo es intimidante pero no te preocupes, es sólo un mensaje que nos informa que los datos se leyeron y qué tipo de dato tiene cada columna.
-Podemos explorar la estructura de la variable \texttt{paises} usando la función \texttt{str()} (de \emph{structure} en inglés).
+Podemos explorar la estructura de la variable \texttt{turistas\_edad} usando la función \texttt{str()} (de \emph{structure} en inglés).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{str}\NormalTok{(paises)}
+\FunctionTok{str}\NormalTok{(turistas\_edad)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## spec_tbl_df [1,704 x 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ pais             : chr [1:1704] "Afganistán" "Afganistán" "Afganistán" "Afganistán" ...
-##  $ continente       : chr [1:1704] "Asia" "Asia" "Asia" "Asia" ...
-##  $ anio             : num [1:1704] 1952 1957 1962 1967 1972 ...
-##  $ esperanza_de_vida: num [1:1704] 28.8 30.3 32 34 36.1 ...
-##  $ poblacion        : num [1:1704] 8425333 9240934 10267083 11537966 13079460 ...
-##  $ pib_per_capita   : num [1:1704] 779 821 853 836 740 ...
+## spec_tbl_df [180 x 3] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ indice_tiempo: chr [1:180] "2012-01" "2012-01" "2012-01" "2012-01" ...
+##  $ edad         : chr [1:180] "Menores de 14" "14 a 29" "30 a 44" "45 a 59" ...
+##  $ turistas     : num [1:180] 2700561 3143845 3234308 2126707 1268445 ...
 ##  - attr(*, "spec")=
 ##   .. cols(
-##   ..   pais = col_character(),
-##   ..   continente = col_character(),
-##   ..   anio = col_double(),
-##   ..   esperanza_de_vida = col_double(),
-##   ..   poblacion = col_double(),
-##   ..   pib_per_capita = col_double()
+##   ..   indice_tiempo = col_character(),
+##   ..   edad = col_character(),
+##   ..   turistas = col_double()
 ##   .. )
 ##  - attr(*, "problems")=<externalptr>
 \end{verbatim}
 
 Esto nos dice un montón.
 La primera línea dice que es una \texttt{tibble}, que es un caso especial de la estructura de datos tabular básica de R llamada \texttt{data.frame}.
-Tiene 1704 filas (las \textbf{observaciones}) y 6 columnas (o \textbf{variables} que describen las observaciones).
-Las siguientes líneas nos dicen los nombres de las columnas (``pais'', ``continente'', ``anio'', ``esperanza\_de\_vida'', ``poblacion'' y ``pbi\_per\_capita''), su tipo de dato (\texttt{chr} o \texttt{num}), la longitud (\texttt{{[}1:1704{]}}) y sus primeros elementos.
-Cada columna de la tabla \texttt{paises} es un \textbf{vector}.
-Dado que los vectores son como los ``ladrillos'' que hacen a los data.frames, merecen una atención especial.
-
-\hypertarget{vectores}{%
-\section{Vectores}\label{vectores}}
-
-Un vector en R es esencialmente una lista ordenada de cosas, con la condición especial de que todos los elementos en un vector tienen que ser del mismo tipo de datos básico.
-
-R tiene 5 tipos de datos básicos:
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{double} (doble): números reales, por ejemplo 3.14159 o 1.5
-\item
-  \texttt{integer} (entero): números enteros, como 1 o 5
-\item
-  \texttt{complex} (complejo): números complejos, por ejemplo i + 2
-\item
-  \texttt{logical} (lógico): verdadero \texttt{TRUE} o \texttt{FALSE}
-\item
-  \texttt{character} (caracter): cadena de caracteres, como ``hola R!''
-\end{itemize}
-
-Existen otros pero son formas un poco más sofisticadas de estos tipos básicos.
-Por ejemplo, el formato POSIXct (de tiempo) se guarda como doble, representando la cantidad de segundos pasados desde el 01/01/1970.
-
-Una forma conveniente de crear un vector es con la función \texttt{c()} (de \emph{combinar} ).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
-\NormalTok{x}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2 3 4
-\end{verbatim}
-
-\texttt{x} es una serie con 4 elementos.
-Si usamos la función \texttt{str()}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{str}\NormalTok{(x)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  num [1:4] 1 2 3 4
-\end{verbatim}
-
-Esta salida nos está informando que \texttt{x} es de tipo numérico (un nombre para dobles y enteros).
-Los vectores sólo pueden ser de un solo tipo.
-Por lo tanto, si intentás combinar un caracter con números, R va a tratar de ``coercer'' u obligar todo los elementos a que sean de un tipo común:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"uno"}\NormalTok{, }\DecValTok{2}\NormalTok{)}
-\FunctionTok{str}\NormalTok{(x)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  chr [1:2] "uno" "2"
-\end{verbatim}
-
-Ahora el vector \texttt{x} es de tipo caracter y el número 2 se convirtió en el caracter ``2''.
-Este tipo de conversión automática puede ser fuente de muchos dolores de cabeza!
-Por ejemplo, ¿qué creés que va a pasar si tratás de sumarle 1 a la variable x?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\SpecialCharTok{+} \DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Error in x + 1: non-numeric argument to binary operator
-\end{verbatim}
-
-¡Un error!
-¿Cuál es el problema?
-El mensaje de error nos da una pista usamos un ``argumento no numérico''.
-R puede hacer \texttt{2\ +\ 1}, pero \texttt{"2"\ +\ 1} no significa nada!
-
-Las reglas de coerción son: logical -\textgreater{} integer -\textgreater{} numeric -\textgreater{} complex -\textgreater{} character, donde -\textgreater{} se puede leer como se transforma en.
-Para forzar la coerción en contra de esta cadena podés usar las funciones \texttt{as...}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{as.numeric}\NormalTok{(x)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: NAs introduced by coercion
-\end{verbatim}
-
-\begin{verbatim}
-## [1] NA  2
-\end{verbatim}
-
-¡Pero no siempre funciona!
-Recordá que \texttt{x} tiene los valores ``uno'' y ``2''.
-R pudo convertir ``2'' en 2, pero no sabe cómo transformar ``uno'' en un elemento numérico.
-Lo que devuelve es un vector que en el lugar de ``2'' tiene 2, pero en el lugar de ``uno'' tiene \texttt{NA}, que es un tipo de elemento especial que representa un valor faltante.
-Pero R avisa, así que no es traidor: el warning advierte que la coerción introdujo valores faltantes.
-
-\hypertarget{vectorizaciuxf3n}{%
-\subsection{Vectorización}\label{vectorizaciuxf3n}}
-
-La mayoría de las funciones de R pueden trabajar sobre vectores y lo hacen \textbf{elemento a elemento}.
-Esto significa que si creás estos dos vectores:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{4}   \CommentTok{\# 1:4 crea un vector que empieza en 1 y termina en 4,}
-\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{6}\SpecialCharTok{:}\DecValTok{9}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2 3 4
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 6 7 8 9
-\end{verbatim}
-
-y los sumás
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\SpecialCharTok{+}\NormalTok{ y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1]  7  9 11 13
-\end{verbatim}
-
-el resultado es un vector de la misma longitud de \texttt{x} e \texttt{y} que en cada posición tiene la suma de cada elemento de \texttt{x} e \texttt{y}
-
-\begin{verbatim}
-x:  1  2  3  4
-    +  +  +  +
-y:  6  7  8  9
----------------
-    7  9 11 13
-\end{verbatim}
-
-Lo mismo sucede al multiplicar vectores
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x}\SpecialCharTok{*}\NormalTok{y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1]  6 14 24 36
-\end{verbatim}
-
-\begin{verbatim}
-x:  1   2   3   4
-    *   *   *   *
-y:  6   7   8   9
------------------
-    6  14  24  36
-\end{verbatim}
-
-Si los vectores no tiene la misma longitud, los elementos del más corto se ``reciclan''.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{)}
-\NormalTok{x }\SpecialCharTok{*}\NormalTok{ y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning in x * y: longer object length is not a multiple of shorter object
-## length
-\end{verbatim}
-
-\begin{verbatim}
-## [1]  6 14 24 24
-\end{verbatim}
-
-\begin{verbatim}
-x:  1   2   3   4
-    *   *   *   *
-y:  6   7   8   6
------------------
-    6  14  24  24
-\end{verbatim}
-
-R emite una advertencia \textbf{sólo si la longitud del vector largo no es múltiplo de la longitud del vector corto}.
-Casi siempre el reciclado de vectores es señal de que algo salió mal.
-La única excepción es cuando el vector corto es de longitud 1.
-Por ejemplo, es totalmente razonable usar \texttt{x\ *\ 2} para duplicar los elementos de x.
+Tiene 180 filas (las \textbf{observaciones}) y 3 columnas (o \textbf{variables} que describen las observaciones).
+Las siguientes líneas nos dicen los nombres de las columnas (indice\_tiempo, edad, y turistas), su tipo de dato (\texttt{chr} o \texttt{num}), la longitud ({[}1:180{]}) y sus primeros elementos.
 
 \hypertarget{leer-datos-de-excel}{%
 \section{Leer datos de excel}\label{leer-datos-de-excel}}
@@ -1225,18 +1111,26 @@ En efecto, RStudio provee la misma ayuda para leer este tipo de datos:
 
 File → Import Dataset → From Excel\ldots{}
 
-\includegraphics{img/importar-paises-xl.png}
+\textbf{CAMBIAR}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"img/importar{-}edad{-}xlsx.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{img/importar-edad-xlsx} \end{center}
 
 Notá que entre las opciones de abajo a la izquierda aparecen dos variables importantes.
 Podés seleccionar de qué hoja leer los datos y qué rango usar.
 Esto seguro que te va a ser muy útil para esos archivos de Excel con múltiples tablas en un archivo, o incluso múltiples tablas en cada hoja!
 
-En este caso paises.xlsx es un Excel buena onda, y el código para leer los datos es muy simple:
+En este caso turistas\_edad.xlsx es un Excel buena onda, y el código para leer los datos es muy simple:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(readxl)}
-\NormalTok{paises }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"datos/paises.xlsx"}\NormalTok{)}
+\NormalTok{turistas\_edad }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"datos/turistas\_edad.xlsx"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1244,18 +1138,15 @@ Con la función \texttt{str()} podés confirmar que los datos leídos son los mi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{str}\NormalTok{(paises)}
+\FunctionTok{str}\NormalTok{(turistas\_edad)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## tibble [1,704 x 6] (S3: tbl_df/tbl/data.frame)
-##  $ pais             : chr [1:1704] "Afganistán" "Afganistán" "Afganistán" "Afganistán" ...
-##  $ continente       : chr [1:1704] "Asia" "Asia" "Asia" "Asia" ...
-##  $ anio             : num [1:1704] 1952 1957 1962 1967 1972 ...
-##  $ esperanza_de_vida: num [1:1704] 28.8 30.3 32 34 36.1 ...
-##  $ poblacion        : num [1:1704] 8425333 9240934 10267083 11537966 13079460 ...
-##  $ pib_per_capita   : num [1:1704] 779 821 853 836 740 ...
+## tibble [180 x 3] (S3: tbl_df/tbl/data.frame)
+##  $ indice_tiempo: chr [1:180] "2012-01" "2012-01" "2012-01" "2012-01" ...
+##  $ edad         : chr [1:180] "Menores de 14" "14 a 29" "30 a 44" "45 a 59" ...
+##  $ turistas     : num [1:180] 2700561 3143845 3234308 2126707 1268445 ...
 \end{verbatim}
 
 \textbf{Desafío: Lee un archivo}
@@ -1264,166 +1155,19 @@ Con la función \texttt{str()} podés confirmar que los datos leídos son los mi
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Lee el archivo \texttt{paises.xlsx}, pero solo las primeras 30 lineas
+  Lee el archivo \texttt{turistas\_edad.xlsx}, pero solo las primeras 30 lineas
 \item
   ¿Qué cambió en código que devuelve RStudio?
 \item
   Revisa la documentación de la función \texttt{read\_excel()} para identificar otros argumentos que puedan resultarte útiles.
 \end{enumerate}
 
-\hypertarget{formatos-de-tablas}{%
-\section{Formatos de tablas}\label{formatos-de-tablas}}
-
-Pensá un momento en la estructura de los datos de \texttt{paises}.
-Tiene seis columnas, pero sólo tres de ellas contienen valores observados (\texttt{esperanza\_de\_vida}, \texttt{poblacion} y \texttt{pib\_per\_capita}) y las otras tres son las ``coordenadas'': \texttt{pais}, \texttt{continente} y \texttt{anio} son columnas que identifican la observación.
-De hecho, la columna \texttt{pais} tiene un montón de datos repetidos!
-
-Esto es un ejemplo de formato ``largo'' (o ``tidy'' en inglés).
-La idea básica de datos ``largos'' es que:
-
-\begin{itemize}
-\tightlist
-\item
-  cada fila es una observación
-\item
-  cada columna es una variable
-\end{itemize}
-
-La tabla \texttt{paises} es bastante larga (tiene 1704 filas y 6 columnas!) pero podría ser más larga aún.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{paises\_largo }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"datos/paises\_largo.csv"}\NormalTok{)}
-\FunctionTok{str}\NormalTok{(paises\_largo)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## spec_tbl_df [5,112 x 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ pais      : chr [1:5112] "Afganistán" "Afganistán" "Afganistán" "Afganistán" ...
-##  $ continente: chr [1:5112] "Asia" "Asia" "Asia" "Asia" ...
-##  $ anio      : num [1:5112] 1952 1957 1962 1967 1972 ...
-##  $ variable  : chr [1:5112] "esperanza_de_vida" "esperanza_de_vida" "esperanza_de_vida" "esperanza_de_vida" ...
-##  $ valor     : num [1:5112] 28.8 30.3 32 34 36.1 ...
-##  - attr(*, "spec")=
-##   .. cols(
-##   ..   pais = col_character(),
-##   ..   continente = col_character(),
-##   ..   anio = col_double(),
-##   ..   variable = col_character(),
-##   ..   valor = col_double()
-##   .. )
-##  - attr(*, "problems")=<externalptr>
-\end{verbatim}
-
-La tabla \texttt{paises\_largo} tiene ¡5112 filas!
-Tiene un valor para cada país, año y variable.
-Es decir, las tres columnas que contenían valores numéricos (\texttt{esperanza\_de\_vida}, \texttt{poblacion} y \texttt{pib\_per\_capita}), en esta tabla son una sola columna llamada ``valor''.
-
-Pero también pueden ser podría ser más ``ancha'':
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{paises\_ancho }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"datos/paises\_ancho.csv"}\NormalTok{)}
-\FunctionTok{str}\NormalTok{(paises\_ancho)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## spec_tbl_df [142 x 38] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ continente            : chr [1:142] "Africa" "Africa" "Africa" "Africa" ...
-##  $ pais                  : chr [1:142] "Algeria" "Angola" "Benin" "Botswana" ...
-##  $ pib_per_capita_1952   : num [1:142] 2449 3521 1063 851 543 ...
-##  $ pib_per_capita_1957   : num [1:142] 3014 3828 960 918 617 ...
-##  $ pib_per_capita_1962   : num [1:142] 2551 4269 949 984 723 ...
-##  $ pib_per_capita_1967   : num [1:142] 3247 5523 1036 1215 795 ...
-##  $ pib_per_capita_1972   : num [1:142] 4183 5473 1086 2264 855 ...
-##  $ pib_per_capita_1977   : num [1:142] 4910 3009 1029 3215 743 ...
-##  $ pib_per_capita_1982   : num [1:142] 5745 2757 1278 4551 807 ...
-##  $ pib_per_capita_1987   : num [1:142] 5681 2430 1226 6206 912 ...
-##  $ pib_per_capita_1992   : num [1:142] 5023 2628 1191 7954 932 ...
-##  $ pib_per_capita_1997   : num [1:142] 4797 2277 1233 8647 946 ...
-##  $ pib_per_capita_2002   : num [1:142] 5288 2773 1373 11004 1038 ...
-##  $ pib_per_capita_2007   : num [1:142] 6223 4797 1441 12570 1217 ...
-##  $ esperanza_de_vida_1952: num [1:142] 43.1 30 38.2 47.6 32 ...
-##  $ esperanza_de_vida_1957: num [1:142] 45.7 32 40.4 49.6 34.9 ...
-##  $ esperanza_de_vida_1962: num [1:142] 48.3 34 42.6 51.5 37.8 ...
-##  $ esperanza_de_vida_1967: num [1:142] 51.4 36 44.9 53.3 40.7 ...
-##  $ esperanza_de_vida_1972: num [1:142] 54.5 37.9 47 56 43.6 ...
-##  $ esperanza_de_vida_1977: num [1:142] 58 39.5 49.2 59.3 46.1 ...
-##  $ esperanza_de_vida_1982: num [1:142] 61.4 39.9 50.9 61.5 48.1 ...
-##  $ esperanza_de_vida_1987: num [1:142] 65.8 39.9 52.3 63.6 49.6 ...
-##  $ esperanza_de_vida_1992: num [1:142] 67.7 40.6 53.9 62.7 50.3 ...
-##  $ esperanza_de_vida_1997: num [1:142] 69.2 41 54.8 52.6 50.3 ...
-##  $ esperanza_de_vida_2002: num [1:142] 71 41 54.4 46.6 50.6 ...
-##  $ esperanza_de_vida_2007: num [1:142] 72.3 42.7 56.7 50.7 52.3 ...
-##  $ poblacion_1952        : num [1:142] 9279525 4232095 1738315 442308 4469979 ...
-##  $ poblacion_1957        : num [1:142] 10270856 4561361 1925173 474639 4713416 ...
-##  $ poblacion_1962        : num [1:142] 11000948 4826015 2151895 512764 4919632 ...
-##  $ poblacion_1967        : num [1:142] 12760499 5247469 2427334 553541 5127935 ...
-##  $ poblacion_1972        : num [1:142] 14760787 5894858 2761407 619351 5433886 ...
-##  $ poblacion_1977        : num [1:142] 17152804 6162675 3168267 781472 5889574 ...
-##  $ poblacion_1982        : num [1:142] 20033753 7016384 3641603 970347 6634596 ...
-##  $ poblacion_1987        : num [1:142] 23254956 7874230 4243788 1151184 7586551 ...
-##  $ poblacion_1992        : num [1:142] 26298373 8735988 4981671 1342614 8878303 ...
-##  $ poblacion_1997        : num [1:142] 29072015 9875024 6066080 1536536 10352843 ...
-##  $ poblacion_2002        : num [1:142] 31287142 10866106 7026113 1630347 12251209 ...
-##  $ poblacion_2007        : num [1:142] 33333216 12420476 8078314 1639131 14326203 ...
-##  - attr(*, "spec")=
-##   .. cols(
-##   ..   continente = col_character(),
-##   ..   pais = col_character(),
-##   ..   pib_per_capita_1952 = col_double(),
-##   ..   pib_per_capita_1957 = col_double(),
-##   ..   pib_per_capita_1962 = col_double(),
-##   ..   pib_per_capita_1967 = col_double(),
-##   ..   pib_per_capita_1972 = col_double(),
-##   ..   pib_per_capita_1977 = col_double(),
-##   ..   pib_per_capita_1982 = col_double(),
-##   ..   pib_per_capita_1987 = col_double(),
-##   ..   pib_per_capita_1992 = col_double(),
-##   ..   pib_per_capita_1997 = col_double(),
-##   ..   pib_per_capita_2002 = col_double(),
-##   ..   pib_per_capita_2007 = col_double(),
-##   ..   esperanza_de_vida_1952 = col_double(),
-##   ..   esperanza_de_vida_1957 = col_double(),
-##   ..   esperanza_de_vida_1962 = col_double(),
-##   ..   esperanza_de_vida_1967 = col_double(),
-##   ..   esperanza_de_vida_1972 = col_double(),
-##   ..   esperanza_de_vida_1977 = col_double(),
-##   ..   esperanza_de_vida_1982 = col_double(),
-##   ..   esperanza_de_vida_1987 = col_double(),
-##   ..   esperanza_de_vida_1992 = col_double(),
-##   ..   esperanza_de_vida_1997 = col_double(),
-##   ..   esperanza_de_vida_2002 = col_double(),
-##   ..   esperanza_de_vida_2007 = col_double(),
-##   ..   poblacion_1952 = col_double(),
-##   ..   poblacion_1957 = col_double(),
-##   ..   poblacion_1962 = col_double(),
-##   ..   poblacion_1967 = col_double(),
-##   ..   poblacion_1972 = col_double(),
-##   ..   poblacion_1977 = col_double(),
-##   ..   poblacion_1982 = col_double(),
-##   ..   poblacion_1987 = col_double(),
-##   ..   poblacion_1992 = col_double(),
-##   ..   poblacion_1997 = col_double(),
-##   ..   poblacion_2002 = col_double(),
-##   ..   poblacion_2007 = col_double()
-##   .. )
-##  - attr(*, "problems")=<externalptr>
-\end{verbatim}
-
-\texttt{paises\_ancho} tiene una sola fila para cada país, y los datos de cada variable y año está en una columna propia.
-
-Ninguna estructura de datos es ``la correcta''; distintos análisis y distintas funciones se llevan mejor con los datos en distinto ``grado de longitud''.
-Es muy normal empezar con datos largos, tener que pasarlos a anchos para hacer un análisis y luego volver a pasar a largos (tan normal que hay \href{https://github.com/dgrtwo/widyr}{un paquete de R que encapsula ese proceso}).
-
 \hypertarget{manipulaciuxf3n-de-datos-ordenados}{%
 \chapter{Manipulación de datos ordenados}\label{manipulaciuxf3n-de-datos-ordenados}}
 
-El paquete \{dplyr\} provee una enorme cantidad de funciones útiles para manipular y analizar datos de manera intuitiva y expresiva.
+El paquete \textbf{dplyr} provee una enorme cantidad de funciones útiles para manipular y analizar datos de manera intuitiva y expresiva.
 
-El espíritu detrás de \{dplyr\} es que la enorme mayoría de los análisis, por más complicados que sean, involucran combinar y encadenar una serie relativamente acotada de acciones (o verbos).
+El espíritu detrás de dplyr es que la enorme mayoría de los análisis, por más complicados que sean, involucran combinar y encadenar una serie relativamente acotada de acciones (o verbos).
 En este curso vamos a centrarnos las cinco más comunes:
 
 \begin{itemize}
@@ -1442,36 +1186,34 @@ En este curso vamos a centrarnos las cinco más comunes:
 
 \textbf{dplyr y tablas dinámicas:}
 
-A grosso modo, las operaciones de \{dplyr\} permiten hacer en R lo que se hace en tablas dinámicas (pivot tables) en Excel.
+A grosso modo, las operaciones de dplyr permiten hacer en R lo que se hace en tablas dinámicas (pivot tables) en Excel.
 \texttt{filter()} vendría a ser como la sección de ``Filtros'', \texttt{group\_by()}, la sección de ``Filas'', \texttt{select()}, la sección de ``Columnas'' y \texttt{summarise()}, la parte de ``Valores''.
-
-\textbf{Cambiar este ejemplo}
 
 \textbf{Primer desafío:}
 
-Te dieron una tabla con datos de temperatura mínima y máxima para distintas estaciones meteorológicas de todo el país durante los 365 días de un año.
-Las columnas son: \texttt{id\_estacion}, \texttt{temperatura\_maxima}, \texttt{temperatura\_minima} y \texttt{provincia}.
-En base a esos datos, te piden que computen la temperatura media anual de cada estación únicamente de las estaciones de La Pampa.
+Te dieron una tabla con datos de cantidad mensual de visitantes residentes y visitantes no residentes para cada provincia.
+Las columnas son: \texttt{año}, \texttt{mes}, \texttt{provincia}, \texttt{visitantes\_residentes} y \texttt{visitantes\_no\_residentes}.
+En base a esos datos, te piden que calcules la proporción promedio de visitantes que son residentes para cada provincia en enero.
 
 ¿En qué orden ejecutarías estos pasos para obtener el resultado deseado?
 
 \begin{itemize}
 \tightlist
 \item
-  usar \texttt{summarise()} para calcular la estadística \texttt{mean(temperatura\_media)} para cada \texttt{id\_estacion}
+  usar \texttt{summarise()} para calcular la estadística \texttt{mean(proporcion\_residentes)} para cada \texttt{provincia}
 \item
-  usar \texttt{group\_by()} para agrupar por la columna \texttt{id\_estacion}
+  usar \texttt{group\_by()} para agrupar por la columna \texttt{provincia}
 \item
-  usar \texttt{mutate()} para agregar una columna llamada \texttt{temperatura\_media} que sea \texttt{(temperatura\_minima\ +\ temperatura\_maxima)/2}.
+  usar \texttt{mutate()} para agregar una columna llamada \texttt{proporcion\_residentes} que sea \texttt{visitantes\_residentes/(visitantes\_residentes\ +\ visitantes\_no\_residentes)}.
 \item
-  usar \texttt{filter()} para seleccionar solo las filas donde la columnas \texttt{provincia} es igual a ``La Pampa''
+  usar \texttt{filter()} para seleccionar solo las filas donde la columna \texttt{mes} es igual a 1.
 \end{itemize}
 
-Para usar \{dplyr\} primero hay que instalarlo (esto hay que hacerlo una sola vez) con el comando:
+Para usar dplyr primero hay que instalarlo (esto hay que hacerlo una sola vez por computadora) con el comando:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{\textquotesingle{}dplyr\textquotesingle{}}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1483,128 +1225,94 @@ y luego cargarlo en memoria con
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## 
-## Attaching package: 'dplyr'
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-\end{verbatim}
-
-Volvé a cargar los datos de países (para un recordatorio, podés ir a \href{04-lectura-datos.html}{Lectura de datos ordenados}):
+Volvé a cargar los datos de turistas por edad (para un recordatorio, podés ir a \href{lectura-de-datos-ordenados.html}{Lectura de datos ordenados}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(readr)}
-\NormalTok{paises }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"datos/paises.csv"}\NormalTok{)}
+\NormalTok{turistas\_edad }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"datos/turistas\_edad.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Rows: 1704 Columns: 6
-\end{verbatim}
-
-\begin{verbatim}
-## -- Column specification --------------------------------------------------------
-## Delimiter: ","
-## chr (2): pais, continente
-## dbl (4): anio, esperanza_de_vida, poblacion, pib_per_capita
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## i Use `spec()` to retrieve the full column specification for this data.
-## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-\end{verbatim}
 
 \hypertarget{seleccionando-columnas-con-select}{%
 \section{\texorpdfstring{Seleccionando columnas con \texttt{select()}}{Seleccionando columnas con select()}}\label{seleccionando-columnas-con-select}}
 
-Para quedarse únicamente con las columnas de año, país y PBI per cápita, usá \texttt{select()}
+Para quedarse únicamente con las columnas de índice de tiempo y turistas, usá \texttt{select()}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{select}\NormalTok{(paises, anio, pais, pib\_per\_capita)}
+\FunctionTok{select}\NormalTok{(turistas\_edad, indice\_tiempo, turistas)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1,704 x 3
-##     anio pais       pib_per_capita
-##    <dbl> <chr>               <dbl>
-##  1  1952 Afganistán           779.
-##  2  1957 Afganistán           821.
-##  3  1962 Afganistán           853.
-##  4  1967 Afganistán           836.
-##  5  1972 Afganistán           740.
-##  6  1977 Afganistán           786.
-##  7  1982 Afganistán           978.
-##  8  1987 Afganistán           852.
-##  9  1992 Afganistán           649.
-## 10  1997 Afganistán           635.
-## # ... with 1,694 more rows
+## # A tibble: 180 x 2
+##    indice_tiempo turistas
+##    <chr>            <dbl>
+##  1 2012-01        2700561
+##  2 2012-01        3143845
+##  3 2012-01        3234308
+##  4 2012-01        2126707
+##  5 2012-01        1268445
+##  6 2012-04         957231
+##  7 2012-04        1296808
+##  8 2012-04        1377356
+##  9 2012-04        1021227
+## 10 2012-04         771842
+## # ... with 170 more rows
 \end{verbatim}
 
 ¿Dónde quedó este resultado?
-Si te fijás en la variable \texttt{paises}, ésta está intacta:
+Si te fijás en la tabla \texttt{turistas\_edad}, su formato no cambió, sigue teniendo todas las columnas originales a pesar de nuestro select:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises}
+\NormalTok{turistas\_edad}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1,704 x 6
-##    pais       continente  anio esperanza_de_vida poblacion pib_per_capita
-##    <chr>      <chr>      <dbl>             <dbl>     <dbl>          <dbl>
-##  1 Afganistán Asia        1952              28.8   8425333           779.
-##  2 Afganistán Asia        1957              30.3   9240934           821.
-##  3 Afganistán Asia        1962              32.0  10267083           853.
-##  4 Afganistán Asia        1967              34.0  11537966           836.
-##  5 Afganistán Asia        1972              36.1  13079460           740.
-##  6 Afganistán Asia        1977              38.4  14880372           786.
-##  7 Afganistán Asia        1982              39.9  12881816           978.
-##  8 Afganistán Asia        1987              40.8  13867957           852.
-##  9 Afganistán Asia        1992              41.7  16317921           649.
-## 10 Afganistán Asia        1997              41.8  22227415           635.
-## # ... with 1,694 more rows
+## # A tibble: 180 x 3
+##    indice_tiempo edad          turistas
+##    <chr>         <chr>            <dbl>
+##  1 2012-01       Menores de 14  2700561
+##  2 2012-01       14 a 29        3143845
+##  3 2012-01       30 a 44        3234308
+##  4 2012-01       45 a 59        2126707
+##  5 2012-01       60 o mas       1268445
+##  6 2012-04       Menores de 14   957231
+##  7 2012-04       14 a 29        1296808
+##  8 2012-04       30 a 44        1377356
+##  9 2012-04       45 a 59        1021227
+## 10 2012-04       60 o mas        771842
+## # ... with 170 more rows
 \end{verbatim}
 
-\texttt{select()} y el resto de las funciones de \{dplyr\} siempre generan una nueva tabla y nunca modifican la tabla original.
-Para guardar la tabla con las tres columnas \texttt{anio}, \texttt{pais} y \texttt{pbi\_per\_capita} tenés que asignar el resultado a una nueva variable.
+\texttt{select()} y el resto de las funciones de dplyr siempre generan una nueva tabla y nunca modifican la tabla original.
+Para guardar la tabla con las dos columnas \texttt{indice\_tiempo} y \texttt{turistas} tenés que asignar el resultado a una nueva variable.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{anio\_pais\_pbi }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(paises, anio, pais, pib\_per\_capita)}
-\NormalTok{anio\_pais\_pbi}
+\NormalTok{turistas\_edad2 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(turistas\_edad, indice\_tiempo, turistas)}
+\NormalTok{turistas\_edad2}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1,704 x 3
-##     anio pais       pib_per_capita
-##    <dbl> <chr>               <dbl>
-##  1  1952 Afganistán           779.
-##  2  1957 Afganistán           821.
-##  3  1962 Afganistán           853.
-##  4  1967 Afganistán           836.
-##  5  1972 Afganistán           740.
-##  6  1977 Afganistán           786.
-##  7  1982 Afganistán           978.
-##  8  1987 Afganistán           852.
-##  9  1992 Afganistán           649.
-## 10  1997 Afganistán           635.
-## # ... with 1,694 more rows
+## # A tibble: 180 x 2
+##    indice_tiempo turistas
+##    <chr>            <dbl>
+##  1 2012-01        2700561
+##  2 2012-01        3143845
+##  3 2012-01        3234308
+##  4 2012-01        2126707
+##  5 2012-01        1268445
+##  6 2012-04         957231
+##  7 2012-04        1296808
+##  8 2012-04        1377356
+##  9 2012-04        1021227
+## 10 2012-04         771842
+## # ... with 170 more rows
 \end{verbatim}
 
 \begin{figure}
@@ -1617,33 +1325,32 @@ Para guardar la tabla con las tres columnas \texttt{anio}, \texttt{pais} y \text
 \section{\texorpdfstring{Filtrando filas con \texttt{filter()}}{Filtrando filas con filter()}}\label{filtrando-filas-con-filter}}
 
 Ahora podés usar \texttt{filter()} para quedarte con sólo unas filas.
-Por ejemplo, para ver los datos de Argentina:
+Por ejemplo, para quedarse con los turistas menores de 14 años
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{filter}\NormalTok{(anio\_pais\_pbi, pais }\SpecialCharTok{==} \StringTok{"Argentina"}\NormalTok{)}
+\FunctionTok{filter}\NormalTok{(turistas\_edad, edad }\SpecialCharTok{==} \StringTok{"Menores de 14"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 12 x 3
-##     anio pais      pib_per_capita
-##    <dbl> <chr>              <dbl>
-##  1  1952 Argentina          5911.
-##  2  1957 Argentina          6857.
-##  3  1962 Argentina          7133.
-##  4  1967 Argentina          8053.
-##  5  1972 Argentina          9443.
-##  6  1977 Argentina         10079.
-##  7  1982 Argentina          8998.
-##  8  1987 Argentina          9140.
-##  9  1992 Argentina          9308.
-## 10  1997 Argentina         10967.
-## 11  2002 Argentina          8798.
-## 12  2007 Argentina         12779.
+## # A tibble: 36 x 3
+##    indice_tiempo edad          turistas
+##    <chr>         <chr>            <dbl>
+##  1 2012-01       Menores de 14  2700561
+##  2 2012-04       Menores de 14   957231
+##  3 2012-07       Menores de 14  1221911
+##  4 2012-10       Menores de 14  1172970
+##  5 2013-01       Menores de 14  2604040
+##  6 2013-04       Menores de 14   942360
+##  7 2013-07       Menores de 14  1341895
+##  8 2013-10       Menores de 14  1382380
+##  9 2014-01       Menores de 14  2706215
+## 10 2014-04       Menores de 14  1006238
+## # ... with 26 more rows
 \end{verbatim}
 
-La mayoría de los análisis consisten en varios pasos (en el primer desafío usaste 4 pasos para \emph{Cambiar el ejemplo: calcular las temperaturas medias de una serie de estaciones}).
+La mayoría de los análisis consisten en varios pasos que van generando tablas intermedias (en el primer desafío usaste 4 pasos para calcular la proporción media de visitantes residentes)
 La única tabla que te interesa es la última, por lo que ir asignando variables nuevas en cada paso intermedio es tedioso y poco práctico.
 Para eso se usa el operador `pipe' (\texttt{\%\textgreater{}\%}).
 
@@ -1654,34 +1361,36 @@ Las dos operaciones anteriores (seleccionar tres columnas y luego filtrar las fi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(anio, pais, pib\_per\_capita) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(pais }\SpecialCharTok{==} \StringTok{"Argentina"}\NormalTok{)}
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(edad }\SpecialCharTok{==} \StringTok{"Menores de 14"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(indice\_tiempo, turistas)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 12 x 3
-##     anio pais      pib_per_capita
-##    <dbl> <chr>              <dbl>
-##  1  1952 Argentina          5911.
-##  2  1957 Argentina          6857.
-##  3  1962 Argentina          7133.
-##  4  1967 Argentina          8053.
-##  5  1972 Argentina          9443.
-##  6  1977 Argentina         10079.
-##  7  1982 Argentina          8998.
-##  8  1987 Argentina          9140.
-##  9  1992 Argentina          9308.
-## 10  1997 Argentina         10967.
-## 11  2002 Argentina          8798.
-## 12  2007 Argentina         12779.
+## # A tibble: 36 x 2
+##    indice_tiempo turistas
+##    <chr>            <dbl>
+##  1 2012-01        2700561
+##  2 2012-04         957231
+##  3 2012-07        1221911
+##  4 2012-10        1172970
+##  5 2013-01        2604040
+##  6 2013-04         942360
+##  7 2013-07        1341895
+##  8 2013-10        1382380
+##  9 2014-01        2706215
+## 10 2014-04        1006238
+## # ... with 26 more rows
 \end{verbatim}
 
-La forma de ``leer'' esto es ``Tomá la variable \texttt{paises}, \textbf{después} aplicale \texttt{select(anio,\ pais,\ pib\_per\_capita)}, \textbf{después} aplicale \texttt{filter(pais\ ==\ "Argentina")}''.
+La forma de ``leer'' esto es ``Tomá la variable \texttt{turistas\_edad}, \textbf{después} aplicale \texttt{s\ filter(edad\ ==\ "Menores\ de\ 14")}, \textbf{después} aplicale \texttt{fselect(indice\_tiempo,\ turistas)}''.
 
-Cómo vimos, el primero argumento de todas las funciones de dplyr espera un data.frame y justamente el operador \texttt{\%\textgreater{}\%} toma el data.frame \texttt{paises} y se lo pasa al primer argumento de \texttt{select()}.
-Luego el data.frame resultante de seleccionar las columnas anio, país y pib\_per\_capita \emph{pasa} como el primer argumento de la función \texttt{filter()} gracias al \texttt{\%\textgreater{}\%}.
+Cómo vimos, el primer argumento de todas las funciones de dplyr es el data frame sobre el cual van a operar, pero notá que en las líneas con \texttt{select()} y \texttt{filter()} no escribís la tabla explícitamente.\\
+Esto es porque la pipe implícitamente pasa el resultado de las líneas anteriores como el primer argumento de la función siguiente.
+
+Toma el data frame \texttt{turistas\_edad} y se lo pasa al primer argumento de \texttt{select()}.
+Luego el data frame resultante de esa operación pasa como el primer argumento de la función \texttt{filter()} gracias al \texttt{\%\textgreater{}\%}.
 
 \textbf{Tip:}
 
@@ -1690,110 +1399,129 @@ En RStudio podés escribir \texttt{\%\textgreater{}\%} usando el atajo de teclad
 
 \textbf{Desafío:}
 
-Completá esta cadena para producir una tabla que contenga los valores de expectativa de vida, país y año únicamente para los países africanos.
+Completá esta cadena para producir una tabla que contenga los datos de turistas de 60 o más años
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(continente }\SpecialCharTok{==}\NormalTok{ \_\_\_) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{select}\NormalTok{(\_\_\_, \_\_\_, \_\_\_)}
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(edad }\SpecialCharTok{==}\NormalTok{ \_\_\_) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(\_\_\_\_\_, \_\_\_\_)}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{agrupando-y-reduciendo-con-group_by-summarise}{%
 \section{\texorpdfstring{Agrupando y reduciendo con \texttt{group\_by()\ \%\textgreater{}\%\ summarise()}}{Agrupando y reduciendo con group\_by() \%\textgreater\% summarise()}}\label{agrupando-y-reduciendo-con-group_by-summarise}}
 
-Si querés calcular la expectativa de vida media para cada continente, tenés que usar el combo \texttt{group\_by()\ \%\textgreater{}\%\ summarise()}.
-Es decir, primero agrupar la tabla según la columna continente y luego calcular un promedio para cada grupo.
+Si querés calcular la cantidad promedio de turistas por cada rango de edad, tenés que usar el combo \texttt{group\_by()\ \%\textgreater{}\%\ summarise()}.
+Es decir, primero agrupar la tabla según la columna \texttt{edad} y luego calcular el promedio de \texttt{turistas} para cada grupo.
 
 Para agrupar la tabla países según el continente usamos el siguiente código:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente) }
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(edad) }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1,704 x 6
-## # Groups:   continente [5]
-##    pais       continente  anio esperanza_de_vida poblacion pib_per_capita
-##    <chr>      <chr>      <dbl>             <dbl>     <dbl>          <dbl>
-##  1 Afganistán Asia        1952              28.8   8425333           779.
-##  2 Afganistán Asia        1957              30.3   9240934           821.
-##  3 Afganistán Asia        1962              32.0  10267083           853.
-##  4 Afganistán Asia        1967              34.0  11537966           836.
-##  5 Afganistán Asia        1972              36.1  13079460           740.
-##  6 Afganistán Asia        1977              38.4  14880372           786.
-##  7 Afganistán Asia        1982              39.9  12881816           978.
-##  8 Afganistán Asia        1987              40.8  13867957           852.
-##  9 Afganistán Asia        1992              41.7  16317921           649.
-## 10 Afganistán Asia        1997              41.8  22227415           635.
-## # ... with 1,694 more rows
+## # A tibble: 180 x 3
+## # Groups:   edad [5]
+##    indice_tiempo edad          turistas
+##    <chr>         <chr>            <dbl>
+##  1 2012-01       Menores de 14  2700561
+##  2 2012-01       14 a 29        3143845
+##  3 2012-01       30 a 44        3234308
+##  4 2012-01       45 a 59        2126707
+##  5 2012-01       60 o mas       1268445
+##  6 2012-04       Menores de 14   957231
+##  7 2012-04       14 a 29        1296808
+##  8 2012-04       30 a 44        1377356
+##  9 2012-04       45 a 59        1021227
+## 10 2012-04       60 o mas        771842
+## # ... with 170 more rows
 \end{verbatim}
 
-A primera vista parecería que la función no hizo nada, pero fijate que el resultado ahora dice que tiene grupos (``Groups:''), y nos dice qué columna es la que agrupa los datos (``continente'') y cuántos grupos hay (``5'').
+A primera vista parecería que la función no hizo nada, pero fijate que el resultado ahora dice que tiene grupos (``Groups:''), y nos dice qué columna es la que agrupa los datos (``edad'') y cuántos grupos hay (``5'').
 Las operaciones subsiguientes que le hagamos a esta tabla van a hacerse \emph{para cada grupo}.
 
-Para ver esto en acción, usá \texttt{summarise()} para computar el promedio de la esperanza de vida:
+Para ver esto en acción, usá \texttt{summarise()} para computar el promedio de turistas
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{esperanza\_de\_vida\_media =} \FunctionTok{mean}\NormalTok{(esperanza\_de\_vida))}
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(edad) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{turistas\_promedio =} \FunctionTok{mean}\NormalTok{(turistas))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 5 x 2
-##   continente esperanza_de_vida_media
-##   <chr>                        <dbl>
-## 1 África                        48.9
-## 2 Américas                      64.7
-## 3 Asia                          60.1
-## 4 Europa                        71.9
-## 5 Oceanía                       74.3
+##   edad          turistas_promedio
+##   <chr>                     <dbl>
+## 1 14 a 29                1440779.
+## 2 30 a 44                1530064.
+## 3 45 a 59                1242697.
+## 4 60 o mas               1033486.
+## 5 Menores de 14          1368313.
 \end{verbatim}
 
 ¡Tadá!
-\texttt{summarise()} devuelve una tabla con una columna para el continente y otra nueva, llamada ``esperanza\_de\_vida\_media'' que contiene el promedio de \texttt{esperanza\_de\_vida} para cada grupo.
+\texttt{summarise()} devuelve una tabla con una columna para la edad y otra nueva, llamada ``turistas\_promedio'' que contiene el promedio de \texttt{turistas} para cada grupo.
 Esta operación es equivalente a esta tabla dinámica en Excel:
 
+\textbf{rehacer el video}
+
 \texttt{group\_by()} permite agrupar en base a múltiples columnas y \texttt{summarise()} permite generar múltiples columnas de resumen.
-El siguiente código calcula la esperanza de vida media y su desvío estándar para cada continente y cada año.
+El siguiente código calcula la cantidad promedio de turistas y su desvío estándar para cada continente y cada año.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente, anio) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{esperanza\_de\_vida\_media =} \FunctionTok{mean}\NormalTok{(esperanza\_de\_vida),}
-            \AttributeTok{esperanza\_de\_vida\_sd =} \FunctionTok{sd}\NormalTok{(esperanza\_de\_vida))}
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(edad, }\AttributeTok{mes =} \FunctionTok{substr}\NormalTok{(indice\_tiempo, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{turistas\_promedio =} \FunctionTok{mean}\NormalTok{(turistas),}
+            \AttributeTok{turistas\_desvio =} \FunctionTok{sd}\NormalTok{(turistas))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## `summarise()` has grouped output by 'continente'. You can override using the `.groups` argument.
+## `summarise()` has grouped output by 'edad'. You can override using the `.groups` argument.
 \end{verbatim}
 
 \begin{verbatim}
-## # A tibble: 60 x 4
-## # Groups:   continente [5]
-##    continente  anio esperanza_de_vida_media esperanza_de_vida_sd
-##    <chr>      <dbl>                   <dbl>                <dbl>
-##  1 África      1952                    39.1                 5.15
-##  2 África      1957                    41.3                 5.62
-##  3 África      1962                    43.3                 5.88
-##  4 África      1967                    45.3                 6.08
-##  5 África      1972                    47.5                 6.42
-##  6 África      1977                    49.6                 6.81
-##  7 África      1982                    51.6                 7.38
-##  8 África      1987                    53.3                 7.86
-##  9 África      1992                    53.6                 9.46
-## 10 África      1997                    53.6                 9.10
-## # ... with 50 more rows
+## # A tibble: 20 x 4
+## # Groups:   edad [5]
+##    edad          mes   turistas_promedio turistas_desvio
+##    <chr>         <chr>             <dbl>           <dbl>
+##  1 14 a 29       01             2432791.         439326.
+##  2 14 a 29       04              889256.         421702.
+##  3 14 a 29       07             1239470.         508496.
+##  4 14 a 29       10             1201600.         310893.
+##  5 30 a 44       01             2571253.         411656.
+##  6 30 a 44       04              954923.         419869.
+##  7 30 a 44       07             1289021.         454895.
+##  8 30 a 44       10             1305058.         301415.
+##  9 45 a 59       01             1955239.         119285.
+## 10 45 a 59       04              826473.         319558.
+## 11 45 a 59       07             1088687.         421866.
+## 12 45 a 59       10             1100391.         245137.
+## 13 60 o mas      01             1410029.         196945.
+## 14 60 o mas      04              827572.         323722.
+## 15 60 o mas      07              931603.         364683.
+## 16 60 o mas      10              964739.         278363.
+## 17 Menores de 14 01             2452844.         284910.
+## 18 Menores de 14 04              698172.         307543.
+## 19 Menores de 14 07             1126737.         409562.
+## 20 Menores de 14 10             1195499          273635.
 \end{verbatim}
+
+\textbf{Tip:}
+
+Este código usa \texttt{substr(indice\_tiempo,\ 6,\ 7)} para definir el mes.
+Esta línea lo que hace es quedarse con el texto de \texttt{indice\_tiempo} que está entre la posición 6 y la 7.
+De esta manera, del texto \texttt{"2012-01"} se queda con ``\texttt{01}'', que representa el mes.
+
+Esta no es la mejor manera de trabajar con fechas, pero es suficiente por ahora.
 
 El resultado va a siempre ser una tabla con la misma cantidad de filas que grupos y una cantidad de columnas igual a la cantidad de columnas usadas para agrupar y los estadísticos computados.
 
@@ -1805,8 +1533,8 @@ El resultado va a siempre ser una tabla con la misma cantidad de filas que grupo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{esperanza\_de\_vida\_media =} \FunctionTok{mean}\NormalTok{(esperanza\_de\_vida))}
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{turistas\_promedio =} \FunctionTok{mean}\NormalTok{(turistas))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1816,81 +1544,94 @@ Las filas de una tabla se dividen en grupos, y luego cada grupo se ``resume'' en
 \includegraphics{img/group_by-summarize.png}
 
 Al igual que hicimos ``cuentas'' usando algunas variables numéricas para obtener información nueva, también podemos utilizar variables categóricas.
-No tiene sentido calcular \texttt{mean(continente)} ya que contienen caracteres, pero tal vez nos interese \emph{contar} la cantidad de observaciones por continente:
+No tiene sentido calcular \texttt{mean(edad)} ya que en esta tabla la edad está codificada como texto, pero tal vez te interese \emph{contar} la cantidad de observaciones por edad:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(edad) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{cantidad =} \FunctionTok{n}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 5 x 2
-##   continente cantidad
-##   <chr>         <int>
-## 1 África          624
-## 2 Américas        300
-## 3 Asia            396
-## 4 Europa          360
-## 5 Oceanía          24
+##   edad          cantidad
+##   <chr>            <int>
+## 1 14 a 29             36
+## 2 30 a 44             36
+## 3 45 a 59             36
+## 4 60 o mas            36
+## 5 Menores de 14       36
 \end{verbatim}
+
+En este caso se ve que hay 36 observaciones (36 fechas) para todos los rangos etáreos.
 
 \hypertarget{creando-nuevas-columnas-con-mutate}{%
 \section{\texorpdfstring{Creando nuevas columnas con \texttt{mutate()}}{Creando nuevas columnas con mutate()}}\label{creando-nuevas-columnas-con-mutate}}
 
 Todo esto está bien para hacer cálculos con columnas previamente existentes, pero muchas veces tenés que crear nuevas columnas.
 
-La tabla \texttt{paises} tiene información de PBI per cápita y de población, por lo que es posible computar el PBI de cada país multiplicando los valores de estas columnas.
-\texttt{mutate()} permite agregar una nueva columna llamada ``pbi'' con esa información:
+La tabla \texttt{turistas\_edad} tiene información temporal codificada como texto en el formato ``año-mes''.
+Sería mucho mejor que esté codificada como una fecha.
+Una forma muy simple de convertir caracteres a fechas es usando el paquete \textbf{lubridate}.
+Este paquete tiene un montón de funciones que te facilitan la vida al trabajar con fechas, pero en este caso vamos a usar la función \texttt{ym()} que transforma en fecha cualquier texto que tenga una fecha codificada con el año seguido del mes.
+
+Para agregar una columna llamada \texttt{tiempo} a la tabla \texttt{turistas\_edad}, vamos a usar la función \texttt{mutate()}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{pbi =}\NormalTok{ pib\_per\_capita}\SpecialCharTok{*}\NormalTok{poblacion)}
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{tiempo =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{ym}\NormalTok{(indice\_tiempo))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1,704 x 7
-##    pais       continente  anio esperanza_de_vi~ poblacion pib_per_capita     pbi
-##    <chr>      <chr>      <dbl>            <dbl>     <dbl>          <dbl>   <dbl>
-##  1 Afganistán Asia        1952             28.8   8425333           779. 6.57e 9
-##  2 Afganistán Asia        1957             30.3   9240934           821. 7.59e 9
-##  3 Afganistán Asia        1962             32.0  10267083           853. 8.76e 9
-##  4 Afganistán Asia        1967             34.0  11537966           836. 9.65e 9
-##  5 Afganistán Asia        1972             36.1  13079460           740. 9.68e 9
-##  6 Afganistán Asia        1977             38.4  14880372           786. 1.17e10
-##  7 Afganistán Asia        1982             39.9  12881816           978. 1.26e10
-##  8 Afganistán Asia        1987             40.8  13867957           852. 1.18e10
-##  9 Afganistán Asia        1992             41.7  16317921           649. 1.06e10
-## 10 Afganistán Asia        1997             41.8  22227415           635. 1.41e10
-## # ... with 1,694 more rows
+## # A tibble: 180 x 4
+##    indice_tiempo edad          turistas tiempo    
+##    <chr>         <chr>            <dbl> <date>    
+##  1 2012-01       Menores de 14  2700561 2012-01-01
+##  2 2012-01       14 a 29        3143845 2012-01-01
+##  3 2012-01       30 a 44        3234308 2012-01-01
+##  4 2012-01       45 a 59        2126707 2012-01-01
+##  5 2012-01       60 o mas       1268445 2012-01-01
+##  6 2012-04       Menores de 14   957231 2012-04-01
+##  7 2012-04       14 a 29        1296808 2012-04-01
+##  8 2012-04       30 a 44        1377356 2012-04-01
+##  9 2012-04       45 a 59        1021227 2012-04-01
+## 10 2012-04       60 o mas        771842 2012-04-01
+## # ... with 170 more rows
 \end{verbatim}
 
-Recordá que las funciones de \{dplyr\} nunca modifican la tabla original.
-\texttt{mutate()} devolvió una nueva tabla que es igual a la tabla \texttt{paises} pero con la columna ``pbi'' agregada.
-La tabla \texttt{paises} sigue intacta.
+¿Notás la diferencia entre la columna \texttt{indice\_tiempo} y \texttt{tiempo}?
+
+Recordá que las funciones de dplyr nunca modifican la tabla original.
+\texttt{mutate()} devolvió una nueva tabla que es igual a la tabla \texttt{turistas\_edad} pero con la columna ``tiempo'' agregada.
+La tabla \texttt{turistas\_edad} sigue intacta.
+
+\textbf{Tip:}
+
+Para usar la función \texttt{ym()} del paquete lubridate el código de arriba usa \texttt{lubridate::ym()}.
+Esta es una forma de usar funciones de paquetes sin tener que cargarlos con \texttt{library()}.
 
 \hypertarget{desagrupando-con-ungroup}{%
 \section{\texorpdfstring{Desagrupando con \texttt{ungroup()}}{Desagrupando con ungroup()}}\label{desagrupando-con-ungroup}}
 
-En general, la mayoría de las funciones de \{dplyr\} ``entienden'' cuando una tabla está agrupada y realizan las operaciones para cada grupo.
+En general, la mayoría de las funciones de dplyr ``entienden'' cuando una tabla está agrupada y realizan las operaciones para cada grupo.
 
 \textbf{Desafío:}
 
-¿Cuál de estos dos códigos agrega una columna llamada ``pbi\_continente'' con el pbi promedio del continente correspondiente a cada país?
+¿Cuál de estos dos códigos agrega una columna llamada ``turistas\_promedio'' con la cantidad de turistas promedios para cada rango de dades?
 ¿Qué hace el otro?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{pbi\_continente =} \FunctionTok{mean}\NormalTok{(pib\_per\_capita}\SpecialCharTok{*}\NormalTok{poblacion)) }
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(edad) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{turistas\_promedio =} \FunctionTok{mean}\NormalTok{(turistas)) }
 
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{pbi\_continente =} \FunctionTok{mean}\NormalTok{(pib\_per\_capita}\SpecialCharTok{*}\NormalTok{poblacion)) }
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{turistas\_promedio =} \FunctionTok{mean}\NormalTok{(turistas)) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -1899,637 +1640,29 @@ Como a veces uno se puede olvidar que quedaron grupos, es conveniente usar la fu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{pbi\_continente =} \FunctionTok{mean}\NormalTok{(pib\_per\_capita}\SpecialCharTok{*}\NormalTok{poblacion)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{turistas\_edad }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(edad) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{turistas\_promedio =} \FunctionTok{mean}\NormalTok{(turistas)) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{ungroup}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1,704 x 7
-##    pais       continente  anio esperanza_de_vida poblacion pib_per_capita
-##    <chr>      <chr>      <dbl>             <dbl>     <dbl>          <dbl>
-##  1 Afganistán Asia        1952              28.8   8425333           779.
-##  2 Afganistán Asia        1957              30.3   9240934           821.
-##  3 Afganistán Asia        1962              32.0  10267083           853.
-##  4 Afganistán Asia        1967              34.0  11537966           836.
-##  5 Afganistán Asia        1972              36.1  13079460           740.
-##  6 Afganistán Asia        1977              38.4  14880372           786.
-##  7 Afganistán Asia        1982              39.9  12881816           978.
-##  8 Afganistán Asia        1987              40.8  13867957           852.
-##  9 Afganistán Asia        1992              41.7  16317921           649.
-## 10 Afganistán Asia        1997              41.8  22227415           635.
-## # ... with 1,694 more rows, and 1 more variable: pbi_continente <dbl>
+## # A tibble: 180 x 4
+##    indice_tiempo edad          turistas turistas_promedio
+##    <chr>         <chr>            <dbl>             <dbl>
+##  1 2012-01       Menores de 14  2700561          1368313.
+##  2 2012-01       14 a 29        3143845          1440779.
+##  3 2012-01       30 a 44        3234308          1530064.
+##  4 2012-01       45 a 59        2126707          1242697.
+##  5 2012-01       60 o mas       1268445          1033486.
+##  6 2012-04       Menores de 14   957231          1368313.
+##  7 2012-04       14 a 29        1296808          1440779.
+##  8 2012-04       30 a 44        1377356          1530064.
+##  9 2012-04       45 a 59        1021227          1242697.
+## 10 2012-04       60 o mas        771842          1033486.
+## # ... with 170 more rows
 \end{verbatim}
-
-\hypertarget{gruxe1ficos-con-ggplot2}{%
-\chapter{Gráficos con ggplot2}\label{gruxe1ficos-con-ggplot2}}
-
-Visualizar datos es útil para identificar a relación entre distintas variables pero también para comunicar el análisis de los datos y resultados.
-El paquete \texttt{ggplot2} permite generar gráficos de gran calidad en pocos pasos.
-Cualquier gráfico de ggplot tendrá como mínimo 3 componentes: los \textbf{datos}, un \textbf{sistema de coordenadas} y una \textbf{geometría} (la representación visual de los datos) y se irá construyendo por capas.
-
-\hypertarget{primera-capa-el-uxe1rea-del-gruxe1fico}{%
-\section{Primera capa: el área del gráfico}\label{primera-capa-el-uxe1rea-del-gruxe1fico}}
-
-Cómo siempre será necesario cargar los paquetes que vamos a usar y ya que estamos los datos con los que venimos trabajando:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(readr)}
-\FunctionTok{library}\NormalTok{(ggplot2)}
-\FunctionTok{library}\NormalTok{(dplyr)}
-
-\NormalTok{turistas\_destinos\_url }\OtherTok{\textless{}{-}} \StringTok{"http://datos.yvera.gob.ar/dataset/945e10f1{-}eee7{-}48a2{-}b0ef{-}8aff11df8814/resource/b8f0f46d{-}eb2f{-}4d68{-}a182{-}e66778bbf89a/download/tur\_int\_turistas\_residentes\_destino\_serie.csv"}
-\NormalTok{turistas\_destinos }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv}\NormalTok{(turistas\_destinos\_url)}
-
-\NormalTok{turistas\_destinos }\OtherTok{\textless{}{-}}\NormalTok{ turistas\_destinos }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{indice\_tiempo =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{ym}\NormalTok{(indice\_tiempo))}
-\end{Highlighting}
-\end{Shaded}
-
-La función principal de ggplot2 es justamente \texttt{ggplot()} que nos permite \emph{iniciar} el gráfico y además definir las características \emph{globales}.
-El primer argumento de esta función serán los datos que queremos visualizar, siempre en un data.frame.
-En este caso usamos \texttt{paises}.
-
-El segundo argumento se llama mapping justamente porque \emph{mapea} o \emph{dibuja} los ejes del gráfico y \textbf{siempre} va acompañado de la función \texttt{aes()}.
-La función \texttt{aes()} recibe las propiedades estéticas del gráfico (o \emph{aesthetic} en inglés) a partir de las variables (o columnas) del data frame estamos usando.
-En este caso le indicamos que en el eje \textbf{x} querremos graficar la variable \texttt{pib\_per\_capita} y en eje \textbf{y} la variable \texttt{esperanza\_de\_vida}.
-
-Pero esta sola función no es suficiente, solo genera la primera capa: el área del gráfico.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ turistas\_destinos, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ indice\_tiempo, }\AttributeTok{y =}\NormalTok{ turistas))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-47-1} \end{center}
-
-\hypertarget{segunda-capa-geometruxedas}{%
-\section{Segunda capa: geometrías}\label{segunda-capa-geometruxedas}}
-
-Necesitamos agregar una nueva capa a nuestro gráfico, los elementos geométricos o \emph{geoms} que representaran los datos.
-Para esto \emph{sumamos} una función geom, por ejemplo si queremos representar los datos con puntos usaremos \texttt{geom\_point()}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ turistas\_destinos, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ indice\_tiempo, }\AttributeTok{y =}\NormalTok{ turistas)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-48-1} \end{center}
-
-¡Nuestro primer gráfico!
-
-\textbf{Primer desafío}
-
-Ahora es tu turno.
-Modifica el gráfico anterior para visualizar cómo cambia la esperanza de vida a lo largo de los años.
-
-¿Te parece útil este gráfico?
-
-Este gráfico tiene muchísima información porque tiene un punto por cada país para cada año para visualizar la esperanza de vida.
-Pero por ahora no podemos identificar esos países, necesitamos agregar información al gráfico.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# ggplot(data = paises, mapping = aes(x = anio, y = esperanza\_de\_vida)) +}
-\CommentTok{\#   geom\_point()}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{mapear-variables-a-elementos}{%
-\section{Mapear variables a elementos}\label{mapear-variables-a-elementos}}
-
-Una posible solución sería utilizar otras variables de nuestros datos, por ejemplo \texttt{continente} y \emph{mapear} el color de los puntos de a cuerdo al continente que pertenecen.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ turistas\_destinos, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ indice\_tiempo, }\AttributeTok{y =}\NormalTok{ turistas)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ region\_destino))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-50-1} \end{center}
-
-Ahh, ahora está un poco mejor.
-Por ejemplo ya podemos ver que muchos países de Europa (los puntos celestes) tienen en promedio mayor esperanza de vida a lo largo de los años que muchos países de África (los puntos rojos).
-Aún no podemos identificar los países individualmente pero podemos sacar algo más de información de nuestros datos.
-
-Algo muy importante a tener en cuenta: \textbf{los puntos toman un color de acuerdo a una variable de los datos}, y para que ggplot2 identifique esa variable (en este caso \texttt{continente}) es necesario incluirla dentro de una función \texttt{aes()}.
-
-\hypertarget{otras-geometruxedas}{%
-\section{Otras geometrías}\label{otras-geometruxedas}}
-
-Este gráfico posiblemente no sea muy adecuado si queremos visualizar la \emph{evolución} de una variable a lo largo del tiempo, necesitamos cambiar la geometría a lineas usando \texttt{geom\_line()}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ turistas\_destinos, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ indice\_tiempo, }\AttributeTok{y =}\NormalTok{ turistas)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ region\_destino))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-51-1} \end{center}
-
-Por suerte las funciones \texttt{geom\_*()} tienen más o menos nombres amigables.
-Pero el gráfico sigue teniendo problemas, al parecer dibujó una línea por continente.
-Si estuviéramos dibujando este gráfico con lápiz y papel muy posiblemente hubiéramos identificado los puntos que corresponden a cada país y los hubiéramos ``unido con líneas'', necesitamos que ggplot2 haga esto.
-¿Cómo le indicamos que puntos corresponde a cada país?
-Necesitamos que los \emph{agrupe} por la variable \texttt{pais} (¡qué bueno que tenemos toda esa información en nuestra base de datos!).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ paises, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ anio, }\AttributeTok{y =}\NormalTok{ esperanza\_de\_vida)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ continente, }\AttributeTok{group =}\NormalTok{ pais))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-52-1} \end{center}
-
-Usamos el argumento \texttt{group\ =} y de nuevo, lo incluimos dentro de la función \texttt{aes()} para indicarle a ggplot2 que busque la variable \texttt{pais} dentro del data.frame que estamos usando.
-
-Y ahora si, conseguimos el gráfico que estamos buscando.
-
-\textbf{Segundo desafío}
-
-Cuando mencionamos que ggplot2 construye gráficos por capas, lo decíamos en serio!
-Hasta ahora tenemos dos capas: el área del gráfico y una geometría (las líneas).
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Sumá una tercera capa para visualizar puntos además de las líneas.
-\item
-  ¿Porqué los puntos ahora no siguen los colores de los continentes?
-\item
-  ¿Qué cambio podrías hacer para que los puntos también tengan color según el continente?
-\end{enumerate}
-
-Acá surge una característica importante de las capas: pueden tener apariencia independiente si solo \emph{mapeamos} el color en la capa de las líneas y no en la capa de los puntos.
-Al mismo tiempo, si quisiéramos que todas las capas tenga la misma apariencia podemos incluir el argumento \texttt{color\ =}en la función global \texttt{ggpplot()} o repetirlo en cada capa.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# ggplot(paises, aes(anio, esperanza\_de\_vida)) +}
-\CommentTok{\#   geom\_line(aes(color = continente, group = pais)) +}
-\CommentTok{\#   geom\_point()}
-\end{Highlighting}
-\end{Shaded}
-
-Si te preguntabas a donde fueron a parar el \texttt{data\ =}, el \texttt{mapping\ =} y los nombres de los argumentos adentro de la función \texttt{aes()}, \texttt{x\ =} e \texttt{y\ =}, resulta que estamos aprovechando que tanto ggplot2 como nosotros ahora sabemos en que orden recibe la información cada función.
-Siempre el primer elemento que le \emph{pasemos} o indiquemos a la función \texttt{ggplot()} será el data.frame.
-
-Algunos argumentos para cambiar la apariencia de las geometrías son:
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{color} o \texttt{colour} modifica el color de líneas y puntos
-\item
-  \texttt{fill}modifica el color del área de un elemento, por ejemplo el relleno de un punto
-\item
-  \texttt{linetype} modifica el tipo de línea (punteada, continua, con guiones, etc.)
-\item
-  \texttt{pch} modifica el tamaño del punto
-\item
-  \texttt{size} modifica el tamaño de los elementos (por ejemplo el tamaño de puntos o el grosor de líneas)
-\item
-  \texttt{alpha} modifica la transparencia de los elementos (1 = opaco, 0 = transparente)
-\item
-  \texttt{shape} modifica el tipo de punto (círculos, cuadrados, triángulos, etc.)
-\end{itemize}
-
-El \emph{mapeo} entre una variable y un parámetro de geometría se hace a través de una \textbf{escala}.
-La escala de colores es lo que define, por ejemplo, que los puntos donde la variable \texttt{continente} toma el valor \texttt{"África"} van a tener el color rosa ({●}), donde toma el valor \texttt{"Américas"}, mostaza ({●}), etc\ldots{}
-
-\textbf{Modificar elementos utilizando un valor único}
-
-Es posible que en algún momento necesites cambiar la apariencia de los elementos o geometrías independientemente de las variables de tu data.frame.
-Por ejemplo podrías querer que todos los puntos sean de un único color: rojos.
-En este caso \texttt{geom\_point(aes(color\ =\ "red"))} no va a funcionar -ojo que los colores van en inglés-.
-Lo que ese código dice es que mapee el parámetro geométrico ``color'' a una variable que contiene el valor \texttt{"red"} para todas las filas.
-El mapeo se hace a través de la escala, que va a asignarle un valor (rosa {●}) a los puntos correspondientes al valor \texttt{"red"}.
-
-Ahora que no nos interesa \emph{mapear} el color a una variable, podemos mover ese argumento \textbf{afuera} de la función \texttt{aes()}: \texttt{geom\_point(color\ =\ "red")}.
-
-\hypertarget{relaciuxf3n-entre-variables}{%
-\section{Relación entre variables}\label{relaciuxf3n-entre-variables}}
-
-Muchas veces no es suficiente con mirar los datos crudos para identificar la relación entre las variables; es necesario usar alguna transformación estadística que resalte esas relaciones, ya sea ajustando una recta o calculando promedios.
-
-Para alguna transformaciones estadísticas comunes, \{ggplot2\} tiene geoms ya programados, pero muchas veces es posible que necesitemos manipular los datos antes de poder hacer un gráfico.
-A veces esa manipulación será compleja y entonces para no repetir el cálculo muchas veces, guardaremos los datos modificados en una nueva variable.
-Pero también podemos \emph{encadenar} la manipulación de los datos y el gráfico resultante.
-
-Por ejemplo, calculemos la esperanza de vida media por continente y para cada año usando \href{05-dplyr-I.html}{\texttt{dplyr}} y luego grafiquemos la \texttt{esperanza\_de\_vida\_media} a los largo de los \texttt{anios}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(dplyr)}
-
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente, anio) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{esperanza\_de\_vida\_media =} \FunctionTok{mean}\NormalTok{(esperanza\_de\_vida)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(anio, esperanza\_de\_vida\_media)) }\SpecialCharTok{+}  \CommentTok{\# Acá se acaban los \%\textgreater{}\% y comienzan los "+"}
-  \FunctionTok{geom\_point}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `summarise()` has grouped output by 'continente'. You can override using the `.groups` argument.
-\end{verbatim}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-54-1} \end{center}
-
-Esto es posible gracias al operador \texttt{\%\textgreater{}\%} que le \emph{pasa} el resultado de \texttt{summarise()} a la función \texttt{ggplot()}.
-Y este resultado no es ni más ni menos que el data.frame que necesitamos para hacer nuestro gráfico.
-Es importante notar que una vez que comenzamos el gráfico ya \textbf{no} se puede usar el operador \texttt{\%\textgreater{}\%} y las capas del gráfico se \emph{suman} como siempre con \texttt{+}.
-
-Este gráfico entonces parece mostrar que la esperanza de vida fue aumentado a lo largo de los años pero sería interesante ver esa relación más explícitamente agregando una nueva capa con \texttt{geom\_smooth()}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente, anio) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{esperanza\_de\_vida\_media =} \FunctionTok{mean}\NormalTok{(esperanza\_de\_vida)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(anio, esperanza\_de\_vida\_media)) }\SpecialCharTok{+}  
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_smooth}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `summarise()` has grouped output by 'continente'. You can override using the `.groups` argument.
-\end{verbatim}
-
-\begin{verbatim}
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-\end{verbatim}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-55-1} \end{center}
-
-Como dice en el mensaje, por defecto \texttt{geom\_smooth()} suaviza los datos usando el método \emph{loess} (regresión lineal local) cuando hay menos de 1000 datos.
-Seguramente va a ser muy común que quieras ajustar una regresión lineal global.
-En ese caso, hay que poner \texttt{method\ =\ "lm"}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente, anio) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{esperanza\_de\_vida\_media =} \FunctionTok{mean}\NormalTok{(esperanza\_de\_vida)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(anio, esperanza\_de\_vida\_media)) }\SpecialCharTok{+}  
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `summarise()` has grouped output by 'continente'. You can override using the `.groups` argument.
-\end{verbatim}
-
-\begin{verbatim}
-## `geom_smooth()` using formula 'y ~ x'
-\end{verbatim}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-56-1} \end{center}
-
-En gris nos muestra el intervalo de confianza al rededor de este suavizado que en este caso es bastante grande porque tenemos pocos datos!
-
-Cómo cualquier geom, podemos modificar el color, el grosor de la línea y casi cualquier cosa que se te ocurra.
-
-\textbf{Tercer desafío}
-
-Modificá el siguiente código para obtener el gráfico que se muestra más abajo.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{paises }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continente, \_\_\_\_\_) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{esperanza\_de\_vida\_media =} \FunctionTok{mean}\NormalTok{(esperanza\_de\_vida)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(anio, \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_)) }\SpecialCharTok{+}  
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ continente), }\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{shape =}\NormalTok{ \_\_\_\_\_) }\SpecialCharTok{+}
-  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{color =}\NormalTok{ continente) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `summarise()` has grouped output by 'continente'. You can override using the `.groups` argument.
-\end{verbatim}
-
-\begin{verbatim}
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-\end{verbatim}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-58-1} \end{center}
-
-\hypertarget{transformaciones-estaduxedsticas}{%
-\section{Transformaciones estadísticas}\label{transformaciones-estaduxedsticas}}
-
-Hasta ahora visualizamos los datos tal cual vienen en la base de datos o con ayuda de \{dplyr\} para transformarlos.
-Pero como adelantamos con \texttt{geom\_smooth()}, hay ciertas transformaciones comunes que se pueden hacer usando ggplot2.
-
-De paso vamos a usar datos incluidos en el paquete \texttt{datos} (muchos paquetes traen bases de datos para probar cosas, ¡este en particular son todas bases de datos en español!) que podés descargar como siempre con \texttt{install.packages("datos")}.
-Los datos \texttt{diamantes} contiene información sobre \textasciitilde{} 54.000 diamantes, incluido el \texttt{precio}, el \texttt{quilate}, el \texttt{color}, la \texttt{claridad} y el \texttt{corte} de cada uno.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(ggplot2)}
-\FunctionTok{library}\NormalTok{(dplyr)}
-\FunctionTok{library}\NormalTok{(datos)}
-\FunctionTok{str}\NormalTok{(diamantes)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## tibble [53,940 x 10] (S3: tbl_df/tbl/data.frame)
-##  $ precio     : int [1:53940] 326 326 327 334 335 336 336 337 337 338 ...
-##  $ quilate    : num [1:53940] 0.23 0.21 0.23 0.29 0.31 0.24 0.24 0.26 0.22 0.23 ...
-##  $ corte      : Ord.factor w/ 5 levels "Regular"<"Bueno"<..: 5 4 2 4 2 3 3 3 1 3 ...
-##  $ color      : Ord.factor w/ 7 levels "D"<"E"<"F"<"G"<..: 2 2 2 6 7 7 6 5 2 5 ...
-##  $ claridad   : Ord.factor w/ 8 levels "I1"<"SI2"<"SI1"<..: 2 3 5 4 2 6 7 3 4 5 ...
-##  $ profundidad: num [1:53940] 61.5 59.8 56.9 62.4 63.3 62.8 62.3 61.9 65.1 59.4 ...
-##  $ tabla      : num [1:53940] 55 61 65 58 58 57 57 55 61 61 ...
-##  $ x          : num [1:53940] 3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
-##  $ y          : num [1:53940] 3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
-##  $ z          : num [1:53940] 2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...
-\end{verbatim}
-
-\hypertarget{gruxe1ficos-de-frecuencias}{%
-\section{Gráficos de frecuencias}\label{gruxe1ficos-de-frecuencias}}
-
-Este es un gráfico de barras construido usando la función \texttt{geom\_bar()}.
-En el eje x muestra el \texttt{corte} de los diamantes y en el eje y la cantidad (\emph{count} en inglés) de diamantes en cada categoría.
-Pero \texttt{diamantes} no tiene una variable que se llame \texttt{count} y tampoco la generamos nosotros.
-¡Es calculada internamente por \{ggplot2\}!
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamantes, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ corte)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-60-1} \end{center}
-
-Cómo el gráfico de barras, también podemos graficar histogramas con \texttt{geom\_histogram()} y polígonos de frecuencia con \texttt{geom\_density()} para visualizar la cantidad de observaciones que caen en cada categoría (si la variable es discreta como el caso del corte de los diamantes) o rango de valores (para variables continuas).
-
-Un ejemplo de variable continua es el \texttt{precio} de los diamantes, veamos como se ve un histograma y de paso le cambiamos el color a las barras, pero ojo, solo al borde.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes, }\FunctionTok{aes}\NormalTok{(precio)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{color =} \StringTok{"darkorange"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-61-1} \end{center}
-
-\textbf{Primer desafío}
-
-¿Notaste el mensaje que devuelve el gráfico?
-
-`\texttt{stat\_bin()} using \texttt{bins\ =\ 30}.
-Pick better value with \texttt{binwidth}.`
-
-Esta geometría tiene dos argumentos importantes \texttt{bins} y \texttt{binwidth}.
-Cambiá el valor de alguno de los dos argumentos y volvé a generar el gráfico, ¿que rol juegan los argumentos?
-
-También podés revisar la documentación.
-
-Además de contar la cantidad de elementos, \{ggplot2\} puede calcular muchas otras transformaciones sobre los datos.
-Por ejemplo si quisiéramos el porcentaje o la proporción que le corresponde a cada categoría de \texttt{corte} respecto del total podemos hacerlo \emph{mapeando} esa transformación \texttt{prop} al eje y con la función \texttt{stat()}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamantes, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ corte)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =} \FunctionTok{stat}\NormalTok{(prop), }\AttributeTok{group =} \DecValTok{1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-62-1} \end{center}
-
-Fijate que la variable \texttt{prop} no es una columna de \texttt{diamantes} sino que es el nombre de una variable computada por \texttt{geom\_bar()}, por eso hay que rodearla de la función \texttt{stat()}.
-El nombre de las variables computadas por cada geoms está en su documentación (abajo de todo, antes de los ejemplos).
-
-Ahora podríamos decir que el 40\% de los diamantes en la base de datos tienen un corte \emph{ideal}.
-Además de la función \texttt{stat()} agregamos \texttt{group\ =\ 1} y esto no fue sin querer.
-Probá correr el gráfico sin ese argumento.
-
-Al incluir \texttt{group\ =\ 1}, \{ggplot2\} junta todas las observaciones en un único grupo (con el valor \texttt{1}) y calcula la proporción o el porcentaje que representa cada corte respecto del total de diamantes.
-Si no incluimos eso, \{ggplot2\} asumirá que cada categoría de corte es un grupo independiente y el cálculo del porcentaje también lo hará por separado.
-
-\hypertarget{posiciuxf3n}{%
-\subsection{Posición}\label{posiciuxf3n}}
-
-Ya vimos que la estética del \texttt{color} sólo modifica el borde de las barras, si quisieras modificar el relleno necesitamos cambiar el \texttt{fill} y al igual que antes podemos \emph{mapear} una variable a esta estética.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamantes) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ corte, }\AttributeTok{fill =}\NormalTok{ claridad))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-63-1} \end{center}
-
-Al \emph{mapear} una variable distinta, la claridad de los diamantes, podemos visualizar información extra.
-Este ``apilamiento'' de las barras es la opción de posición por defecto \texttt{position\ =\ "stack"}, pero podrías usar una de las otras tres opciones: \texttt{"identity"}, \texttt{"dodge"} o \texttt{"fill"}.
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{position\ =\ "identity"} colocará cada barra comenzando en cero quedando todas superpuestas. Para ver esa superposición, debemos hacer que las barras sean ligeramente transparentes configurando el \texttt{alpha} a un valor pequeño.
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ corte, }\AttributeTok{fill =}\NormalTok{ claridad), }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{position =} \StringTok{"identity"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-64-1} \end{center}
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{position\ =\ "fill"} apila las barras al igual que \texttt{position\ =\ "stack"}, pero transforma los datos para que cada conjunto de barras apiladas tenga la misma altura. Esto hace que sea más fácil comparar proporciones entre grupos.
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ corte, }\AttributeTok{fill =}\NormalTok{ claridad), }\AttributeTok{position =} \StringTok{"fill"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-65-1} \end{center}
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{position\ =\ "dodge"} coloca las barras una al lado de la otra. Esto hace que sea más fácil comparar valores individuales.
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ corte, }\AttributeTok{fill =}\NormalTok{ claridad), }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-66-1} \end{center}
-
-\hypertarget{gruxe1ficos-de-luxedneas-suavizas}{%
-\section{Gráficos de líneas suavizas}\label{gruxe1ficos-de-luxedneas-suavizas}}
-
-Cómo vimos antes, los gráficos de líneas suavizadas (smoothers) ajustan un modelo a los datos y luego grafican las predicciones del modelo.
-Sin entrar en muchos detalles, se puede aplicar distintos modelos y la elección del mismo dependerá de los datos.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes, }\FunctionTok{aes}\NormalTok{(quilate, precio)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_smooth}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
-\end{verbatim}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-67-1} \end{center}
-
-\hypertarget{gruxe1ficos-de-caja}{%
-\section{Gráficos de caja}\label{gruxe1ficos-de-caja}}
-
-Los diagramas de caja, mejor conocidos como boxplots calculan un resumen robusto de la distribución y luego muestran una caja con formato especial.
-
-La línea central de la caja corresponde a la \textbf{mediana} (el valor que toma el dato central) y los extremos de la caja son los \textbf{cuartiles 1 y 3}, definiendo así el \textbf{rango intercuartil} (IQR).
-Los extremos están definidos como el valor observado que no esté más lejos de \textbf{1.5*IQR} de la mediana y los puntos son los las observaciones que se escapan de ese rango, que pueden ser considerados \textbf{outliers} o \textbf{valores extremos}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes, }\FunctionTok{aes}\NormalTok{(claridad, precio)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_boxplot}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-68-1} \end{center}
-
-Los boxplot dan muchísima información sobre los datos pero al mismo tiempo \emph{esconden} la cantidad de observaciones que se usaron para generarlos y en particular cual es la frecuencia a lo largo del eje y.
-Por esta razón también existen \texttt{geom\_violin()} y \texttt{geom\_jitter()}.
-
-\textbf{Segundo desafío}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Volvé a graficar la distribución del precio para cada tipo de claridad pero ahora usando \texttt{geom\_violin()} y \texttt{geom\_jitter()}.
-\item
-  ¿Qué ventajas y desventajas encuentran respecto de \texttt{geom\_boxplot()}?
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes, }\FunctionTok{aes}\NormalTok{(claridad, precio)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_violin}\NormalTok{() }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-69-1} \end{center}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes, }\FunctionTok{aes}\NormalTok{(claridad, precio)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_jitter}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-70-1} \end{center}
-
-Cuando nuestra base de datos es muy grande corremos el riesgo de generar de que los elementos del gráfico estén tan juntos que se solapen y no se vean.
-Esto se conoce como \textbf{overplotting}.
-La base de datos \texttt{diamantes} tiene 53940 observaciones y al graficar un punto por cada una, aún si están separados por la claridad, quedan superpuestos.
-
-Para resolver este problema se suele modificar la estética de los elementos, cambiando el tamaño o \texttt{size} para que ocupen menos lugar y se vean mejor, cambiando la forma o \texttt{shape} por alguna que no tenga relleno y permita ver los elementos que hay atrás o modificando la transparencia o \texttt{alpha} por la misma razón.
-En bases de datos tan grandes como la de diamantes, muchas veces hay que utilizar varios de estos recursos.
-
-\hypertarget{graficando-en-muxfaltiples-paneles}{%
-\section{Graficando en múltiples paneles}\label{graficando-en-muxfaltiples-paneles}}
-
-Vimos que es posible graficar más de dos variables en un gráfico \emph{mapeando} una variable al \texttt{color} o por ejemplo el tipo de línea o \texttt{linetype}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes, }\FunctionTok{aes}\NormalTok{(quilate, precio)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ color))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-71-1} \end{center}
-
-En este caso no solo visualizamos la relación entre el precio y el quilate del diamante, también podemos ver que rol juega el color.
-También podríamos haber intentando resolver el problema generando un gráfico por cada color filtrando las observaciones correspondientes.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{diamantes }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(color }\SpecialCharTok{==} \StringTok{"D"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(quilate, precio)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ color))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-72-1} \end{center}
-
-Pero sería muchísimo trabajo si tenemos que hacer esto para cada una de las 7 categorías de color.
-La buena noticia es que \{ggplot2\} tiene un par de funciones justo para resolver este problema:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes, }\FunctionTok{aes}\NormalTok{(quilate, precio)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ color)) }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{color)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-73-1} \end{center}
-
-Esta nueva capa con \texttt{facet\_wrap()} divide al gráfico inicial en 7 paneles o \emph{facets}, uno por cada color.
-Esta función requiere saber que variable será la responsable de separar los paneles y para eso se usa la \textbf{notación de fórmula} de R: \texttt{\textasciitilde{}color}.
-Esto se lee como generar paneles \emph{``en función del color''}.
-
-¿Y si quisiéramos generar paneles a partir de 2 variables?
-Para eso existe \texttt{facet\_grid()}.
-En este gráfico generamos paneles viendo la \emph{``relación entre el corte y el color''} y por ejemplo en el primer panel arriba a la izquierda podremos observar los diamantes que son al mismo tiempo de color D y corte Regular.
-En este caso \emph{mapear} la variable color al color de los diamantes no parece ser necesario ya que cada columna ya nos permite identificar eso, sin embargo en algunos casos ayuda a leer el gráfico más rápido.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(diamantes, }\FunctionTok{aes}\NormalTok{(quilate, precio)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ color)) }\SpecialCharTok{+}
-  \FunctionTok{facet\_grid}\NormalTok{(corte}\SpecialCharTok{\textasciitilde{}}\NormalTok{color)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-74-1} \end{center}
-
-\textbf{Tercer desafío}
-
-Generá boxplots para analizar como se comporta el \texttt{precio} según la \texttt{claridad} para cada tipo de \texttt{corte} como se ve acá.
-
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-75-1} \end{center}
 
 \hypertarget{manipulaciuxf3n-de-datos-ordenados-usando-dplyr-y-tidyr-ii}{%
 \chapter{Manipulación de datos ordenados usando \{dplyr\} y \{tidyr\} II}\label{manipulaciuxf3n-de-datos-ordenados-usando-dplyr-y-tidyr-ii}}
@@ -3102,7 +2235,7 @@ Para eso:
 \end{enumerate}
 
 \hypertarget{manipulaciuxf3n-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1}{%
-\section{Manipulación de datos ordenados usando \{dplyr\} y \{tidyr\} II}\label{manipulaciuxf3n-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1}}
+\chapter{Manipulación de datos ordenados usando \{dplyr\} y \{tidyr\} II}\label{manipulaciuxf3n-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1}}
 
 En \href{04-lectura-datos.html\#Formatos_de_tablas}{la última sección de lectura de datos} viste el concepto de datos ``anchos'' y ``largos''.
 
@@ -3672,7 +2805,7 @@ Para eso:
 \end{enumerate}
 
 \hypertarget{reportes-ii}{%
-\section{Reportes II}\label{reportes-ii}}
+\chapter{Reportes II}\label{reportes-ii}}
 
 Durante este curso fuiste creando varios documentos con R Markdown en HTML. Este es un formato que tiene un montón de flexibilidad, pero seguramente no es el único que necesitás. Casi seguro que los informes los tengas que presentar en formato PDF o, incluso, ¡en papel impreso! \{Rmarkdown\}, y todo un amplio ecosistema de otros paquetes, permite generar documentos en múltiples formatos usando el mismo archivo de texto plano.
 
@@ -3792,7 +2925,7 @@ Por ejemplo, podrías tener un reporte que analiza la evolución de la expectati
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-104-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-72-1} \end{center}
 
 Si ahora querés hacer el mismo reporte pero para Uruguay, tenés que abrir el archivo y modificar la llamada a \texttt{filter} para quedarte sólo con ese país:
 
@@ -3981,7 +3114,7 @@ Anterior
 Siguiente
 
 \hypertarget{tablas}{%
-\section{Tablas}\label{tablas}}
+\chapter{Tablas}\label{tablas}}
 
 Por defecto, la forma en que R Markdown muestra tablas es bastante feo porque muestra lo que verías si corrieras el código en la consola.
 
@@ -4454,7 +3587,7 @@ Esto es sólo una mínima parte de lo que se puede hacer con el paquete \{kableE
 Para ejemplos mucho más detallados, te recomendamos leer \href{https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html}{la viñeta completa}
 
 \hypertarget{apariencia-de-gruxe1ficos}{%
-\section{Apariencia de gráficos}\label{apariencia-de-gruxe1ficos}}
+\chapter{Apariencia de gráficos}\label{apariencia-de-gruxe1ficos}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4508,7 +3641,7 @@ Para mostrar como funciona, vamos a utilizar la base de datos de países y con s
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-129-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-97-1} \end{center}
 
 \hypertarget{escala-de-colores-y-otras}{%
 \subsection{Escala de colores y otras}\label{escala-de-colores-y-otras}}
@@ -4524,7 +3657,7 @@ Lo primero que podemos hacer es cambiar el color de los puntos de a cuerdo al co
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-130-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-98-1} \end{center}
 
 Pero esta escala de colores que usa \{ggplot2\} por defecto no es de las mejores, de hecho las personas que tienen daltonísmo muy posiblemente no logren diferenciar todos los puntos.
 Una escala o paleta de colores muy usada es \href{https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html}{\textbf{viridis}} que fue creada justamente para resolver este y otros problemas.
@@ -4543,7 +3676,7 @@ Cómo estamos modificando el \emph{color}, la función a usar será \texttt{scal
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-131-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-99-1} \end{center}
 
 Nuestro gráfico va quedando mejor y podemos aprovechar la capacidad de \{ggplot2\} de \emph{mapear} variables a los elementos del gráfico y mostrar la población de cada país.
 
@@ -4563,7 +3696,7 @@ La ``d'' del final viene de \emph{discrete} y se usa para variables discretas o 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-132-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-100-1} \end{center}
 
 Esto nos da más información, pero al mismo tiempo vemos que los puntos se superponen.
 Vamos a arreglar eso agregando transparencia y de paso modificar el tamaño de los puntos con la escala correspondiente \texttt{scale\_size()} y sacar la legenda con \texttt{guide\ =\ NULL}.
@@ -4579,7 +3712,7 @@ Vamos a arreglar eso agregando transparencia y de paso modificar el tamaño de l
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-133-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-101-1} \end{center}
 
 \hypertarget{escalas-de-ejes}{%
 \subsection{Escalas de ejes}\label{escalas-de-ejes}}
@@ -4599,7 +3732,7 @@ Eso puede esta indicando que el PBI tiene un comportamiento \emph{logarítmico} 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-134-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-102-1} \end{center}
 
 En este caso las escalas que modifican los ejes justamente comienzan con \texttt{scala\_x\_} o \texttt{scale\_y\_} según sea el caso.
 Y por supuesto hay una variedad importante de escalas con muchas opciones.
@@ -4624,7 +3757,7 @@ Por ahora es difícil, pero podríamos agregar etiquetas de texto con el nombre 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-135-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-103-1} \end{center}
 
 Pero nos olvidamos que tenemos casi 200 países, es razonable agregarle etiquetas a todos.
 Pero podríamos querer resaltar algunos, tal vez los de un continente en particular o los que cumplen con la condición de tener las mayores poblaciones del mundo.
@@ -4648,7 +3781,7 @@ Para eso vamos a generarnos una nueva tabla con los países que queremos resalta
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-136-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-104-1} \end{center}
 
 Del código anterior surge algo muy importante: es posible generar capas en un gráfico usando una data.frame \emph{distinto} al que usamos para graficar las capas anteriores.
 Esto es útil principalmente para definir etiquetas o resaltar determinadas observaciones.
@@ -4677,7 +3810,7 @@ Vamos a usar una nueva función (y una nueva capa!), \texttt{labs()}:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-137-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-105-1} \end{center}
 
 Agregamos un título, un subtítulo, el epígrafe de la figura (\emph{caption}) para las aclaraciones y cambiamos el nombre de los ejes para que se vean mejor.
 Pero ademas eliminamos el nombre de la leyenda porque era un poco redundante.
@@ -4711,7 +3844,7 @@ Por defecto \{ggplot2\} usa \texttt{theme\_grey()}, probemos \texttt{theme\_ligh
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-138-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{DT6_files/figure-latex/unnamed-chunk-106-1} \end{center}
 
 Ahora es tu turno.
 Elegí un \href{https://es.r4ds.hadley.nz/images/visualization-themes.png}{tema que te guste} y probalo.
@@ -4721,5 +3854,92 @@ Junto con las funciones \texttt{theme\_...()}, hay una función llamada \texttt{
 Tiene casi infinitas opciones y si algún momento te desvelas intentando cambiar esa línea o ese borde, seguro que \texttt{theme()} tiene alguna opción para hacer eso.
 
 Anterior Hoja de ruta
+
+\hypertarget{desafuxedos-de-pruxe1ctica}{%
+\chapter{Desafíos de práctica}\label{desafuxedos-de-pruxe1ctica}}
+
+En esta sección te proponemos desafíos y ejercicios para prácticar o revisar lo que vimos en los distintos capítulos. Cada una de las subsección estará asociada a un conjunto de capítulos y buscan relacionar los distintos temas y herramientas.
+
+\hypertarget{desafuxedo-1}{%
+\section{Desafío 1}\label{desafuxedo-1}}
+
+\textbf{Capítulos asociados:} Instalación de R y Rstudio, Uso de proyectos, Reportes con RMarkdown y lectura de datos.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Seguí las instrucciones que encontrarás en el \href{}{Anexo I} para instalar R y Rstudio. Tené en cuenta que la instalación en computadoras con Windows requieren algunos pasos extra.
+\item
+  Abrí RStudio y creá tu primer proyecto. Este proyecto te acompañará a lo largo de todos los desafíos y ejercicios de este libro, por lo que va a necesitar un nombre fácil de recordar. Podés revisar las instrucciones \href{}{acá}.
+\item
+  Ahora es momento de instalar algunos paquetes para poder usar luego. Por ahora instalemos readr, remotes y datos.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"readr"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"ciencia\_datos/datos"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+La tercera linea, si bien distinta a las anteriores, también instala un paqute. La diferencia es que instala el paquete desde un repositorio de GitHub donde suelen estar los paquetes en desarrollo.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Creá un nuevo archivo R Markdown que se llame ``01-lectura.Rmd'' desde File -\textgreater{} New File -\textgreater{} R Markdown. Si bien el archivo puede tener cualquer nombre, siempre que sea informativo, te proponemos nombrarlos como número-nombre para poder ordenarlos y que te resulte más fácil encontrarlo dentro del proyecto. Borrá la plantilla y guardá el archivo. Para guardar File -\textgreater{} Save o click en en el disquette 💾. Es posible que necesites darle permiso a RStudio para que instale nuevos paquetes asociados a R Markdown.
+\item
+  Aprovechemos el archivo recien creado para leer datos. Te proponemos que revises el capítulo de {[}lectura de datos{]} y sigas las instrucciones para leer los datos.
+\item
+  ¡Listo! En la próxima sección practicaremos con esos y otros datos.
+\end{enumerate}
+
+\hypertarget{desafuxedo-2}{%
+\section{Desafío 2}\label{desafuxedo-2}}
+
+\textbf{Capítulos asociados:} Manipulación de datos con dplyr y la primera parte de gráficos con ggplot2
+
+\hypertarget{desafuxedo-3}{%
+\section{Desafío 3}\label{desafuxedo-3}}
+
+\textbf{Capítulos asociados:} Más gráficos con ggplot2 y manupulación de datos con dplyr y tidyr.
+
+\hypertarget{desafuxedo-4}{%
+\section{Desafío 4}\label{desafuxedo-4}}
+
+\textbf{Capítulos asociados:} Tablas, gráficos e informes para publicar.
+
+\hypertarget{appendix-apuxe9ndice}{%
+\appendix}
+
+
+\hypertarget{instalando-r-y-rstudio}{%
+\chapter{Instalando R y RStudio}\label{instalando-r-y-rstudio}}
+
+\hypertarget{windows}{%
+\section{Windows}\label{windows}}
+
+Entrá a \url{https://cran.r-project.org/bin/windows/base/} y bajate el instalador haciendo click en el link grandote que dice ``Download R 4.0.5 for Windows''. Una vez que se bajó, hacé doble click en el archivo y seguí las instrucciones del instalador.
+
+Una vez que se termine de instalar, te va a aparecer un ícono como este en el escritorio o en los programas instalados R Programming Language icon PNG and SVG Vector Free Download
+
+Al ejecturalo, les tiene que aparecer algo como esto:
+
+R for Windows Descargar (2021 Última versión) para Windows 10, 8, 7
+
+Para instalar algunos paquetes de R vas a necesitar instalar un adicional llamado rtools40. Entrá a \url{https://cran.r-project.org/bin/windows/Rtools/} y descargate el instalador en donde dice ``On Windows 64-bit: rtools40-x86\_64.exe (recommended: includes both i386 and x64 compilers)''
+
+Finalmente abrí RStudio y en la consola poné esto y apretá enter:
+
+writeLines(`PATH=``\({RTOOLS40_HOME}\\usr\\bin;\)\{PATH\}''\,', con = ``\textasciitilde/.Renviron'')
+
+Finalmente, para chequear que todo esté bien, cerrá RStudio, volvé a abrirlo y escribí esto en la consolsa y apretá enter:
+
+Sys.which(``make'')
+Debería salir algo como esto:
+
+``C:\textbackslash rtools40\textbackslash usr\textbackslash bin\textbackslash make.exe''
 
 \end{document}

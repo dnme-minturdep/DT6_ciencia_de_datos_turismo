@@ -8,9 +8,7 @@ Cualquier gráfico de ggplot tendrá como mínimo 3 componentes: los **datos**, 
 
 Cómo siempre, primero hay que cargar los paquetes y los datos. 
 
-```{r message=FALSE, warning=FALSE}
-library(readr)
-library(ggplot2)
+```{r message=FALSE, warning=FALSE, include=FALSE}
 library(dplyr)
 library(tidyr)
 library(stringr)
@@ -26,6 +24,14 @@ parques <- parques %>%
   select(-c("residentes", "no_residentes", "total")) %>% 
   pivot_wider(names_from = tipo_visitante, values_from = value, names_repair = "unique") %>% 
   mutate(indice_tiempo = lubridate::ym(indice_tiempo))
+
+readr::write_csv(parques, "datos/parques_tidy.csv")
+```
+
+
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+parques <- readr::read_csv("datos/parques_tidy.csv")
 ```
 
 La función principal de ggplot2 es justamente `ggplot()` que permite *iniciar* el gráfico y además definir las características *globales*.
