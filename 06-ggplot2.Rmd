@@ -7,6 +7,7 @@ Cualquier gráfico de ggplot tendrá como mínimo 3 componentes: los **datos**, 
 ## Primera capa: el área del gráfico
 
 Cómo siempre, primero hay que cargar los paquetes y los datos. 
+Para esta sección, vamos a leer el archivo parques_tidy.csv, que es una serie de tiempo de visitantes a parques nacionales descargada de [Yvera](http://datos.yvera.gob.ar/dataset/parques-nacionales/archivo/78aea6ed-761c-4659-bdf2-7fcb0f616fad) y modificada un poco para poder trabajar con ella más fácilmente con ggplot2. 
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 library(dplyr)
@@ -33,6 +34,19 @@ readr::write_csv(parques, "datos/parques_tidy.csv")
 library(ggplot2)
 parques <- readr::read_csv("datos/parques_tidy.csv")
 ```
+Para tener una idea de este conjunto de datos, `head()` muestra las primeras 6 filas
+
+```{r}
+head(parques)
+```
+
+La tabla tiene
+
+- **indice_tiempo**: fecha que representa el mes,
+- **region**: texto con la región,
+- **residentes**: cantidad de visitantes residentes que visitaron cada región en cada fecha,
+- **noresidentes**: cantidad de visitantes no residentes,
+- **total**: cantidad todal de visitantes (la suma de `residentes` y `noresidentes`)
 
 La función principal de ggplot2 es justamente `ggplot()` que permite *iniciar* el gráfico y además definir las características *globales*.
 El primer argumento de esta función serán los datos que vas a visualizar, siempre en un data frame.
