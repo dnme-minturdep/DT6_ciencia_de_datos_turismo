@@ -1,0 +1,39 @@
+# Desafíos de práctica
+
+En esta sección te proponemos desafíos y ejercicios para prácticar o revisar lo que vimos en los distintos capítulos. Cada una de las subsección estará asociada a un conjunto de capítulos y buscan relacionar los distintos temas y herramientas. 
+
+## Desafío 1
+
+**Capítulos asociados:** Instalación de R y Rstudio, Uso de proyectos, Reportes con RMarkdown y lectura de datos. 
+
+1. Seguí las instrucciones que encontrarás en el [Anexo I]() para instalar R y Rstudio. Tené en cuenta que la instalación en computadoras con Windows requieren algunos pasos extra. 
+
+2. Abrí RStudio y creá tu primer proyecto. Este proyecto te acompañará a lo largo de todos los desafíos y ejercicios de este libro, por lo que va a necesitar un nombre fácil de recordar. Podés revisar las instrucciones [acá](). 
+
+3. Ahora es momento de instalar algunos paquetes para poder usar luego. Por ahora instalemos readr, remotes y datos. 
+
+```{r eval=FALSE, include=TRUE}
+install.packages("readr")
+install.packages("remotes")
+remotes::install_github("ciencia_datos/datos")
+```
+
+La tercera linea, si bien distinta a las anteriores, también instala un paqute. La diferencia es que instala el paquete desde un repositorio de GitHub donde suelen estar los paquetes en desarrollo. 
+
+4. Creá un nuevo archivo R Markdown que se llame "01-lectura.Rmd" desde File -> New File -> R Markdown. Si bien el archivo puede tener cualquer nombre, siempre que sea informativo, te proponemos nombrarlos como número-nombre para poder ordenarlos y que te resulte más fácil encontrarlo dentro del proyecto. Borrá la plantilla y guardá el archivo. Para guardar File -> Save  o click en en el disquette 💾. Es posible que necesites darle permiso a RStudio para que instale nuevos paquetes asociados a R Markdown. 
+
+5. Aprovechemos el archivo recien creado para leer datos. Te proponemos que revises el capítulo de [lectura de datos] y sigas las instrucciones para leer los datos. 
+
+6. ¡Listo! En la próxima sección practicaremos con esos y otros datos.
+
+## Desafío 2
+
+**Capítulos asociados:** Manipulación de datos con dplyr y la primera parte de gráficos con ggplot2
+
+## Desafío 3
+
+**Capítulos asociados:** Más gráficos con ggplot2 y manupulación de datos con dplyr y tidyr.
+
+## Desafío 4
+
+**Capítulos asociados:** Tablas, gráficos e informes para publicar. 
