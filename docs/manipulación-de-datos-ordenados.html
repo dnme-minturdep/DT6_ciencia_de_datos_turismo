@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Manipulación de datos ordenados | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
+  <meta name="description" content="Ciencia de Datos para el Turismo" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Manipulación de datos ordenados | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Ciencia de Datos para el Turismo" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Manipulación de datos ordenados | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  
+  <meta name="twitter:description" content="Ciencia de Datos para el Turismo" />
+  
+
+<meta name="author" content="Dirección Nacional de Mercados y Estadísticas - Subsecretaría de Desarrollo Estratégico" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lectura-de-datos-ordenados.html"/>
+<link rel="next" href="gráficos-con-ggplot2.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="imagenes/escudo_mintur.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#documento-técnico-nº6---resumen"><i class="fa fa-check"></i>Documento Técnico Nº6 - Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a><ul>
+<li class="chapter" data-level="1.1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#por-qué-r"><i class="fa fa-check"></i><b>1.1</b> ¿Por qué R?</a></li>
+<li class="chapter" data-level="1.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#cómo-decirle-a-r-qué-hacer"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#orientándose-en-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Orientándose en RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#hablando-con-r"><i class="fa fa-check"></i><b>1.2.2</b> Hablando con R</a></li>
+<li class="chapter" data-level="1.2.3" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#extendiendo-r"><i class="fa fa-check"></i><b>1.2.3</b> Extendiendo R</a></li>
+<li class="chapter" data-level="1.2.4" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#buscando-ayuda"><i class="fa fa-check"></i><b>1.2.4</b> Buscando ayuda</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#qué-ventajas-tiene"><i class="fa fa-check"></i><b>2.0.1</b> ¿Qué ventajas tiene?</a></li>
+<li class="chapter" data-level="2.0.2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#abrir-un-proyecto"><i class="fa fa-check"></i><b>2.0.2</b> Abrir un proyecto</a></li>
+<li class="chapter" data-level="2.0.3" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#cómo-se-organiza"><i class="fa fa-check"></i><b>2.0.3</b> ¿Cómo se organiza?</a></li>
+<li class="chapter" data-level="2.0.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#ordenando-aún-más"><i class="fa fa-check"></i><b>2.0.4</b> Ordenando aún más</a></li>
+<li class="chapter" data-level="2.0.5" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#borrón-y-cuenta-nueva-todos-los-días"><i class="fa fa-check"></i><b>2.0.5</b> Borrón y cuenta nueva… todos los días!</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a RMarkdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#creando-archivos-.rmd"><i class="fa fa-check"></i><b>3.1</b> Creando archivos .Rmd</a></li>
+<li class="chapter" data-level="3.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#estructura-de-un-.rmd"><i class="fa fa-check"></i><b>3.2</b> Estructura de un .Rmd</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#encabezado"><i class="fa fa-check"></i><b>3.2.1</b> Encabezado</a></li>
+<li class="chapter" data-level="3.2.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#bloques-de-código"><i class="fa fa-check"></i><b>3.2.2</b> Bloques de código</a></li>
+<li class="chapter" data-level="3.2.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#el-texto-propio-del-documento."><i class="fa fa-check"></i><b>3.2.3</b> El texto propio del documento.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#markdown"><i class="fa fa-check"></i><b>3.3</b> Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a><ul>
+<li class="chapter" data-level="4.1" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#descargando-datos"><i class="fa fa-check"></i><b>4.1</b> Descargando datos</a></li>
+<li class="chapter" data-level="4.2" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#leer-datos-csv"><i class="fa fa-check"></i><b>4.2</b> Leer datos csv</a></li>
+<li class="chapter" data-level="4.3" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#leer-datos-de-excel"><i class="fa fa-check"></i><b>4.3</b> Leer datos de excel</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html"><i class="fa fa-check"></i><b>5</b> Manipulación de datos ordenados</a><ul>
+<li class="chapter" data-level="5.1" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#seleccionando-columnas-con-select"><i class="fa fa-check"></i><b>5.1</b> Seleccionando columnas con <code>select()</code></a></li>
+<li class="chapter" data-level="5.2" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#filtrando-filas-con-filter"><i class="fa fa-check"></i><b>5.2</b> Filtrando filas con <code>filter()</code></a></li>
+<li class="chapter" data-level="5.3" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#agrupando-y-reduciendo-con-group_by-summarise"><i class="fa fa-check"></i><b>5.3</b> Agrupando y reduciendo con <code>group_by() %&gt;% summarise()</code></a></li>
+<li class="chapter" data-level="5.4" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#creando-nuevas-columnas-con-mutate"><i class="fa fa-check"></i><b>5.4</b> Creando nuevas columnas con <code>mutate()</code></a></li>
+<li class="chapter" data-level="5.5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#desagrupando-con-ungroup"><i class="fa fa-check"></i><b>5.5</b> Desagrupando con <code>ungroup()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html"><i class="fa fa-check"></i><b>6</b> Gráficos con ggplot2</a><ul>
+<li class="chapter" data-level="6.1" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#primera-capa-el-área-del-gráfico"><i class="fa fa-check"></i><b>6.1</b> Primera capa: el área del gráfico</a></li>
+<li class="chapter" data-level="6.2" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#segunda-capa-geometrías"><i class="fa fa-check"></i><b>6.2</b> Segunda capa: geometrías</a></li>
+<li class="chapter" data-level="6.3" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#mapear-variables-a-elementos"><i class="fa fa-check"></i><b>6.3</b> Mapear variables a elementos</a></li>
+<li class="chapter" data-level="6.4" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#otras-geometrías"><i class="fa fa-check"></i><b>6.4</b> Otras geometrías</a></li>
+<li class="chapter" data-level="6.5" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#relación-entre-variables"><i class="fa fa-check"></i><b>6.5</b> Relación entre variables</a></li>
+<li class="chapter" data-level="6.6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#transformaciones-estadísticas"><i class="fa fa-check"></i><b>6.6</b> Transformaciones estadísticas</a></li>
+<li class="chapter" data-level="6.7" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-frecuencias"><i class="fa fa-check"></i><b>6.7</b> Gráficos de frecuencias</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#posición"><i class="fa fa-check"></i><b>6.7.1</b> Posición</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-líneas-suavizas"><i class="fa fa-check"></i><b>6.8</b> Gráficos de líneas suavizas</a></li>
+<li class="chapter" data-level="6.9" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-caja"><i class="fa fa-check"></i><b>6.9</b> Gráficos de caja</a></li>
+<li class="chapter" data-level="6.10" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#graficando-en-múltiples-paneles"><i class="fa fa-check"></i><b>6.10</b> Graficando en múltiples paneles</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="7.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-ancho-a-largo-con-pivot_longer"><i class="fa fa-check"></i><b>7.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="7.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-largo-a-ancho-con-pivot_wider"><i class="fa fa-check"></i><b>7.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="7.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#uniendo-tablas"><i class="fa fa-check"></i><b>7.3</b> Uniendo tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><i class="fa fa-check"></i><b>8</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="8.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#de-ancho-a-largo-con-pivot_longer-1"><i class="fa fa-check"></i><b>8.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="8.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#de-largo-a-ancho-con-pivot_wider-1"><i class="fa fa-check"></i><b>8.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="8.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#uniendo-tablas-1"><i class="fa fa-check"></i><b>8.3</b> Uniendo tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="reportes-ii.html"><a href="reportes-ii.html"><i class="fa fa-check"></i><b>9</b> Reportes II</a><ul>
+<li class="chapter" data-level="9.1" data-path="reportes-ii.html"><a href="reportes-ii.html#eligiendo-el-formato-de-salida"><i class="fa fa-check"></i><b>9.1</b> Eligiendo el formato de salida</a></li>
+<li class="chapter" data-level="9.2" data-path="reportes-ii.html"><a href="reportes-ii.html#personalizando-la-salida"><i class="fa fa-check"></i><b>9.2</b> Personalizando la salida</a></li>
+<li class="chapter" data-level="9.3" data-path="reportes-ii.html"><a href="reportes-ii.html#reportes-parametrizados"><i class="fa fa-check"></i><b>9.3</b> Reportes parametrizados</a></li>
+<li class="chapter" data-level="9.4" data-path="reportes-ii.html"><a href="reportes-ii.html#control-de-chunks"><i class="fa fa-check"></i><b>9.4</b> Control de chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>10</b> Tablas</a><ul>
+<li class="chapter" data-level="10.1" data-path="tablas.html"><a href="tablas.html#tablas-simples-con-kable"><i class="fa fa-check"></i><b>10.1</b> Tablas simples con <code>kable</code></a></li>
+<li class="chapter" data-level="10.2" data-path="tablas.html"><a href="tablas.html#supertablas-con-kableextra"><i class="fa fa-check"></i><b>10.2</b> Supertablas con {kableExtra}</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html"><i class="fa fa-check"></i><b>11</b> Apariencia de gráficos</a><ul>
+<li class="chapter" data-level="11.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas"><i class="fa fa-check"></i><b>11.1</b> Escalas</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escala-de-colores-y-otras"><i class="fa fa-check"></i><b>11.1.1</b> Escala de colores y otras</a></li>
+<li class="chapter" data-level="11.1.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas-de-ejes"><i class="fa fa-check"></i><b>11.1.2</b> Escalas de ejes</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#elementos-de-texto"><i class="fa fa-check"></i><b>11.2</b> Elementos de texto</a></li>
+<li class="chapter" data-level="11.3" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#temas"><i class="fa fa-check"></i><b>11.3</b> Temas</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="chapter" data-level="A" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html"><i class="fa fa-check"></i><b>A</b> Desafíos de práctica</a><ul>
+<li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-1"><i class="fa fa-check"></i>Desafío 1</a></li>
+<li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-2"><i class="fa fa-check"></i>Desafío 2</a></li>
+<li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-3"><i class="fa fa-check"></i>Desafío 3</a></li>
+<li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-4"><i class="fa fa-check"></i>Desafío 4</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html"><i class="fa fa-check"></i><b>B</b> Instalando R y RStudio</a><ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-r"><i class="fa fa-check"></i>Instalando R</a><ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#windows"><i class="fa fa-check"></i>Windows</a></li>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#ubuntu-o-derivados"><i class="fa fa-check"></i>Ubuntu o derivados</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-rstudio"><i class="fa fa-check"></i>Instalando RStudio</a><ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#windows-1"><i class="fa fa-check"></i>Windows</a></li>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#ubuntu-o-derivados-1"><i class="fa fa-check"></i>Ubuntu o derivados</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><b><a href="http://www.yvera.gob.ar/estadistica" target="blank">Estadísticas de Turismo</a></b></li>
+<li><a href="http://datos.yvera.gob.ar/" target="blank">Datos Abiertos de Turismo</a></li>
+<li><a href="https://tableros.yvera.tur.ar/" target="blank">Tableros y Reportes</a></li>
+<li><a href="https://www.yvera.tur.ar/estadistica/informe" target="blank">Informes</a></li>
+<li><a href="https://armonizacion.yvera.tur.ar/" target="blank">Armonización</a></li>
+<li><a href="https://bitacora.yvera.tur.ar/" target="blank">Bitácora</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documento Técnico N°6: Ciencia de Datos para el Turismo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="imagenes/cabezal.png">
+</div>
+<div id="manipulación-de-datos-ordenados" class="section level1">
+<h1><span class="header-section-number">Capítulo 5</span> Manipulación de datos ordenados</h1>
+<p>El paquete <strong>dplyr</strong> provee una enorme cantidad de funciones útiles para manipular y analizar datos de manera intuitiva y expresiva.</p>
+<p>El espíritu detrás de dplyr es que la enorme mayoría de los análisis, por más complicados que sean, involucran combinar y encadenar una serie relativamente acotada de acciones (o verbos).
+En este curso vamos a centrarnos las cinco más comunes:</p>
+<ul>
+<li><code>select()</code>: selecciona columnas de una tabla.</li>
+<li><code>filter()</code>: selecciona (o filtra) filas de una tabla a partir de una o más condiciones lógicas.</li>
+<li><code>group_by()</code>: agrupa una tabla en base al valor de una o más columnas.</li>
+<li><code>mutate()</code>: agrega nuevas columnas a una tabla.</li>
+<li><code>summarise()</code>: calcula estadísticas para cada grupo de una tabla.</li>
+</ul>
+<div class="alert alert-success">
+<p><strong>dplyr y tablas dinámicas:</strong></p>
+<p>A grosso modo, las operaciones de dplyr permiten hacer en R lo que se hace en tablas dinámicas (pivot tables) en Excel.
+<code>filter()</code> vendría a ser como la sección de “Filtros”, <code>group_by()</code>, la sección de “Filas”, <code>select()</code>, la sección de “Columnas” y <code>summarise()</code>, la parte de “Valores”.</p>
+</div>
+<div class="alert alert-info">
+<p><strong>Primer desafío:</strong></p>
+<p>Te dieron una tabla con datos de cantidad mensual de visitantes residentes y visitantes no residentes para cada provincia.
+Las columnas son: <code>año</code>, <code>mes</code>, <code>provincia</code>, <code>visitantes_residentes</code> y <code>visitantes_no_residentes</code>.
+En base a esos datos, te piden que calcules la proporción promedio de visitantes que son residentes para cada provincia en enero.</p>
+<p>¿En qué orden ejecutarías estos pasos para obtener el resultado deseado?</p>
+<ul>
+<li>usar <code>summarise()</code> para calcular la estadística <code>mean(proporcion_residentes)</code> para cada <code>provincia</code></li>
+<li>usar <code>group_by()</code> para agrupar por la columna <code>provincia</code></li>
+<li>usar <code>mutate()</code> para agregar una columna llamada <code>proporcion_residentes</code> que sea <code>visitantes_residentes/(visitantes_residentes + visitantes_no_residentes)</code>.</li>
+<li>usar <code>filter()</code> para seleccionar solo las filas donde la columna <code>mes</code> es igual a 1.</li>
+</ul>
+</div>
+<p>Para usar dplyr primero hay que instalarlo (esto hay que hacerlo una sola vez por computadora) con el comando:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="manipulación-de-datos-ordenados.html#cb39-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<p>y luego cargarlo en memoria con</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="manipulación-de-datos-ordenados.html#cb40-1"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<p>Volvé a cargar los datos de turistas por edad (para un recordatorio, podés ir a <a href="lectura-de-datos-ordenados.html">Lectura de datos ordenados</a>):</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="manipulación-de-datos-ordenados.html#cb41-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb41-2"><a href="manipulación-de-datos-ordenados.html#cb41-2"></a>turistas_edad &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/turistas_edad.csv&quot;</span>)</span></code></pre></div>
+<div id="seleccionando-columnas-con-select" class="section level2">
+<h2><span class="header-section-number">5.1</span> Seleccionando columnas con <code>select()</code></h2>
+<p>Para quedarse únicamente con las columnas de índice de tiempo y turistas, usá <code>select()</code></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="manipulación-de-datos-ordenados.html#cb42-1"></a><span class="kw">select</span>(turistas_edad, indice_tiempo, turistas)</span></code></pre></div>
+<pre><code>## # A tibble: 180 × 2
+##    indice_tiempo turistas
+##    &lt;chr&gt;            &lt;dbl&gt;
+##  1 2012-01        2700561
+##  2 2012-01        3143845
+##  3 2012-01        3234308
+##  4 2012-01        2126707
+##  5 2012-01        1268445
+##  6 2012-04         957231
+##  7 2012-04        1296808
+##  8 2012-04        1377356
+##  9 2012-04        1021227
+## 10 2012-04         771842
+## # … with 170 more rows</code></pre>
+<p>¿Dónde quedó este resultado?
+Si te fijás en la tabla <code>turistas_edad</code>, su formato no cambió, sigue teniendo todas las columnas originales a pesar de nuestro select:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="manipulación-de-datos-ordenados.html#cb44-1"></a>turistas_edad</span></code></pre></div>
+<pre><code>## # A tibble: 180 × 3
+##    indice_tiempo edad          turistas
+##    &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;
+##  1 2012-01       Menores de 14  2700561
+##  2 2012-01       14 a 29        3143845
+##  3 2012-01       30 a 44        3234308
+##  4 2012-01       45 a 59        2126707
+##  5 2012-01       60 o mas       1268445
+##  6 2012-04       Menores de 14   957231
+##  7 2012-04       14 a 29        1296808
+##  8 2012-04       30 a 44        1377356
+##  9 2012-04       45 a 59        1021227
+## 10 2012-04       60 o mas        771842
+## # … with 170 more rows</code></pre>
+<p><code>select()</code> y el resto de las funciones de dplyr siempre generan una nueva tabla y nunca modifican la tabla original.
+Para guardar la tabla con las dos columnas <code>indice_tiempo</code> y <code>turistas</code> tenés que asignar el resultado a una nueva variable.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="manipulación-de-datos-ordenados.html#cb46-1"></a>turistas_edad2 &lt;-<span class="st"> </span><span class="kw">select</span>(turistas_edad, indice_tiempo, turistas)</span>
+<span id="cb46-2"><a href="manipulación-de-datos-ordenados.html#cb46-2"></a>turistas_edad2</span></code></pre></div>
+<pre><code>## # A tibble: 180 × 2
+##    indice_tiempo turistas
+##    &lt;chr&gt;            &lt;dbl&gt;
+##  1 2012-01        2700561
+##  2 2012-01        3143845
+##  3 2012-01        3234308
+##  4 2012-01        2126707
+##  5 2012-01        1268445
+##  6 2012-04         957231
+##  7 2012-04        1296808
+##  8 2012-04        1377356
+##  9 2012-04        1021227
+## 10 2012-04         771842
+## # … with 170 more rows</code></pre>
+<div class="figure">
+<img src="img/dplyr-select.png" alt="" />
+<p class="caption">Cómo funciona <code>select()</code></p>
+</div>
+</div>
+<div id="filtrando-filas-con-filter" class="section level2">
+<h2><span class="header-section-number">5.2</span> Filtrando filas con <code>filter()</code></h2>
+<p>Ahora podés usar <code>filter()</code> para quedarte con sólo unas filas.
+Por ejemplo, para quedarse con los turistas menores de 14 años</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="manipulación-de-datos-ordenados.html#cb48-1"></a><span class="kw">filter</span>(turistas_edad, edad <span class="op">==</span><span class="st"> &quot;Menores de 14&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 36 × 3
+##    indice_tiempo edad          turistas
+##    &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;
+##  1 2012-01       Menores de 14  2700561
+##  2 2012-04       Menores de 14   957231
+##  3 2012-07       Menores de 14  1221911
+##  4 2012-10       Menores de 14  1172970
+##  5 2013-01       Menores de 14  2604040
+##  6 2013-04       Menores de 14   942360
+##  7 2013-07       Menores de 14  1341895
+##  8 2013-10       Menores de 14  1382380
+##  9 2014-01       Menores de 14  2706215
+## 10 2014-04       Menores de 14  1006238
+## # … with 26 more rows</code></pre>
+<p>La mayoría de los análisis consisten en varios pasos que van generando tablas intermedias (en el primer desafío usaste 4 pasos para calcular la proporción media de visitantes residentes)
+La única tabla que te interesa es la última, por lo que ir asignando variables nuevas en cada paso intermedio es tedioso y poco práctico.
+Para eso se usa el operador ‘pipe’ (<code>%&gt;%</code>).</p>
+<p>El operador ‘pipe’ (<code>%&gt;%</code>) agarra el resultado de una función y se lo pasa a la siguiente.
+Esto permite escribir el código como una cadena de funciones que van operando sobre el resultado de la anterior.</p>
+<p>Las dos operaciones anteriores (seleccionar tres columnas y luego filtrar las filas correspondientes a Argentina) se pueden escribir uno después del otro y sin asignar los resultados intermedios a nuevas variables de esta forma:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="manipulación-de-datos-ordenados.html#cb50-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-2"><a href="manipulación-de-datos-ordenados.html#cb50-2"></a><span class="st">  </span><span class="kw">filter</span>(edad <span class="op">==</span><span class="st"> &quot;Menores de 14&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-3"><a href="manipulación-de-datos-ordenados.html#cb50-3"></a><span class="st">  </span><span class="kw">select</span>(indice_tiempo, turistas)</span></code></pre></div>
+<pre><code>## # A tibble: 36 × 2
+##    indice_tiempo turistas
+##    &lt;chr&gt;            &lt;dbl&gt;
+##  1 2012-01        2700561
+##  2 2012-04         957231
+##  3 2012-07        1221911
+##  4 2012-10        1172970
+##  5 2013-01        2604040
+##  6 2013-04         942360
+##  7 2013-07        1341895
+##  8 2013-10        1382380
+##  9 2014-01        2706215
+## 10 2014-04        1006238
+## # … with 26 more rows</code></pre>
+<p>La forma de “leer” esto es “Tomá la variable <code>turistas_edad</code>, <strong>después</strong> aplicale <code>s filter(edad == "Menores de 14")</code>, <strong>después</strong> aplicale <code>fselect(indice_tiempo, turistas)</code>”.</p>
+<p>Cómo vimos, el primer argumento de todas las funciones de dplyr es el data frame sobre el cual van a operar, pero notá que en las líneas con <code>select()</code> y <code>filter()</code> no escribís la tabla explícitamente.<br />
+Esto es porque la pipe implícitamente pasa el resultado de las líneas anteriores como el primer argumento de la función siguiente.</p>
+<p>Toma el data frame <code>turistas_edad</code> y se lo pasa al primer argumento de <code>select()</code>.
+Luego el data frame resultante de esa operación pasa como el primer argumento de la función <code>filter()</code> gracias al <code>%&gt;%</code>.</p>
+<div class="alert alert-success">
+<p><strong>Tip:</strong></p>
+<p>En RStudio podés escribir <code>%&gt;%</code> usando el atajo de teclado Ctr + Shift + M.
+¡Probalo!</p>
+</div>
+<div class="alert alert-info">
+<p><strong>Desafío:</strong></p>
+<p>Completá esta cadena para producir una tabla que contenga los datos de turistas de 60 o más años</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="manipulación-de-datos-ordenados.html#cb52-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb52-2"><a href="manipulación-de-datos-ordenados.html#cb52-2"></a><span class="st">  </span><span class="kw">filter</span>(edad <span class="op">==</span><span class="st"> </span>___) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb52-3"><a href="manipulación-de-datos-ordenados.html#cb52-3"></a><span class="st">  </span><span class="kw">select</span>(_____, ____)</span></code></pre></div>
+</div>
+</div>
+<div id="agrupando-y-reduciendo-con-group_by-summarise" class="section level2">
+<h2><span class="header-section-number">5.3</span> Agrupando y reduciendo con <code>group_by() %&gt;% summarise()</code></h2>
+<p>Si querés calcular la cantidad promedio de turistas por cada rango de edad, tenés que usar el combo <code>group_by() %&gt;% summarise()</code>.
+Es decir, primero agrupar la tabla según la columna <code>edad</code> y luego calcular el promedio de <code>turistas</code> para cada grupo.</p>
+<p>Para agrupar la tabla países según el continente usamos el siguiente código:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="manipulación-de-datos-ordenados.html#cb53-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb53-2"><a href="manipulación-de-datos-ordenados.html#cb53-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) </span></code></pre></div>
+<pre><code>## # A tibble: 180 × 3
+## # Groups:   edad [5]
+##    indice_tiempo edad          turistas
+##    &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;
+##  1 2012-01       Menores de 14  2700561
+##  2 2012-01       14 a 29        3143845
+##  3 2012-01       30 a 44        3234308
+##  4 2012-01       45 a 59        2126707
+##  5 2012-01       60 o mas       1268445
+##  6 2012-04       Menores de 14   957231
+##  7 2012-04       14 a 29        1296808
+##  8 2012-04       30 a 44        1377356
+##  9 2012-04       45 a 59        1021227
+## 10 2012-04       60 o mas        771842
+## # … with 170 more rows</code></pre>
+<p>A primera vista parecería que la función no hizo nada, pero fijate que el resultado ahora dice que tiene grupos (“Groups:”), y nos dice qué columna es la que agrupa los datos (“edad”) y cuántos grupos hay (“5”).
+Las operaciones subsiguientes que le hagamos a esta tabla van a hacerse <em>para cada grupo</em>.</p>
+<p>Para ver esto en acción, usá <code>summarise()</code> para computar el promedio de turistas</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="manipulación-de-datos-ordenados.html#cb55-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb55-2"><a href="manipulación-de-datos-ordenados.html#cb55-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb55-3"><a href="manipulación-de-datos-ordenados.html#cb55-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas))</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##   edad          turistas_promedio
+##   &lt;chr&gt;                     &lt;dbl&gt;
+## 1 14 a 29                1440779.
+## 2 30 a 44                1530064.
+## 3 45 a 59                1242697.
+## 4 60 o mas               1033486.
+## 5 Menores de 14          1368313.</code></pre>
+<p>¡Tadá!
+<code>summarise()</code> devuelve una tabla con una columna para la edad y otra nueva, llamada “turistas_promedio” que contiene el promedio de <code>turistas</code> para cada grupo.
+Esta operación es equivalente a esta tabla dinámica en Excel:</p>
+<strong>rehacer el video</strong>
+<figure>
+<video width=770px controls>
+<source src="img/pivot-vid.webm" type="video/webm">
+</video>
+</figure>
+<p><code>group_by()</code> permite agrupar en base a múltiples columnas y <code>summarise()</code> permite generar múltiples columnas de resumen.
+El siguiente código calcula la cantidad promedio de turistas y su desvío estándar para cada continente y cada año.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="manipulación-de-datos-ordenados.html#cb57-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb57-2"><a href="manipulación-de-datos-ordenados.html#cb57-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad, <span class="dt">mes =</span> <span class="kw">substr</span>(indice_tiempo, <span class="dv">6</span>, <span class="dv">7</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb57-3"><a href="manipulación-de-datos-ordenados.html#cb57-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas),</span>
+<span id="cb57-4"><a href="manipulación-de-datos-ordenados.html#cb57-4"></a>            <span class="dt">turistas_desvio =</span> <span class="kw">sd</span>(turistas))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;edad&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 20 × 4
+## # Groups:   edad [5]
+##    edad          mes   turistas_promedio turistas_desvio
+##    &lt;chr&gt;         &lt;chr&gt;             &lt;dbl&gt;           &lt;dbl&gt;
+##  1 14 a 29       01             2432791.         439326.
+##  2 14 a 29       04              889256.         421702.
+##  3 14 a 29       07             1239470.         508496.
+##  4 14 a 29       10             1201600.         310893.
+##  5 30 a 44       01             2571253.         411656.
+##  6 30 a 44       04              954923.         419869.
+##  7 30 a 44       07             1289021.         454895.
+##  8 30 a 44       10             1305058.         301415.
+##  9 45 a 59       01             1955239.         119285.
+## 10 45 a 59       04              826473.         319558.
+## 11 45 a 59       07             1088687.         421866.
+## 12 45 a 59       10             1100391.         245137.
+## 13 60 o mas      01             1410029.         196945.
+## 14 60 o mas      04              827572.         323722.
+## 15 60 o mas      07              931603.         364683.
+## 16 60 o mas      10              964739.         278363.
+## 17 Menores de 14 01             2452844.         284910.
+## 18 Menores de 14 04              698172.         307543.
+## 19 Menores de 14 07             1126737.         409562.
+## 20 Menores de 14 10             1195499          273635.</code></pre>
+<div class="alert alert-success">
+<p><strong>Tip:</strong></p>
+<p>Este código usa <code>substr(indice_tiempo, 6, 7)</code> para definir el mes.
+Esta línea lo que hace es quedarse con el texto de <code>indice_tiempo</code> que está entre la posición 6 y la 7.
+De esta manera, del texto <code>"2012-01"</code> se queda con “<code>01</code>”, que representa el mes.</p>
+<p>Esta no es la mejor manera de trabajar con fechas, pero es suficiente por ahora.</p>
+</div>
+<p>El resultado va a siempre ser una tabla con la misma cantidad de filas que grupos y una cantidad de columnas igual a la cantidad de columnas usadas para agrupar y los estadísticos computados.</p>
+<div class="alert alert-info">
+<p><strong>Desafío:</strong></p>
+<p>¿Cuál te imaginás que va a ser el resultado del siguiente código?
+¿Cuántas filas y columnas va a tener?
+(Tratá de pensarlo antes de correrlo.)</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="manipulación-de-datos-ordenados.html#cb60-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb60-2"><a href="manipulación-de-datos-ordenados.html#cb60-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas))</span></code></pre></div>
+</div>
+<p>El combo <code>group_by() %&gt;% summarise()</code> se puede resumir en esta figura.
+Las filas de una tabla se dividen en grupos, y luego cada grupo se “resume” en una fila en función del estadístico usado.</p>
+<p><img src="img/group_by-summarize.png" /></p>
+<p>Al igual que hicimos “cuentas” usando algunas variables numéricas para obtener información nueva, también podemos utilizar variables categóricas.
+No tiene sentido calcular <code>mean(edad)</code> ya que en esta tabla la edad está codificada como texto, pero tal vez te interese <em>contar</em> la cantidad de observaciones por edad:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="manipulación-de-datos-ordenados.html#cb61-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb61-2"><a href="manipulación-de-datos-ordenados.html#cb61-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb61-3"><a href="manipulación-de-datos-ordenados.html#cb61-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">cantidad =</span> <span class="kw">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##   edad          cantidad
+##   &lt;chr&gt;            &lt;int&gt;
+## 1 14 a 29             36
+## 2 30 a 44             36
+## 3 45 a 59             36
+## 4 60 o mas            36
+## 5 Menores de 14       36</code></pre>
+<p>En este caso se ve que hay 36 observaciones (36 fechas) para todos los rangos etáreos.</p>
+</div>
+<div id="creando-nuevas-columnas-con-mutate" class="section level2">
+<h2><span class="header-section-number">5.4</span> Creando nuevas columnas con <code>mutate()</code></h2>
+<p>Todo esto está bien para hacer cálculos con columnas previamente existentes, pero muchas veces tenés que crear nuevas columnas.</p>
+<p>La tabla <code>turistas_edad</code> tiene información temporal codificada como texto en el formato “año-mes”.
+Sería mucho mejor que esté codificada como una fecha.
+Una forma muy simple de convertir caracteres a fechas es usando el paquete <strong>lubridate</strong>.
+Este paquete tiene un montón de funciones que te facilitan la vida al trabajar con fechas, pero en este caso vamos a usar la función <code>ym()</code> que transforma en fecha cualquier texto que tenga una fecha codificada con el año seguido del mes.</p>
+<p>Para agregar una columna llamada <code>tiempo</code> a la tabla <code>turistas_edad</code>, vamos a usar la función <code>mutate()</code></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="manipulación-de-datos-ordenados.html#cb63-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb63-2"><a href="manipulación-de-datos-ordenados.html#cb63-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tiempo =</span> lubridate<span class="op">::</span><span class="kw">ym</span>(indice_tiempo))</span></code></pre></div>
+<pre><code>## # A tibble: 180 × 4
+##    indice_tiempo edad          turistas tiempo    
+##    &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt; &lt;date&gt;    
+##  1 2012-01       Menores de 14  2700561 2012-01-01
+##  2 2012-01       14 a 29        3143845 2012-01-01
+##  3 2012-01       30 a 44        3234308 2012-01-01
+##  4 2012-01       45 a 59        2126707 2012-01-01
+##  5 2012-01       60 o mas       1268445 2012-01-01
+##  6 2012-04       Menores de 14   957231 2012-04-01
+##  7 2012-04       14 a 29        1296808 2012-04-01
+##  8 2012-04       30 a 44        1377356 2012-04-01
+##  9 2012-04       45 a 59        1021227 2012-04-01
+## 10 2012-04       60 o mas        771842 2012-04-01
+## # … with 170 more rows</code></pre>
+<p>¿Notás la diferencia entre la columna <code>indice_tiempo</code> y <code>tiempo</code>?</p>
+<p>Recordá que las funciones de dplyr nunca modifican la tabla original.
+<code>mutate()</code> devolvió una nueva tabla que es igual a la tabla <code>turistas_edad</code> pero con la columna “tiempo” agregada.
+La tabla <code>turistas_edad</code> sigue intacta.</p>
+<div class="alert alert-success">
+<p><strong>Tip:</strong></p>
+<p>Para usar la función <code>ym()</code> del paquete lubridate el código de arriba usa <code>lubridate::ym()</code>.
+Esta es una forma de usar funciones de paquetes sin tener que cargarlos con <code>library()</code>.</p>
+</div>
+</div>
+<div id="desagrupando-con-ungroup" class="section level2">
+<h2><span class="header-section-number">5.5</span> Desagrupando con <code>ungroup()</code></h2>
+<p>En general, la mayoría de las funciones de dplyr “entienden” cuando una tabla está agrupada y realizan las operaciones para cada grupo.</p>
+<div class="alert alert-info">
+<p><strong>Desafío:</strong></p>
+<p>¿Cuál de estos dos códigos agrega una columna llamada “turistas_promedio” con la cantidad de turistas promedios para cada rango de dades?
+¿Qué hace el otro?</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="manipulación-de-datos-ordenados.html#cb65-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb65-2"><a href="manipulación-de-datos-ordenados.html#cb65-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb65-3"><a href="manipulación-de-datos-ordenados.html#cb65-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas)) </span>
+<span id="cb65-4"><a href="manipulación-de-datos-ordenados.html#cb65-4"></a></span>
+<span id="cb65-5"><a href="manipulación-de-datos-ordenados.html#cb65-5"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb65-6"><a href="manipulación-de-datos-ordenados.html#cb65-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas)) </span></code></pre></div>
+</div>
+<p>En otras palabras, los resultados de <code>mutate()</code>, <code>filter()</code>, <code>summarise()</code> y otras funciones cambian según si la tabla está agrupada o no.
+Como a veces uno se puede olvidar que quedaron grupos, es conveniente usar la función <code>ungroup()</code> una vez que dejás de trabajar con grupos:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="manipulación-de-datos-ordenados.html#cb66-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb66-2"><a href="manipulación-de-datos-ordenados.html#cb66-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb66-3"><a href="manipulación-de-datos-ordenados.html#cb66-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb66-4"><a href="manipulación-de-datos-ordenados.html#cb66-4"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 180 × 4
+##    indice_tiempo edad          turistas turistas_promedio
+##    &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;             &lt;dbl&gt;
+##  1 2012-01       Menores de 14  2700561          1368313.
+##  2 2012-01       14 a 29        3143845          1440779.
+##  3 2012-01       30 a 44        3234308          1530064.
+##  4 2012-01       45 a 59        2126707          1242697.
+##  5 2012-01       60 o mas       1268445          1033486.
+##  6 2012-04       Menores de 14   957231          1368313.
+##  7 2012-04       14 a 29        1296808          1440779.
+##  8 2012-04       30 a 44        1377356          1530064.
+##  9 2012-04       45 a 59        1021227          1242697.
+## 10 2012-04       60 o mas        771842          1033486.
+## # … with 170 more rows</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lectura-de-datos-ordenados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="gráficos-con-ggplot2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["DT6.pdf", "DT6.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

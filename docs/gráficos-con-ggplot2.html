@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 6 Gráficos con ggplot2 | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
+  <meta name="description" content="Ciencia de Datos para el Turismo" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 6 Gráficos con ggplot2 | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Ciencia de Datos para el Turismo" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 6 Gráficos con ggplot2 | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  
+  <meta name="twitter:description" content="Ciencia de Datos para el Turismo" />
+  
+
+<meta name="author" content="Dirección Nacional de Mercados y Estadísticas - Subsecretaría de Desarrollo Estratégico" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="manipulación-de-datos-ordenados.html"/>
+<link rel="next" href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="imagenes/escudo_mintur.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#documento-técnico-nº6---resumen"><i class="fa fa-check"></i>Documento Técnico Nº6 - Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a><ul>
+<li class="chapter" data-level="1.1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#por-qué-r"><i class="fa fa-check"></i><b>1.1</b> ¿Por qué R?</a></li>
+<li class="chapter" data-level="1.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#cómo-decirle-a-r-qué-hacer"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#orientándose-en-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Orientándose en RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#hablando-con-r"><i class="fa fa-check"></i><b>1.2.2</b> Hablando con R</a></li>
+<li class="chapter" data-level="1.2.3" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#extendiendo-r"><i class="fa fa-check"></i><b>1.2.3</b> Extendiendo R</a></li>
+<li class="chapter" data-level="1.2.4" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#buscando-ayuda"><i class="fa fa-check"></i><b>1.2.4</b> Buscando ayuda</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#qué-ventajas-tiene"><i class="fa fa-check"></i><b>2.0.1</b> ¿Qué ventajas tiene?</a></li>
+<li class="chapter" data-level="2.0.2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#abrir-un-proyecto"><i class="fa fa-check"></i><b>2.0.2</b> Abrir un proyecto</a></li>
+<li class="chapter" data-level="2.0.3" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#cómo-se-organiza"><i class="fa fa-check"></i><b>2.0.3</b> ¿Cómo se organiza?</a></li>
+<li class="chapter" data-level="2.0.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#ordenando-aún-más"><i class="fa fa-check"></i><b>2.0.4</b> Ordenando aún más</a></li>
+<li class="chapter" data-level="2.0.5" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#borrón-y-cuenta-nueva-todos-los-días"><i class="fa fa-check"></i><b>2.0.5</b> Borrón y cuenta nueva… todos los días!</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a RMarkdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#creando-archivos-.rmd"><i class="fa fa-check"></i><b>3.1</b> Creando archivos .Rmd</a></li>
+<li class="chapter" data-level="3.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#estructura-de-un-.rmd"><i class="fa fa-check"></i><b>3.2</b> Estructura de un .Rmd</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#encabezado"><i class="fa fa-check"></i><b>3.2.1</b> Encabezado</a></li>
+<li class="chapter" data-level="3.2.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#bloques-de-código"><i class="fa fa-check"></i><b>3.2.2</b> Bloques de código</a></li>
+<li class="chapter" data-level="3.2.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#el-texto-propio-del-documento."><i class="fa fa-check"></i><b>3.2.3</b> El texto propio del documento.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#markdown"><i class="fa fa-check"></i><b>3.3</b> Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a><ul>
+<li class="chapter" data-level="4.1" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#descargando-datos"><i class="fa fa-check"></i><b>4.1</b> Descargando datos</a></li>
+<li class="chapter" data-level="4.2" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#leer-datos-csv"><i class="fa fa-check"></i><b>4.2</b> Leer datos csv</a></li>
+<li class="chapter" data-level="4.3" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#leer-datos-de-excel"><i class="fa fa-check"></i><b>4.3</b> Leer datos de excel</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html"><i class="fa fa-check"></i><b>5</b> Manipulación de datos ordenados</a><ul>
+<li class="chapter" data-level="5.1" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#seleccionando-columnas-con-select"><i class="fa fa-check"></i><b>5.1</b> Seleccionando columnas con <code>select()</code></a></li>
+<li class="chapter" data-level="5.2" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#filtrando-filas-con-filter"><i class="fa fa-check"></i><b>5.2</b> Filtrando filas con <code>filter()</code></a></li>
+<li class="chapter" data-level="5.3" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#agrupando-y-reduciendo-con-group_by-summarise"><i class="fa fa-check"></i><b>5.3</b> Agrupando y reduciendo con <code>group_by() %&gt;% summarise()</code></a></li>
+<li class="chapter" data-level="5.4" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#creando-nuevas-columnas-con-mutate"><i class="fa fa-check"></i><b>5.4</b> Creando nuevas columnas con <code>mutate()</code></a></li>
+<li class="chapter" data-level="5.5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#desagrupando-con-ungroup"><i class="fa fa-check"></i><b>5.5</b> Desagrupando con <code>ungroup()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html"><i class="fa fa-check"></i><b>6</b> Gráficos con ggplot2</a><ul>
+<li class="chapter" data-level="6.1" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#primera-capa-el-área-del-gráfico"><i class="fa fa-check"></i><b>6.1</b> Primera capa: el área del gráfico</a></li>
+<li class="chapter" data-level="6.2" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#segunda-capa-geometrías"><i class="fa fa-check"></i><b>6.2</b> Segunda capa: geometrías</a></li>
+<li class="chapter" data-level="6.3" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#mapear-variables-a-elementos"><i class="fa fa-check"></i><b>6.3</b> Mapear variables a elementos</a></li>
+<li class="chapter" data-level="6.4" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#otras-geometrías"><i class="fa fa-check"></i><b>6.4</b> Otras geometrías</a></li>
+<li class="chapter" data-level="6.5" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#relación-entre-variables"><i class="fa fa-check"></i><b>6.5</b> Relación entre variables</a></li>
+<li class="chapter" data-level="6.6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#transformaciones-estadísticas"><i class="fa fa-check"></i><b>6.6</b> Transformaciones estadísticas</a></li>
+<li class="chapter" data-level="6.7" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-frecuencias"><i class="fa fa-check"></i><b>6.7</b> Gráficos de frecuencias</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#posición"><i class="fa fa-check"></i><b>6.7.1</b> Posición</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-líneas-suavizas"><i class="fa fa-check"></i><b>6.8</b> Gráficos de líneas suavizas</a></li>
+<li class="chapter" data-level="6.9" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-caja"><i class="fa fa-check"></i><b>6.9</b> Gráficos de caja</a></li>
+<li class="chapter" data-level="6.10" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#graficando-en-múltiples-paneles"><i class="fa fa-check"></i><b>6.10</b> Graficando en múltiples paneles</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="7.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-ancho-a-largo-con-pivot_longer"><i class="fa fa-check"></i><b>7.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="7.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-largo-a-ancho-con-pivot_wider"><i class="fa fa-check"></i><b>7.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="7.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#uniendo-tablas"><i class="fa fa-check"></i><b>7.3</b> Uniendo tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><i class="fa fa-check"></i><b>8</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="8.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#de-ancho-a-largo-con-pivot_longer-1"><i class="fa fa-check"></i><b>8.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="8.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#de-largo-a-ancho-con-pivot_wider-1"><i class="fa fa-check"></i><b>8.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="8.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#uniendo-tablas-1"><i class="fa fa-check"></i><b>8.3</b> Uniendo tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="reportes-ii.html"><a href="reportes-ii.html"><i class="fa fa-check"></i><b>9</b> Reportes II</a><ul>
+<li class="chapter" data-level="9.1" data-path="reportes-ii.html"><a href="reportes-ii.html#eligiendo-el-formato-de-salida"><i class="fa fa-check"></i><b>9.1</b> Eligiendo el formato de salida</a></li>
+<li class="chapter" data-level="9.2" data-path="reportes-ii.html"><a href="reportes-ii.html#personalizando-la-salida"><i class="fa fa-check"></i><b>9.2</b> Personalizando la salida</a></li>
+<li class="chapter" data-level="9.3" data-path="reportes-ii.html"><a href="reportes-ii.html#reportes-parametrizados"><i class="fa fa-check"></i><b>9.3</b> Reportes parametrizados</a></li>
+<li class="chapter" data-level="9.4" data-path="reportes-ii.html"><a href="reportes-ii.html#control-de-chunks"><i class="fa fa-check"></i><b>9.4</b> Control de chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>10</b> Tablas</a><ul>
+<li class="chapter" data-level="10.1" data-path="tablas.html"><a href="tablas.html#tablas-simples-con-kable"><i class="fa fa-check"></i><b>10.1</b> Tablas simples con <code>kable</code></a></li>
+<li class="chapter" data-level="10.2" data-path="tablas.html"><a href="tablas.html#supertablas-con-kableextra"><i class="fa fa-check"></i><b>10.2</b> Supertablas con {kableExtra}</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html"><i class="fa fa-check"></i><b>11</b> Apariencia de gráficos</a><ul>
+<li class="chapter" data-level="11.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas"><i class="fa fa-check"></i><b>11.1</b> Escalas</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escala-de-colores-y-otras"><i class="fa fa-check"></i><b>11.1.1</b> Escala de colores y otras</a></li>
+<li class="chapter" data-level="11.1.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas-de-ejes"><i class="fa fa-check"></i><b>11.1.2</b> Escalas de ejes</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#elementos-de-texto"><i class="fa fa-check"></i><b>11.2</b> Elementos de texto</a></li>
+<li class="chapter" data-level="11.3" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#temas"><i class="fa fa-check"></i><b>11.3</b> Temas</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="chapter" data-level="A" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html"><i class="fa fa-check"></i><b>A</b> Desafíos de práctica</a><ul>
+<li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-1"><i class="fa fa-check"></i>Desafío 1</a></li>
+<li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-2"><i class="fa fa-check"></i>Desafío 2</a></li>
+<li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-3"><i class="fa fa-check"></i>Desafío 3</a></li>
+<li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-4"><i class="fa fa-check"></i>Desafío 4</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html"><i class="fa fa-check"></i><b>B</b> Instalando R y RStudio</a><ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-r"><i class="fa fa-check"></i>Instalando R</a><ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#windows"><i class="fa fa-check"></i>Windows</a></li>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#ubuntu-o-derivados"><i class="fa fa-check"></i>Ubuntu o derivados</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-rstudio"><i class="fa fa-check"></i>Instalando RStudio</a><ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#windows-1"><i class="fa fa-check"></i>Windows</a></li>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#ubuntu-o-derivados-1"><i class="fa fa-check"></i>Ubuntu o derivados</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><b><a href="http://www.yvera.gob.ar/estadistica" target="blank">Estadísticas de Turismo</a></b></li>
+<li><a href="http://datos.yvera.gob.ar/" target="blank">Datos Abiertos de Turismo</a></li>
+<li><a href="https://tableros.yvera.tur.ar/" target="blank">Tableros y Reportes</a></li>
+<li><a href="https://www.yvera.tur.ar/estadistica/informe" target="blank">Informes</a></li>
+<li><a href="https://armonizacion.yvera.tur.ar/" target="blank">Armonización</a></li>
+<li><a href="https://bitacora.yvera.tur.ar/" target="blank">Bitácora</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documento Técnico N°6: Ciencia de Datos para el Turismo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="imagenes/cabezal.png">
+</div>
+<div id="gráficos-con-ggplot2" class="section level1">
+<h1><span class="header-section-number">Capítulo 6</span> Gráficos con ggplot2</h1>
+<p>Visualizar datos es útil para identificar a relación entre distintas variables pero también para comunicar el análisis de los datos y resultados.
+El paquete <code>ggplot2</code> permite generar gráficos de gran calidad en pocos pasos.
+Cualquier gráfico de ggplot tendrá como mínimo 3 componentes: los <strong>datos</strong>, un <strong>sistema de coordenadas</strong> y una <strong>geometría</strong> (la representación visual de los datos) y se irá construyendo por capas.</p>
+<div id="primera-capa-el-área-del-gráfico" class="section level2">
+<h2><span class="header-section-number">6.1</span> Primera capa: el área del gráfico</h2>
+<p>Cómo siempre será necesario cargar los paquetes que vamos a usar y ya que estamos los datos con los que venimos trabajando:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="gráficos-con-ggplot2.html#cb68-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb68-2"><a href="gráficos-con-ggplot2.html#cb68-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb68-3"><a href="gráficos-con-ggplot2.html#cb68-3"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb68-4"><a href="gráficos-con-ggplot2.html#cb68-4"></a></span>
+<span id="cb68-5"><a href="gráficos-con-ggplot2.html#cb68-5"></a>turistas_destinos_url &lt;-<span class="st"> &quot;http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/b8f0f46d-eb2f-4d68-a182-e66778bbf89a/download/tur_int_turistas_residentes_destino_serie.csv&quot;</span></span>
+<span id="cb68-6"><a href="gráficos-con-ggplot2.html#cb68-6"></a>turistas_destinos &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(turistas_destinos_url)</span>
+<span id="cb68-7"><a href="gráficos-con-ggplot2.html#cb68-7"></a></span>
+<span id="cb68-8"><a href="gráficos-con-ggplot2.html#cb68-8"></a>turistas_destinos &lt;-<span class="st"> </span>turistas_destinos <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb68-9"><a href="gráficos-con-ggplot2.html#cb68-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">indice_tiempo =</span> lubridate<span class="op">::</span><span class="kw">ym</span>(indice_tiempo))</span>
+<span id="cb68-10"><a href="gráficos-con-ggplot2.html#cb68-10"></a></span>
+<span id="cb68-11"><a href="gráficos-con-ggplot2.html#cb68-11"></a>paises &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span></code></pre></div>
+<p>La función principal de ggplot2 es justamente <code>ggplot()</code> que nos permite <em>iniciar</em> el gráfico y además definir las características <em>globales</em>.
+El primer argumento de esta función serán los datos que queremos visualizar, siempre en un data.frame.
+En este caso usamos <code>paises</code>.</p>
+<p>El segundo argumento se llama mapping justamente porque <em>mapea</em> o <em>dibuja</em> los ejes del gráfico y <strong>siempre</strong> va acompañado de la función <code>aes()</code>.
+La función <code>aes()</code> recibe las propiedades estéticas del gráfico (o <em>aesthetic</em> en inglés) a partir de las variables (o columnas) del data frame estamos usando.
+En este caso le indicamos que en el eje <strong>x</strong> querremos graficar la variable <code>pib_per_capita</code> y en eje <strong>y</strong> la variable <code>esperanza_de_vida</code>.</p>
+<p>Pero esta sola función no es suficiente, solo genera la primera capa: el área del gráfico.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="gráficos-con-ggplot2.html#cb69-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> turistas_destinos, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> indice_tiempo, <span class="dt">y =</span> turistas))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="segunda-capa-geometrías" class="section level2">
+<h2><span class="header-section-number">6.2</span> Segunda capa: geometrías</h2>
+<p>Necesitamos agregar una nueva capa a nuestro gráfico, los elementos geométricos o <em>geoms</em> que representaran los datos.
+Para esto <em>sumamos</em> una función geom, por ejemplo si queremos representar los datos con puntos usaremos <code>geom_point()</code></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="gráficos-con-ggplot2.html#cb70-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> turistas_destinos, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> indice_tiempo, <span class="dt">y =</span> turistas)) <span class="op">+</span></span>
+<span id="cb70-2"><a href="gráficos-con-ggplot2.html#cb70-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>¡Nuestro primer gráfico!</p>
+<div class="alert alert-info">
+<p><strong>Primer desafío</strong></p>
+<p>Ahora es tu turno.
+Modifica el gráfico anterior para visualizar cómo cambia la esperanza de vida a lo largo de los años.</p>
+<p>¿Te parece útil este gráfico?</p>
+</div>
+<p>Este gráfico tiene muchísima información porque tiene un punto por cada país para cada año para visualizar la esperanza de vida.
+Pero por ahora no podemos identificar esos países, necesitamos agregar información al gráfico.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="gráficos-con-ggplot2.html#cb71-1"></a><span class="co"># ggplot(data = paises, mapping = aes(x = anio, y = esperanza_de_vida)) +</span></span>
+<span id="cb71-2"><a href="gráficos-con-ggplot2.html#cb71-2"></a><span class="co">#   geom_point()</span></span></code></pre></div>
+</div>
+<div id="mapear-variables-a-elementos" class="section level2">
+<h2><span class="header-section-number">6.3</span> Mapear variables a elementos</h2>
+<p>Una posible solución sería utilizar otras variables de nuestros datos, por ejemplo <code>continente</code> y <em>mapear</em> el color de los puntos de a cuerdo al continente que pertenecen.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="gráficos-con-ggplot2.html#cb72-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> turistas_destinos, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> indice_tiempo, <span class="dt">y =</span> turistas)) <span class="op">+</span></span>
+<span id="cb72-2"><a href="gráficos-con-ggplot2.html#cb72-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> region_destino))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Ahh, ahora está un poco mejor.
+Por ejemplo ya podemos ver que muchos países de Europa (los puntos celestes) tienen en promedio mayor esperanza de vida a lo largo de los años que muchos países de África (los puntos rojos).
+Aún no podemos identificar los países individualmente pero podemos sacar algo más de información de nuestros datos.</p>
+<p>Algo muy importante a tener en cuenta: <strong>los puntos toman un color de acuerdo a una variable de los datos</strong>, y para que ggplot2 identifique esa variable (en este caso <code>continente</code>) es necesario incluirla dentro de una función <code>aes()</code>.</p>
+</div>
+<div id="otras-geometrías" class="section level2">
+<h2><span class="header-section-number">6.4</span> Otras geometrías</h2>
+<p>Este gráfico posiblemente no sea muy adecuado si queremos visualizar la <em>evolución</em> de una variable a lo largo del tiempo, necesitamos cambiar la geometría a lineas usando <code>geom_line()</code></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="gráficos-con-ggplot2.html#cb73-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> turistas_destinos, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> indice_tiempo, <span class="dt">y =</span> turistas)) <span class="op">+</span></span>
+<span id="cb73-2"><a href="gráficos-con-ggplot2.html#cb73-2"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> region_destino))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Por suerte las funciones <code>geom_*()</code> tienen más o menos nombres amigables.
+Pero el gráfico sigue teniendo problemas, al parecer dibujó una línea por continente.
+Si estuviéramos dibujando este gráfico con lápiz y papel muy posiblemente hubiéramos identificado los puntos que corresponden a cada país y los hubiéramos “unido con líneas”, necesitamos que ggplot2 haga esto.
+¿Cómo le indicamos que puntos corresponde a cada país?
+Necesitamos que los <em>agrupe</em> por la variable <code>pais</code> (¡qué bueno que tenemos toda esa información en nuestra base de datos!).</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="gráficos-con-ggplot2.html#cb74-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> paises, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> anio, <span class="dt">y =</span> esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb74-2"><a href="gráficos-con-ggplot2.html#cb74-2"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">group =</span> pais))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Usamos el argumento <code>group =</code> y de nuevo, lo incluimos dentro de la función <code>aes()</code> para indicarle a ggplot2 que busque la variable <code>pais</code> dentro del data.frame que estamos usando.</p>
+<p>Y ahora si, conseguimos el gráfico que estamos buscando.</p>
+<div class="alert alert-info">
+<p><strong>Segundo desafío</strong></p>
+<p>Cuando mencionamos que ggplot2 construye gráficos por capas, lo decíamos en serio!
+Hasta ahora tenemos dos capas: el área del gráfico y una geometría (las líneas).</p>
+<ol style="list-style-type: decimal">
+<li>Sumá una tercera capa para visualizar puntos además de las líneas.</li>
+<li>¿Porqué los puntos ahora no siguen los colores de los continentes?</li>
+<li>¿Qué cambio podrías hacer para que los puntos también tengan color según el continente?</li>
+</ol>
+</div>
+<p>Acá surge una característica importante de las capas: pueden tener apariencia independiente si solo <em>mapeamos</em> el color en la capa de las líneas y no en la capa de los puntos.
+Al mismo tiempo, si quisiéramos que todas las capas tenga la misma apariencia podemos incluir el argumento <code>color =</code>en la función global <code>ggpplot()</code> o repetirlo en cada capa.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="gráficos-con-ggplot2.html#cb75-1"></a><span class="co"># ggplot(paises, aes(anio, esperanza_de_vida)) +</span></span>
+<span id="cb75-2"><a href="gráficos-con-ggplot2.html#cb75-2"></a><span class="co">#   geom_line(aes(color = continente, group = pais)) +</span></span>
+<span id="cb75-3"><a href="gráficos-con-ggplot2.html#cb75-3"></a><span class="co">#   geom_point()</span></span></code></pre></div>
+<div class="alert alert-success">
+<p>Si te preguntabas a donde fueron a parar el <code>data =</code>, el <code>mapping =</code> y los nombres de los argumentos adentro de la función <code>aes()</code>, <code>x =</code> e <code>y =</code>, resulta que estamos aprovechando que tanto ggplot2 como nosotros ahora sabemos en que orden recibe la información cada función.
+Siempre el primer elemento que le <em>pasemos</em> o indiquemos a la función <code>ggplot()</code> será el data.frame.</p>
+</div>
+<p>Algunos argumentos para cambiar la apariencia de las geometrías son:</p>
+<ul>
+<li><code>color</code> o <code>colour</code> modifica el color de líneas y puntos</li>
+<li><code>fill</code>modifica el color del área de un elemento, por ejemplo el relleno de un punto</li>
+<li><code>linetype</code> modifica el tipo de línea (punteada, continua, con guiones, etc.)</li>
+<li><code>pch</code> modifica el tamaño del punto</li>
+<li><code>size</code> modifica el tamaño de los elementos (por ejemplo el tamaño de puntos o el grosor de líneas)</li>
+<li><code>alpha</code> modifica la transparencia de los elementos (1 = opaco, 0 = transparente)</li>
+<li><code>shape</code> modifica el tipo de punto (círculos, cuadrados, triángulos, etc.)</li>
+</ul>
+<p>El <em>mapeo</em> entre una variable y un parámetro de geometría se hace a través de una <strong>escala</strong>.
+La escala de colores es lo que define, por ejemplo, que los puntos donde la variable <code>continente</code> toma el valor <code>"África"</code> van a tener el color rosa (<span style="color:#F77D75">●</span>), donde toma el valor <code>"Américas"</code>, mostaza (<span style="color:#B7B940">●</span>), etc…</p>
+<div class="alert alert-success">
+<p><strong>Modificar elementos utilizando un valor único</strong></p>
+<p>Es posible que en algún momento necesites cambiar la apariencia de los elementos o geometrías independientemente de las variables de tu data.frame.
+Por ejemplo podrías querer que todos los puntos sean de un único color: rojos.
+En este caso <code>geom_point(aes(color = "red"))</code> no va a funcionar -ojo que los colores van en inglés-.
+Lo que ese código dice es que mapee el parámetro geométrico “color” a una variable que contiene el valor <code>"red"</code> para todas las filas.
+El mapeo se hace a través de la escala, que va a asignarle un valor (rosa <span style="color:#F77D75">●</span>) a los puntos correspondientes al valor <code>"red"</code>.</p>
+<p>Ahora que no nos interesa <em>mapear</em> el color a una variable, podemos mover ese argumento <strong>afuera</strong> de la función <code>aes()</code>: <code>geom_point(color = "red")</code>.</p>
+</div>
+</div>
+<div id="relación-entre-variables" class="section level2">
+<h2><span class="header-section-number">6.5</span> Relación entre variables</h2>
+<p>Muchas veces no es suficiente con mirar los datos crudos para identificar la relación entre las variables; es necesario usar alguna transformación estadística que resalte esas relaciones, ya sea ajustando una recta o calculando promedios.</p>
+<p>Para alguna transformaciones estadísticas comunes, {ggplot2} tiene geoms ya programados, pero muchas veces es posible que necesitemos manipular los datos antes de poder hacer un gráfico.
+A veces esa manipulación será compleja y entonces para no repetir el cálculo muchas veces, guardaremos los datos modificados en una nueva variable.
+Pero también podemos <em>encadenar</em> la manipulación de los datos y el gráfico resultante.</p>
+<p>Por ejemplo, calculemos la esperanza de vida media por continente y para cada año usando <a href="05-dplyr-I.html"><code>dplyr</code></a> y luego grafiquemos la <code>esperanza_de_vida_media</code> a los largo de los <code>anios</code>:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="gráficos-con-ggplot2.html#cb76-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb76-2"><a href="gráficos-con-ggplot2.html#cb76-2"></a></span>
+<span id="cb76-3"><a href="gráficos-con-ggplot2.html#cb76-3"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb76-4"><a href="gráficos-con-ggplot2.html#cb76-4"></a><span class="st">  </span><span class="kw">group_by</span>(continente, anio) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb76-5"><a href="gráficos-con-ggplot2.html#cb76-5"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">esperanza_de_vida_media =</span> <span class="kw">mean</span>(esperanza_de_vida)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb76-6"><a href="gráficos-con-ggplot2.html#cb76-6"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(anio, esperanza_de_vida_media)) <span class="op">+</span><span class="st">  </span><span class="co"># Acá se acaban los %&gt;% y comienzan los &quot;+&quot;</span></span>
+<span id="cb76-7"><a href="gráficos-con-ggplot2.html#cb76-7"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;continente&#39;. You can override using the `.groups` argument.</code></pre>
+<p><img src="DT6_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Esto es posible gracias al operador <code>%&gt;%</code> que le <em>pasa</em> el resultado de <code>summarise()</code> a la función <code>ggplot()</code>.
+Y este resultado no es ni más ni menos que el data.frame que necesitamos para hacer nuestro gráfico.
+Es importante notar que una vez que comenzamos el gráfico ya <strong>no</strong> se puede usar el operador <code>%&gt;%</code> y las capas del gráfico se <em>suman</em> como siempre con <code>+</code>.</p>
+<p>Este gráfico entonces parece mostrar que la esperanza de vida fue aumentado a lo largo de los años pero sería interesante ver esa relación más explícitamente agregando una nueva capa con <code>geom_smooth()</code>.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="gráficos-con-ggplot2.html#cb78-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-2"><a href="gráficos-con-ggplot2.html#cb78-2"></a><span class="st">  </span><span class="kw">group_by</span>(continente, anio) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-3"><a href="gráficos-con-ggplot2.html#cb78-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">esperanza_de_vida_media =</span> <span class="kw">mean</span>(esperanza_de_vida)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-4"><a href="gráficos-con-ggplot2.html#cb78-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(anio, esperanza_de_vida_media)) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb78-5"><a href="gráficos-con-ggplot2.html#cb78-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb78-6"><a href="gráficos-con-ggplot2.html#cb78-6"></a><span class="st">  </span><span class="kw">geom_smooth</span>()</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;continente&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="DT6_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Como dice en el mensaje, por defecto <code>geom_smooth()</code> suaviza los datos usando el método <em>loess</em> (regresión lineal local) cuando hay menos de 1000 datos.
+Seguramente va a ser muy común que quieras ajustar una regresión lineal global.
+En ese caso, hay que poner <code>method = "lm"</code>:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="gráficos-con-ggplot2.html#cb81-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-2"><a href="gráficos-con-ggplot2.html#cb81-2"></a><span class="st">  </span><span class="kw">group_by</span>(continente, anio) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-3"><a href="gráficos-con-ggplot2.html#cb81-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">esperanza_de_vida_media =</span> <span class="kw">mean</span>(esperanza_de_vida)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-4"><a href="gráficos-con-ggplot2.html#cb81-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(anio, esperanza_de_vida_media)) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb81-5"><a href="gráficos-con-ggplot2.html#cb81-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb81-6"><a href="gráficos-con-ggplot2.html#cb81-6"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;continente&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="DT6_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>En gris nos muestra el intervalo de confianza al rededor de este suavizado que en este caso es bastante grande porque tenemos pocos datos!</p>
+<p>Cómo cualquier geom, podemos modificar el color, el grosor de la línea y casi cualquier cosa que se te ocurra.</p>
+<div class="alert alert-info">
+<p><strong>Tercer desafío</strong></p>
+<p>Modificá el siguiente código para obtener el gráfico que se muestra más abajo.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="gráficos-con-ggplot2.html#cb84-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb84-2"><a href="gráficos-con-ggplot2.html#cb84-2"></a><span class="st">  </span><span class="kw">group_by</span>(continente, _____) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb84-3"><a href="gráficos-con-ggplot2.html#cb84-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">esperanza_de_vida_media =</span> <span class="kw">mean</span>(esperanza_de_vida)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb84-4"><a href="gráficos-con-ggplot2.html#cb84-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(anio, ________________)) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb84-5"><a href="gráficos-con-ggplot2.html#cb84-5"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">shape =</span> _____) <span class="op">+</span></span>
+<span id="cb84-6"><a href="gráficos-con-ggplot2.html#cb84-6"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> continente) </span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;continente&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="DT6_files/figure-html/unnamed-chunk-56-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="transformaciones-estadísticas" class="section level2">
+<h2><span class="header-section-number">6.6</span> Transformaciones estadísticas</h2>
+<p>Hasta ahora visualizamos los datos tal cual vienen en la base de datos o con ayuda de {dplyr} para transformarlos.
+Pero como adelantamos con <code>geom_smooth()</code>, hay ciertas transformaciones comunes que se pueden hacer usando ggplot2.</p>
+<p>De paso vamos a usar datos incluidos en el paquete <code>datos</code> (muchos paquetes traen bases de datos para probar cosas, ¡este en particular son todas bases de datos en español!) que podés descargar como siempre con <code>install.packages("datos")</code>.
+Los datos <code>diamantes</code> contiene información sobre ~ 54.000 diamantes, incluido el <code>precio</code>, el <code>quilate</code>, el <code>color</code>, la <code>claridad</code> y el <code>corte</code> de cada uno.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="gráficos-con-ggplot2.html#cb87-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb87-2"><a href="gráficos-con-ggplot2.html#cb87-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb87-3"><a href="gráficos-con-ggplot2.html#cb87-3"></a><span class="kw">library</span>(datos)</span>
+<span id="cb87-4"><a href="gráficos-con-ggplot2.html#cb87-4"></a><span class="kw">str</span>(diamantes)</span></code></pre></div>
+<pre><code>## tibble [53,940 × 10] (S3: tbl_df/tbl/data.frame)
+##  $ precio     : int [1:53940] 326 326 327 334 335 336 336 337 337 338 ...
+##  $ quilate    : num [1:53940] 0.23 0.21 0.23 0.29 0.31 0.24 0.24 0.26 0.22 0.23 ...
+##  $ corte      : Ord.factor w/ 5 levels &quot;Regular&quot;&lt;&quot;Bueno&quot;&lt;..: 5 4 2 4 2 3 3 3 1 3 ...
+##  $ color      : Ord.factor w/ 7 levels &quot;D&quot;&lt;&quot;E&quot;&lt;&quot;F&quot;&lt;&quot;G&quot;&lt;..: 2 2 2 6 7 7 6 5 2 5 ...
+##  $ claridad   : Ord.factor w/ 8 levels &quot;I1&quot;&lt;&quot;SI2&quot;&lt;&quot;SI1&quot;&lt;..: 2 3 5 4 2 6 7 3 4 5 ...
+##  $ profundidad: num [1:53940] 61.5 59.8 56.9 62.4 63.3 62.8 62.3 61.9 65.1 59.4 ...
+##  $ tabla      : num [1:53940] 55 61 65 58 58 57 57 55 61 61 ...
+##  $ x          : num [1:53940] 3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
+##  $ y          : num [1:53940] 3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
+##  $ z          : num [1:53940] 2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...</code></pre>
+</div>
+<div id="gráficos-de-frecuencias" class="section level2">
+<h2><span class="header-section-number">6.7</span> Gráficos de frecuencias</h2>
+<p>Este es un gráfico de barras construido usando la función <code>geom_bar()</code>.
+En el eje x muestra el <code>corte</code> de los diamantes y en el eje y la cantidad (<em>count</em> en inglés) de diamantes en cada categoría.
+Pero <code>diamantes</code> no tiene una variable que se llame <code>count</code> y tampoco la generamos nosotros.
+¡Es calculada internamente por {ggplot2}!</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="gráficos-con-ggplot2.html#cb89-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamantes, <span class="kw">aes</span>(<span class="dt">x =</span> corte)) <span class="op">+</span></span>
+<span id="cb89-2"><a href="gráficos-con-ggplot2.html#cb89-2"></a><span class="st">  </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-58-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Cómo el gráfico de barras, también podemos graficar histogramas con <code>geom_histogram()</code> y polígonos de frecuencia con <code>geom_density()</code> para visualizar la cantidad de observaciones que caen en cada categoría (si la variable es discreta como el caso del corte de los diamantes) o rango de valores (para variables continuas).</p>
+<p>Un ejemplo de variable continua es el <code>precio</code> de los diamantes, veamos como se ve un histograma y de paso le cambiamos el color a las barras, pero ojo, solo al borde.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="gráficos-con-ggplot2.html#cb90-1"></a><span class="kw">ggplot</span>(diamantes, <span class="kw">aes</span>(precio)) <span class="op">+</span></span>
+<span id="cb90-2"><a href="gráficos-con-ggplot2.html#cb90-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">color =</span> <span class="st">&quot;darkorange&quot;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="DT6_files/figure-html/unnamed-chunk-59-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="alert alert-info">
+<p><strong>Primer desafío</strong></p>
+<p>¿Notaste el mensaje que devuelve el gráfico?</p>
+<p>`<code>stat_bin()</code> using <code>bins = 30</code>.
+Pick better value with <code>binwidth</code>.`</p>
+<p>Esta geometría tiene dos argumentos importantes <code>bins</code> y <code>binwidth</code>.
+Cambiá el valor de alguno de los dos argumentos y volvé a generar el gráfico, ¿que rol juegan los argumentos?</p>
+<p>También podés revisar la documentación.</p>
+</div>
+<p>Además de contar la cantidad de elementos, {ggplot2} puede calcular muchas otras transformaciones sobre los datos.
+Por ejemplo si quisiéramos el porcentaje o la proporción que le corresponde a cada categoría de <code>corte</code> respecto del total podemos hacerlo <em>mapeando</em> esa transformación <code>prop</code> al eje y con la función <code>stat()</code>.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="gráficos-con-ggplot2.html#cb92-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamantes, <span class="kw">aes</span>(<span class="dt">x =</span> corte)) <span class="op">+</span></span>
+<span id="cb92-2"><a href="gráficos-con-ggplot2.html#cb92-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">stat</span>(prop), <span class="dt">group =</span> <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-60-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Fijate que la variable <code>prop</code> no es una columna de <code>diamantes</code> sino que es el nombre de una variable computada por <code>geom_bar()</code>, por eso hay que rodearla de la función <code>stat()</code>.
+El nombre de las variables computadas por cada geoms está en su documentación (abajo de todo, antes de los ejemplos).</p>
+<p>Ahora podríamos decir que el 40% de los diamantes en la base de datos tienen un corte <em>ideal</em>.
+Además de la función <code>stat()</code> agregamos <code>group = 1</code> y esto no fue sin querer.
+Probá correr el gráfico sin ese argumento.</p>
+<p>Al incluir <code>group = 1</code>, {ggplot2} junta todas las observaciones en un único grupo (con el valor <code>1</code>) y calcula la proporción o el porcentaje que representa cada corte respecto del total de diamantes.
+Si no incluimos eso, {ggplot2} asumirá que cada categoría de corte es un grupo independiente y el cálculo del porcentaje también lo hará por separado.</p>
+<div id="posición" class="section level3">
+<h3><span class="header-section-number">6.7.1</span> Posición</h3>
+<p>Ya vimos que la estética del <code>color</code> sólo modifica el borde de las barras, si quisieras modificar el relleno necesitamos cambiar el <code>fill</code> y al igual que antes podemos <em>mapear</em> una variable a esta estética.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="gráficos-con-ggplot2.html#cb93-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamantes) <span class="op">+</span></span>
+<span id="cb93-2"><a href="gráficos-con-ggplot2.html#cb93-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> corte, <span class="dt">fill =</span> claridad))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-61-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Al <em>mapear</em> una variable distinta, la claridad de los diamantes, podemos visualizar información extra.
+Este “apilamiento” de las barras es la opción de posición por defecto <code>position = "stack"</code>, pero podrías usar una de las otras tres opciones: <code>"identity"</code>, <code>"dodge"</code> o <code>"fill"</code>.</p>
+<ul>
+<li><code>position = "identity"</code> colocará cada barra comenzando en cero quedando todas superpuestas. Para ver esa superposición, debemos hacer que las barras sean ligeramente transparentes configurando el <code>alpha</code> a un valor pequeño.</li>
+</ul>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="gráficos-con-ggplot2.html#cb94-1"></a><span class="kw">ggplot</span>(diamantes) <span class="op">+</span></span>
+<span id="cb94-2"><a href="gráficos-con-ggplot2.html#cb94-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> corte, <span class="dt">fill =</span> claridad), <span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-62-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>position = "fill"</code> apila las barras al igual que <code>position = "stack"</code>, pero transforma los datos para que cada conjunto de barras apiladas tenga la misma altura. Esto hace que sea más fácil comparar proporciones entre grupos.</li>
+</ul>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="gráficos-con-ggplot2.html#cb95-1"></a><span class="kw">ggplot</span>(diamantes) <span class="op">+</span></span>
+<span id="cb95-2"><a href="gráficos-con-ggplot2.html#cb95-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> corte, <span class="dt">fill =</span> claridad), <span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-63-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>position = "dodge"</code> coloca las barras una al lado de la otra. Esto hace que sea más fácil comparar valores individuales.</li>
+</ul>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="gráficos-con-ggplot2.html#cb96-1"></a><span class="kw">ggplot</span>(diamantes) <span class="op">+</span></span>
+<span id="cb96-2"><a href="gráficos-con-ggplot2.html#cb96-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> corte, <span class="dt">fill =</span> claridad), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-64-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="gráficos-de-líneas-suavizas" class="section level2">
+<h2><span class="header-section-number">6.8</span> Gráficos de líneas suavizas</h2>
+<p>Cómo vimos antes, los gráficos de líneas suavizadas (smoothers) ajustan un modelo a los datos y luego grafican las predicciones del modelo.
+Sin entrar en muchos detalles, se puede aplicar distintos modelos y la elección del mismo dependerá de los datos.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="gráficos-con-ggplot2.html#cb97-1"></a><span class="kw">ggplot</span>(diamantes, <span class="kw">aes</span>(quilate, precio)) <span class="op">+</span></span>
+<span id="cb97-2"><a href="gráficos-con-ggplot2.html#cb97-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb97-3"><a href="gráficos-con-ggplot2.html#cb97-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
+<p><img src="DT6_files/figure-html/unnamed-chunk-65-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="gráficos-de-caja" class="section level2">
+<h2><span class="header-section-number">6.9</span> Gráficos de caja</h2>
+<p>Los diagramas de caja, mejor conocidos como boxplots calculan un resumen robusto de la distribución y luego muestran una caja con formato especial.</p>
+<p>La línea central de la caja corresponde a la <strong>mediana</strong> (el valor que toma el dato central) y los extremos de la caja son los <strong>cuartiles 1 y 3</strong>, definiendo así el <strong>rango intercuartil</strong> (IQR).
+Los extremos están definidos como el valor observado que no esté más lejos de <strong>1.5*IQR</strong> de la mediana y los puntos son los las observaciones que se escapan de ese rango, que pueden ser considerados <strong>outliers</strong> o <strong>valores extremos</strong>.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="gráficos-con-ggplot2.html#cb99-1"></a><span class="kw">ggplot</span>(diamantes, <span class="kw">aes</span>(claridad, precio)) <span class="op">+</span></span>
+<span id="cb99-2"><a href="gráficos-con-ggplot2.html#cb99-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-66-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Los boxplot dan muchísima información sobre los datos pero al mismo tiempo <em>esconden</em> la cantidad de observaciones que se usaron para generarlos y en particular cual es la frecuencia a lo largo del eje y.
+Por esta razón también existen <code>geom_violin()</code> y <code>geom_jitter()</code>.</p>
+<div class="alert alert-info">
+<p><strong>Segundo desafío</strong></p>
+<ol style="list-style-type: decimal">
+<li>Volvé a graficar la distribución del precio para cada tipo de claridad pero ahora usando <code>geom_violin()</code> y <code>geom_jitter()</code>.</li>
+<li>¿Qué ventajas y desventajas encuentran respecto de <code>geom_boxplot()</code>?</li>
+</ol>
+</div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="gráficos-con-ggplot2.html#cb100-1"></a><span class="kw">ggplot</span>(diamantes, <span class="kw">aes</span>(claridad, precio)) <span class="op">+</span></span>
+<span id="cb100-2"><a href="gráficos-con-ggplot2.html#cb100-2"></a><span class="st">  </span><span class="kw">geom_violin</span>() </span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-67-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="gráficos-con-ggplot2.html#cb101-1"></a><span class="kw">ggplot</span>(diamantes, <span class="kw">aes</span>(claridad, precio)) <span class="op">+</span></span>
+<span id="cb101-2"><a href="gráficos-con-ggplot2.html#cb101-2"></a><span class="st">  </span><span class="kw">geom_jitter</span>()</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-68-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="alert alert-success">
+<p>Cuando nuestra base de datos es muy grande corremos el riesgo de generar de que los elementos del gráfico estén tan juntos que se solapen y no se vean.
+Esto se conoce como <strong>overplotting</strong>.
+La base de datos <code>diamantes</code> tiene 53940 observaciones y al graficar un punto por cada una, aún si están separados por la claridad, quedan superpuestos.</p>
+<p>Para resolver este problema se suele modificar la estética de los elementos, cambiando el tamaño o <code>size</code> para que ocupen menos lugar y se vean mejor, cambiando la forma o <code>shape</code> por alguna que no tenga relleno y permita ver los elementos que hay atrás o modificando la transparencia o <code>alpha</code> por la misma razón.
+En bases de datos tan grandes como la de diamantes, muchas veces hay que utilizar varios de estos recursos.</p>
+</div>
+</div>
+<div id="graficando-en-múltiples-paneles" class="section level2">
+<h2><span class="header-section-number">6.10</span> Graficando en múltiples paneles</h2>
+<p>Vimos que es posible graficar más de dos variables en un gráfico <em>mapeando</em> una variable al <code>color</code> o por ejemplo el tipo de línea o <code>linetype</code></p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="gráficos-con-ggplot2.html#cb102-1"></a><span class="kw">ggplot</span>(diamantes, <span class="kw">aes</span>(quilate, precio)) <span class="op">+</span></span>
+<span id="cb102-2"><a href="gráficos-con-ggplot2.html#cb102-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> color))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-69-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>En este caso no solo visualizamos la relación entre el precio y el quilate del diamante, también podemos ver que rol juega el color.
+También podríamos haber intentando resolver el problema generando un gráfico por cada color filtrando las observaciones correspondientes.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="gráficos-con-ggplot2.html#cb103-1"></a>diamantes <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb103-2"><a href="gráficos-con-ggplot2.html#cb103-2"></a><span class="st">  </span><span class="kw">filter</span>(color <span class="op">==</span><span class="st"> &quot;D&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb103-3"><a href="gráficos-con-ggplot2.html#cb103-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(quilate, precio)) <span class="op">+</span></span>
+<span id="cb103-4"><a href="gráficos-con-ggplot2.html#cb103-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> color))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Pero sería muchísimo trabajo si tenemos que hacer esto para cada una de las 7 categorías de color.
+La buena noticia es que {ggplot2} tiene un par de funciones justo para resolver este problema:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="gráficos-con-ggplot2.html#cb104-1"></a><span class="kw">ggplot</span>(diamantes, <span class="kw">aes</span>(quilate, precio)) <span class="op">+</span></span>
+<span id="cb104-2"><a href="gráficos-con-ggplot2.html#cb104-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> color)) <span class="op">+</span></span>
+<span id="cb104-3"><a href="gráficos-con-ggplot2.html#cb104-3"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>color)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-71-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Esta nueva capa con <code>facet_wrap()</code> divide al gráfico inicial en 7 paneles o <em>facets</em>, uno por cada color.
+Esta función requiere saber que variable será la responsable de separar los paneles y para eso se usa la <strong>notación de fórmula</strong> de R: <code>~color</code>.
+Esto se lee como generar paneles <em>“en función del color”</em>.</p>
+<p>¿Y si quisiéramos generar paneles a partir de 2 variables?
+Para eso existe <code>facet_grid()</code>.
+En este gráfico generamos paneles viendo la <em>“relación entre el corte y el color”</em> y por ejemplo en el primer panel arriba a la izquierda podremos observar los diamantes que son al mismo tiempo de color D y corte Regular.
+En este caso <em>mapear</em> la variable color al color de los diamantes no parece ser necesario ya que cada columna ya nos permite identificar eso, sin embargo en algunos casos ayuda a leer el gráfico más rápido.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="gráficos-con-ggplot2.html#cb105-1"></a><span class="kw">ggplot</span>(diamantes, <span class="kw">aes</span>(quilate, precio)) <span class="op">+</span></span>
+<span id="cb105-2"><a href="gráficos-con-ggplot2.html#cb105-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> color)) <span class="op">+</span></span>
+<span id="cb105-3"><a href="gráficos-con-ggplot2.html#cb105-3"></a><span class="st">  </span><span class="kw">facet_grid</span>(corte<span class="op">~</span>color)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-72-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="alert alert-info">
+<p><strong>Tercer desafío</strong></p>
+<p>Generá boxplots para analizar como se comporta el <code>precio</code> según la <code>claridad</code> para cada tipo de <code>corte</code> como se ve acá.</p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-73-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="manipulación-de-datos-ordenados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["DT6.pdf", "DT6.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
