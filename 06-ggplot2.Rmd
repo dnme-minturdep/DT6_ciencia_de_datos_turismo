@@ -18,6 +18,8 @@ turistas_destinos <- readr::read_csv(turistas_destinos_url)
 
 turistas_destinos <- turistas_destinos %>% 
   mutate(indice_tiempo = lubridate::ym(indice_tiempo))
+
+paises <- read_csv("datos/paises.csv")
 ```
 
 La función principal de ggplot2 es justamente `ggplot()` que nos permite *iniciar* el gráfico y además definir las características *globales*.
