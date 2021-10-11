@@ -1,5 +1,5 @@
 bookdown::gitbook:
-  split_by: "section"       # Páginas por secciones (en lugar de capítulos)
+  split_by: "chapter"       # Páginas por secciones (en lugar de capítulos)
   split_bib: no   # No agrega bliblio al final de cada capitulo
   includes:
     before_body: assets/hero-image.html
