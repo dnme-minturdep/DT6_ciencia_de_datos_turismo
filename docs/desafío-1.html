@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.8 Gráficos de líneas suavizas | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
+  <title>12.1 Desafío 1 | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
   <meta name="description" content="Ciencia de Datos para el Turismo" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.8 Gráficos de líneas suavizas | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta property="og:title" content="12.1 Desafío 1 | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.8 Gráficos de líneas suavizas | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta name="twitter:title" content="12.1 Desafío 1 | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
   
   <meta name="twitter:description" content="Ciencia de Datos para el Turismo" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gráficos-de-frecuencias.html"/>
-<link rel="next" href="gráficos-de-caja.html"/>
+<link rel="prev" href="desafíos-de-práctica.html"/>
+<link rel="next" href="desafío-2.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -255,23 +255,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="imagenes/cabezal.png">
 </div>
-<div id="gráficos-de-líneas-suavizas" class="section level2">
-<h2><span class="header-section-number">6.8</span> Gráficos de líneas suavizas</h2>
-<p>Cómo vimos antes, los gráficos de líneas suavizadas (smoothers) ajustan un modelo a los datos y luego grafican las predicciones del modelo.
-Sin entrar en muchos detalles, se puede aplicar distintos modelos y la elección del mismo dependerá de los datos.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="gráficos-de-líneas-suavizas.html#cb103-1"></a><span class="kw">ggplot</span>(diamantes, <span class="kw">aes</span>(quilate, precio)) <span class="op">+</span></span>
-<span id="cb103-2"><a href="gráficos-de-líneas-suavizas.html#cb103-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb103-3"><a href="gráficos-de-líneas-suavizas.html#cb103-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>()</span></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
-<p><img src="DT6_files/figure-html/unnamed-chunk-65-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="desafío-1" class="section level2">
+<h2><span class="header-section-number">12.1</span> Desafío 1</h2>
+<p><strong>Capítulos asociados:</strong> Instalación de R y Rstudio, Uso de proyectos, Reportes con RMarkdown y lectura de datos.</p>
+<ol style="list-style-type: decimal">
+<li><p>Seguí las instrucciones que encontrarás en el <a href="">Anexo I</a> para instalar R y Rstudio. Tené en cuenta que la instalación en computadoras con Windows requieren algunos pasos extra.</p></li>
+<li><p>Abrí RStudio y creá tu primer proyecto. Este proyecto te acompañará a lo largo de todos los desafíos y ejercicios de este libro, por lo que va a necesitar un nombre fácil de recordar. Podés revisar las instrucciones <a href="">acá</a>.</p></li>
+<li><p>Ahora es momento de instalar algunos paquetes para poder usar luego. Por ahora instalemos readr, remotes y datos.</p></li>
+</ol>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="desafío-1.html#cb231-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;readr&quot;</span>)</span>
+<span id="cb231-2"><a href="desafío-1.html#cb231-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb231-3"><a href="desafío-1.html#cb231-3"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ciencia_datos/datos&quot;</span>)</span></code></pre></div>
+<p>La tercera linea, si bien distinta a las anteriores, también instala un paqute. La diferencia es que instala el paquete desde un repositorio de GitHub donde suelen estar los paquetes en desarrollo.</p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Creá un nuevo archivo R Markdown que se llame “01-lectura.Rmd” desde File -&gt; New File -&gt; R Markdown. Si bien el archivo puede tener cualquer nombre, siempre que sea informativo, te proponemos nombrarlos como número-nombre para poder ordenarlos y que te resulte más fácil encontrarlo dentro del proyecto. Borrá la plantilla y guardá el archivo. Para guardar File -&gt; Save o click en en el disquette 💾. Es posible que necesites darle permiso a RStudio para que instale nuevos paquetes asociados a R Markdown.</p></li>
+<li><p>Aprovechemos el archivo recien creado para leer datos. Te proponemos que revises el capítulo de [lectura de datos] y sigas las instrucciones para leer los datos.</p></li>
+<li><p>¡Listo! En la próxima sección practicaremos con esos y otros datos.</p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="gráficos-de-frecuencias.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="gráficos-de-caja.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="desafíos-de-práctica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="desafío-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

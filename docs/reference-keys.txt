@@ -62,3 +62,8 @@ escala-de-colores-y-otras
 escalas-de-ejes
 elementos-de-texto
 temas
+desafíos-de-práctica
+desafío-1
+desafío-2
+desafío-3
+desafío-4
