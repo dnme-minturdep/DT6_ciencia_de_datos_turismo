@@ -3,7 +3,7 @@
 ```{r echo=FALSE, results='asis'}
 glosario <- yaml::read_yaml("glosario.yml")
 sink <- lapply(seq_along(glosario), function(i) {
-  cat(paste0(glosario[[i]]$nombre, "<a id=\"", glosario[[i]]$id, "\"></a>", "\n : ", glosario[[i]]$def))
+  cat(paste0(glosario[[i]]$nombre, "<a id=\"", names(glosario)[[i]], "\"></a>", "\n : ", glosario[[i]]$def))
 })
 
 ```

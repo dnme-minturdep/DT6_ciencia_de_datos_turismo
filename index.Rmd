@@ -55,6 +55,10 @@ gdef <- function(texto, clave = NULL) {
   
   def <- glosario[[clave]]$def
   
+  if (is.null(def)) {
+    stop("No se encontró definición para el término ", clave)
+  }
+  
   paste0("[", texto, "](#", clave, " \"", def, "\")")
   
 }
