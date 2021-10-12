@@ -65,4 +65,4 @@ gdef <- function(texto, clave = NULL) {
 
 ```
 
-`r gdef("CRAN")`
+

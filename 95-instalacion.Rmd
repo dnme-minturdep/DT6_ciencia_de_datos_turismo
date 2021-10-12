@@ -47,7 +47,8 @@ c(make = "C:\\rtools40\\usr\\bin\\make.exe")
 
 ### Ubuntu o derivados {-}
 
-Para tener la última versión, tenés que agregar los repositorios de CRAN. Para hacerlo, vas a tener que tener permisos de administrador. 
+Para tener la última versión, tenés que agregar los `r gdef("repositorios", "repositorio")` de `r gdef("CRAN")`.
+Para hacerlo, vas a tener que tener permisos de administrador. 
 Los detalles están en [esta](https://cran.r-project.org/bin/linux/ubuntu/) página, pero el resumen es:
 
 ```bash
