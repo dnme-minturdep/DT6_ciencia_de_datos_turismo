@@ -162,7 +162,7 @@ prueba: `` `r ocupacion` ``
 Este es el texto dirigido a las personas que van a leer el reporte.
 Incluirá una introducción, descripción de los datos y de los resultados; es lo que escribirías en el archivo de Word.
 
-A diferencia de Word, el formato del texto se define usando [markdown](<https://es.wikipedia.org/wiki/Markdown>], que es un lenguaje simple que permite indicar si un texto va en negrita, cursiva, es un título, etc...usando símbolos especiales dentro del texto.
+A diferencia de Word, el formato del texto se define usando [markdown](<https://es.wikipedia.org/wiki/Markdown>), que es un lenguaje simple que permite indicar si un texto va en negrita, cursiva, es un título, etc...usando símbolos especiales dentro del texto.
 
 ## Markdown
 
