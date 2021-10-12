@@ -1,0 +1,10 @@
+# Glosario
+
+```{r include=FALSE}
+library(glosario)
+g <- get_glossary()
+
+```
+
+CRAN <a id="cran"></a>
+ : Repositorio
