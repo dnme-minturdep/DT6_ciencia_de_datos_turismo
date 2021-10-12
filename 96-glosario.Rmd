@@ -1,10 +1,12 @@
 # Glosario
 
-```{r include=FALSE}
-library(glosario)
-g <- get_glossary()
+```{r echo=FALSE, results='asis'}
+glosario <- yaml::read_yaml("glosario.yml")
+sink <- lapply(seq_along(glosario), function(i) {
+  cat(paste0(glosario[[i]]$nombre, "<a id=\"", glosario[[i]]$id, "\"></a>", "\n : ", glosario[[i]]$def))
+})
 
 ```
 
-CRAN <a id="cran"></a>
- : Repositorio
+
+
