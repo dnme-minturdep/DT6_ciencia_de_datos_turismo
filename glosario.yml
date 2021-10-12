@@ -1,4 +1,15 @@
 cran:
   nombre: CRAN
-  def: Un repositorio
+  def: Acrónimo de Comprehensive R Archive Network, un servicio que mantiene un repositorio de paquetes "oficial" de R.
   
+datos-ordenados:
+  nombre: Datos Ordenados
+  def: Datos tabulares que satisfacen tres condiciones que facilitan su limpieza inicial y su posterior exploración y análisis—(1) cada variable conforma una columna, (2) cada observación conforma una fila y (3) cada tipo de unidad de observación conforma una tabla.
+  
+github: 
+  nombre: GitHub
+  def: Una plataforma web que permite guardar repositorios online con control de versiones y colaborar con otras personas.
+  
+repositorio:
+  nombre: Repositorio
+  def: Lugar en el que un sistema de control de versión guarda los archivos que conforman un proyecto y los metadatos que describen su historia.
