@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-caja"><i class="fa fa-check"></i><b>6.9</b> Gráficos de caja</a></li>
 <li class="chapter" data-level="6.10" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#graficando-en-múltiples-paneles"><i class="fa fa-check"></i><b>6.10</b> Graficando en múltiples paneles</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando dplyr y tidyr II</a><ul>
 <li class="chapter" data-level="7.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-ancho-a-largo-con-pivot_longer"><i class="fa fa-check"></i><b>7.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
 <li class="chapter" data-level="7.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-largo-a-ancho-con-pivot_wider"><i class="fa fa-check"></i><b>7.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
 <li class="chapter" data-level="7.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#uniendo-tablas"><i class="fa fa-check"></i><b>7.3</b> Uniendo tablas</a></li>
@@ -274,14 +274,14 @@ Este es un formato que tiene un montón de flexibilidad, pero seguramente no es 
 <p><img src="img/rmd-ejemplo-secciones.png" /></p>
 <p>Ese <code>html_document</code> no es otra cosa que una función de {Rmarkdown} llamada <code>html_document</code>. Como te podrás imaginar, {Rmarkdown} tiene una serie de otras funciones que definen formatos de salida. Los dos que seguramente te van a servir más son <code>pdf_document</code> y <code>word_document</code> que justamente generan PDFs y archivos de Word, respectivamente.</p>
 <p>Para crear un documento de R Markdown que genere un archivo PDF basta con cambiar el <code>output</code> en el encabezado por esto:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb172-1"><a href="reportes-ii.html#cb172-1"></a><span class="pp">---</span></span>
-<span id="cb172-2"><a href="reportes-ii.html#cb172-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> pdf_document</span></span>
-<span id="cb172-3"><a href="reportes-ii.html#cb172-3"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb171-1"><a href="reportes-ii.html#cb171-1"></a><span class="pp">---</span></span>
+<span id="cb171-2"><a href="reportes-ii.html#cb171-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> pdf_document</span></span>
+<span id="cb171-3"><a href="reportes-ii.html#cb171-3"></a><span class="pp">---</span></span></code></pre></div>
 <p>Para que el documento se genere correctamente hace falta instalar LaTeX, que es un sistema de composición de textos. Aunque parezca mentira, la mejor forma de instalar LaTeX para usar R Markdown es instalando el paquete {<a href="https://yihui.org/tinytex/">tinytex</a>} con <code>install.packages("tinytex")</code> y luego correr <code>tinytex::install_tinytex()</code>. Esto va a instalar una versión pequeña de LaTeX en un lugar donde luego {Rmarkdown} lo puede usar. Esta es la forma altamente recomendada para generar PDFs con R Markdown que va a evitarte un montón de dolores de cabeza.</p>
 <p>Análogamente, podés generar un archivo de word cambiando el <code>output</code> así:</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb173-1"><a href="reportes-ii.html#cb173-1"></a><span class="pp">---</span></span>
-<span id="cb173-2"><a href="reportes-ii.html#cb173-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> word_document</span></span>
-<span id="cb173-3"><a href="reportes-ii.html#cb173-3"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb172-1"><a href="reportes-ii.html#cb172-1"></a><span class="pp">---</span></span>
+<span id="cb172-2"><a href="reportes-ii.html#cb172-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> word_document</span></span>
+<span id="cb172-3"><a href="reportes-ii.html#cb172-3"></a><span class="pp">---</span></span></code></pre></div>
 <p>Y ya está. En la gran mayoría de los casos no vas a tener que modificar nada más del código ni el texto.</p>
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
@@ -291,24 +291,24 @@ Este es un formato que tiene un montón de flexibilidad, pero seguramente no es 
 <div id="personalizando-la-salida" class="section level2">
 <h2><span class="header-section-number">10.2</span> Personalizando la salida</h2>
 <p>Cada función de formato viene con sus opciones de personalización que podés acceder leyendo su documentación. Para ver la documentación de <code>html_document</code>, usa este comando:</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="reportes-ii.html#cb174-1"></a>?rmarkdown<span class="op">::</span>html_document</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="reportes-ii.html#cb173-1"></a>?rmarkdown<span class="op">::</span>html_document</span></code></pre></div>
 <p>Vas a ver que tiene un montón de argumentos que modifican la salida. La forma de setear estos argumentos en un documento de R Markdown es, de nuevo, en el encabezado. Cada argumento de la función de salida (<code>html_document</code> en este caso) es un elemento debajo de la función de output.</p>
 <p>Por ejemplo, para que un documento de html tenga una tabla de contenidos hay que setear el argumento <code>toc</code> (de <strong>t</strong>able <strong>o</strong>f <strong>c</strong>ontents) a <code>TRUE</code>. En el encabezado, esto queda así:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb175-1"><a href="reportes-ii.html#cb175-1"></a><span class="pp">---</span></span>
-<span id="cb175-2"><a href="reportes-ii.html#cb175-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb175-3"><a href="reportes-ii.html#cb175-3"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
-<span id="cb175-4"><a href="reportes-ii.html#cb175-4"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span>
-<span id="cb175-5"><a href="reportes-ii.html#cb175-5"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb174-1"><a href="reportes-ii.html#cb174-1"></a><span class="pp">---</span></span>
+<span id="cb174-2"><a href="reportes-ii.html#cb174-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb174-3"><a href="reportes-ii.html#cb174-3"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb174-4"><a href="reportes-ii.html#cb174-4"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span>
+<span id="cb174-5"><a href="reportes-ii.html#cb174-5"></a><span class="pp">---</span></span></code></pre></div>
 <p>Conviene mirar eso con un poco de detenimiento porque requiere “traducir” código de R –cual los argumentos de una función se fijan entre paréntesis y con <code>=</code>– en código de yaml –donde los argumentos de la función son una lista cuyos elementos se definen con <code>:</code>.</p>
 <p>En R lo que vemos como <code>html_document(toc = TRUE)</code> se traduce a yaml como</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb176-1"><a href="reportes-ii.html#cb176-1"></a><span class="fu">html_document</span><span class="kw">:</span></span>
-<span id="cb176-2"><a href="reportes-ii.html#cb176-2"></a><span class="at">  </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb175-1"><a href="reportes-ii.html#cb175-1"></a><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb175-2"><a href="reportes-ii.html#cb175-2"></a><span class="at">  </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span></code></pre></div>
 <p>Si vas a la ayuda de <code>pdf_document</code> vas a ver que también tiene un argumento llamado <code>toc</code>. Algunos argumentos son compartidos, lo cual hace que se aún más fácil generar un mismo reporte en muchos formatos haciendo muy pocos cambios.</p>
 <p>Una forma rápida de hacer tus informes más vistosos es cambiarle el tema visual. <code>html_document</code> permite elegir entre una serie de temas usando el argumento <code>theme</code>. Por ejemplo, poniendo esto en el encabezado, generás un documento HTML con un fondo oscuro</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb177-1"><a href="reportes-ii.html#cb177-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb177-2"><a href="reportes-ii.html#cb177-2"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
-<span id="cb177-3"><a href="reportes-ii.html#cb177-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span>
-<span id="cb177-4"><a href="reportes-ii.html#cb177-4"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> darkly</span></span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb176-1"><a href="reportes-ii.html#cb176-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb176-2"><a href="reportes-ii.html#cb176-2"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb176-3"><a href="reportes-ii.html#cb176-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span>
+<span id="cb176-4"><a href="reportes-ii.html#cb176-4"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> darkly</span></span></code></pre></div>
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
 <p>Andá a la ayuda de <code>html_document</code> y fijate cuáles son los valores válidos para el argumento <code>theme</code>. ¡Probá algunos!</p>
@@ -318,6 +318,18 @@ Este es un formato que tiene un montón de flexibilidad, pero seguramente no es 
 <h2><span class="header-section-number">10.3</span> Reportes parametrizados</h2>
 <p>Es muy común tener que hacer un reporte cuyo resultado dependa de ciertos parámetros.</p>
 <p>Por ejemplo, podrías tener un reporte que analiza la evolución de la expectativa de vida de Argentina con el siguiente código</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="reportes-ii.html#cb177-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb177-2"><a href="reportes-ii.html#cb177-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb177-3"><a href="reportes-ii.html#cb177-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb177-4"><a href="reportes-ii.html#cb177-4"></a></span>
+<span id="cb177-5"><a href="reportes-ii.html#cb177-5"></a>paises &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span>
+<span id="cb177-6"><a href="reportes-ii.html#cb177-6"></a></span>
+<span id="cb177-7"><a href="reportes-ii.html#cb177-7"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb177-8"><a href="reportes-ii.html#cb177-8"></a><span class="st">  </span><span class="kw">filter</span>(pais <span class="op">==</span><span class="st"> &quot;Argentina&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb177-9"><a href="reportes-ii.html#cb177-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(anio, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb177-10"><a href="reportes-ii.html#cb177-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-121-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Si ahora querés hacer el mismo reporte pero para Uruguay, tenés que abrir el archivo y modificar la llamada a <code>filter</code> para quedarte sólo con ese país:</p>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="reportes-ii.html#cb178-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb178-2"><a href="reportes-ii.html#cb178-2"></a><span class="kw">library</span>(dplyr)</span>
 <span id="cb178-3"><a href="reportes-ii.html#cb178-3"></a><span class="kw">library</span>(ggplot2)</span>
@@ -325,43 +337,31 @@ Este es un formato que tiene un montón de flexibilidad, pero seguramente no es 
 <span id="cb178-5"><a href="reportes-ii.html#cb178-5"></a>paises &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span>
 <span id="cb178-6"><a href="reportes-ii.html#cb178-6"></a></span>
 <span id="cb178-7"><a href="reportes-ii.html#cb178-7"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb178-8"><a href="reportes-ii.html#cb178-8"></a><span class="st">  </span><span class="kw">filter</span>(pais <span class="op">==</span><span class="st"> &quot;Argentina&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb178-8"><a href="reportes-ii.html#cb178-8"></a><span class="st">  </span><span class="kw">filter</span>(pais <span class="op">==</span><span class="st"> &quot;Uruguay&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb178-9"><a href="reportes-ii.html#cb178-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(anio, esperanza_de_vida)) <span class="op">+</span></span>
 <span id="cb178-10"><a href="reportes-ii.html#cb178-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-121-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>Si ahora querés hacer el mismo reporte pero para Uruguay, tenés que abrir el archivo y modificar la llamada a <code>filter</code> para quedarte sólo con ese país:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="reportes-ii.html#cb179-1"></a><span class="kw">library</span>(readr)</span>
-<span id="cb179-2"><a href="reportes-ii.html#cb179-2"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb179-3"><a href="reportes-ii.html#cb179-3"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb179-4"><a href="reportes-ii.html#cb179-4"></a></span>
-<span id="cb179-5"><a href="reportes-ii.html#cb179-5"></a>paises &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span>
-<span id="cb179-6"><a href="reportes-ii.html#cb179-6"></a></span>
-<span id="cb179-7"><a href="reportes-ii.html#cb179-7"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb179-8"><a href="reportes-ii.html#cb179-8"></a><span class="st">  </span><span class="kw">filter</span>(pais <span class="op">==</span><span class="st"> &quot;Uruguay&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb179-9"><a href="reportes-ii.html#cb179-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(anio, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb179-10"><a href="reportes-ii.html#cb179-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
 <p>Si el reporte es largo y usa el nombre del país en múltiples lugares cambiar “Argentina” por “Uruguay” puede ser tedioso y propenso a error, ya que te obliga a modificar muchas partes del código. Y si después tenés que hacer el mismo reporte para Chile…</p>
 <p>En estas situaciones podés crear un reporte parametrizado. La idea es que el reporte tiene una serie de parámetros que puede modificar la salida. Es como si el archivo de R Markdown fuera una gran función con sus argumentos!</p>
 <p>Para generar un reporte parametrizado hay que agregar un elemento llamado <code>params</code> al encabezado con la lista de parámetros y sus valores por default.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb180-1"><a href="reportes-ii.html#cb180-1"></a><span class="fu">params</span><span class="kw">:</span></span>
-<span id="cb180-2"><a href="reportes-ii.html#cb180-2"></a><span class="at">  </span><span class="fu">pais</span><span class="kw">:</span><span class="at"> Argentina</span></span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb179-1"><a href="reportes-ii.html#cb179-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb179-2"><a href="reportes-ii.html#cb179-2"></a><span class="at">  </span><span class="fu">pais</span><span class="kw">:</span><span class="at"> Argentina</span></span></code></pre></div>
 <p>Luego, en el código de R vas a tener acceso a una variable llamada <code>params</code> que es una lista que contiene los parámetros y su valor. Para acceder al valor de cada parámetros se usa el operador <code>$</code> de la siguiente manera:</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="reportes-ii.html#cb181-1"></a>params<span class="op">$</span>pais</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="reportes-ii.html#cb180-1"></a>params<span class="op">$</span>pais</span></code></pre></div>
 <pre><code>## [1] &quot;Argentina&quot;</code></pre>
 <p>De esta manera, el código original se puede modificar para usar el valor del país almacenado en <code>params$pais</code></p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="reportes-ii.html#cb183-1"></a><span class="kw">library</span>(readr)</span>
-<span id="cb183-2"><a href="reportes-ii.html#cb183-2"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb183-3"><a href="reportes-ii.html#cb183-3"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb183-4"><a href="reportes-ii.html#cb183-4"></a></span>
-<span id="cb183-5"><a href="reportes-ii.html#cb183-5"></a>paises &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span>
-<span id="cb183-6"><a href="reportes-ii.html#cb183-6"></a></span>
-<span id="cb183-7"><a href="reportes-ii.html#cb183-7"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb183-8"><a href="reportes-ii.html#cb183-8"></a><span class="st">  </span><span class="kw">filter</span>(pais <span class="op">==</span><span class="st"> </span>params<span class="op">$</span>pais) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb183-9"><a href="reportes-ii.html#cb183-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(anio, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb183-10"><a href="reportes-ii.html#cb183-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="reportes-ii.html#cb182-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb182-2"><a href="reportes-ii.html#cb182-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb182-3"><a href="reportes-ii.html#cb182-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb182-4"><a href="reportes-ii.html#cb182-4"></a></span>
+<span id="cb182-5"><a href="reportes-ii.html#cb182-5"></a>paises &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span>
+<span id="cb182-6"><a href="reportes-ii.html#cb182-6"></a></span>
+<span id="cb182-7"><a href="reportes-ii.html#cb182-7"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb182-8"><a href="reportes-ii.html#cb182-8"></a><span class="st">  </span><span class="kw">filter</span>(pais <span class="op">==</span><span class="st"> </span>params<span class="op">$</span>pais) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb182-9"><a href="reportes-ii.html#cb182-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(anio, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb182-10"><a href="reportes-ii.html#cb182-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
 <p>Y ahora el mismo código puede funcionar para distintos países. Para crear reportes distintos para cada país sólo hay que modificar el valor del parámetro en el encabezado:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb184-1"><a href="reportes-ii.html#cb184-1"></a><span class="fu">params</span><span class="kw">:</span></span>
-<span id="cb184-2"><a href="reportes-ii.html#cb184-2"></a><span class="at">  </span><span class="fu">pais</span><span class="kw">:</span><span class="at"> Uruguay</span></span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb183-1"><a href="reportes-ii.html#cb183-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb183-2"><a href="reportes-ii.html#cb183-2"></a><span class="at">  </span><span class="fu">pais</span><span class="kw">:</span><span class="at"> Uruguay</span></span></code></pre></div>
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
 <p>Agregá al menos un parámetro al reporte que venís armando.</p>
@@ -420,7 +420,7 @@ paises &lt;- read_csv(&quot;datos/paises.csv&quot;)</code></pre>
 <p>Esto es útil cuando uno está haciendo trabajo interactivo pero en general no quiere que quede en el reporte. Para que no muestre estos mensajes basta con poner la opción <code>message = FALSE</code></p>
 <p><code>{r message = FALSE}     paises &lt;- read_csv("datos/paises.csv")</code></p>
 <p>En general no pasa nada si ignorás los mensajes. Son cuestiones diagnósticas extra que sirven para que vos, como humano, te enteres de lo que hizo una función. Distinto son las advertencias, o “warnings”. Una advertencia te está diciendo que hay algo “raro” en el código que puede significar que hay algo mal. No llega al nivel de error, que es algo que literalmente “no computa”. Por ejemplo, <code>sqrt</code> tira una advertencia cuando recibe números negativos.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="reportes-ii.html#cb189-1"></a>i &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="reportes-ii.html#cb188-1"></a>i &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## Warning in sqrt(-1): NaNs produced</code></pre>
 <p>Si un chunk tira una advertencia que es esperable pero no querés que aparezca en el reporte, podés ocultarlas con la opción <code>warning = FALSE</code>.</p>
 <p><code>{r warning = FALSE}     i &lt;- sqrt(-1)</code></p>

@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-caja"><i class="fa fa-check"></i><b>6.9</b> Gráficos de caja</a></li>
 <li class="chapter" data-level="6.10" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#graficando-en-múltiples-paneles"><i class="fa fa-check"></i><b>6.10</b> Graficando en múltiples paneles</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando dplyr y tidyr II</a><ul>
 <li class="chapter" data-level="7.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-ancho-a-largo-con-pivot_longer"><i class="fa fa-check"></i><b>7.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
 <li class="chapter" data-level="7.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-largo-a-ancho-con-pivot_wider"><i class="fa fa-check"></i><b>7.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
 <li class="chapter" data-level="7.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#uniendo-tablas"><i class="fa fa-check"></i><b>7.3</b> Uniendo tablas</a></li>
@@ -264,8 +264,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="apariencia-de-gráficos" class="section level1">
 <h1><span class="header-section-number">Capítulo 9</span> Apariencia de gráficos</h1>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="apariencia-de-gráficos.html#cb157-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb157-2"><a href="apariencia-de-gráficos.html#cb157-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="apariencia-de-gráficos.html#cb156-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb156-2"><a href="apariencia-de-gráficos.html#cb156-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
 <div id="escalas" class="section level2">
 <h2><span class="header-section-number">9.1</span> Escalas</h2>
 <p><a href="06-graficos-I.html">Previamente</a> comentamos que el <em>mapeo</em> de una variable en un elemento geométrico, por ejemplo cuando le asignamos distintos colores a los puntos que representan cada continente, usa una <strong>escala</strong> para definir, en este caso, que color le corresponde a cada elemento.</p>
@@ -274,7 +274,7 @@ Para esto, {ggplot2} siempre usa una escala que podemos modificar de acuerdo a n
 <p>Por supuesto, modificar una escala implica sumar una nueva capa al gráfico sumando una nueva función.
 Todas las funciones de escala comienzan con <code>scale</code> (de escala en inglés), el tipo de apariencia que queremos modificar (<code>color</code>, <code>fill</code>, <code>shape</code>, etc) y en muchos casos un nombre o una característica de esa escala.</p>
 <p>Para mostrar como funciona, vamos a utilizar la base de datos de países y con suerte al final de este documento tendremos un gráfico listo para publicar.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="apariencia-de-gráficos.html#cb158-1"></a>paises &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="apariencia-de-gráficos.html#cb157-1"></a>paises &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 1704 Columns: 6</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -283,29 +283,29 @@ Todas las funciones de escala comienzan con <code>scale</code> (de escala en ing
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="apariencia-de-gráficos.html#cb162-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb162-2"><a href="apariencia-de-gráficos.html#cb162-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb162-3"><a href="apariencia-de-gráficos.html#cb162-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb162-4"><a href="apariencia-de-gráficos.html#cb162-4"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="apariencia-de-gráficos.html#cb161-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-2"><a href="apariencia-de-gráficos.html#cb161-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-3"><a href="apariencia-de-gráficos.html#cb161-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb161-4"><a href="apariencia-de-gráficos.html#cb161-4"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-109-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <div id="escala-de-colores-y-otras" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> Escala de colores y otras</h3>
 <p>Lo primero que podemos hacer es cambiar el color de los puntos de a cuerdo al continente.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="apariencia-de-gráficos.html#cb163-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb163-2"><a href="apariencia-de-gráficos.html#cb163-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb163-3"><a href="apariencia-de-gráficos.html#cb163-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb163-4"><a href="apariencia-de-gráficos.html#cb163-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente))</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="apariencia-de-gráficos.html#cb162-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb162-2"><a href="apariencia-de-gráficos.html#cb162-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb162-3"><a href="apariencia-de-gráficos.html#cb162-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb162-4"><a href="apariencia-de-gráficos.html#cb162-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente))</span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-110-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Pero esta escala de colores que usa {ggplot2} por defecto no es de las mejores, de hecho las personas que tienen daltonísmo muy posiblemente no logren diferenciar todos los puntos.
 Una escala o paleta de colores muy usada es <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><strong>viridis</strong></a> que fue creada justamente para resolver este y otros problemas.
 También existe otra gran familia de paletas de colores llamada <a href="https://colorbrewer2.org/"><strong>ColorBrewer</strong></a>.</p>
 <p>Vamos a probar la paleta “Dark2” de ColorBrewer, esta paleta es <em>qualitativa</em> y es justo lo que necesitamos para identificar elementos en categorías como los continentes.
 Cómo estamos modificando el <em>color</em>, la función a usar será <code>scale_color_brewer()</code>:</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="apariencia-de-gráficos.html#cb164-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb164-2"><a href="apariencia-de-gráficos.html#cb164-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb164-3"><a href="apariencia-de-gráficos.html#cb164-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb164-4"><a href="apariencia-de-gráficos.html#cb164-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente)) <span class="op">+</span></span>
-<span id="cb164-5"><a href="apariencia-de-gráficos.html#cb164-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="apariencia-de-gráficos.html#cb163-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb163-2"><a href="apariencia-de-gráficos.html#cb163-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb163-3"><a href="apariencia-de-gráficos.html#cb163-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb163-4"><a href="apariencia-de-gráficos.html#cb163-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente)) <span class="op">+</span></span>
+<span id="cb163-5"><a href="apariencia-de-gráficos.html#cb163-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-111-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Nuestro gráfico va quedando mejor y podemos aprovechar la capacidad de {ggplot2} de <em>mapear</em> variables a los elementos del gráfico y mostrar la población de cada país.</p>
 <div class="alert alert-info">
@@ -314,33 +314,33 @@ Cómo estamos modificando el <em>color</em>, la función a usar será <code>scal
 Para eso tenés que usar <code>scale_color_viridis_d()</code>.
 La “d” del final viene de <em>discrete</em> y se usa para variables discretas o categorías, mientas que si los datos son continuos, se usa “c”.</p>
 </div>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="apariencia-de-gráficos.html#cb165-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb165-2"><a href="apariencia-de-gráficos.html#cb165-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb165-3"><a href="apariencia-de-gráficos.html#cb165-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb165-4"><a href="apariencia-de-gráficos.html#cb165-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion)) <span class="op">+</span></span>
-<span id="cb165-5"><a href="apariencia-de-gráficos.html#cb165-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="apariencia-de-gráficos.html#cb164-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb164-2"><a href="apariencia-de-gráficos.html#cb164-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb164-3"><a href="apariencia-de-gráficos.html#cb164-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb164-4"><a href="apariencia-de-gráficos.html#cb164-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion)) <span class="op">+</span></span>
+<span id="cb164-5"><a href="apariencia-de-gráficos.html#cb164-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-112-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Esto nos da más información, pero al mismo tiempo vemos que los puntos se superponen.
 Vamos a arreglar eso agregando transparencia y de paso modificar el tamaño de los puntos con la escala correspondiente <code>scale_size()</code> y sacar la legenda con <code>guide = NULL</code>.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="apariencia-de-gráficos.html#cb166-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb166-2"><a href="apariencia-de-gráficos.html#cb166-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb166-3"><a href="apariencia-de-gráficos.html#cb166-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb166-4"><a href="apariencia-de-gráficos.html#cb166-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb166-5"><a href="apariencia-de-gráficos.html#cb166-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb166-6"><a href="apariencia-de-gráficos.html#cb166-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="apariencia-de-gráficos.html#cb165-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb165-2"><a href="apariencia-de-gráficos.html#cb165-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb165-3"><a href="apariencia-de-gráficos.html#cb165-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb165-4"><a href="apariencia-de-gráficos.html#cb165-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb165-5"><a href="apariencia-de-gráficos.html#cb165-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb165-6"><a href="apariencia-de-gráficos.html#cb165-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>)</span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-113-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="escalas-de-ejes" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> Escalas de ejes</h3>
 <p>Tal vez notaste que el comportamiento entre la esperanza de vida y el PBI no es lineal, de hecho el PBI varía mucho mientras que la esperanza de vida va apenas entre 40 y 80 y algo.
 Eso puede esta indicando que el PBI tiene un comportamiento <em>logarítmico</em> y si bien podríamos transformar los datos antes de hacer el gráfico, también podemos elegir una escala logarítmica para el eje del gráfico correspondiente.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="apariencia-de-gráficos.html#cb167-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb167-2"><a href="apariencia-de-gráficos.html#cb167-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb167-3"><a href="apariencia-de-gráficos.html#cb167-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb167-4"><a href="apariencia-de-gráficos.html#cb167-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb167-5"><a href="apariencia-de-gráficos.html#cb167-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb167-6"><a href="apariencia-de-gráficos.html#cb167-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb167-7"><a href="apariencia-de-gráficos.html#cb167-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="apariencia-de-gráficos.html#cb166-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb166-2"><a href="apariencia-de-gráficos.html#cb166-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb166-3"><a href="apariencia-de-gráficos.html#cb166-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb166-4"><a href="apariencia-de-gráficos.html#cb166-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb166-5"><a href="apariencia-de-gráficos.html#cb166-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb166-6"><a href="apariencia-de-gráficos.html#cb166-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb166-7"><a href="apariencia-de-gráficos.html#cb166-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>()</span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-114-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>En este caso las escalas que modifican los ejes justamente comienzan con <code>scala_x_</code> o <code>scale_y_</code> según sea el caso.
 Y por supuesto hay una variedad importante de escalas con muchas opciones.</p>
@@ -351,31 +351,31 @@ Y por supuesto hay una variedad importante de escalas con muchas opciones.</p>
 <p>Ya sumamos 3 escalas, pero el gráfico ya se ve muy bien.
 ¿Cómo hacemos si queremos identificar países individuales?
 Por ahora es difícil, pero podríamos agregar etiquetas de texto con el nombre de cada país al lado de cada punto usando <code>geom_text()</code>, y en este caso la apariencia está dada por <code>label</code> o etiqueta:</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="apariencia-de-gráficos.html#cb168-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb168-2"><a href="apariencia-de-gráficos.html#cb168-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb168-3"><a href="apariencia-de-gráficos.html#cb168-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb168-4"><a href="apariencia-de-gráficos.html#cb168-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb168-5"><a href="apariencia-de-gráficos.html#cb168-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb168-6"><a href="apariencia-de-gráficos.html#cb168-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb168-7"><a href="apariencia-de-gráficos.html#cb168-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
-<span id="cb168-8"><a href="apariencia-de-gráficos.html#cb168-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais)) </span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="apariencia-de-gráficos.html#cb167-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb167-2"><a href="apariencia-de-gráficos.html#cb167-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb167-3"><a href="apariencia-de-gráficos.html#cb167-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb167-4"><a href="apariencia-de-gráficos.html#cb167-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb167-5"><a href="apariencia-de-gráficos.html#cb167-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb167-6"><a href="apariencia-de-gráficos.html#cb167-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb167-7"><a href="apariencia-de-gráficos.html#cb167-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
+<span id="cb167-8"><a href="apariencia-de-gráficos.html#cb167-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais)) </span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-115-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Pero nos olvidamos que tenemos casi 200 países, es razonable agregarle etiquetas a todos.
 Pero podríamos querer resaltar algunos, tal vez los de un continente en particular o los que cumplen con la condición de tener las mayores poblaciones del mundo.
 Para eso vamos a generarnos una nueva tabla con los países que queremos resaltar y de paso usarla dentro de <code>geom_text()</code>.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="apariencia-de-gráficos.html#cb169-1"></a>mucha_poblacion &lt;-<span class="st"> </span>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb169-2"><a href="apariencia-de-gráficos.html#cb169-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb169-3"><a href="apariencia-de-gráficos.html#cb169-3"></a><span class="st">  </span><span class="kw">filter</span>(poblacion <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000000000</span>) <span class="co"># Países con más de un billón de habitantes!</span></span>
-<span id="cb169-4"><a href="apariencia-de-gráficos.html#cb169-4"></a></span>
-<span id="cb169-5"><a href="apariencia-de-gráficos.html#cb169-5"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb169-6"><a href="apariencia-de-gráficos.html#cb169-6"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb169-7"><a href="apariencia-de-gráficos.html#cb169-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb169-8"><a href="apariencia-de-gráficos.html#cb169-8"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb169-9"><a href="apariencia-de-gráficos.html#cb169-9"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb169-10"><a href="apariencia-de-gráficos.html#cb169-10"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb169-11"><a href="apariencia-de-gráficos.html#cb169-11"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
-<span id="cb169-12"><a href="apariencia-de-gráficos.html#cb169-12"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), </span>
-<span id="cb169-13"><a href="apariencia-de-gráficos.html#cb169-13"></a>            <span class="dt">data =</span> mucha_poblacion)  <span class="co"># Esta capa usa la tabla mucha_población!</span></span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="apariencia-de-gráficos.html#cb168-1"></a>mucha_poblacion &lt;-<span class="st"> </span>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb168-2"><a href="apariencia-de-gráficos.html#cb168-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb168-3"><a href="apariencia-de-gráficos.html#cb168-3"></a><span class="st">  </span><span class="kw">filter</span>(poblacion <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000000000</span>) <span class="co"># Países con más de un billón de habitantes!</span></span>
+<span id="cb168-4"><a href="apariencia-de-gráficos.html#cb168-4"></a></span>
+<span id="cb168-5"><a href="apariencia-de-gráficos.html#cb168-5"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb168-6"><a href="apariencia-de-gráficos.html#cb168-6"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb168-7"><a href="apariencia-de-gráficos.html#cb168-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb168-8"><a href="apariencia-de-gráficos.html#cb168-8"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb168-9"><a href="apariencia-de-gráficos.html#cb168-9"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb168-10"><a href="apariencia-de-gráficos.html#cb168-10"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb168-11"><a href="apariencia-de-gráficos.html#cb168-11"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
+<span id="cb168-12"><a href="apariencia-de-gráficos.html#cb168-12"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), </span>
+<span id="cb168-13"><a href="apariencia-de-gráficos.html#cb168-13"></a>            <span class="dt">data =</span> mucha_poblacion)  <span class="co"># Esta capa usa la tabla mucha_población!</span></span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-116-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <div class="alert alert-success">
 <p>Del código anterior surge algo muy importante: es posible generar capas en un gráfico usando una data.frame <em>distinto</em> al que usamos para graficar las capas anteriores.
@@ -384,6 +384,30 @@ Esto es útil principalmente para definir etiquetas o resaltar determinadas obse
 </div>
 <p>Veamos ahora una (de varias) maneras agregar o modificar elementos de texto en el gráfico.
 Vamos a usar una nueva función (y una nueva capa!), <code>labs()</code>:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="apariencia-de-gráficos.html#cb169-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb169-2"><a href="apariencia-de-gráficos.html#cb169-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb169-3"><a href="apariencia-de-gráficos.html#cb169-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb169-4"><a href="apariencia-de-gráficos.html#cb169-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb169-5"><a href="apariencia-de-gráficos.html#cb169-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb169-6"><a href="apariencia-de-gráficos.html#cb169-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb169-7"><a href="apariencia-de-gráficos.html#cb169-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
+<span id="cb169-8"><a href="apariencia-de-gráficos.html#cb169-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), <span class="dt">data =</span> mucha_poblacion) <span class="op">+</span></span>
+<span id="cb169-9"><a href="apariencia-de-gráficos.html#cb169-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Paises del mundo&quot;</span>,</span>
+<span id="cb169-10"><a href="apariencia-de-gráficos.html#cb169-10"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;Año 2007&quot;</span>,</span>
+<span id="cb169-11"><a href="apariencia-de-gráficos.html#cb169-11"></a>       <span class="dt">caption =</span> <span class="st">&quot;El tamaño de cada circulo representa la población.&quot;</span>,</span>
+<span id="cb169-12"><a href="apariencia-de-gráficos.html#cb169-12"></a>       <span class="dt">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
+<span id="cb169-13"><a href="apariencia-de-gráficos.html#cb169-13"></a>       <span class="dt">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
+<span id="cb169-14"><a href="apariencia-de-gráficos.html#cb169-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-117-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Agregamos un título, un subtítulo, el epígrafe de la figura (<em>caption</em>) para las aclaraciones y cambiamos el nombre de los ejes para que se vean mejor.
+Pero ademas eliminamos el nombre de la leyenda porque era un poco redundante.</p>
+</div>
+<div id="temas" class="section level2">
+<h2><span class="header-section-number">9.3</span> Temas</h2>
+<p>Nos queda una última cosa por hacer, cambiar la apariencia global del gráfico.
+{ggplot2} tiene muchos <em>temas</em> disponibles y para todos los gustos.
+Pero además hay otros paquetes que extienden las posibilidades, por ejemplo <a href="https://github.com/jrnold/ggthemes">{ggthemes}</a>.</p>
+<p>Por defecto {ggplot2} usa <code>theme_grey()</code>, probemos <code>theme_light()</code>:</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="apariencia-de-gráficos.html#cb170-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb170-2"><a href="apariencia-de-gráficos.html#cb170-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb170-3"><a href="apariencia-de-gráficos.html#cb170-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
@@ -397,32 +421,8 @@ Vamos a usar una nueva función (y una nueva capa!), <code>labs()</code>:</p>
 <span id="cb170-11"><a href="apariencia-de-gráficos.html#cb170-11"></a>       <span class="dt">caption =</span> <span class="st">&quot;El tamaño de cada circulo representa la población.&quot;</span>,</span>
 <span id="cb170-12"><a href="apariencia-de-gráficos.html#cb170-12"></a>       <span class="dt">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
 <span id="cb170-13"><a href="apariencia-de-gráficos.html#cb170-13"></a>       <span class="dt">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
-<span id="cb170-14"><a href="apariencia-de-gráficos.html#cb170-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-117-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>Agregamos un título, un subtítulo, el epígrafe de la figura (<em>caption</em>) para las aclaraciones y cambiamos el nombre de los ejes para que se vean mejor.
-Pero ademas eliminamos el nombre de la leyenda porque era un poco redundante.</p>
-</div>
-<div id="temas" class="section level2">
-<h2><span class="header-section-number">9.3</span> Temas</h2>
-<p>Nos queda una última cosa por hacer, cambiar la apariencia global del gráfico.
-{ggplot2} tiene muchos <em>temas</em> disponibles y para todos los gustos.
-Pero además hay otros paquetes que extienden las posibilidades, por ejemplo <a href="https://github.com/jrnold/ggthemes">{ggthemes}</a>.</p>
-<p>Por defecto {ggplot2} usa <code>theme_grey()</code>, probemos <code>theme_light()</code>:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="apariencia-de-gráficos.html#cb171-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb171-2"><a href="apariencia-de-gráficos.html#cb171-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb171-3"><a href="apariencia-de-gráficos.html#cb171-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb171-4"><a href="apariencia-de-gráficos.html#cb171-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb171-5"><a href="apariencia-de-gráficos.html#cb171-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb171-6"><a href="apariencia-de-gráficos.html#cb171-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb171-7"><a href="apariencia-de-gráficos.html#cb171-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
-<span id="cb171-8"><a href="apariencia-de-gráficos.html#cb171-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), <span class="dt">data =</span> mucha_poblacion) <span class="op">+</span></span>
-<span id="cb171-9"><a href="apariencia-de-gráficos.html#cb171-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Paises del mundo&quot;</span>,</span>
-<span id="cb171-10"><a href="apariencia-de-gráficos.html#cb171-10"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;Año 2007&quot;</span>,</span>
-<span id="cb171-11"><a href="apariencia-de-gráficos.html#cb171-11"></a>       <span class="dt">caption =</span> <span class="st">&quot;El tamaño de cada circulo representa la población.&quot;</span>,</span>
-<span id="cb171-12"><a href="apariencia-de-gráficos.html#cb171-12"></a>       <span class="dt">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
-<span id="cb171-13"><a href="apariencia-de-gráficos.html#cb171-13"></a>       <span class="dt">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
-<span id="cb171-14"><a href="apariencia-de-gráficos.html#cb171-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span></span>
-<span id="cb171-15"><a href="apariencia-de-gráficos.html#cb171-15"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
+<span id="cb170-14"><a href="apariencia-de-gráficos.html#cb170-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span></span>
+<span id="cb170-15"><a href="apariencia-de-gráficos.html#cb170-15"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-118-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <div class="alert alert-info">
 <p>Ahora es tu turno.
