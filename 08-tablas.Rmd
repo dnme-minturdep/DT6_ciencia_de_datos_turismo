@@ -35,7 +35,7 @@ parques_resumen
 ## Tablas simples con `kable`
 
 Existen varios paquetes para mostrar tablas lindas pero una forma simple y sin vueltas es usando la función `kable()` del paquete **knitr**.
-Sólo usando esta función ya devuelve una tabla más que razonable:
+Sólo usando esta función ya devuelve una tabla con un diseño más limpio y acabado:
 
 ```{r}
 library(knitr)
@@ -44,7 +44,7 @@ kable(parques_resumen)
 
 La mayoría de las veces, el nombre de las columnas que queremos mostrar no va a ser igual que el nombre de las columnas en R.
 En la tabla `parques_resumen`, los nombres están en minúscula, sin espacios y sin "caracteres especiales" como "ñ".
-Esto es útil para comunicarse con R, pero no está bueno para comunicados a seres humanos.
+Esto es útil para comunicarse con R, pero no está bueno para comunicarse con otras personas.
 El argumento `col.names` permite especificar el nombre de las columnas para mostrar:
 
 ```{r}
@@ -161,7 +161,7 @@ parques_tabla %>%
 
 Conviene detenerse para mirar un poco con detalle el código.
 La llamada a `column_spec()` está cambiando el formato de la columna 1.
-En particular, va a determinar si el texto es en negrita (bold) o no.
+En particular, va a determinar si el texto está en negrita (bold) o no.
 Y la forma para determinarlo es el vector `parques_resumen$anio == 2021`.
 ¿Qué es ese vector?
 
@@ -169,10 +169,10 @@ Y la forma para determinarlo es el vector `parques_resumen$anio == 2021`.
 parques_resumen$anio == 2021
 ```
 
-Por lo tanto, `column_spec(column = 1, bold = (parques_resumen$anio == 2021))` va a hacer que las tres últimas filass de la columna uno estén en negrita, y las demás no.
+Por lo tanto, `column_spec(column = 1, bold = (parques_resumen$anio == 2021))` va a hacer que las tres últimas filas de la columna uno estén en negrita, y las demás no.
 Luego, `collapse_rows()` colapsa las filas según el año y entonces esas tres últimas filas se transforman en una.
 
-En este caso el órden de las operaciones es importantes. 
+En este caso el órden de las operaciones es importante. 
 Si primero colapsamos y luego damos formato, el resultado no es el esperado:
 
 ```{r}
