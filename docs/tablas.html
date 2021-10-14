@@ -270,13 +270,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tablas" class="section level1">
 <h1><span class="header-section-number">Capítulo 10</span> Tablas</h1>
 <p>Por defecto, la forma en que R Markdown muestra tablas es bastante feo porque muestra lo que verías si corrieras el código en la consola.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="tablas.html#cb187-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb187-2"><a href="tablas.html#cb187-2"></a>paises &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span>
-<span id="cb187-3"><a href="tablas.html#cb187-3"></a>paises_seleccion &lt;-<span class="st"> </span>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb187-4"><a href="tablas.html#cb187-4"></a><span class="st">  </span><span class="kw">filter</span>(pais <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Uruguay&quot;</span>, <span class="st">&quot;Chile&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb187-5"><a href="tablas.html#cb187-5"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2007</span>, <span class="dv">2002</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb187-6"><a href="tablas.html#cb187-6"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>continente)</span>
-<span id="cb187-7"><a href="tablas.html#cb187-7"></a>paises_seleccion</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="tablas.html#cb185-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb185-2"><a href="tablas.html#cb185-2"></a>paises &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span>
+<span id="cb185-3"><a href="tablas.html#cb185-3"></a>paises_seleccion &lt;-<span class="st"> </span>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb185-4"><a href="tablas.html#cb185-4"></a><span class="st">  </span><span class="kw">filter</span>(pais <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Uruguay&quot;</span>, <span class="st">&quot;Chile&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb185-5"><a href="tablas.html#cb185-5"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2007</span>, <span class="dv">2002</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb185-6"><a href="tablas.html#cb185-6"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>continente)</span>
+<span id="cb185-7"><a href="tablas.html#cb185-7"></a>paises_seleccion</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ##   pais       anio esperanza_de_vida poblacion pib_per_capita
 ##   &lt;chr&gt;     &lt;dbl&gt;             &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;
@@ -290,8 +290,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.1</span> Tablas simples con <code>kable</code></h2>
 <p>Existen varios paquetes para mostrar tablas lindas pero una forma simple y sin vueltas es usando la función <code>kable</code> del paquete {knitr}.
 Sólo usando esta función ya devuelve una tabla más que razonable:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="tablas.html#cb189-1"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb189-2"><a href="tablas.html#cb189-2"></a><span class="kw">kable</span>(paises_seleccion)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="tablas.html#cb187-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb187-2"><a href="tablas.html#cb187-2"></a><span class="kw">kable</span>(paises_seleccion)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -351,8 +351,8 @@ Sólo usando esta función ya devuelve una tabla más que razonable:</p>
 En la tabla <code>paises</code>, los nombres están en minúscula, sin espacios y sin “caracteres especiales” como “ñ” o “í”.
 Esto es útil para comunicarse con R, pero no está bueno para comunicados a seres humanos.
 El argumento <code>col.names</code> permite especificar el nombre de las columnas para mostrar:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="tablas.html#cb190-1"></a><span class="kw">kable</span>(paises_seleccion, </span>
-<span id="cb190-2"><a href="tablas.html#cb190-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="tablas.html#cb188-1"></a><span class="kw">kable</span>(paises_seleccion, </span>
+<span id="cb188-2"><a href="tablas.html#cb188-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -410,9 +410,9 @@ El argumento <code>col.names</code> permite especificar el nombre de las columna
 </table>
 <p>En Español, en general usamos la coma para separar los decimales y el punto como separador de miles.
 Para eso, hay que modificar el argumento <code>format.args</code> de esta manera:</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="tablas.html#cb191-1"></a><span class="kw">kable</span>(paises_seleccion, </span>
-<span id="cb191-2"><a href="tablas.html#cb191-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;),</span></span>
-<span id="cb191-3"><a href="tablas.html#cb191-3"></a><span class="st">      format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="tablas.html#cb189-1"></a><span class="kw">kable</span>(paises_seleccion, </span>
+<span id="cb189-2"><a href="tablas.html#cb189-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;),</span></span>
+<span id="cb189-3"><a href="tablas.html#cb189-3"></a><span class="st">      format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -471,10 +471,10 @@ Para eso, hay que modificar el argumento <code>format.args</code> de esta manera
 <p>Uff… pero ponerle el punto de miles a los años queda raro.
 La solución es convertir la columna <code>anio</code> en caracter.
 De esta manera, no se ve afectada por el formato numérico.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="tablas.html#cb192-1"></a>paises_seleccion <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb192-2"><a href="tablas.html#cb192-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb192-3"><a href="tablas.html#cb192-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;),</span></span>
-<span id="cb192-4"><a href="tablas.html#cb192-4"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="tablas.html#cb190-1"></a>paises_seleccion <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb190-2"><a href="tablas.html#cb190-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb190-3"><a href="tablas.html#cb190-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;),</span></span>
+<span id="cb190-4"><a href="tablas.html#cb190-4"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -536,22 +536,22 @@ Para hacer cosas un poco mas complicadas está el paquete {kableExtra}.</p>
 <div id="supertablas-con-kableextra" class="section level2">
 <h2><span class="header-section-number">10.2</span> Supertablas con {kableExtra}</h2>
 <p>El paquete {kableExtra}, como su nombre lo indica, nació para extender el poder de la función <code>kable</code>.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="tablas.html#cb193-1"></a><span class="kw">library</span>(kableExtra)  <span class="co"># instalar con install.packages(&quot;kableExtra&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="tablas.html#cb191-1"></a><span class="kw">library</span>(kableExtra)  <span class="co"># instalar con install.packages(&quot;kableExtra&quot;)</span></span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;kableExtra&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:dplyr&#39;:
 ## 
 ##     group_rows</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="tablas.html#cb196-1"></a>paises_tabla &lt;-<span class="st"> </span>paises_seleccion <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb196-2"><a href="tablas.html#cb196-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb196-3"><a href="tablas.html#cb196-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;),</span></span>
-<span id="cb196-4"><a href="tablas.html#cb196-4"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="tablas.html#cb194-1"></a>paises_tabla &lt;-<span class="st"> </span>paises_seleccion <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb194-2"><a href="tablas.html#cb194-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb194-3"><a href="tablas.html#cb194-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;),</span></span>
+<span id="cb194-4"><a href="tablas.html#cb194-4"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;))</span></span></code></pre></div>
 <p>La primera columna de la tabla de arriba es un tanto redundante.
 Sería mejor agrupar las filas según el país.
 Esto se consigue con la función <code>collapse_rows</code>:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="tablas.html#cb197-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb197-2"><a href="tablas.html#cb197-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb197-3"><a href="tablas.html#cb197-3"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="tablas.html#cb195-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb195-2"><a href="tablas.html#cb195-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb195-3"><a href="tablas.html#cb195-3"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -676,9 +676,9 @@ Por defecto, <code>collapse_rows</code> pone las etiquetas en el centro, pero la
 {kableExtra} permite cambiar el estilo de las tablas muy fácilmente.
 <code>kable_styling</code> es el estilo por defecto, que es igual al que produce <code>kable</code>, pero tiene muchos otros.
 Si viste tablas hechas en LaTeX, quizás este estilo te resulte familiar:</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="tablas.html#cb198-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb198-2"><a href="tablas.html#cb198-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb198-3"><a href="tablas.html#cb198-3"></a><span class="st">  </span><span class="kw">kable_classic_2</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="tablas.html#cb196-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb196-2"><a href="tablas.html#cb196-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb196-3"><a href="tablas.html#cb196-3"></a><span class="st">  </span><span class="kw">kable_classic_2</span>()</span></code></pre></div>
 <table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
 <thead>
 <tr>
@@ -797,10 +797,10 @@ Uruguay
 </table>
 <p>La función <code>column_spec</code> permite cambiar los parámetros gráficos de una o más columnas.
 En este caso cambiamos la primera columna (<code>column = 1</code>) para que las palabras aparezcan italizadas (<code>italic = TRUE</code>):</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="tablas.html#cb199-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb199-2"><a href="tablas.html#cb199-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">italic =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
-<span id="cb199-3"><a href="tablas.html#cb199-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb199-4"><a href="tablas.html#cb199-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="tablas.html#cb197-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb197-2"><a href="tablas.html#cb197-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">italic =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb197-3"><a href="tablas.html#cb197-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb197-4"><a href="tablas.html#cb197-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -919,10 +919,10 @@ Uruguay
 </table>
 <p>Lo notable de <code>column_spec</code> es que en sus argumentos se pueden poner vectores de manera de generar formato condicional.
 Para resaltar con negrita únicamente el país “Argentina”:</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="tablas.html#cb200-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb200-2"><a href="tablas.html#cb200-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> (paises_seleccion<span class="op">$</span>pais <span class="op">==</span><span class="st"> &quot;Argentina&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb200-3"><a href="tablas.html#cb200-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb200-4"><a href="tablas.html#cb200-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="tablas.html#cb198-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb198-2"><a href="tablas.html#cb198-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> (paises_seleccion<span class="op">$</span>pais <span class="op">==</span><span class="st"> &quot;Argentina&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb198-3"><a href="tablas.html#cb198-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb198-4"><a href="tablas.html#cb198-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1044,16 +1044,16 @@ La llamada a <code>column_spec</code> está cambiando el formato de la columna 1
 En particular, va a determinar si el texto es en negrita (bold) o no.
 Y la forma para determinarlo es el vector <code>paises$pais == "Argentina"</code>.
 ¿Qué es ese vector?</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="tablas.html#cb201-1"></a>paises_seleccion<span class="op">$</span>pais <span class="op">==</span><span class="st"> &quot;Argentina&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="tablas.html#cb199-1"></a>paises_seleccion<span class="op">$</span>pais <span class="op">==</span><span class="st"> &quot;Argentina&quot;</span></span></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE FALSE FALSE FALSE</code></pre>
 <p>Por lo tanto, <code>column_spec(column = 1, bold = (paises$pais == "Argentina"))</code> va a hacer que las dos primera filas de la columna uno estén en negrita, y las demás no.
 Luego, <code>collapse_rows</code> colapsa las filas según el país y entonces esas dos primeras filas se transforman en una.</p>
 <p>Esto da un montón de flexibilidad en el estilo del texto.
 Por ejemplo, se puede hacer que el color del texto cambie según el valor usando <code>column_spec</code> y <code>spec_color</code>.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="tablas.html#cb203-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb203-2"><a href="tablas.html#cb203-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">3</span>, <span class="dt">color =</span> <span class="kw">spec_color</span>(paises_seleccion<span class="op">$</span>esperanza_de_vida)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb203-3"><a href="tablas.html#cb203-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb203-4"><a href="tablas.html#cb203-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="tablas.html#cb201-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb201-2"><a href="tablas.html#cb201-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">3</span>, <span class="dt">color =</span> <span class="kw">spec_color</span>(paises_seleccion<span class="op">$</span>esperanza_de_vida)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb201-3"><a href="tablas.html#cb201-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb201-4"><a href="tablas.html#cb201-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1172,16 +1172,16 @@ Uruguay
 </table>
 <p>La función nueva, <code>spec_color</code> genera colores a partir de un vector.
 Podés ver cómo funciona en esta linea:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="tablas.html#cb204-1"></a><span class="kw">spec_color</span>(paises_seleccion<span class="op">$</span>esperanza_de_vida)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="tablas.html#cb202-1"></a><span class="kw">spec_color</span>(paises_seleccion<span class="op">$</span>esperanza_de_vida)</span></code></pre></div>
 <pre><code>## [1] &quot;#440154FF&quot; &quot;#3D4D8AFF&quot; &quot;#90D743FF&quot; &quot;#FDE725FF&quot; &quot;#3D4D8AFF&quot; &quot;#228D8DFF&quot;</code></pre>
 <p>Esos números son representaciones en hexadecimal de los colores que ves en la tabla.
 Podés pasarle cualquier serie de colores, no sólo la creada con <code>spec_color</code>.</p>
 <p>Así como se puede cambiar el estilo de las columnas con <code>column_spec</code>, se puede cambiar el estilo de las filas con <code>row_spec</code>.
 Por ejemplo, se puede resaltar cada 2 líneas con este código:</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="tablas.html#cb206-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb206-2"><a href="tablas.html#cb206-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(paises_seleccion), <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;azure&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb206-3"><a href="tablas.html#cb206-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb206-4"><a href="tablas.html#cb206-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="tablas.html#cb204-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb204-2"><a href="tablas.html#cb204-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(paises_seleccion), <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;azure&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb204-3"><a href="tablas.html#cb204-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb204-4"><a href="tablas.html#cb204-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1302,13 +1302,13 @@ Uruguay
 ¿Qué es eso?
 <code>seq</code> genera una secuencia (de <strong>seq</strong>uence) de números empezando en 2, terminando en la cantidad de filas de <code>paises_seleccion</code> y saltando de a dos.
 En resumen:</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="tablas.html#cb207-1"></a><span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(paises_seleccion), <span class="dt">by =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="tablas.html#cb205-1"></a><span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(paises_seleccion), <span class="dt">by =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 2 4 6</code></pre>
 <p>Como caso especial, se puede usar <code>row = 0</code> en <code>row_spec</code> para cambiar el formato del encabezado.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="tablas.html#cb209-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb209-2"><a href="tablas.html#cb209-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="dv">0</span>, <span class="dt">underline =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb209-3"><a href="tablas.html#cb209-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb209-4"><a href="tablas.html#cb209-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="tablas.html#cb207-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb207-2"><a href="tablas.html#cb207-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="dv">0</span>, <span class="dt">underline =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb207-3"><a href="tablas.html#cb207-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb207-4"><a href="tablas.html#cb207-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>

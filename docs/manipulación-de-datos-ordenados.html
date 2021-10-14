@@ -298,16 +298,16 @@ En base a esos datos, te piden que calcules la proporción promedio de visitante
 </ul>
 </div>
 <p>Para usar dplyr primero hay que instalarlo (esto hay que hacerlo una sola vez por computadora) con el comando:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="manipulación-de-datos-ordenados.html#cb39-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="manipulación-de-datos-ordenados.html#cb37-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <p>y luego cargarlo en memoria con</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="manipulación-de-datos-ordenados.html#cb40-1"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="manipulación-de-datos-ordenados.html#cb38-1"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
 <p>Volvé a cargar los datos de turistas por edad (para un recordatorio, podés ir a <a href="lectura-de-datos-ordenados.html">Lectura de datos ordenados</a>):</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="manipulación-de-datos-ordenados.html#cb41-1"></a><span class="kw">library</span>(readr)</span>
-<span id="cb41-2"><a href="manipulación-de-datos-ordenados.html#cb41-2"></a>turistas_edad &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/turistas_edad.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="manipulación-de-datos-ordenados.html#cb39-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb39-2"><a href="manipulación-de-datos-ordenados.html#cb39-2"></a>turistas_edad &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/turistas_edad.csv&quot;</span>)</span></code></pre></div>
 <div id="seleccionando-columnas-con-select" class="section level2">
 <h2><span class="header-section-number">5.1</span> Seleccionando columnas con <code>select()</code></h2>
 <p>Para quedarse únicamente con las columnas de índice de tiempo y turistas, usá <code>select()</code></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="manipulación-de-datos-ordenados.html#cb42-1"></a><span class="kw">select</span>(turistas_edad, indice_tiempo, turistas)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="manipulación-de-datos-ordenados.html#cb40-1"></a><span class="kw">select</span>(turistas_edad, indice_tiempo, turistas)</span></code></pre></div>
 <pre><code>## # A tibble: 180 × 2
 ##    indice_tiempo turistas
 ##    &lt;chr&gt;            &lt;dbl&gt;
@@ -324,7 +324,7 @@ En base a esos datos, te piden que calcules la proporción promedio de visitante
 ## # … with 170 more rows</code></pre>
 <p>¿Dónde quedó este resultado?
 Si te fijás en la tabla <code>turistas_edad</code>, su formato no cambió, sigue teniendo todas las columnas originales a pesar de nuestro select:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="manipulación-de-datos-ordenados.html#cb44-1"></a>turistas_edad</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="manipulación-de-datos-ordenados.html#cb42-1"></a>turistas_edad</span></code></pre></div>
 <pre><code>## # A tibble: 180 × 3
 ##    indice_tiempo edad          turistas
 ##    &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;
@@ -341,8 +341,8 @@ Si te fijás en la tabla <code>turistas_edad</code>, su formato no cambió, sigu
 ## # … with 170 more rows</code></pre>
 <p><code>select()</code> y el resto de las funciones de dplyr siempre generan una nueva tabla y nunca modifican la tabla original.
 Para guardar la tabla con las dos columnas <code>indice_tiempo</code> y <code>turistas</code> tenés que asignar el resultado a una nueva variable.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="manipulación-de-datos-ordenados.html#cb46-1"></a>turistas_edad2 &lt;-<span class="st"> </span><span class="kw">select</span>(turistas_edad, indice_tiempo, turistas)</span>
-<span id="cb46-2"><a href="manipulación-de-datos-ordenados.html#cb46-2"></a>turistas_edad2</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="manipulación-de-datos-ordenados.html#cb44-1"></a>turistas_edad2 &lt;-<span class="st"> </span><span class="kw">select</span>(turistas_edad, indice_tiempo, turistas)</span>
+<span id="cb44-2"><a href="manipulación-de-datos-ordenados.html#cb44-2"></a>turistas_edad2</span></code></pre></div>
 <pre><code>## # A tibble: 180 × 2
 ##    indice_tiempo turistas
 ##    &lt;chr&gt;            &lt;dbl&gt;
@@ -366,7 +366,7 @@ Para guardar la tabla con las dos columnas <code>indice_tiempo</code> y <code>tu
 <h2><span class="header-section-number">5.2</span> Filtrando filas con <code>filter()</code></h2>
 <p>Ahora podés usar <code>filter()</code> para quedarte con sólo unas filas.
 Por ejemplo, para quedarse con los turistas menores de 14 años</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="manipulación-de-datos-ordenados.html#cb48-1"></a><span class="kw">filter</span>(turistas_edad, edad <span class="op">==</span><span class="st"> &quot;Menores de 14&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="manipulación-de-datos-ordenados.html#cb46-1"></a><span class="kw">filter</span>(turistas_edad, edad <span class="op">==</span><span class="st"> &quot;Menores de 14&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 36 × 3
 ##    indice_tiempo edad          turistas
 ##    &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;
@@ -387,9 +387,9 @@ Para eso se usa el operador ‘pipe’ (<code>%&gt;%</code>).</p>
 <p>El operador ‘pipe’ (<code>%&gt;%</code>) agarra el resultado de una función y se lo pasa a la siguiente.
 Esto permite escribir el código como una cadena de funciones que van operando sobre el resultado de la anterior.</p>
 <p>Las dos operaciones anteriores (seleccionar tres columnas y luego filtrar las filas correspondientes a Argentina) se pueden escribir uno después del otro y sin asignar los resultados intermedios a nuevas variables de esta forma:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="manipulación-de-datos-ordenados.html#cb50-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb50-2"><a href="manipulación-de-datos-ordenados.html#cb50-2"></a><span class="st">  </span><span class="kw">filter</span>(edad <span class="op">==</span><span class="st"> &quot;Menores de 14&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb50-3"><a href="manipulación-de-datos-ordenados.html#cb50-3"></a><span class="st">  </span><span class="kw">select</span>(indice_tiempo, turistas)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="manipulación-de-datos-ordenados.html#cb48-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb48-2"><a href="manipulación-de-datos-ordenados.html#cb48-2"></a><span class="st">  </span><span class="kw">filter</span>(edad <span class="op">==</span><span class="st"> &quot;Menores de 14&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb48-3"><a href="manipulación-de-datos-ordenados.html#cb48-3"></a><span class="st">  </span><span class="kw">select</span>(indice_tiempo, turistas)</span></code></pre></div>
 <pre><code>## # A tibble: 36 × 2
 ##    indice_tiempo turistas
 ##    &lt;chr&gt;            &lt;dbl&gt;
@@ -417,9 +417,9 @@ Luego el data frame resultante de esa operación pasa como el primer argumento d
 <div class="alert alert-info">
 <p><strong>Desafío:</strong></p>
 <p>Completá esta cadena para producir una tabla que contenga los datos de turistas de 60 o más años</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="manipulación-de-datos-ordenados.html#cb52-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-2"><a href="manipulación-de-datos-ordenados.html#cb52-2"></a><span class="st">  </span><span class="kw">filter</span>(edad <span class="op">==</span><span class="st"> </span>___) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-3"><a href="manipulación-de-datos-ordenados.html#cb52-3"></a><span class="st">  </span><span class="kw">select</span>(_____, ____)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="manipulación-de-datos-ordenados.html#cb50-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-2"><a href="manipulación-de-datos-ordenados.html#cb50-2"></a><span class="st">  </span><span class="kw">filter</span>(edad <span class="op">==</span><span class="st"> </span>___) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-3"><a href="manipulación-de-datos-ordenados.html#cb50-3"></a><span class="st">  </span><span class="kw">select</span>(_____, ____)</span></code></pre></div>
 </div>
 </div>
 <div id="agrupando-y-reduciendo-con-group_by-summarise" class="section level2">
@@ -427,8 +427,8 @@ Luego el data frame resultante de esa operación pasa como el primer argumento d
 <p>Si querés calcular la cantidad promedio de turistas por cada rango de edad, tenés que usar el combo <code>group_by() %&gt;% summarise()</code>.
 Es decir, primero agrupar la tabla según la columna <code>edad</code> y luego calcular el promedio de <code>turistas</code> para cada grupo.</p>
 <p>Para agrupar la tabla países según el continente usamos el siguiente código:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="manipulación-de-datos-ordenados.html#cb53-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb53-2"><a href="manipulación-de-datos-ordenados.html#cb53-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) </span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="manipulación-de-datos-ordenados.html#cb51-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb51-2"><a href="manipulación-de-datos-ordenados.html#cb51-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) </span></code></pre></div>
 <pre><code>## # A tibble: 180 × 3
 ## # Groups:   edad [5]
 ##    indice_tiempo edad          turistas
@@ -447,9 +447,9 @@ Es decir, primero agrupar la tabla según la columna <code>edad</code> y luego c
 <p>A primera vista parecería que la función no hizo nada, pero fijate que el resultado ahora dice que tiene grupos (“Groups:”), y nos dice qué columna es la que agrupa los datos (“edad”) y cuántos grupos hay (“5”).
 Las operaciones subsiguientes que le hagamos a esta tabla van a hacerse <em>para cada grupo</em>.</p>
 <p>Para ver esto en acción, usá <code>summarise()</code> para computar el promedio de turistas</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="manipulación-de-datos-ordenados.html#cb55-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb55-2"><a href="manipulación-de-datos-ordenados.html#cb55-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb55-3"><a href="manipulación-de-datos-ordenados.html#cb55-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas))</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="manipulación-de-datos-ordenados.html#cb53-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb53-2"><a href="manipulación-de-datos-ordenados.html#cb53-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb53-3"><a href="manipulación-de-datos-ordenados.html#cb53-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas))</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 2
 ##   edad          turistas_promedio
 ##   &lt;chr&gt;                     &lt;dbl&gt;
@@ -469,10 +469,10 @@ Esta operación es equivalente a esta tabla dinámica en Excel:</p>
 </figure>
 <p><code>group_by()</code> permite agrupar en base a múltiples columnas y <code>summarise()</code> permite generar múltiples columnas de resumen.
 El siguiente código calcula la cantidad promedio de turistas y su desvío estándar para cada continente y cada año.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="manipulación-de-datos-ordenados.html#cb57-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb57-2"><a href="manipulación-de-datos-ordenados.html#cb57-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad, <span class="dt">mes =</span> <span class="kw">substr</span>(indice_tiempo, <span class="dv">6</span>, <span class="dv">7</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb57-3"><a href="manipulación-de-datos-ordenados.html#cb57-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas),</span>
-<span id="cb57-4"><a href="manipulación-de-datos-ordenados.html#cb57-4"></a>            <span class="dt">turistas_desvio =</span> <span class="kw">sd</span>(turistas))</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="manipulación-de-datos-ordenados.html#cb55-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb55-2"><a href="manipulación-de-datos-ordenados.html#cb55-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad, <span class="dt">mes =</span> <span class="kw">substr</span>(indice_tiempo, <span class="dv">6</span>, <span class="dv">7</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb55-3"><a href="manipulación-de-datos-ordenados.html#cb55-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas),</span>
+<span id="cb55-4"><a href="manipulación-de-datos-ordenados.html#cb55-4"></a>            <span class="dt">turistas_desvio =</span> <span class="kw">sd</span>(turistas))</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;edad&#39;. You can override using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 20 × 4
 ## # Groups:   edad [5]
@@ -511,17 +511,17 @@ De esta manera, del texto <code>"2012-01"</code> se queda con “<code>01</code>
 <p>¿Cuál te imaginás que va a ser el resultado del siguiente código?
 ¿Cuántas filas y columnas va a tener?
 (Tratá de pensarlo antes de correrlo.)</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="manipulación-de-datos-ordenados.html#cb60-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb60-2"><a href="manipulación-de-datos-ordenados.html#cb60-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas))</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="manipulación-de-datos-ordenados.html#cb58-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb58-2"><a href="manipulación-de-datos-ordenados.html#cb58-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas))</span></code></pre></div>
 </div>
 <p>El combo <code>group_by() %&gt;% summarise()</code> se puede resumir en esta figura.
 Las filas de una tabla se dividen en grupos, y luego cada grupo se “resume” en una fila en función del estadístico usado.</p>
 <p><img src="img/group_by-summarize.png" /></p>
 <p>Al igual que hicimos “cuentas” usando algunas variables numéricas para obtener información nueva, también podemos utilizar variables categóricas.
 No tiene sentido calcular <code>mean(edad)</code> ya que en esta tabla la edad está codificada como texto, pero tal vez te interese <em>contar</em> la cantidad de observaciones por edad:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="manipulación-de-datos-ordenados.html#cb61-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb61-2"><a href="manipulación-de-datos-ordenados.html#cb61-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb61-3"><a href="manipulación-de-datos-ordenados.html#cb61-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">cantidad =</span> <span class="kw">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="manipulación-de-datos-ordenados.html#cb59-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb59-2"><a href="manipulación-de-datos-ordenados.html#cb59-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb59-3"><a href="manipulación-de-datos-ordenados.html#cb59-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">cantidad =</span> <span class="kw">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 2
 ##   edad          cantidad
 ##   &lt;chr&gt;            &lt;int&gt;
@@ -540,8 +540,8 @@ Sería mucho mejor que esté codificada como una fecha.
 Una forma muy simple de convertir caracteres a fechas es usando el paquete <strong>lubridate</strong>.
 Este paquete tiene un montón de funciones que te facilitan la vida al trabajar con fechas, pero en este caso vamos a usar la función <code>ym()</code> que transforma en fecha cualquier texto que tenga una fecha codificada con el año seguido del mes.</p>
 <p>Para agregar una columna llamada <code>tiempo</code> a la tabla <code>turistas_edad</code>, vamos a usar la función <code>mutate()</code></p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="manipulación-de-datos-ordenados.html#cb63-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb63-2"><a href="manipulación-de-datos-ordenados.html#cb63-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tiempo =</span> lubridate<span class="op">::</span><span class="kw">ym</span>(indice_tiempo))</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="manipulación-de-datos-ordenados.html#cb61-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb61-2"><a href="manipulación-de-datos-ordenados.html#cb61-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tiempo =</span> lubridate<span class="op">::</span><span class="kw">ym</span>(indice_tiempo))</span></code></pre></div>
 <pre><code>## # A tibble: 180 × 4
 ##    indice_tiempo edad          turistas tiempo    
 ##    &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt; &lt;date&gt;    
@@ -573,19 +573,19 @@ Esta es una forma de usar funciones de paquetes sin tener que cargarlos con <cod
 <p><strong>Desafío:</strong></p>
 <p>¿Cuál de estos dos códigos agrega una columna llamada “turistas_promedio” con la cantidad de turistas promedios para cada rango de dades?
 ¿Qué hace el otro?</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="manipulación-de-datos-ordenados.html#cb65-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb65-2"><a href="manipulación-de-datos-ordenados.html#cb65-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb65-3"><a href="manipulación-de-datos-ordenados.html#cb65-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas)) </span>
-<span id="cb65-4"><a href="manipulación-de-datos-ordenados.html#cb65-4"></a></span>
-<span id="cb65-5"><a href="manipulación-de-datos-ordenados.html#cb65-5"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb65-6"><a href="manipulación-de-datos-ordenados.html#cb65-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas)) </span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="manipulación-de-datos-ordenados.html#cb63-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb63-2"><a href="manipulación-de-datos-ordenados.html#cb63-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb63-3"><a href="manipulación-de-datos-ordenados.html#cb63-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas)) </span>
+<span id="cb63-4"><a href="manipulación-de-datos-ordenados.html#cb63-4"></a></span>
+<span id="cb63-5"><a href="manipulación-de-datos-ordenados.html#cb63-5"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb63-6"><a href="manipulación-de-datos-ordenados.html#cb63-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas)) </span></code></pre></div>
 </div>
 <p>En otras palabras, los resultados de <code>mutate()</code>, <code>filter()</code>, <code>summarise()</code> y otras funciones cambian según si la tabla está agrupada o no.
 Como a veces uno se puede olvidar que quedaron grupos, es conveniente usar la función <code>ungroup()</code> una vez que dejás de trabajar con grupos:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="manipulación-de-datos-ordenados.html#cb66-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb66-2"><a href="manipulación-de-datos-ordenados.html#cb66-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb66-3"><a href="manipulación-de-datos-ordenados.html#cb66-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb66-4"><a href="manipulación-de-datos-ordenados.html#cb66-4"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="manipulación-de-datos-ordenados.html#cb64-1"></a>turistas_edad <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb64-2"><a href="manipulación-de-datos-ordenados.html#cb64-2"></a><span class="st">  </span><span class="kw">group_by</span>(edad) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb64-3"><a href="manipulación-de-datos-ordenados.html#cb64-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">turistas_promedio =</span> <span class="kw">mean</span>(turistas)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb64-4"><a href="manipulación-de-datos-ordenados.html#cb64-4"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 180 × 4
 ##    indice_tiempo edad          turistas turistas_promedio
 ##    &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;             &lt;dbl&gt;

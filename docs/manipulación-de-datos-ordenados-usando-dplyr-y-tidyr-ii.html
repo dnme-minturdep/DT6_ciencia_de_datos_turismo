@@ -301,16 +301,16 @@ Dibujá un esquema en papel y lápiz en formato ancho y uno en formato largo.
 </div>
 <p>En esta sección vas a usar el paquete {tidyr} para manipular datos.
 Si no lo tenés instalado, instalalo con el comando:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb106-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb104-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
 <p>(como siempre, recordá que esto hay que hacerlo una única vez)</p>
 <p>Y luego cargá {tidyr} y {dplyr} (que usaste en <a href="05-dplyr-I.html">una sección anterior</a>) con:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb107-1"></a><span class="kw">library</span>(tidyr)</span>
-<span id="cb107-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb107-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb105-1"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb105-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb105-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
 <div id="de-ancho-a-largo-con-pivot_longer" class="section level2">
 <h2><span class="header-section-number">7.1</span> De ancho a largo con <code>pivot_longer()</code></h2>
 <p>En secciones anteriores usaste una versión de los datos de <a href="https://www.gapminder.org/">gapminder</a>.
 Ahora vas a leer los datos en su formato original:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb108-1"></a>paises_ancho &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises_ancho.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb106-1"></a>paises_ancho &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises_ancho.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 142 Columns: 38</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -319,7 +319,7 @@ Ahora vas a leer los datos en su formato original:</p>
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-1"></a>paises_ancho</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb110-1"></a>paises_ancho</span></code></pre></div>
 <pre><code>## # A tibble: 142 × 38
 ##    continente pais                     pib_per_capita_… pib_per_capita_… pib_per_capita_…
 ##    &lt;chr&gt;      &lt;chr&gt;                               &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
@@ -348,14 +348,14 @@ Es una buena forma de no tener que cargar un montón de paquetes innecesarios si
 <p>Esta tabla, increíblemente ancha, es muy difícil de manejar.
 Por ejemplo, es imposible hacer una serie de tiempo de una variable, o calcular el promedio por variable y país; ni hablar de calcular una regresión lineal.</p>
 <p>Para convertirlo en una tabla más larga, se usa <code>pivot_longer()</code> (“longer” es “más largo” en inglés):</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-1"></a>paises_largo &lt;-<span class="st"> </span><span class="kw">pivot_longer</span>(paises_ancho,</span>
-<span id="cb114-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-2"></a>                             <span class="dt">cols =</span> <span class="kw">c</span>(<span class="kw">starts_with</span>(<span class="st">&#39;pob&#39;</span>), </span>
-<span id="cb114-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-3"></a>                                      <span class="kw">starts_with</span>(<span class="st">&#39;esperanza&#39;</span>), </span>
-<span id="cb114-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-4"></a>                                      <span class="kw">starts_with</span>(<span class="st">&#39;pib_per&#39;</span>)),</span>
-<span id="cb114-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-5"></a>                             <span class="dt">names_to =</span> <span class="st">&quot;variable_anio&quot;</span>, </span>
-<span id="cb114-6"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-6"></a>                             <span class="dt">values_to =</span> <span class="st">&quot;valor&quot;</span></span>
-<span id="cb114-7"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-7"></a>)</span>
-<span id="cb114-8"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-8"></a>paises_largo</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-1"></a>paises_largo &lt;-<span class="st"> </span><span class="kw">pivot_longer</span>(paises_ancho,</span>
+<span id="cb112-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-2"></a>                             <span class="dt">cols =</span> <span class="kw">c</span>(<span class="kw">starts_with</span>(<span class="st">&#39;pob&#39;</span>), </span>
+<span id="cb112-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-3"></a>                                      <span class="kw">starts_with</span>(<span class="st">&#39;esperanza&#39;</span>), </span>
+<span id="cb112-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-4"></a>                                      <span class="kw">starts_with</span>(<span class="st">&#39;pib_per&#39;</span>)),</span>
+<span id="cb112-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-5"></a>                             <span class="dt">names_to =</span> <span class="st">&quot;variable_anio&quot;</span>, </span>
+<span id="cb112-6"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-6"></a>                             <span class="dt">values_to =</span> <span class="st">&quot;valor&quot;</span></span>
+<span id="cb112-7"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-7"></a>)</span>
+<span id="cb112-8"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-8"></a>paises_largo</span></code></pre></div>
 <pre><code>## # A tibble: 5,112 × 4
 ##    continente pais    variable_anio     valor
 ##    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt;
@@ -393,10 +393,10 @@ Ahora estos datos están uno arriba de otro en la columna “valor”, pero para
 <p>La columna <code>variable_anio</code> todavía no es muy útil porque contiene 2 datos, la variable (población, expectativa de vida o PBI per cápita) y el año.
 Sería mejor separar esta información en dos columnas llamadas “variable” y “anio”.
 Para eso está la función <code>separate()</code>.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-1"></a><span class="kw">separate</span>(paises_largo, </span>
-<span id="cb116-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-2"></a>         <span class="dt">col =</span> variable_anio, </span>
-<span id="cb116-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-3"></a>         <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;anio&quot;</span>), </span>
-<span id="cb116-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-4"></a>         <span class="dt">sep =</span> <span class="dv">-4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-1"></a><span class="kw">separate</span>(paises_largo, </span>
+<span id="cb114-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-2"></a>         <span class="dt">col =</span> variable_anio, </span>
+<span id="cb114-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-3"></a>         <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;anio&quot;</span>), </span>
+<span id="cb114-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-4"></a>         <span class="dt">sep =</span> <span class="dv">-4</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5,112 × 5
 ##    continente pais    variable   anio     valor
 ##    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt;
@@ -421,11 +421,11 @@ Como el año tiene siempre 4 caracteres, una solución simple es usar <code>sep 
 <p>Habrás notado un problema.
 El texto en la columnas <code>variable</code> todavía tiene un “_” al final.
 Podrías usar <code>mutate()</code> y un poco de funciones de manipulación de caracteres para quitarlo, pero hay una forma un poco más simple y es separando la columna <code>variable_anio</code> en tres, incluyendo una columna con el guión:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-1"></a>paises_largo &lt;-<span class="st"> </span><span class="kw">separate</span>(paises_largo, </span>
-<span id="cb118-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-2"></a>         <span class="dt">col =</span> variable_anio, </span>
-<span id="cb118-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-3"></a>         <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;guion&quot;</span>, <span class="st">&quot;anio&quot;</span>), </span>
-<span id="cb118-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-4"></a>         <span class="dt">sep =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">-4</span>))</span>
-<span id="cb118-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-5"></a>paises_largo</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-1"></a>paises_largo &lt;-<span class="st"> </span><span class="kw">separate</span>(paises_largo, </span>
+<span id="cb116-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-2"></a>         <span class="dt">col =</span> variable_anio, </span>
+<span id="cb116-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-3"></a>         <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;guion&quot;</span>, <span class="st">&quot;anio&quot;</span>), </span>
+<span id="cb116-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-4"></a>         <span class="dt">sep =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">-4</span>))</span>
+<span id="cb116-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-5"></a>paises_largo</span></code></pre></div>
 <pre><code>## # A tibble: 5,112 × 6
 ##    continente pais    variable  guion anio     valor
 ##    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;
@@ -444,10 +444,10 @@ Podrías usar <code>mutate()</code> y un poco de funciones de manipulación de c
 Hay que eliminar la columna <code>guion</code>, que no sirve para nada.
 Pero fijate que debajo de la columna <code>anio</code> dice <code>&lt;chr&gt;</code>; eso significa que el tipo de la columna es caracter, pero los años son números.
 Usando <code>mutate()</code> podés eliminar la columna <code>guion</code> asignándole el valor <code>NULL</code> (nulo) y coercer (recordá <a href="04-lectura-datos.html#Vectores">esta sección</a>) la columna <code>anio</code> a entero usando <code>as.integer()</code>:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-1"></a>paises_largo &lt;-<span class="st"> </span><span class="kw">mutate</span>(paises_largo, </span>
-<span id="cb120-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-2"></a>                       <span class="dt">guion =</span> <span class="ot">NULL</span>,</span>
-<span id="cb120-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-3"></a>                       <span class="dt">anio =</span> <span class="kw">as.integer</span>(anio))</span>
-<span id="cb120-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-4"></a>paises_largo</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-1"></a>paises_largo &lt;-<span class="st"> </span><span class="kw">mutate</span>(paises_largo, </span>
+<span id="cb118-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-2"></a>                       <span class="dt">guion =</span> <span class="ot">NULL</span>,</span>
+<span id="cb118-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-3"></a>                       <span class="dt">anio =</span> <span class="kw">as.integer</span>(anio))</span>
+<span id="cb118-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-4"></a>paises_largo</span></code></pre></div>
 <pre><code>## # A tibble: 5,112 × 5
 ##    continente pais    variable   anio    valor
 ##    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;    &lt;dbl&gt;
@@ -475,8 +475,8 @@ Pero con los datos así no podrías hacer un gráfico de puntos que muestre la r
 Fijate que los valores de la columna <code>valor</code> no tienen todos las mismas unidades, por lo que operar con ese vector podría dar resultados sin sentido.
 Muchas veces es conveniente y natural tener los datos en un formato intermedio en donde hay múltiples columnas con los valores de distintas variables observadas.</p>
 <p>Pasa “ensanchar” una tabla está la función <code>pivot_wider()</code> (“wider” es “más ancha” en inglés) y el código para conseguir este formato intermedio es:</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-1"></a>paises_medio &lt;-<span class="st"> </span><span class="kw">pivot_wider</span>(paises_largo, <span class="dt">names_from =</span> variable, <span class="dt">values_from =</span> valor)</span>
-<span id="cb122-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-2"></a>paises_medio</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-1"></a>paises_medio &lt;-<span class="st"> </span><span class="kw">pivot_wider</span>(paises_largo, <span class="dt">names_from =</span> variable, <span class="dt">values_from =</span> valor)</span>
+<span id="cb120-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-2"></a>paises_medio</span></code></pre></div>
 <pre><code>## # A tibble: 1,704 × 6
 ##    continente pais     anio poblacion esperanza_de_vida pib_per_capita
 ##    &lt;chr&gt;      &lt;chr&gt;   &lt;int&gt;     &lt;dbl&gt;             &lt;dbl&gt;          &lt;dbl&gt;
@@ -496,10 +496,10 @@ El segundo, <code>names_from</code> es la columna cuyos valores únicos van a co
 La columna <code>variable</code> tiene los valores <code>"población"</code>, <code>"esperanza_de_vida"</code> y <code>"pib_per_capita"</code> y entonces la tabla nueva tendrá tres columnas con esos nombres.
 El tercer argumento, <code>values_from</code>, es la columna de la cual sacar los valores.</p>
 <p>Para volver al formato más ancho, basta con agregar más columnas en el argumento <code>names_from</code>:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-1"></a><span class="kw">pivot_wider</span>(paises_largo, </span>
-<span id="cb124-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-2"></a>            <span class="dt">names_from =</span> <span class="kw">c</span>(variable, anio), </span>
-<span id="cb124-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-3"></a>            <span class="dt">names_sep =</span> <span class="st">&quot;_&quot;</span>,</span>
-<span id="cb124-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-4"></a>            <span class="dt">values_from =</span> valor)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-1"></a><span class="kw">pivot_wider</span>(paises_largo, </span>
+<span id="cb122-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-2"></a>            <span class="dt">names_from =</span> <span class="kw">c</span>(variable, anio), </span>
+<span id="cb122-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-3"></a>            <span class="dt">names_sep =</span> <span class="st">&quot;_&quot;</span>,</span>
+<span id="cb122-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-4"></a>            <span class="dt">values_from =</span> valor)</span></code></pre></div>
 <pre><code>## # A tibble: 142 × 38
 ##    continente pais   poblacion_1952 poblacion_1957 poblacion_1962 poblacion_1967
 ##    &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
@@ -556,11 +556,11 @@ Esto significa que eliminará las filas (observaciones) que no coincidan en amba
 </ul>
 <p><img src="img/join_family.png" /></p>
 <p>Ahora vamos a seguir trabajando con las base de datos de <code>paises</code> pero nos vamos a quedar solo con las observaciones del 2007 y de paso unirlo a una nueva base de datos <code>co2</code> que contiene información de la emisión de dióxido de carbono de cada país para ese mismo año.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb126-1"></a>paises_<span class="dv">2007</span> &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb126-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb126-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) </span>
-<span id="cb126-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb126-3"></a></span>
-<span id="cb126-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb126-4"></a>co2_<span class="dv">2007</span> &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/co2_2007.csv&quot;</span>)</span>
-<span id="cb126-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb126-5"></a>co2_<span class="dv">2007</span></span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-1"></a>paises_<span class="dv">2007</span> &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb124-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) </span>
+<span id="cb124-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-3"></a></span>
+<span id="cb124-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-4"></a>co2_<span class="dv">2007</span> &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/co2_2007.csv&quot;</span>)</span>
+<span id="cb124-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-5"></a>co2_<span class="dv">2007</span></span></code></pre></div>
 <pre><code>## # A tibble: 218 × 3
 ##    codigo_iso emision_co2 pais                  
 ##    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;                 
@@ -583,8 +583,8 @@ Esta última columna también está presente en la tabla <code>paises_2007</code
 <li>qué variable o variables (se puede usar más de una!) usar para identificar coincidencias: el argumento <code>by</code>.</li>
 </ul>
 <p>Unamos <code>paises_2007</code> y <code>co2_2007</code> primero con <code>full_join()</code>:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb128-1"></a>paises_co2_<span class="dv">2007</span> &lt;-<span class="st"> </span><span class="kw">full_join</span>(paises_<span class="dv">2007</span>, co2_<span class="dv">2007</span>, <span class="dt">by =</span> <span class="st">&quot;pais&quot;</span>)</span>
-<span id="cb128-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb128-2"></a>paises_co2_<span class="dv">2007</span></span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb126-1"></a>paises_co2_<span class="dv">2007</span> &lt;-<span class="st"> </span><span class="kw">full_join</span>(paises_<span class="dv">2007</span>, co2_<span class="dv">2007</span>, <span class="dt">by =</span> <span class="st">&quot;pais&quot;</span>)</span>
+<span id="cb126-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb126-2"></a>paises_co2_<span class="dv">2007</span></span></code></pre></div>
 <pre><code>## # A tibble: 241 × 8
 ##    pais       continente  anio esperanza_de_vi… poblacion pib_per_capita codigo_iso
 ##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;     
@@ -606,8 +606,8 @@ Esta última columna también está presente en la tabla <code>paises_2007</code
 </ul>
 <p>Esta es la opción más segura si no sabemos si todas las observaciones de una tabla están presente en a otra.</p>
 <p>Si solo nos interesa conservar las filas de la tabla <em>de la izquierda</em>, en este caso <code>paises_2007</code> entonces:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb130-1"></a>paises_co2_<span class="dv">2007</span> &lt;-<span class="st"> </span><span class="kw">left_join</span>(paises_<span class="dv">2007</span>, co2_<span class="dv">2007</span>, <span class="dt">by =</span> <span class="st">&quot;pais&quot;</span>)</span>
-<span id="cb130-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb130-2"></a>paises_co2_<span class="dv">2007</span></span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb128-1"></a>paises_co2_<span class="dv">2007</span> &lt;-<span class="st"> </span><span class="kw">left_join</span>(paises_<span class="dv">2007</span>, co2_<span class="dv">2007</span>, <span class="dt">by =</span> <span class="st">&quot;pais&quot;</span>)</span>
+<span id="cb128-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb128-2"></a>paises_co2_<span class="dv">2007</span></span></code></pre></div>
 <pre><code>## # A tibble: 142 × 8
 ##    pais       continente  anio esperanza_de_vi… poblacion pib_per_capita codigo_iso
 ##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;     
@@ -625,8 +625,8 @@ Esta última columna también está presente en la tabla <code>paises_2007</code
 <p>Ahora esperamos que la tabla resultante tenga la misma cantidad de filas que <code>paises_2007</code> y efectivamente eso ocurre.
 Pero al mismo tiempo varios países en esa tabla no encontraron coincidencia en <code>co2_2007</code> y por esa razón, la columna nueva columna <code>emisiones_co2</code> tiene <code>NA</code>.</p>
 <p>Finalmente, si quisiéramos quedarnos solo con las observaciones que están presentes en ambas tablas usamos <code>inner_join()</code>.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb132-1"></a>paises_co2_<span class="dv">2007</span> &lt;-<span class="st"> </span><span class="kw">inner_join</span>(paises_<span class="dv">2007</span>, co2_<span class="dv">2007</span>, <span class="dt">by =</span> <span class="st">&quot;pais&quot;</span>)</span>
-<span id="cb132-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb132-2"></a>paises_co2_<span class="dv">2007</span></span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb130-1"></a>paises_co2_<span class="dv">2007</span> &lt;-<span class="st"> </span><span class="kw">inner_join</span>(paises_<span class="dv">2007</span>, co2_<span class="dv">2007</span>, <span class="dt">by =</span> <span class="st">&quot;pais&quot;</span>)</span>
+<span id="cb130-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb130-2"></a>paises_co2_<span class="dv">2007</span></span></code></pre></div>
 <pre><code>## # A tibble: 119 × 8
 ##    pais    continente  anio esperanza_de_vi… poblacion pib_per_capita codigo_iso
 ##    &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;     

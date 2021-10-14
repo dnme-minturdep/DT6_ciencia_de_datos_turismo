@@ -318,7 +318,6 @@ Para datos tabulares, la forma más útil es el formato csv, que es un archivo d
 <p>File → Import Dataset → From Text (readr)…</p>
 </div>
 <p>Esto te va abrir una ventana donde podrás elegir el archivo a importar (en este caso el archivo <code>turistas_edad.csv</code> que está dentro de la capeta <code>datos</code> del proyecto) y otros detalles.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="lectura-de-datos-ordenados.html#cb28-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;img/importar-edad-xlsx.png&quot;</span>)</span></code></pre></div>
 <p><img src="img/importar-edad-xlsx.png" title="Diálogo de importar datos de RStudio." alt="Diálogo de importar datos de RStudio." width="100%" style="display: block; margin: auto;" /></p>
 <p>En la pantalla principal vas a poder previsualizar los datos y ver que pinta tienen.
 Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos <code>turistas_edad</code>), si la primera fila contiene los nombres de las columnas (<code>First Row as Names</code>), qué delimitador tienen los datos (en este caso <code>comma</code>, pero podría ser punto y coma u otro), etc…</p>
@@ -326,8 +325,8 @@ Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la va
 Podrías apretar el botón “Import” para leer los datos pero si bien es posible, al mismo tiempo esas líneas de código no se guardan en ningún lado y entonces nuestro trabajo luego no se puede reproducir.
 Por eso, te proponemos que copies ese código, cierres esa ventana con el botón “Cancel”, y pegues el código en el archivo donde estés trabajando.
 Cuando lo ejecutes, se va a generar la variable <code>turistas_edad</code> con los datos.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="lectura-de-datos-ordenados.html#cb29-1"></a><span class="kw">library</span>(readr)</span>
-<span id="cb29-2"><a href="lectura-de-datos-ordenados.html#cb29-2"></a>turistas_edad &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/turistas_edad.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="lectura-de-datos-ordenados.html#cb28-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb28-2"><a href="lectura-de-datos-ordenados.html#cb28-2"></a>turistas_edad &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/turistas_edad.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 180 Columns: 3</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -347,7 +346,7 @@ Una vez que lo tenés, no necesitás abrirla de nuevo.</p>
 </div>
 <p>Todo ese texto naranja/rojo es intimidante pero no te preocupes, es sólo un mensaje que nos informa que los datos se leyeron y qué tipo de dato tiene cada columna.
 Podemos explorar la estructura de la variable <code>turistas_edad</code> usando la función <code>str()</code> (de <em>structure</em> en inglés).</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="lectura-de-datos-ordenados.html#cb33-1"></a><span class="kw">str</span>(turistas_edad)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="lectura-de-datos-ordenados.html#cb32-1"></a><span class="kw">str</span>(turistas_edad)</span></code></pre></div>
 <pre><code>## spec_tbl_df [180 × 3] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ indice_tiempo: chr [1:180] &quot;2012-01&quot; &quot;2012-01&quot; &quot;2012-01&quot; &quot;2012-01&quot; ...
 ##  $ edad         : chr [1:180] &quot;Menores de 14&quot; &quot;14 a 29&quot; &quot;30 a 44&quot; &quot;45 a 59&quot; ...
@@ -371,17 +370,15 @@ En efecto, RStudio provee la misma ayuda para leer este tipo de datos:</p>
 <div class="alert alert-secondary">
 <p>File → Import Dataset → From Excel…</p>
 </div>
-<p><strong>CAMBIAR</strong></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="lectura-de-datos-ordenados.html#cb35-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;img/importar-edad-xlsx.png&quot;</span>)</span></code></pre></div>
 <p><img src="img/importar-edad-xlsx.png" title="Diálogo de importar datos de RStudio." alt="Diálogo de importar datos de RStudio." width="100%" style="display: block; margin: auto;" /></p>
 <p>Notá que entre las opciones de abajo a la izquierda aparecen dos variables importantes.
 Podés seleccionar de qué hoja leer los datos y qué rango usar.
 Esto seguro que te va a ser muy útil para esos archivos de Excel con múltiples tablas en un archivo, o incluso múltiples tablas en cada hoja!</p>
 <p>En este caso turistas_edad.xlsx es un Excel buena onda, y el código para leer los datos es muy simple:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="lectura-de-datos-ordenados.html#cb36-1"></a><span class="kw">library</span>(readxl)</span>
-<span id="cb36-2"><a href="lectura-de-datos-ordenados.html#cb36-2"></a>turistas_edad &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;datos/turistas_edad.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="lectura-de-datos-ordenados.html#cb34-1"></a><span class="kw">library</span>(readxl)</span>
+<span id="cb34-2"><a href="lectura-de-datos-ordenados.html#cb34-2"></a>turistas_edad &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;datos/turistas_edad.xlsx&quot;</span>)</span></code></pre></div>
 <p>Con la función <code>str()</code> podés confirmar que los datos leídos son los mismos que para el csv.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="lectura-de-datos-ordenados.html#cb37-1"></a><span class="kw">str</span>(turistas_edad)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="lectura-de-datos-ordenados.html#cb35-1"></a><span class="kw">str</span>(turistas_edad)</span></code></pre></div>
 <pre><code>## tibble [180 × 3] (S3: tbl_df/tbl/data.frame)
 ##  $ indice_tiempo: chr [1:180] &quot;2012-01&quot; &quot;2012-01&quot; &quot;2012-01&quot; &quot;2012-01&quot; ...
 ##  $ edad         : chr [1:180] &quot;Menores de 14&quot; &quot;14 a 29&quot; &quot;30 a 44&quot; &quot;45 a 59&quot; ...
