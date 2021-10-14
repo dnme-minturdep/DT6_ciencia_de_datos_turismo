@@ -32,6 +32,7 @@
   
 <link rel="prev" href="gráficos-con-ggplot2.html"/>
 <link rel="next" href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -57,18 +57,18 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -88,7 +88,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,83 +138,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="toc-logo"><a href="./"><img src="imagenes/escudo_mintur.png"></a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#documento-técnico-nº6---resumen"><i class="fa fa-check"></i>Documento Técnico Nº6 - Resumen</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a><ul>
+<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#por-qué-r"><i class="fa fa-check"></i><b>1.1</b> ¿Por qué R?</a></li>
-<li class="chapter" data-level="1.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#cómo-decirle-a-r-qué-hacer"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a><ul>
+<li class="chapter" data-level="1.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#cómo-decirle-a-r-qué-hacer"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#orientándose-en-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Orientándose en RStudio</a></li>
 <li class="chapter" data-level="1.2.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#hablando-con-r"><i class="fa fa-check"></i><b>1.2.2</b> Hablando con R</a></li>
 <li class="chapter" data-level="1.2.3" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#extendiendo-r"><i class="fa fa-check"></i><b>1.2.3</b> Extendiendo R</a></li>
 <li class="chapter" data-level="1.2.4" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#buscando-ayuda"><i class="fa fa-check"></i><b>1.2.4</b> Buscando ayuda</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a><ul>
+<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#qué-ventajas-tiene"><i class="fa fa-check"></i><b>2.1</b> ¿Qué ventajas tiene?</a></li>
 <li class="chapter" data-level="2.2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#abrir-un-proyecto"><i class="fa fa-check"></i><b>2.2</b> Abrir un proyecto</a></li>
 <li class="chapter" data-level="2.3" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#cómo-se-organiza"><i class="fa fa-check"></i><b>2.3</b> ¿Cómo se organiza?</a></li>
-<li class="chapter" data-level="2.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#ordenando-aún-más"><i class="fa fa-check"></i><b>2.4</b> Ordenando aún más</a><ul>
+<li class="chapter" data-level="2.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#ordenando-aún-más"><i class="fa fa-check"></i><b>2.4</b> Ordenando aún más</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#borrón-y-cuenta-nueva-todos-los-días"><i class="fa fa-check"></i><b>2.4.1</b> Borrón y cuenta nueva… todos los días!</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#creando-archivos-.rmd"><i class="fa fa-check"></i><b>3.1</b> Creando archivos .Rmd</a></li>
-<li class="chapter" data-level="3.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#estructura-de-un-.rmd"><i class="fa fa-check"></i><b>3.2</b> Estructura de un .Rmd</a><ul>
+<li class="chapter" data-level="3.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#estructura-de-un-.rmd"><i class="fa fa-check"></i><b>3.2</b> Estructura de un .Rmd</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#encabezado"><i class="fa fa-check"></i><b>3.2.1</b> Encabezado</a></li>
 <li class="chapter" data-level="3.2.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#bloques-de-código"><i class="fa fa-check"></i><b>3.2.2</b> Bloques de código</a></li>
 <li class="chapter" data-level="3.2.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#el-texto-propio-del-documento."><i class="fa fa-check"></i><b>3.2.3</b> El texto propio del documento.</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#markdown"><i class="fa fa-check"></i><b>3.3</b> Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a><ul>
+<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#descargando-datos"><i class="fa fa-check"></i><b>4.1</b> Descargando datos</a></li>
 <li class="chapter" data-level="4.2" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#leer-datos-csv"><i class="fa fa-check"></i><b>4.2</b> Leer datos csv</a></li>
 <li class="chapter" data-level="4.3" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#leer-datos-de-excel"><i class="fa fa-check"></i><b>4.3</b> Leer datos de excel</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html"><i class="fa fa-check"></i><b>5</b> Manipulación de datos ordenados</a><ul>
+<li class="chapter" data-level="5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html"><i class="fa fa-check"></i><b>5</b> Manipulación de datos ordenados</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#seleccionando-columnas-con-select"><i class="fa fa-check"></i><b>5.1</b> Seleccionando columnas con <code>select()</code></a></li>
 <li class="chapter" data-level="5.2" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#filtrando-filas-con-filter"><i class="fa fa-check"></i><b>5.2</b> Filtrando filas con <code>filter()</code></a></li>
 <li class="chapter" data-level="5.3" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#agrupando-y-reduciendo-con-group_by-summarise"><i class="fa fa-check"></i><b>5.3</b> Agrupando y reduciendo con <code>group_by() %&gt;% summarise()</code></a></li>
 <li class="chapter" data-level="5.4" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#creando-nuevas-columnas-con-mutate"><i class="fa fa-check"></i><b>5.4</b> Creando nuevas columnas con <code>mutate()</code></a></li>
 <li class="chapter" data-level="5.5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#desagrupando-con-ungroup"><i class="fa fa-check"></i><b>5.5</b> Desagrupando con <code>ungroup()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html"><i class="fa fa-check"></i><b>6</b> Gráficos con ggplot2</a><ul>
+<li class="chapter" data-level="6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html"><i class="fa fa-check"></i><b>6</b> Gráficos con ggplot2</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#primera-capa-el-área-del-gráfico"><i class="fa fa-check"></i><b>6.1</b> Primera capa: el área del gráfico</a></li>
 <li class="chapter" data-level="6.2" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#segunda-capa-geometrías"><i class="fa fa-check"></i><b>6.2</b> Segunda capa: geometrías</a></li>
 <li class="chapter" data-level="6.3" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#mapear-variables-a-elementos"><i class="fa fa-check"></i><b>6.3</b> Mapear variables a elementos</a></li>
 <li class="chapter" data-level="6.4" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#otras-geometrías"><i class="fa fa-check"></i><b>6.4</b> Otras geometrías</a></li>
 <li class="chapter" data-level="6.5" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#relación-entre-variables"><i class="fa fa-check"></i><b>6.5</b> Relación entre variables</a></li>
 <li class="chapter" data-level="6.6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#transformaciones-estadísticas"><i class="fa fa-check"></i><b>6.6</b> Transformaciones estadísticas</a></li>
-<li class="chapter" data-level="6.7" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-frecuencias"><i class="fa fa-check"></i><b>6.7</b> Gráficos de frecuencias</a><ul>
+<li class="chapter" data-level="6.7" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-frecuencias"><i class="fa fa-check"></i><b>6.7</b> Gráficos de frecuencias</a>
+<ul>
 <li class="chapter" data-level="6.7.1" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#posición"><i class="fa fa-check"></i><b>6.7.1</b> Posición</a></li>
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-líneas-suavizas"><i class="fa fa-check"></i><b>6.8</b> Gráficos de líneas suavizas</a></li>
 <li class="chapter" data-level="6.9" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-caja"><i class="fa fa-check"></i><b>6.9</b> Gráficos de caja</a></li>
 <li class="chapter" data-level="6.10" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#graficando-en-múltiples-paneles"><i class="fa fa-check"></i><b>6.10</b> Graficando en múltiples paneles</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-ancho-a-largo-con-pivot_longer"><i class="fa fa-check"></i><b>7.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
 <li class="chapter" data-level="7.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-largo-a-ancho-con-pivot_wider"><i class="fa fa-check"></i><b>7.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
 <li class="chapter" data-level="7.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#uniendo-tablas"><i class="fa fa-check"></i><b>7.3</b> Uniendo tablas</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><i class="fa fa-check"></i><b>8</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
+<li class="chapter" data-level="8" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><i class="fa fa-check"></i><b>8</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#de-ancho-a-largo-con-pivot_longer-1"><i class="fa fa-check"></i><b>8.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
 <li class="chapter" data-level="8.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#de-largo-a-ancho-con-pivot_wider-1"><i class="fa fa-check"></i><b>8.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
 <li class="chapter" data-level="8.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#uniendo-tablas-1"><i class="fa fa-check"></i><b>8.3</b> Uniendo tablas</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="reportes-ii.html"><a href="reportes-ii.html"><i class="fa fa-check"></i><b>9</b> Reportes II</a><ul>
+<li class="chapter" data-level="9" data-path="reportes-ii.html"><a href="reportes-ii.html"><i class="fa fa-check"></i><b>9</b> Reportes II</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="reportes-ii.html"><a href="reportes-ii.html#eligiendo-el-formato-de-salida"><i class="fa fa-check"></i><b>9.1</b> Eligiendo el formato de salida</a></li>
 <li class="chapter" data-level="9.2" data-path="reportes-ii.html"><a href="reportes-ii.html#personalizando-la-salida"><i class="fa fa-check"></i><b>9.2</b> Personalizando la salida</a></li>
 <li class="chapter" data-level="9.3" data-path="reportes-ii.html"><a href="reportes-ii.html#reportes-parametrizados"><i class="fa fa-check"></i><b>9.3</b> Reportes parametrizados</a></li>
 <li class="chapter" data-level="9.4" data-path="reportes-ii.html"><a href="reportes-ii.html#control-de-chunks"><i class="fa fa-check"></i><b>9.4</b> Control de chunks</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>10</b> Tablas</a><ul>
+<li class="chapter" data-level="10" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>10</b> Tablas</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="tablas.html"><a href="tablas.html#tablas-simples-con-kable"><i class="fa fa-check"></i><b>10.1</b> Tablas simples con <code>kable</code></a></li>
 <li class="chapter" data-level="10.2" data-path="tablas.html"><a href="tablas.html#supertablas-con-kableextra"><i class="fa fa-check"></i><b>10.2</b> Supertablas con {kableExtra}</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html"><i class="fa fa-check"></i><b>11</b> Apariencia de gráficos</a><ul>
-<li class="chapter" data-level="11.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas"><i class="fa fa-check"></i><b>11.1</b> Escalas</a><ul>
+<li class="chapter" data-level="11" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html"><i class="fa fa-check"></i><b>11</b> Apariencia de gráficos</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas"><i class="fa fa-check"></i><b>11.1</b> Escalas</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escala-de-colores-y-otras"><i class="fa fa-check"></i><b>11.1.1</b> Escala de colores y otras</a></li>
 <li class="chapter" data-level="11.1.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas-de-ejes"><i class="fa fa-check"></i><b>11.1.2</b> Escalas de ejes</a></li>
 </ul></li>
@@ -222,18 +239,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#temas"><i class="fa fa-check"></i><b>11.3</b> Temas</a></li>
 </ul></li>
 <li class="appendix"><span><b>Apéndice</b></span></li>
-<li class="chapter" data-level="A" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html"><i class="fa fa-check"></i><b>A</b> Desafíos de práctica</a><ul>
+<li class="chapter" data-level="A" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html"><i class="fa fa-check"></i><b>A</b> Desafíos de práctica</a>
+<ul>
 <li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-1"><i class="fa fa-check"></i>Desafío 1</a></li>
 <li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-2"><i class="fa fa-check"></i>Desafío 2</a></li>
 <li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-3"><i class="fa fa-check"></i>Desafío 3</a></li>
 <li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-4"><i class="fa fa-check"></i>Desafío 4</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html"><i class="fa fa-check"></i><b>B</b> Instalando R y RStudio</a><ul>
-<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-r"><i class="fa fa-check"></i>Instalando R</a><ul>
+<li class="chapter" data-level="B" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html"><i class="fa fa-check"></i><b>B</b> Instalando R y RStudio</a>
+<ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-r"><i class="fa fa-check"></i>Instalando R</a>
+<ul>
 <li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#windows"><i class="fa fa-check"></i>Windows</a></li>
 <li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#ubuntu-o-derivados"><i class="fa fa-check"></i>Ubuntu o derivados</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-rstudio"><i class="fa fa-check"></i>Instalando RStudio</a><ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-rstudio"><i class="fa fa-check"></i>Instalando RStudio</a>
+<ul>
 <li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#windows-1"><i class="fa fa-check"></i>Windows</a></li>
 <li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#ubuntu-o-derivados-1"><i class="fa fa-check"></i>Ubuntu o derivados</a></li>
 </ul></li>
@@ -267,18 +288,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="imagenes/cabezal.png">
 </div>
-<div id="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii" class="section level1">
+<div id="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii" class="section level1" number="7">
 <h1><span class="header-section-number">Capítulo 7</span> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</h1>
-<p>En <a href="04-lectura-datos.html#Formatos_de_tablas">la última sección de lectura de datos</a> viste el concepto de datos “anchos” y “largos”.</p>
-<p>Los datos en formato “largo” o “tidy”, son aquellos en los cuales:</p>
+<p>A esta altura del libro vimos varios set de datos, cada uno tiene una pinta un poco distinta y trabajar con ellos presenta distintos desafíos.
+En este capítulo veremos como manipular los datos para organizarlos de distinta manera y que nos sirvan para resolver distintos problemas.</p>
+<p>Pero primero algunas definiciones.</p>
+<p>Cuando hablamos de datos en formato “largo” o “tidy”, nos referimos a aquellos set de datos en los cuales:</p>
 <ul>
 <li>cada fila es una observación</li>
 <li>cada columna es una variable</li>
 </ul>
-<p>En el formato “ancho” es un poco más complejo de definirlo pero la idea general es que:</p>
+<p>Los datos en formato “ancho” pueden ser muy variados y son un poco más complejo de definir pero la idea general es que:</p>
 <ul>
 <li>cada fila es un “item”</li>
 <li>cada columna es una variable</li>
+<li>muchas veces los nombres de las columnas son variables de los datos</li>
 </ul>
 <p><img src="img/largo-ancho.png" /></p>
 <p>Una tabla en formato largo va a tener una cierta cantidad de columnas que cumplen el rol de <em>identificadores</em> y cuya combinación identifican una única observación y una única columna con el valor de la observación.
@@ -286,9 +310,9 @@ En el ejemplo de arriba, <code>pais</code> y <code>anio</code> son las columnas 
 <p>En una tabla ancha, cada observación única se identifica a partir de la intersección de filas y columnas.
 En el ejemplo, los países están en las filas y los años en las columnas.</p>
 <p>En general, el formato ancho es más compacto y legible por humanos mientras que el largo es más fácil de manejar con la computadora.
-Si te fijás en las tablas de arriba, es más fácil comparar los valores entre países y entre años en la tabla ancha.
+Si revisás las tablas de arriba, es más fácil comparar los valores entre países y entre años en la tabla ancha.
 Pero el nombre de las columnas (“1999”, “2000”) en realidad ¡son datos!
-Además este formato se empieza a complicar en cuanto hay más de dos identificadores.</p>
+Además este formato se empieza a complicar en cuanto hay más de dos identificadores como veremos más adelante.</p>
 <p>Un mismo set de datos puede ser representado de forma completamente “larga”, completamente “ancha” o –lo que es más común– en un formato intermedio pero no existe una forma “correcta” de organizar los datos; cada una tiene sus ventajas y desventajas.
 Por esto es que es muy normal que durante un análisis los datos vayan y vuelvan entre distintos formatos dependiendo de los métodos estadísticos que se le aplican.
 Entonces, aprender a transformar datos anchos en largos y viceversa es un habilidad muy útil.</p>
@@ -299,6 +323,7 @@ Entonces, aprender a transformar datos anchos en largos y viceversa es un habili
 Dibujá un esquema en papel y lápiz en formato ancho y uno en formato largo.
 ¿En qué formato es más “natural” esa extensión?</p>
 </div>
+<<<<<<< Updated upstream
 <p>En esta sección vas a usar el paquete {tidyr} para manipular datos.
 Si no lo tenés instalado, instalalo con el comando:</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb104-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
@@ -307,18 +332,34 @@ Si no lo tenés instalado, instalalo con el comando:</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb105-1"></a><span class="kw">library</span>(tidyr)</span>
 <span id="cb105-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb105-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
 <div id="de-ancho-a-largo-con-pivot_longer" class="section level2">
+=======
+<p>En esta sección vas a usar el paquete <strong>tidyr</strong> para manipular datos.
+Si no lo tenés instalado, podés hacer con el comando:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
+<p>Cómo siempre, recordá que esto solo se hace una vez y es recomendable hacerlo desde la consola para que no quede en un chunk de código por accidente.</p>
+<p>Y luego cargá tidyr y dplyr (que usaste en <a href="05-dplyr-I.html">una sección anterior</a>) con:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb105-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<div id="de-ancho-a-largo-con-pivot_longer" class="section level2" number="7.1">
+>>>>>>> Stashed changes
 <h2><span class="header-section-number">7.1</span> De ancho a largo con <code>pivot_longer()</code></h2>
-<p>En secciones anteriores usaste una versión de los datos de <a href="https://www.gapminder.org/">gapminder</a>.
+<p>En secciones anteriores usaste una versión de los datos asociados a parques nacionales.
 Ahora vas a leer los datos en su formato original:</p>
+<<<<<<< Updated upstream
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb106-1"></a>paises_ancho &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises_ancho.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 142 Columns: 38</code></pre>
+=======
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb106-1" aria-hidden="true" tabindex="-1"></a>parques_ancho <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 160 Columns: 22</code></pre>
+>>>>>>> Stashed changes
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr  (2): continente, pais
-## dbl (36): pib_per_capita_1952, pib_per_capita_1957, pib_per_capita_1962, pib...</code></pre>
+## chr  (1): indice_tiempo
+## dbl (21): residentes, no_residentes, total, buenos_aires_residentes, buenos_...</code></pre>
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<<<<<<< Updated upstream
 <div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb110-1"></a>paises_ancho</span></code></pre></div>
 <pre><code>## # A tibble: 142 × 38
 ##    continente pais                     pib_per_capita_… pib_per_capita_… pib_per_capita_…
@@ -340,14 +381,38 @@ Ahora vas a leer los datos en su formato original:</p>
 ## #   pib_per_capita_2002 &lt;dbl&gt;, pib_per_capita_2007 &lt;dbl&gt;,
 ## #   esperanza_de_vida_1952 &lt;dbl&gt;, esperanza_de_vida_1957 &lt;dbl&gt;,
 ## #   esperanza_de_vida_1962 &lt;dbl&gt;, esperanza_de_vida_1967 &lt;dbl&gt;, …</code></pre>
+=======
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb110-1" aria-hidden="true" tabindex="-1"></a>parques_ancho</span></code></pre></div>
+<pre><code>## # A tibble: 160 × 22
+##    indice_tiempo residentes no_residentes  total buenos_aires_residentes
+##    &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;                   &lt;dbl&gt;
+##  1 2008-01           352303        198407 550710                     885
+##  2 2008-02           283145        151809 434953                     624
+##  3 2008-03           172711        148956 321667                       0
+##  4 2008-04            61491         68606 130097                     462
+##  5 2008-05            48787         43751  92538                    1091
+##  6 2008-06            40502         30907  71409                    1126
+##  7 2008-07           134956         60520 195476                    1304
+##  8 2008-08           122110         63082 185192                    2912
+##  9 2008-09           109375         64259 173634                    1394
+## 10 2008-10           148809         94066 242875                    2004
+## # … with 150 more rows, and 17 more variables:
+## #   buenos_aires_no_residentes &lt;dbl&gt;, buenos_aires_total &lt;dbl&gt;,
+## #   cordoba_residentes &lt;dbl&gt;, cordoba_no_residentes &lt;dbl&gt;, cordoba_total &lt;dbl&gt;,
+## #   cuyo_residentes &lt;dbl&gt;, cuyo_no_residentes &lt;dbl&gt;, cuyo_total &lt;dbl&gt;,
+## #   litoral_residentes &lt;dbl&gt;, litoral_no_residentes &lt;dbl&gt;, litoral_total &lt;dbl&gt;,
+## #   norte_residentes &lt;dbl&gt;, norte_no_residentes &lt;dbl&gt;, norte_total &lt;dbl&gt;,
+## #   patagonia_residentes &lt;dbl&gt;, patagonia_no_residentes &lt;dbl&gt;, …</code></pre>
+>>>>>>> Stashed changes
 <div class="alert alert-success">
 <p>¿Notaste que en el código anterior no usaste <code>library(readr)</code> para cargar el paquete y luego leer?
 Con la notación <code>paquete::funcion()</code> podés acceder a las funciones de un paquete sin tener que cargarlo.
 Es una buena forma de no tener que cargar un montón de paquetes innecesarios si vas a correr una única función de un paquete pocas veces.</p>
 </div>
-<p>Esta tabla, increíblemente ancha, es muy difícil de manejar.
-Por ejemplo, es imposible hacer una serie de tiempo de una variable, o calcular el promedio por variable y país; ni hablar de calcular una regresión lineal.</p>
+<p>Esta tabla es bastante ancha y puede ser difícil de manejar.
+Por ejemplo, es complicado hacer series de tiempo de los visitantes de uan región porque la información está distribuida entre varias columnas. Tampoco sería simple hacer cuentas por regiones o por tipo de residente con este formato de tabla.</p>
 <p>Para convertirlo en una tabla más larga, se usa <code>pivot_longer()</code> (“longer” es “más largo” en inglés):</p>
+<<<<<<< Updated upstream
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-1"></a>paises_largo &lt;-<span class="st"> </span><span class="kw">pivot_longer</span>(paises_ancho,</span>
 <span id="cb112-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-2"></a>                             <span class="dt">cols =</span> <span class="kw">c</span>(<span class="kw">starts_with</span>(<span class="st">&#39;pob&#39;</span>), </span>
 <span id="cb112-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-3"></a>                                      <span class="kw">starts_with</span>(<span class="st">&#39;esperanza&#39;</span>), </span>
@@ -371,28 +436,51 @@ Por ejemplo, es imposible hacer una serie de tiempo de una variable, o calcular 
 ## 10 Africa     Algeria poblacion_1997 29072015
 ## # … with 5,102 more rows</code></pre>
 <p>El primer argumento de<code>pivot_longer()</code> es la tabla que va a modificar: <code>paises_ancho</code>.
+=======
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-1" aria-hidden="true" tabindex="-1"></a>parques_largo <span class="ot">&lt;-</span> parques_ancho <span class="sc">%&gt;%</span> </span>
+<span id="cb112-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;indice_tiempo&quot;</span>, <span class="st">&quot;residentes&quot;</span>, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;total&quot;</span>),</span>
+<span id="cb112-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;region_visitante&quot;</span>,</span>
+<span id="cb112-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>)</span>
+<span id="cb112-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb112-5" aria-hidden="true" tabindex="-1"></a>parques_largo</span></code></pre></div>
+<pre><code>## # A tibble: 2,880 × 6
+##    indice_tiempo residentes no_residentes  total region_visitante          valor
+##    &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;
+##  1 2008-01           352303        198407 550710 buenos_aires_residentes     885
+##  2 2008-01           352303        198407 550710 buenos_aires_no_residen…      0
+##  3 2008-01           352303        198407 550710 buenos_aires_total          885
+##  4 2008-01           352303        198407 550710 cordoba_residentes          717
+##  5 2008-01           352303        198407 550710 cordoba_no_residentes       145
+##  6 2008-01           352303        198407 550710 cordoba_total               862
+##  7 2008-01           352303        198407 550710 cuyo_residentes            4965
+##  8 2008-01           352303        198407 550710 cuyo_no_residentes          179
+##  9 2008-01           352303        198407 550710 cuyo_total                 5144
+## 10 2008-01           352303        198407 550710 litoral_residentes       111408
+## # … with 2,870 more rows</code></pre>
+<p>El primer argumento de<code>pivot_longer()</code> es la tabla que va a modificar: <code>parques_ancho</code>.
+>>>>>>> Stashed changes
 El segundo argumento se llama <code>cols</code> y es un vector con las columnas que tienen los valores a “alargar”.
-Podría ser un vector escrito a mano (algo como <code>c("pib_per_capita_1952", "pib_per_capita_1957"...)</code>) pero con más de 30 columnas, escribir todo eso sería tedioso y probablemente estaría lleno de errores.
-Por eso {tidyr} provee funciones de ayuda para seleccionar columnas en base a patrones.
-El código de arriba usa <code>starts_with()</code> que, como su nombre en inglés lo indica, selecciona las columnas que <em>empiezan con</em> una determinada cadena de caracteres.
-El vector <code>c(starts_with('pob'), starts_with('esperanza'), starts_with('pib_per'))</code> le dice a <code>pivot_longer()</code> que seleccione las columnas que empieza con “pob”, las que empiezan con “esperanza” y las que empiezan con “pib_per”.</p>
+Podría ser un vector escrito a mano (algo como <code>c("buenos_aires_residentes", "buenos_aires_no_residentes"...)</code>) pero con más de 20 columnas, escribir todo eso sería tedioso y probablemente estaría lleno de errores.
+Por eso tidyr provee funciones de ayuda para seleccionar columnas en base a patrones.
+Po ejemplo <code>starts_with()</code> que, como su nombre en inglés lo indica, selecciona las columnas que <em>empiezan con</em> una determinada cadena de caracteres.
+en este caso le decimos que queremos todas las columnas <em>menos</em> las que están mencionadas. Por eso hay un “-” antes del vector de columnas. Entonces, el vector <code>-c("indice_tiempo", "residentes", "no_residentes", "total")</code> le dice a <code>pivot_longer()</code> que seleccione todas las columnas menos las que están mencionadas.</p>
 <div class="alert alert-success">
 <p>Estas funciones accesorias para seleccionar muchas funciones se llaman “tidyselect”.
 Si querés leer más detalles de las distintas formas que podés seleccionar variables leé la documentación usando <code>?tidyselect::language</code>.</p>
 </div>
 <p>El tercer y cuarto argumento son los nombres de las columnas de “nombre” y de “valor” que va a tener la nueva tabla.
-Como la nueva columna de identificación tiene los datos de la variable y el año a medir, “variable_anio” es un buen nombre.
+Como la nueva columna de identificación tiene los datos de la región y el tipo de visitante, <code>region_visitante</code> es un buen nombre.
 Y la columna de valor va a tener… bueno, el valor.</p>
 <p>Tomate un momento para visualizar lo que acaba de pasar.
 La tabla ancha tenía un montón de columnas con distintos datos.
-Ahora estos datos están uno arriba de otro en la columna “valor”, pero para identificar el nombre de la columna de la cual vinieron, se agrega la columna “variable_anio”.</p>
+Ahora estos datos están uno arriba de otro en la columna “valor”, pero para identificar el nombre de la columna de la cual vinieron, se agrega la columna “region_visitante”.</p>
 <div class="figure">
 <img src="img/ancho-a-largo.png" alt="" />
 <p class="caption">Proceso de largo a ancho</p>
 </div>
-<p>La columna <code>variable_anio</code> todavía no es muy útil porque contiene 2 datos, la variable (población, expectativa de vida o PBI per cápita) y el año.
-Sería mejor separar esta información en dos columnas llamadas “variable” y “anio”.
+<p>La columna <code>region_visitante</code> todavía no es muy útil porque contiene 2 datos, la región (Buenos Aires, Cuyo, Litoral, etc.) y el tipo de visitante y la suma de ambos.
+Sería mejor separar esta información en dos columnas llamadas “region” y “resinte”.
 Para eso está la función <code>separate()</code>.</p>
+<<<<<<< Updated upstream
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-1"></a><span class="kw">separate</span>(paises_largo, </span>
 <span id="cb114-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-2"></a>         <span class="dt">col =</span> variable_anio, </span>
 <span id="cb114-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-3"></a>         <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;anio&quot;</span>), </span>
@@ -411,11 +499,36 @@ Para eso está la función <code>separate()</code>.</p>
 ##  9 Africa     Algeria poblacion_ 1992  26298373
 ## 10 Africa     Algeria poblacion_ 1997  29072015
 ## # … with 5,102 more rows</code></pre>
+=======
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-1" aria-hidden="true" tabindex="-1"></a>parques_largo <span class="ot">&lt;-</span> parques_largo <span class="sc">%&gt;%</span> </span>
+<span id="cb114-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region_visitante =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(region_visitante, <span class="st">&quot;buenos_aires*&quot;</span>, <span class="st">&quot;buenos-aires&quot;</span>),</span>
+<span id="cb114-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_visitante =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(region_visitante, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;noresidentes&quot;</span>)) </span>
+<span id="cb114-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-5" aria-hidden="true" tabindex="-1"></a><span class="fu">separate</span>(parques_largo, </span>
+<span id="cb114-6"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-6" aria-hidden="true" tabindex="-1"></a>         region_visitante, </span>
+<span id="cb114-7"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span>, <span class="st">&quot;tipo_visitante&quot;</span>), </span>
+<span id="cb114-8"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb114-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 2,880 × 7
+##    indice_tiempo residentes no_residentes  total region    tipo_visitante  valor
+##    &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;
+##  1 2008-01           352303        198407 550710 buenos-a… residentes        885
+##  2 2008-01           352303        198407 550710 buenos-a… noresidentes        0
+##  3 2008-01           352303        198407 550710 buenos-a… total             885
+##  4 2008-01           352303        198407 550710 cordoba   residentes        717
+##  5 2008-01           352303        198407 550710 cordoba   noresidentes      145
+##  6 2008-01           352303        198407 550710 cordoba   total             862
+##  7 2008-01           352303        198407 550710 cuyo      residentes       4965
+##  8 2008-01           352303        198407 550710 cuyo      noresidentes      179
+##  9 2008-01           352303        198407 550710 cuyo      total            5144
+## 10 2008-01           352303        198407 550710 litoral   residentes     111408
+## # … with 2,870 more rows</code></pre>
+>>>>>>> Stashed changes
 <p>El primer argumento, como siempre, es la tabla a procesar.
 El segundo, <code>col</code>, es la columna a separar en dos (o más) columnas nuevas.
 El tercero, <code>into</code> es el nombre de las nuevas columnas que <code>separate()</code> va a crear.
 El último argumento es <code>sep</code> que define cómo realizar la separación.
 Por defecto, <code>sep</code> es una <a href="https://es.wikipedia.org/wiki/Expresi%C3%B3n_regular">expresión regular</a> que captura cualquier caracter no alfanumérico.
+<<<<<<< Updated upstream
 En el caso de <code>variable_anio</code> no sirve, porque para valores como <code>"esperanza_de_vida_1952"</code>, separaría en <code>"esperanza"</code>, <code>"de"</code>, <code>"vida"</code> y <code>"1952"</code>.
 Como el año tiene siempre 4 caracteres, una solución simple es usar <code>sep = -4</code>, que significa que la separación es 4 caracteres contando desde el final.</p>
 <p>Habrás notado un problema.
@@ -462,19 +575,70 @@ Usando <code>mutate()</code> podés eliminar la columna <code>guion</code> asign
 ##  9 Africa     Algeria poblacion  1992 26298373
 ## 10 Africa     Algeria poblacion  1997 29072015
 ## # … with 5,102 more rows</code></pre>
+=======
+En el caso de <code>region_visitante</code> no sirve, porque todos los valores que contienen, por ejemplo “buenos_aires_residentes” usan el “<em>” para separar palabras.
+Si hubieamos usado la función <code>separate()</code> directamente hubieramos terminado con 3 columnas una con el datos ”buenos”, otra con el datos ”aires” y la última como el dato ”residentes”. Ni hablar si pensamos en ”norte_residentes”, nos quedaríamos con 2 columnas.
+Por esa razón primero tuvimos que manipular las columnas con <code>mutate()</code> para reemplazar ”buenos_aires” por ”buenos-aires” y ”no_residentes” por ”noresidentes”. Si el plan es poder usar el ”</em>” como separador entre la región y el tipo de visitante.</p>
+<p>Así quedó la columna region_visitante antes de aplicar la separación.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-1" aria-hidden="true" tabindex="-1"></a>parques_largo <span class="sc">%&gt;%</span> </span>
+<span id="cb116-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region_visitante =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(region_visitante, <span class="st">&quot;buenos_aires*&quot;</span>, <span class="st">&quot;buenos-aires&quot;</span>),</span>
+<span id="cb116-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb116-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_visitante =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(region_visitante, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;noresidentes&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 2,880 × 6
+##    indice_tiempo residentes no_residentes  total region_visitante          valor
+##    &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;
+##  1 2008-01           352303        198407 550710 buenos-aires_residentes     885
+##  2 2008-01           352303        198407 550710 buenos-aires_noresident…      0
+##  3 2008-01           352303        198407 550710 buenos-aires_total          885
+##  4 2008-01           352303        198407 550710 cordoba_residentes          717
+##  5 2008-01           352303        198407 550710 cordoba_noresidentes        145
+##  6 2008-01           352303        198407 550710 cordoba_total               862
+##  7 2008-01           352303        198407 550710 cuyo_residentes            4965
+##  8 2008-01           352303        198407 550710 cuyo_noresidentes           179
+##  9 2008-01           352303        198407 550710 cuyo_total                 5144
+## 10 2008-01           352303        198407 550710 litoral_residentes       111408
+## # … with 2,870 more rows</code></pre>
+<p>La función <code>str_replace()</code> del paquete <strong>stringr</strong> busca un patrón en un texto, por ejemplo “no_residentes” y lo reemplaza por otra cadena de texto que indiquemos, por ejemplo “noresidentes”. Este paquete es muy muy útil para manipular texto.</p>
+>>>>>>> Stashed changes
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
 <p>Juntá todos los pasos anteriores en una sola cadena de operaciones usando <code>%&gt;%</code>.</p>
 </div>
+<p>Nos falta eliminar esas columnas que ya no tienen sentido: residentes, no_resindetes y total. La información de esas columnas están asociadas al formato ancho y podemos volver a generarla si fuera necesario.</p>
+<p>Guardemos el resultado de todos los pasos anteriores en <code>parques_largo</code>.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-1" aria-hidden="true" tabindex="-1"></a>parques_largo <span class="ot">&lt;-</span> parques_ancho <span class="sc">%&gt;%</span> </span>
+<span id="cb118-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;indice_tiempo&quot;</span>, <span class="st">&quot;residentes&quot;</span>, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;total&quot;</span>),</span>
+<span id="cb118-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;region_visitante&quot;</span>,</span>
+<span id="cb118-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region_visitante =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(region_visitante, <span class="st">&quot;buenos_aires*&quot;</span>, <span class="st">&quot;buenos-aires&quot;</span>),</span>
+<span id="cb118-6"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_visitante =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(region_visitante, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;noresidentes&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-7"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(region_visitante, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span>, <span class="st">&quot;tipo_visitante&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-8"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;residentes&quot;</span>, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;total&quot;</span>))</span>
+<span id="cb118-9"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-10"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb118-10" aria-hidden="true" tabindex="-1"></a>parques_largo</span></code></pre></div>
+<pre><code>## # A tibble: 2,880 × 4
+##    indice_tiempo region       tipo_visitante  valor
+##    &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;           &lt;dbl&gt;
+##  1 2008-01       buenos-aires residentes        885
+##  2 2008-01       buenos-aires noresidentes        0
+##  3 2008-01       buenos-aires total             885
+##  4 2008-01       cordoba      residentes        717
+##  5 2008-01       cordoba      noresidentes      145
+##  6 2008-01       cordoba      total             862
+##  7 2008-01       cuyo         residentes       4965
+##  8 2008-01       cuyo         noresidentes      179
+##  9 2008-01       cuyo         total            5144
+## 10 2008-01       litoral      residentes     111408
+## # … with 2,870 more rows</code></pre>
+<p>Si decidimos que este es el formato ideal podríamos guardar los datos en un nuevo archivo csv y luego trabajar directamente con esa versión. Por supuesto es importante guardar el código que lo genera pero eso puede ir en un archivo separado y se corre una única vez.</p>
 </div>
-<div id="de-largo-a-ancho-con-pivot_wider" class="section level2">
+<div id="de-largo-a-ancho-con-pivot_wider" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> De largo a ancho con <code>pivot_wider()</code></h2>
-<p>Ahora la variable <code>paises_largo</code> está en el formato más largo posible.
-Tiene 5 columnas, de las cuales sólo una es la columnas con valores.
-Pero con los datos así no podrías hacer un gráfico de puntos que muestre la relación entre el PBI per cápita y la expectativa de vida como en la <a href="06-graficos-I.html#Segunda_capa:_geometrías">sección de gráficos</a>.
-Fijate que los valores de la columna <code>valor</code> no tienen todos las mismas unidades, por lo que operar con ese vector podría dar resultados sin sentido.
-Muchas veces es conveniente y natural tener los datos en un formato intermedio en donde hay múltiples columnas con los valores de distintas variables observadas.</p>
+<p>Ahora la variable <code>parques_largo</code> está en el formato más largo posible.
+Tiene 4 columnas, de las cuales sólo una es la columnas con valores.
+Pero con los datos así no podrías hacer un gráfico de puntos que muestre la relación entre el residentes y no residentes de vida como en la <a href="gráficos-con-ggplot2.html#segunda-capa-geometrías">sección de gráficos</a>.</p>
+<p>Muchas veces es conveniente y natural tener los datos en un formato intermedio en donde hay múltiples columnas con los valores de distintas variables observadas.</p>
 <p>Pasa “ensanchar” una tabla está la función <code>pivot_wider()</code> (“wider” es “más ancha” en inglés) y el código para conseguir este formato intermedio es:</p>
+<<<<<<< Updated upstream
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-1"></a>paises_medio &lt;-<span class="st"> </span><span class="kw">pivot_wider</span>(paises_largo, <span class="dt">names_from =</span> variable, <span class="dt">values_from =</span> valor)</span>
 <span id="cb120-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-2"></a>paises_medio</span></code></pre></div>
 <pre><code>## # A tibble: 1,704 × 6
@@ -491,11 +655,32 @@ Muchas veces es conveniente y natural tener los datos en un formato intermedio e
 ##  9 Africa     Algeria  1992  26298373              67.7          5023.
 ## 10 Africa     Algeria  1997  29072015              69.2          4797.
 ## # … with 1,694 more rows</code></pre>
+=======
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-1" aria-hidden="true" tabindex="-1"></a>parques_medio <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(parques_largo, </span>
+<span id="cb120-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">names_from =</span> tipo_visitante, </span>
+<span id="cb120-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">values_from =</span> valor)</span>
+<span id="cb120-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb120-4" aria-hidden="true" tabindex="-1"></a>parques_medio</span></code></pre></div>
+<pre><code>## # A tibble: 960 × 5
+##    indice_tiempo region       residentes noresidentes  total
+##    &lt;chr&gt;         &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+##  1 2008-01       buenos-aires        885            0    885
+##  2 2008-01       cordoba             717          145    862
+##  3 2008-01       cuyo               4965          179   5144
+##  4 2008-01       litoral          111408        55335 166743
+##  5 2008-01       norte              4241          774   5016
+##  6 2008-01       patagonia        230087       141973 372060
+##  7 2008-02       buenos-aires        624            0    624
+##  8 2008-02       cordoba             475          148    623
+##  9 2008-02       cuyo               4803          139   4942
+## 10 2008-02       litoral           85853        53596 139449
+## # … with 950 more rows</code></pre>
+>>>>>>> Stashed changes
 <p>Nuevamente el primer argumento es la tabla original.
 El segundo, <code>names_from</code> es la columna cuyos valores únicos van a convertirse en nuevas columnas.
-La columna <code>variable</code> tiene los valores <code>"población"</code>, <code>"esperanza_de_vida"</code> y <code>"pib_per_capita"</code> y entonces la tabla nueva tendrá tres columnas con esos nombres.
+La columna <code>tipo_visitante</code> tiene los valores <code>"residentes"</code>, <code>"noresidentes"</code> y <code>"total"</code> y entonces la tabla nueva tendrá tres columnas con esos nombres.
 El tercer argumento, <code>values_from</code>, es la columna de la cual sacar los valores.</p>
 <p>Para volver al formato más ancho, basta con agregar más columnas en el argumento <code>names_from</code>:</p>
+<<<<<<< Updated upstream
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-1"></a><span class="kw">pivot_wider</span>(paises_largo, </span>
 <span id="cb122-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-2"></a>            <span class="dt">names_from =</span> <span class="kw">c</span>(variable, anio), </span>
 <span id="cb122-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-3"></a>            <span class="dt">names_sep =</span> <span class="st">&quot;_&quot;</span>,</span>
@@ -521,23 +706,47 @@ El tercer argumento, <code>values_from</code>, es la columna de la cual sacar lo
 ## #   esperanza_de_vida_1967 &lt;dbl&gt;, esperanza_de_vida_1972 &lt;dbl&gt;,
 ## #   esperanza_de_vida_1977 &lt;dbl&gt;, esperanza_de_vida_1982 &lt;dbl&gt;, …</code></pre>
 <p>En esta llamada también está el argumento <code>names_sep</code>, que determina el caracter que se usa para crear el nombre de las nuevas columnas.</p>
+=======
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_wider</span>(parques_largo, </span>
+<span id="cb122-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">names_from =</span> <span class="fu">c</span>(region, tipo_visitante), </span>
+<span id="cb122-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>,</span>
+<span id="cb122-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb122-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">values_from =</span> valor)</span></code></pre></div>
+<pre><code>## # A tibble: 160 × 19
+##    indice_tiempo `buenos-aires_residentes` `buenos-aires_nore… `buenos-aires_to…
+##    &lt;chr&gt;                             &lt;dbl&gt;               &lt;dbl&gt;             &lt;dbl&gt;
+##  1 2008-01                             885                   0               885
+##  2 2008-02                             624                   0               624
+##  3 2008-03                               0                   0                 0
+##  4 2008-04                             462                   0               462
+##  5 2008-05                            1091                   0              1091
+##  6 2008-06                            1126                   0              1126
+##  7 2008-07                            1304                   0              1304
+##  8 2008-08                            2912                   0              2912
+##  9 2008-09                            1394                   0              1394
+## 10 2008-10                            2004                   0              2004
+## # … with 150 more rows, and 15 more variables: cordoba_residentes &lt;dbl&gt;,
+## #   cordoba_noresidentes &lt;dbl&gt;, cordoba_total &lt;dbl&gt;, cuyo_residentes &lt;dbl&gt;,
+## #   cuyo_noresidentes &lt;dbl&gt;, cuyo_total &lt;dbl&gt;, litoral_residentes &lt;dbl&gt;,
+## #   litoral_noresidentes &lt;dbl&gt;, litoral_total &lt;dbl&gt;, norte_residentes &lt;dbl&gt;,
+## #   norte_noresidentes &lt;dbl&gt;, norte_total &lt;dbl&gt;, patagonia_residentes &lt;dbl&gt;,
+## #   patagonia_noresidentes &lt;dbl&gt;, patagonia_total &lt;dbl&gt;</code></pre>
+<p>En esta llamada también está el argumento <code>names_sep</code>, que determina el caracter que se usa para crear el nombre de las nuevas columnas, usamos <code>"_"</code> para que quede igual al original.</p>
+>>>>>>> Stashed changes
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
 <ul>
-<li><p>Creá una nueva tabla, llamada <code>paises_superduper_ancho</code> que tenga una columna para cada variable, anio y país.
-(Consejo: la tabla final tiene que tener 5 filas).</p></li>
-<li><p>¿Cómo es la tabla más ancha posible que podés generar con estos datos?
-¿Cuántas filas y columnas tiene?</p></li>
+<li>¿Cómo es la tabla más ancha posible que podés generar con estos datos?
+¿Cuántas filas y columnas tiene? No es necesario que lo intentes hacer ahora pero siempre sirve hacer un diagrama para organizar las ideas.</li>
 </ul>
 </div>
 </div>
-<div id="uniendo-tablas" class="section level2">
+<div id="uniendo-tablas" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Uniendo tablas</h2>
-<p>Hasta ahora todo lo que usaste de {dplyr} involucra trabajar y modificar con una sola tabla a la vez, pero es muy común tener dos o más tablas con datos relacionados.
+<p>Hasta ahora todo lo que usaste de dplyr involucra trabajar y modificar con una sola tabla a la vez, pero es muy común tener dos o más tablas con datos relacionados.
 En ese caso, tenemos que <em>unir</em> estas tablas.
 a partir de una o más variables en común o <em>keys</em>.
-En Excel u otro programa de hojas de cálculo, esto se resuelve con la función “VLOOKUP” o “BUSCARV”, en R y en particular dentro del mundo de {dplyr} hay que usar la familia de funciones <code>*_join()</code>.
-Hay una función cada tipo de unión que queramos hacer.</p>
+En Excel u otro programa de hojas de cálculo, esto se resuelve con la función “VLOOKUP” o “BUSCARV”, en R y en particular dentro del mundo de dplyr hay que usar la familia de funciones <code>*_join()</code>.
+Hay una función para cada tipo de unión que queramos hacer.</p>
 <p>Asumiendo que querés unir dos data.frames o tablas <code>x</code> e <code>y</code> que tienen en común una variable <code>A</code>:</p>
 <p><img src="img/join.png" /></p>
 <ul>
@@ -555,6 +764,7 @@ Si hay múltiples coincidencias entre <code>x</code> e <code>y</code>, entonces 
 Esto significa que eliminará las filas (observaciones) que no coincidan en ambas tablas, lo que puede ser peligroso.</p></li>
 </ul>
 <p><img src="img/join_family.png" /></p>
+<<<<<<< Updated upstream
 <p>Ahora vamos a seguir trabajando con las base de datos de <code>paises</code> pero nos vamos a quedar solo con las observaciones del 2007 y de paso unirlo a una nueva base de datos <code>co2</code> que contiene información de la emisión de dióxido de carbono de cada país para ese mismo año.</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-1"></a>paises_<span class="dv">2007</span> &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb124-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) </span>
@@ -577,11 +787,41 @@ Esto significa que eliminará las filas (observaciones) que no coincidan en amba
 ## # … with 208 more rows</code></pre>
 <p>Esta nueva tabla tiene 3 columnas: <code>codigo_iso</code> tiene el código ISO de 3 letras de (abreviaturas que se usan internacionalmente), <code>emision_co2</code> tiene las emisiones anuales per cápita de CO2 en toneladas, <code>pais</code> tiene el nombre del país.
 Esta última columna también está presente en la tabla <code>paises_2007</code> y es la que va a servir como variable llave para unir las dos tablas.</p>
+=======
+<p>Ahora vamos a seguir trabajando con las base de datos de <code>parques_largo</code> y de paso unirlo a una nueva base de datos <code>hoeles</code> que contiene información de viajeron por región de destino y origen a lo largo del tiempo.</p>
+<p>Para que los datos sean más manejable y poder ver que es lo que sucede vamos a quedarnos solo con la información de 2018.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb124-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb124-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-4"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-4" aria-hidden="true" tabindex="-1"></a>parques_2018 <span class="ot">&lt;-</span> parques_largo <span class="sc">%&gt;%</span> </span>
+<span id="cb124-5"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">indice_tiempo =</span> <span class="fu">ym</span>(indice_tiempo)) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-6"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(indice_tiempo) <span class="sc">==</span> <span class="dv">2018</span>)</span>
+<span id="cb124-7"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-8"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-8" aria-hidden="true" tabindex="-1"></a>hoteles <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;http://datos.yvera.gob.ar/dataset/93db331e-6970-4d74-8589-c1223ac9c282/resource/1f6b78aa-d3b4-440a-bd7d-30d76e1728aa/download/viajeros-hospedados-residentes-y-no-residentes-por-destino.csv&quot;</span>)</span>
+<span id="cb124-9"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-10"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-10" aria-hidden="true" tabindex="-1"></a>hoteles_2018 <span class="ot">&lt;-</span> hoteles <span class="sc">%&gt;%</span> </span>
+<span id="cb124-11"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region_de_destino =</span> <span class="fu">tolower</span>(region_de_destino) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-12"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-12" aria-hidden="true" tabindex="-1"></a>           <span class="fu">str_replace</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-13"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-13" aria-hidden="true" tabindex="-1"></a>           <span class="fu">str_replace</span>(<span class="st">&quot;ó&quot;</span>, <span class="st">&quot;o&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-14"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from  =</span> origen_viajeros, <span class="at">values_from =</span> viajeros) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-15"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">hoteles_noresidentes =</span> <span class="st">`</span><span class="at">No residentes</span><span class="st">`</span>, </span>
+<span id="cb124-16"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">hoteles_residentes =</span> Residentes, </span>
+<span id="cb124-17"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">region =</span> region_de_destino) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-18"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">indice_tiempo =</span> lubridate<span class="sc">::</span><span class="fu">ym</span>(indice_tiempo)) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-19"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb124-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lubridate<span class="sc">::</span><span class="fu">year</span>(indice_tiempo) <span class="sc">==</span> <span class="dv">2018</span>)</span></code></pre></div>
+<div class="alert alert-success">
+<p>En el código de más arriba volvimos a usar la librería lubridate. En este caso la función <code>year()</code> permite extraer el parte del año de la fecha que está guardada en la columna <code>indice_tiempo</code>.
+Esto luego nos pemite filtrar los datos por años.</p>
+</div>
+<p>Esta nueva tabla tiene 5 columnas: <code>indice_tiempo</code> con la fecha (año y mes), <code>region</code> con la regiones de destino de los visitantes, <code>observaciones</code> con muchos NA, <code>hoteles_residentes</code> y <code>hoteles_noresidentes</code> que indica la cantidad de personas resindetes y no residentes que se alojaron en hoteles.
+Las columnas <code>region</code> e <code>indice_tiempo</code> también están presente en la tabla <code>parques_2018</code> y son las que van a servir como variables llave para unir las dos tablas.</p>
+>>>>>>> Stashed changes
 <p>Para unir las dos tablas, cualquier función <em>join</em> requiere cierta información:</p>
 <ul>
 <li>las tablas a unir: son los dos primeros argumentos.</li>
 <li>qué variable o variables (se puede usar más de una!) usar para identificar coincidencias: el argumento <code>by</code>.</li>
 </ul>
+<<<<<<< Updated upstream
 <p>Unamos <code>paises_2007</code> y <code>co2_2007</code> primero con <code>full_join()</code>:</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb126-1"></a>paises_co2_<span class="dv">2007</span> &lt;-<span class="st"> </span><span class="kw">full_join</span>(paises_<span class="dv">2007</span>, co2_<span class="dv">2007</span>, <span class="dt">by =</span> <span class="st">&quot;pais&quot;</span>)</span>
 <span id="cb126-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb126-2"></a>paises_co2_<span class="dv">2007</span></span></code></pre></div>
@@ -599,12 +839,33 @@ Esta última columna también está presente en la tabla <code>paises_2007</code
 ##  9 Bangladesh Asia        2007             64.1 150448339          1391. BGD       
 ## 10 Bélgica    Europa      2007             79.4  10392226         33693. BEL       
 ## # … with 231 more rows, and 1 more variable: emision_co2 &lt;dbl&gt;</code></pre>
+=======
+<p>Unamos <code>parques_2018</code> y <code>hoteles_2018</code> primero con <code>full_join()</code>:</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb125-1" aria-hidden="true" tabindex="-1"></a>parques_hoteles_2018 <span class="ot">&lt;-</span> <span class="fu">full_join</span>(parques_2018, hoteles_2018, </span>
+<span id="cb125-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb125-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span>, <span class="st">&quot;indice_tiempo&quot;</span>))</span>
+<span id="cb125-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb125-3" aria-hidden="true" tabindex="-1"></a>parques_hoteles_2018</span></code></pre></div>
+<pre><code>## # A tibble: 228 × 7
+##    indice_tiempo region       tipo_visitante  valor observaciones hoteles_residen…
+##    &lt;date&gt;        &lt;chr&gt;        &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                    &lt;dbl&gt;
+##  1 2018-01-01    buenos-aires residentes        239 &lt;NA&gt;                    385396
+##  2 2018-01-01    buenos-aires noresidentes        4 &lt;NA&gt;                    385396
+##  3 2018-01-01    buenos-aires total             243 &lt;NA&gt;                    385396
+##  4 2018-01-01    cordoba      residentes       2663 &lt;NA&gt;                    299440
+##  5 2018-01-01    cordoba      noresidentes      239 &lt;NA&gt;                    299440
+##  6 2018-01-01    cordoba      total            2902 &lt;NA&gt;                    299440
+##  7 2018-01-01    cuyo         residentes       4959 &lt;NA&gt;                    141927
+##  8 2018-01-01    cuyo         noresidentes      259 &lt;NA&gt;                    141927
+##  9 2018-01-01    cuyo         total            5218 &lt;NA&gt;                    141927
+## 10 2018-01-01    litoral      residentes     157509 &lt;NA&gt;                    261555
+## # … with 218 more rows, and 1 more variable: hoteles_noresidentes &lt;dbl&gt;</code></pre>
+>>>>>>> Stashed changes
 <p>Si miramos de cerca la tabla unida veremos un par de cosas:</p>
 <ul>
-<li>Todas las columnas de <code>paises_2007</code> y de <code>co2_2007</code> están presentes.</li>
-<li>Todas las observaciones están presentes, aún los países que están presentes en <code>co2_2007</code> pero no en <code>paises_2007</code> y viceversa. En esos casos ahora tenemos <code>NA</code>. Esto genera una tabla con 241 filas.</li>
+<li>Todas las columnas de <code>parques_2018</code> y de <code>hoteles2018</code> están presentes.</li>
+<li>Todas las observaciones están presentes, aún las regiones que están presentes en <code>hoteles_2018</code> pero no en <code>parques_2018</code> (no hay parques nacionales en CABA). En esos casos ahora tenemos <code>NA</code> en las columnas que vienen del data.frame de parques. Esto genera una tabla con 228 filas.</li>
 </ul>
 <p>Esta es la opción más segura si no sabemos si todas las observaciones de una tabla están presente en a otra.</p>
+<<<<<<< Updated upstream
 <p>Si solo nos interesa conservar las filas de la tabla <em>de la izquierda</em>, en este caso <code>paises_2007</code> entonces:</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb128-1"></a>paises_co2_<span class="dv">2007</span> &lt;-<span class="st"> </span><span class="kw">left_join</span>(paises_<span class="dv">2007</span>, co2_<span class="dv">2007</span>, <span class="dt">by =</span> <span class="st">&quot;pais&quot;</span>)</span>
 <span id="cb128-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb128-2"></a>paises_co2_<span class="dv">2007</span></span></code></pre></div>
@@ -642,17 +903,53 @@ Pero al mismo tiempo varios países en esa tabla no encontraron coincidencia en 
 ## 10 Botswa… África      2007             50.7   1639131         12570. BWA       
 ## # … with 109 more rows, and 1 more variable: emision_co2 &lt;dbl&gt;</code></pre>
 <p>En este caso, perdemos las filas de <code>co2_2007</code> que no encontraron coincidencia en <code>paises_2007</code> y viceversa y la tabla resultante tiene aún menos filas (119).</p>
+=======
+<p>Si solo nos interesa conservar las filas de la tabla <em>de la izquierda</em>, en este caso <code>parques_2018</code> entonces:</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb127-1" aria-hidden="true" tabindex="-1"></a>parques_hoteles_2018 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(parques_2018, hoteles_2018, </span>
+<span id="cb127-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb127-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span>, <span class="st">&quot;indice_tiempo&quot;</span>))</span>
+<span id="cb127-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb127-3" aria-hidden="true" tabindex="-1"></a>parques_hoteles_2018</span></code></pre></div>
+<pre><code>## # A tibble: 216 × 7
+##    indice_tiempo region       tipo_visitante  valor observaciones hoteles_residen…
+##    &lt;date&gt;        &lt;chr&gt;        &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                    &lt;dbl&gt;
+##  1 2018-01-01    buenos-aires residentes        239 &lt;NA&gt;                    385396
+##  2 2018-01-01    buenos-aires noresidentes        4 &lt;NA&gt;                    385396
+##  3 2018-01-01    buenos-aires total             243 &lt;NA&gt;                    385396
+##  4 2018-01-01    cordoba      residentes       2663 &lt;NA&gt;                    299440
+##  5 2018-01-01    cordoba      noresidentes      239 &lt;NA&gt;                    299440
+##  6 2018-01-01    cordoba      total            2902 &lt;NA&gt;                    299440
+##  7 2018-01-01    cuyo         residentes       4959 &lt;NA&gt;                    141927
+##  8 2018-01-01    cuyo         noresidentes      259 &lt;NA&gt;                    141927
+##  9 2018-01-01    cuyo         total            5218 &lt;NA&gt;                    141927
+## 10 2018-01-01    litoral      residentes     157509 &lt;NA&gt;                    261555
+## # … with 206 more rows, and 1 more variable: hoteles_noresidentes &lt;dbl&gt;</code></pre>
+<p>Ahora esperamos que la tabla resultante tenga la misma cantidad de filas que <code>parques_2018</code> y efectivamente eso ocurre.
+Todas las regiones en <code>parques_2018</code> tienen coincidencia con <code>hoteles_2018</code> y por eso no hay NAs en las columnas que vienen de ese último data.frame.</p>
+<p>Finalmente, si quisiéramos quedarnos solo con las observaciones que están presentes en ambas tablas usamos <code>inner_join()</code>.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb129-1" aria-hidden="true" tabindex="-1"></a>parques_hoteles_2018 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(parques_2018, hoteles_2018, </span>
+<span id="cb129-2"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb129-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span>, <span class="st">&quot;indice_tiempo&quot;</span>))</span>
+<span id="cb129-3"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#cb129-3" aria-hidden="true" tabindex="-1"></a>parques_hoteles_2018</span></code></pre></div>
+<pre><code>## # A tibble: 216 × 7
+##    indice_tiempo region       tipo_visitante  valor observaciones hoteles_residen…
+##    &lt;date&gt;        &lt;chr&gt;        &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                    &lt;dbl&gt;
+##  1 2018-01-01    buenos-aires residentes        239 &lt;NA&gt;                    385396
+##  2 2018-01-01    buenos-aires noresidentes        4 &lt;NA&gt;                    385396
+##  3 2018-01-01    buenos-aires total             243 &lt;NA&gt;                    385396
+##  4 2018-01-01    cordoba      residentes       2663 &lt;NA&gt;                    299440
+##  5 2018-01-01    cordoba      noresidentes      239 &lt;NA&gt;                    299440
+##  6 2018-01-01    cordoba      total            2902 &lt;NA&gt;                    299440
+##  7 2018-01-01    cuyo         residentes       4959 &lt;NA&gt;                    141927
+##  8 2018-01-01    cuyo         noresidentes      259 &lt;NA&gt;                    141927
+##  9 2018-01-01    cuyo         total            5218 &lt;NA&gt;                    141927
+## 10 2018-01-01    litoral      residentes     157509 &lt;NA&gt;                    261555
+## # … with 206 more rows, and 1 more variable: hoteles_noresidentes &lt;dbl&gt;</code></pre>
+<p>En este caso, perdemos las filas de <code>hoteles_2018</code> que no encontraron coincidencia en <code>parques_2018</code>, es decir la región de CABA. La tabla resultante es igual a la tabla que generamos en el ejemplo anterior con 216 fialas.</p>
+>>>>>>> Stashed changes
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
-<p>Estuvimos trabajando con una parte de la base de datos de emisiones.
-Pero también está disponible <code>co2_completo.csv</code> que contiene las emisiones para distintos años.
-El objetivo es que unas <code>paises</code> y <code>co2</code> teniendo en cuenta tanto el país como el año.
-Para eso:</p>
+<p>Ahora es tu turno. Nos faltó revisar la función <code>right_join()</code>, intentá unir las dos tablas con las que estuvimos trabajando cambiando el orden en el que las llamas en la función.</p>
 <ol style="list-style-type: decimal">
-<li>Lee la base de datos <code>co2_completo.csv</code> en una nueva variable que se llame <code>co2</code>.</li>
-<li>Revisá el nombre de las variables en esta base de datos, ¿se llaman igual que las variables en <code>paises</code>?</li>
-<li>Uní las dos tablas usando <code>full_join()</code>, tené en cuenta que ahora usamos dos variables llave <code>pais</code> y <code>anio</code>. Buscá en la documentación cómo indicarle eso a la función <code>full_join()</code>.<br />
-</li>
+<li>¿Ves alguna diferencia en los resultados?</li>
+<li>Si encontras alguna diferencia, intentá explicar a que se debe. Si no hay diferencias, pensá por qué.</li>
 </ol>
 </div>
 
