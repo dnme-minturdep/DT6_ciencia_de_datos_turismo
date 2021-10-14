@@ -1,22 +1,24 @@
-# Manipulación de datos ordenados usando {dplyr} y {tidyr} II
+# Manipulación de datos ordenados usando dplyr y tidyr II
 
-A esta altura del libro vimos varios set de datos, cada uno tiene una pinta un poco distinta y trabajar con ellos presenta distintos desafíos. 
+A esta altura del libro vimos varios conjuntos de datos. 
+Cada uno tiene una pinta un poco distinta y trabajar con ellos presenta distintos desafíos. 
 En este capítulo veremos como manipular los datos para organizarlos de distinta manera y que nos sirvan para resolver distintos problemas. 
 
 Pero primero algunas definiciones. 
 
-Cuando hablamos de datos en formato "largo" o "tidy", nos referimos a aquellos set de datos en los cuales:
+Cuando hablamos de datos "ordenados" , o "tidy", o en formato "largo", nos referimos a aquellos set de datos en los cuales:
 
 -   cada fila es una observación
 -   cada columna es una variable
 
-Los datos en formato "ancho" pueden ser muy variados y son un poco más complejo de definir pero la idea general es que:
+Los datos en formato "ancho" pueden ser muy variados, por lo que son un poco más complejos de definir. 
+Pero la idea general es que:
 
 -   cada fila es un "item"
 -   cada columna es una variable
 -   muchas veces los nombres de las columnas son variables de los datos
 
-![](img/largo-ancho.png)
+![](img/largo-ancho.png "Dos tablas con los mismos datos. Una en formato ancho: la primera columna se llama país y tiene 3 observaciones con los paíes 'A', 'B' y 'C' y la segunda y tercer columna se llaman ' 1999' y '2000'  respectivamente y contienen 3 números cada una. Otra tabla en formato largo: tiene columnas pais, anio y casos. Tiene una fila para cada combinación de paises (los mismos tres) y años (1999 y 2000) y la última columna contiene los mismos números que la tabla anterior.")
 
 Una tabla en formato largo va a tener una cierta cantidad de columnas que cumplen el rol de *identificadores* y cuya combinación identifican una única observación y una única columna con el valor de la observación.
 En el ejemplo de arriba, `pais` y `anio` son las columnas identificadoras y `casos` es la columna que contiene el valor de las observaciones.
@@ -27,9 +29,10 @@ En el ejemplo, los países están en las filas y los años en las columnas.
 En general, el formato ancho es más compacto y legible por humanos mientras que el largo es más fácil de manejar con la computadora.
 Si revisás las tablas de arriba, es más fácil comparar los valores entre países y entre años en la tabla ancha.
 Pero el nombre de las columnas ("1999", "2000") en realidad ¡son datos!
-Además este formato se empieza a complicar en cuanto hay más de dos identificadores como veremos más adelante.
+Además este formato se empieza a complicar en cuanto hay más de dos identificadores, como veremos más adelante.
 
-Un mismo set de datos puede ser representado de forma completamente "larga", completamente "ancha" o --lo que es más común-- en un formato intermedio pero no existe una forma "correcta" de organizar los datos; cada una tiene sus ventajas y desventajas.
+Un mismo conjunto de datos puede ser representado de forma completamente "larga", completamente "ancha" o --lo que es más común-- en un formato intermedio. 
+No existe una forma "correcta" de organizar los datos; cada una tiene sus ventajas y desventajas.
 Por esto es que es muy normal que durante un análisis los datos vayan y vuelvan entre distintos formatos dependiendo de los métodos estadísticos que se le aplican.
 Entonces, aprender a transformar datos anchos en largos y viceversa es un habilidad muy útil.
 
@@ -43,15 +46,15 @@ Dibujá un esquema en papel y lápiz en formato ancho y uno en formato largo.
 :::
 
 En esta sección vas a usar el paquete **tidyr** para manipular datos.
-Si no lo tenés instalado, podés hacer con el comando:
+Si no lo tenés instalado, podés hacerlo con el comando:
 
 ```{r eval = FALSE}
 install.packages("tidyr")
 ```
 
-Cómo siempre, recordá que esto solo se hace una vez y es recomendable hacerlo desde la consola para que no quede en un chunk de código por accidente.
+Cómo siempre, recordá que esto sólo se hace una vez y es recomendable hacerlo desde la consola para que no quede en un bloque de código por accidente.
 
-Y luego cargá tidyr y dplyr (que usaste en [una sección anterior](05-dplyr-I.html)) con:
+Y luego cargá tidyr y dplyr (que usaste en [una sección anterior](manipulación-de-datos-ordenados.html)) con:
 
 ```{r}
 library(tidyr)
@@ -76,7 +79,8 @@ Es una buena forma de no tener que cargar un montón de paquetes innecesarios si
 :::
 
 Esta tabla es bastante ancha y puede ser difícil de manejar.
-Por ejemplo, es complicado hacer series de tiempo de los visitantes de uan región porque la información está distribuida entre varias columnas. Tampoco sería simple hacer cuentas por regiones o por tipo de residente con este formato de tabla.
+Por ejemplo, es complicado hacer series de tiempo de los visitantes de una región porque la información está distribuida entre varias columnas. 
+Tampoco sería simple hacer cuentas por regiones o por tipo de residente con este formato de tabla.
 
 Para convertirlo en una tabla más larga, se usa `pivot_longer()` ("longer" es "más largo" en inglés):
 
@@ -92,8 +96,9 @@ El primer argumento de`pivot_longer()` es la tabla que va a modificar: `parques_
 El segundo argumento se llama `cols` y es un vector con las columnas que tienen los valores a "alargar".
 Podría ser un vector escrito a mano (algo como `c("buenos_aires_residentes", "buenos_aires_no_residentes"...)`) pero con más de 20 columnas, escribir todo eso sería tedioso y probablemente estaría lleno de errores.
 Por eso tidyr provee funciones de ayuda para seleccionar columnas en base a patrones.
-Po ejemplo `starts_with()` que, como su nombre en inglés lo indica, selecciona las columnas que *empiezan con* una determinada cadena de caracteres.
-en este caso le decimos que queremos todas las columnas *menos* las que están mencionadas. Por eso hay un "-" antes del vector de columnas. Entonces, el vector `-c("indice_tiempo", "residentes", "no_residentes", "total")` le dice a `pivot_longer()` que seleccione todas las columnas menos las que están mencionadas.
+Por ejemplo `starts_with()` que, como su nombre en inglés lo indica, selecciona las columnas que *empiezan con* una determinada cadena de caracteres.
+en este caso le decimos que queremos todas las columnas *menos* las que están mencionadas. Por eso hay un "-" antes del vector de columnas. 
+Entonces, el vector `-c("indice_tiempo", "residentes", "no_residentes", "total")` le dice a `pivot_longer()` que seleccione todas las columnas excepto `indice_tiempo`, `residentes`, `no_residentes` y `total`.
 
 ::: {.alert .alert-success}
 Estas funciones accesorias para seleccionar muchas funciones se llaman "tidyselect".
@@ -108,10 +113,10 @@ Tomate un momento para visualizar lo que acaba de pasar.
 La tabla ancha tenía un montón de columnas con distintos datos.
 Ahora estos datos están uno arriba de otro en la columna "valor", pero para identificar el nombre de la columna de la cual vinieron, se agrega la columna "region_visitante".
 
-![Proceso de largo a ancho](img/ancho-a-largo.png)
+![Proceso de ancho a largo](img/ancho-a-largo.png  "Esquema de transformación de una tabla de formato ancho a largo.")
 
-La columna `region_visitante` todavía no es muy útil porque contiene 2 datos, la región (Buenos Aires, Cuyo, Litoral, etc.) y el tipo de visitante y la suma de ambos.
-Sería mejor separar esta información en dos columnas llamadas "region" y "resinte".
+La columna `region_visitante` todavía no es muy útil porque contiene 2 datos, la región (Buenos Aires, Cuyo, Litoral, etc.) y el tipo de visitante (Residente, No Residente o la suma de ambos).
+Sería mejor separar esta información en dos columnas llamadas "region" y "residente".
 Para eso está la función `separate()`.
 
 ```{r}
@@ -130,9 +135,10 @@ El segundo, `col`, es la columna a separar en dos (o más) columnas nuevas.
 El tercero, `into` es el nombre de las nuevas columnas que `separate()` va a crear.
 El último argumento es `sep` que define cómo realizar la separación.
 Por defecto, `sep` es una [expresión regular](https://es.wikipedia.org/wiki/Expresi%C3%B3n_regular) que captura cualquier caracter no alfanumérico.
-En el caso de `region_visitante` no sirve, porque todos los valores que contienen, por ejemplo "buenos_aires_residentes" usan el "_" para separar palabras. 
-Si hubieamos usado la función `separate()` directamente hubieramos terminado con 3 columnas una con el datos "buenos", otra con el datos "aires" y la última como el dato "residentes". Ni hablar si pensamos en "norte_residentes", nos quedaríamos con 2 columnas. 
-Por esa razón primero tuvimos que manipular las columnas con `mutate()` para reemplazar "buenos_aires" por "buenos-aires" y "no_residentes" por "noresidentes". Si el plan es poder usar el "_" como separador entre la región y el tipo de visitante. 
+En el caso de `region_visitante` no sirve, porque todos los valores que contienen, por ejemplo "buenos_aires_residentes" usan el "\_" para separar palabras. 
+Si hubieamos usado la función `separate()` directamente hubieramos terminado con 3 columnas una con el datos "buenos", otra con el datos "aires" y la última como el dato "residentes". 
+Ni hablar si pensamos en "norte_residentes", nos quedaríamos con 2 columnas. 
+Por esa razón primero tuvimos que manipular las columnas con `mutate()` para reemplazar "buenos_aires" por "buenos-aires" y "no_residentes" por "noresidentes" de manera de poder usar el "\_" como separador entre la región y el tipo de visitante únicamente.
 
 Así quedó la columna region_visitante antes de aplicar la separación.
 ```{r}
@@ -141,7 +147,8 @@ parques_largo %>%
          region_visitante = stringr::str_replace(region_visitante, "no_residentes", "noresidentes"))
 ```
 
-La función `str_replace()` del paquete **stringr** busca un patrón en un texto, por ejemplo "no_residentes" y lo reemplaza por otra cadena de texto que indiquemos, por ejemplo "noresidentes". Este paquete es muy muy útil para manipular texto. 
+La función `str_replace()` del paquete **stringr** busca un patrón en un texto, por ejemplo "no_residentes" y lo reemplaza por otra cadena de texto que indiquemos, por ejemplo "noresidentes". 
+Este paquete es muy muy útil para manipular texto. 
 
 ::: {.alert .alert-info}
 **Desafío**
@@ -149,7 +156,8 @@ La función `str_replace()` del paquete **stringr** busca un patrón en un texto
 Juntá todos los pasos anteriores en una sola cadena de operaciones usando `%>%`.
 :::
 
-Nos falta eliminar esas columnas que ya no tienen sentido: residentes, no_resindetes y total. La información de esas columnas están asociadas al formato ancho y podemos volver a generarla si fuera necesario.
+Nos falta eliminar esas columnas que ya no tienen sentido: residentes, no_resindetes y total. 
+La información de esas columnas están asociadas al formato ancho y podemos volver a generarla si fuera necesario.
 
 Guardemos el resultado de todos los pasos anteriores en `parques_largo`.
 
@@ -166,13 +174,14 @@ parques_largo <- parques_ancho %>%
 parques_largo
 ```
 
-Si decidimos que este es el formato ideal podríamos guardar los datos en un nuevo archivo csv y luego trabajar directamente con esa versión. Por supuesto es importante guardar el código que lo genera pero eso puede ir en un archivo separado y se corre una única vez. 
+Si decidimos que este es el formato ideal podríamos guardar los datos en un nuevo archivo csv y luego trabajar directamente con esa versión. 
+Por supuesto, es importante guardar el código que lo genera pero eso puede ir en un archivo separado y se corre una única vez. 
 
 ## De largo a ancho con `pivot_wider()`
 
 Ahora la variable `parques_largo` está en el formato más largo posible.
 Tiene 4 columnas, de las cuales sólo una es la columnas con valores.
-Pero con los datos así no podrías hacer un gráfico de puntos que muestre la relación entre el residentes y no residentes de vida como en la [sección de gráficos](gráficos-con-ggplot2.html#segunda-capa-geometrías).
+Pero con los datos así no podrías hacer un gráfico de puntos que muestre la relación entre cantidad de visitantes residentes y no residentes en cada mes como en la [sección de gráficos](gráficos-con-ggplot2.html#segunda-capa-geometrías).
 
 Muchas veces es conveniente y natural tener los datos en un formato intermedio en donde hay múltiples columnas con los valores de distintas variables observadas.
 
@@ -205,7 +214,8 @@ En esta llamada también está el argumento `names_sep`, que determina el caract
 **Desafío**
 
 -   ¿Cómo es la tabla más ancha posible que podés generar con estos datos?
-¿Cuántas filas y columnas tiene? No es necesario que lo intentes hacer ahora pero siempre sirve hacer un diagrama para organizar las ideas.
+¿Cuántas filas y columnas tiene? 
+No es necesario que lo intentes hacer ahora pero siempre sirve hacer un diagrama para organizar las ideas.
 :::
 
 ## Uniendo tablas
@@ -221,7 +231,7 @@ Asumiendo que querés unir dos data.frames o tablas `x` e `y` que tienen en com�
 ![](img/join.png)
 
 -   `full_join()`: devuelve todas las filas y todas las columnas de ambas tablas `x` e `y`.
-Cuando no coinciden los elementos en `x1`, devuelve `NA` (dato faltante).
+Cuando no coinciden los elementos en `y`, devuelve `NA` (dato faltante).
 Esto significa que no se pierden filas de ninguna de las dos tablas aún cuando no hay coincidencia.
 Está es la manera más segura de unir tablas.
 
@@ -238,9 +248,9 @@ Esto significa que eliminará las filas (observaciones) que no coincidan en amba
 
 ![](img/join_family.png)
 
-Ahora vamos a seguir trabajando con las base de datos de `parques_largo` y de paso unirlo a una nueva base de datos `hoeles` que contiene información de viajeron por región de destino y origen a lo largo del tiempo.
+Ahora vamos a seguir trabajando con las base de datos de `parques_largo` y de paso unirlo a una nueva base de datos `hoteles` que contiene información de viajeros por región de destino y origen a lo largo del tiempo.
 
-Para que los datos sean más manejable y poder ver que es lo que sucede vamos a quedarnos solo con la información de 2018.
+Para que los datos sean más manejables y poder ver que es lo que sucede vamos a quedarnos sólo con la información de 2018.
 
 ```{r, message=FALSE}
 library(lubridate)
@@ -265,7 +275,8 @@ hoteles_2018 <- hoteles %>%
 ```
 
 ::: {.alert .alert-success}
-En el código de más arriba volvimos a usar la librería lubridate. En este caso la función `year()` permite extraer el parte del año de la fecha que está guardada en la columna `indice_tiempo`. 
+En el código de más arriba volvimos a usar la librería lubridate. 
+En este caso la función `year()` permite extraer el parte del año de la fecha que está guardada en la columna `indice_tiempo`. 
 Esto luego nos pemite filtrar los datos por años. 
 :::
 
@@ -288,7 +299,9 @@ parques_hoteles_2018
 Si miramos de cerca la tabla unida veremos un par de cosas:
 
 -   Todas las columnas de `parques_2018` y de `hoteles2018` están presentes.
--   Todas las observaciones están presentes, aún las regiones que están presentes en `hoteles_2018` pero no en `parques_2018` (no hay parques nacionales en CABA). En esos casos ahora tenemos `NA` en las columnas que vienen del data.frame de parques. Esto genera una tabla con 228 filas.
+-   Todas las observaciones están presentes, aún las regiones que están presentes en `hoteles_2018` pero no en `parques_2018` (no hay parques nacionales en CABA). 
+En esos casos ahora tenemos `NA` en las columnas que vienen del data.frame de parques. 
+Esto genera una tabla con 228 filas.
 
 Esta es la opción más segura si no sabemos si todas las observaciones de una tabla están presente en a otra.
 
@@ -311,12 +324,15 @@ parques_hoteles_2018 <- inner_join(parques_2018, hoteles_2018,
 parques_hoteles_2018
 ```
 
-En este caso, perdemos las filas de `hoteles_2018` que no encontraron coincidencia en `parques_2018`, es decir la región de CABA. La tabla resultante es igual a la tabla que generamos en el ejemplo anterior con 216 fialas.
+En este caso, perdemos las filas de `hoteles_2018` que no encontraron coincidencia en `parques_2018`, es decir la región de CABA. 
+La tabla resultante es igual a la tabla que generamos en el ejemplo anterior con `r nrow(parques_hoteles_2018)` fialas.
 
 ::: {.alert .alert-info}
 **Desafío**
 
-Ahora es tu turno. Nos faltó revisar la función `right_join()`, intentá unir las dos tablas con las que estuvimos trabajando cambiando el orden en el que las llamas en la función. 
+Ahora es tu turno. 
+Nos faltó revisar la función `right_join()`. 
+Intentá unir las dos tablas con las que estuvimos trabajando cambiando el orden en el que las llamas en la función. 
 
 1.  ¿Ves alguna diferencia en los resultados?
 2.  Si encontras alguna diferencia, intentá explicar a que se debe. Si no hay diferencias, pensá por qué.
