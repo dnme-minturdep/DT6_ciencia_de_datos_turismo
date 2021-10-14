@@ -107,7 +107,7 @@ R entiende un montón de operaciones aritméticas escritas como seguramente ya t
 -   `-`: restar
 -   `*`: multiplicar
 -   `/`: dividir
--   `^`: exponenciar
+-   `^` o `**`: exponenciar
 
 Pero además conoce muchas otras operaciones.
 Para decirle a R que calcule el seno de 1 hay que escribir esto:
