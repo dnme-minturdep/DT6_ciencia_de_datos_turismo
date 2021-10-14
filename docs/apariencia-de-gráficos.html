@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 11 Apariencia de gráficos | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
+  <title>Capítulo 9 Apariencia de gráficos | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
   <meta name="description" content="Ciencia de Datos para el Turismo" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 11 Apariencia de gráficos | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta property="og:title" content="Capítulo 9 Apariencia de gráficos | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 11 Apariencia de gráficos | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta name="twitter:title" content="Capítulo 9 Apariencia de gráficos | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
   
   <meta name="twitter:description" content="Ciencia de Datos para el Turismo" />
   
@@ -31,8 +31,7 @@
   
   
 <link rel="prev" href="tablas.html"/>
-<link rel="next" href="desafíos-de-práctica.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<link rel="next" href="reportes-ii.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +49,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -57,18 +57,18 @@
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -88,7 +88,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,123 +138,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="toc-logo"><a href="./"><img src="imagenes/escudo_mintur.png"></a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#documento-técnico-nº6---resumen"><i class="fa fa-check"></i>Documento Técnico Nº6 - Resumen</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a>
-<ul>
+<li class="chapter" data-level="1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> Ciencia de Datos</a><ul>
 <li class="chapter" data-level="1.1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#por-qué-r"><i class="fa fa-check"></i><b>1.1</b> ¿Por qué R?</a></li>
-<li class="chapter" data-level="1.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#cómo-decirle-a-r-qué-hacer"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#cómo-decirle-a-r-qué-hacer"><i class="fa fa-check"></i><b>1.2</b> Cómo decirle a R qué hacer</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#orientándose-en-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Orientándose en RStudio</a></li>
 <li class="chapter" data-level="1.2.2" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#hablando-con-r"><i class="fa fa-check"></i><b>1.2.2</b> Hablando con R</a></li>
 <li class="chapter" data-level="1.2.3" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#extendiendo-r"><i class="fa fa-check"></i><b>1.2.3</b> Extendiendo R</a></li>
 <li class="chapter" data-level="1.2.4" data-path="ciencia-de-datos.html"><a href="ciencia-de-datos.html#buscando-ayuda"><i class="fa fa-check"></i><b>1.2.4</b> Buscando ayuda</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a>
-<ul>
+<li class="chapter" data-level="2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html"><i class="fa fa-check"></i><b>2</b> Trabajar con proyectos en RStudio</a><ul>
 <li class="chapter" data-level="2.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#qué-ventajas-tiene"><i class="fa fa-check"></i><b>2.1</b> ¿Qué ventajas tiene?</a></li>
 <li class="chapter" data-level="2.2" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#abrir-un-proyecto"><i class="fa fa-check"></i><b>2.2</b> Abrir un proyecto</a></li>
 <li class="chapter" data-level="2.3" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#cómo-se-organiza"><i class="fa fa-check"></i><b>2.3</b> ¿Cómo se organiza?</a></li>
-<li class="chapter" data-level="2.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#ordenando-aún-más"><i class="fa fa-check"></i><b>2.4</b> Ordenando aún más</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#ordenando-aún-más"><i class="fa fa-check"></i><b>2.4</b> Ordenando aún más</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="trabajar-con-proyectos-en-rstudio.html"><a href="trabajar-con-proyectos-en-rstudio.html#borrón-y-cuenta-nueva-todos-los-días"><i class="fa fa-check"></i><b>2.4.1</b> Borrón y cuenta nueva… todos los días!</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a RMarkdown</a>
-<ul>
+<li class="chapter" data-level="3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Introducción a RMarkdown</a><ul>
 <li class="chapter" data-level="3.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#creando-archivos-.rmd"><i class="fa fa-check"></i><b>3.1</b> Creando archivos .Rmd</a></li>
-<li class="chapter" data-level="3.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#estructura-de-un-.rmd"><i class="fa fa-check"></i><b>3.2</b> Estructura de un .Rmd</a>
-<ul>
+<li class="chapter" data-level="3.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#estructura-de-un-.rmd"><i class="fa fa-check"></i><b>3.2</b> Estructura de un .Rmd</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#encabezado"><i class="fa fa-check"></i><b>3.2.1</b> Encabezado</a></li>
 <li class="chapter" data-level="3.2.2" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#bloques-de-código"><i class="fa fa-check"></i><b>3.2.2</b> Bloques de código</a></li>
 <li class="chapter" data-level="3.2.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#el-texto-propio-del-documento."><i class="fa fa-check"></i><b>3.2.3</b> El texto propio del documento.</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="introducción-a-rmarkdown.html"><a href="introducción-a-rmarkdown.html#markdown"><i class="fa fa-check"></i><b>3.3</b> Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a>
-<ul>
+<li class="chapter" data-level="4" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html"><i class="fa fa-check"></i><b>4</b> Lectura de datos ordenados</a><ul>
 <li class="chapter" data-level="4.1" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#descargando-datos"><i class="fa fa-check"></i><b>4.1</b> Descargando datos</a></li>
 <li class="chapter" data-level="4.2" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#leer-datos-csv"><i class="fa fa-check"></i><b>4.2</b> Leer datos csv</a></li>
 <li class="chapter" data-level="4.3" data-path="lectura-de-datos-ordenados.html"><a href="lectura-de-datos-ordenados.html#leer-datos-de-excel"><i class="fa fa-check"></i><b>4.3</b> Leer datos de excel</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html"><i class="fa fa-check"></i><b>5</b> Manipulación de datos ordenados</a>
-<ul>
+<li class="chapter" data-level="5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html"><i class="fa fa-check"></i><b>5</b> Manipulación de datos ordenados</a><ul>
 <li class="chapter" data-level="5.1" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#seleccionando-columnas-con-select"><i class="fa fa-check"></i><b>5.1</b> Seleccionando columnas con <code>select()</code></a></li>
 <li class="chapter" data-level="5.2" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#filtrando-filas-con-filter"><i class="fa fa-check"></i><b>5.2</b> Filtrando filas con <code>filter()</code></a></li>
 <li class="chapter" data-level="5.3" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#agrupando-y-reduciendo-con-group_by-summarise"><i class="fa fa-check"></i><b>5.3</b> Agrupando y reduciendo con <code>group_by() %&gt;% summarise()</code></a></li>
 <li class="chapter" data-level="5.4" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#creando-nuevas-columnas-con-mutate"><i class="fa fa-check"></i><b>5.4</b> Creando nuevas columnas con <code>mutate()</code></a></li>
 <li class="chapter" data-level="5.5" data-path="manipulación-de-datos-ordenados.html"><a href="manipulación-de-datos-ordenados.html#desagrupando-con-ungroup"><i class="fa fa-check"></i><b>5.5</b> Desagrupando con <code>ungroup()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html"><i class="fa fa-check"></i><b>6</b> Gráficos con ggplot2</a>
-<ul>
+<li class="chapter" data-level="6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html"><i class="fa fa-check"></i><b>6</b> Gráficos con ggplot2</a><ul>
 <li class="chapter" data-level="6.1" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#primera-capa-el-área-del-gráfico"><i class="fa fa-check"></i><b>6.1</b> Primera capa: el área del gráfico</a></li>
 <li class="chapter" data-level="6.2" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#segunda-capa-geometrías"><i class="fa fa-check"></i><b>6.2</b> Segunda capa: geometrías</a></li>
 <li class="chapter" data-level="6.3" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#mapear-variables-a-elementos"><i class="fa fa-check"></i><b>6.3</b> Mapear variables a elementos</a></li>
 <li class="chapter" data-level="6.4" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#otras-geometrías"><i class="fa fa-check"></i><b>6.4</b> Otras geometrías</a></li>
 <li class="chapter" data-level="6.5" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#relación-entre-variables"><i class="fa fa-check"></i><b>6.5</b> Relación entre variables</a></li>
 <li class="chapter" data-level="6.6" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#transformaciones-estadísticas"><i class="fa fa-check"></i><b>6.6</b> Transformaciones estadísticas</a></li>
-<li class="chapter" data-level="6.7" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-frecuencias"><i class="fa fa-check"></i><b>6.7</b> Gráficos de frecuencias</a>
-<ul>
+<li class="chapter" data-level="6.7" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-frecuencias"><i class="fa fa-check"></i><b>6.7</b> Gráficos de frecuencias</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#posición"><i class="fa fa-check"></i><b>6.7.1</b> Posición</a></li>
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-líneas-suavizas"><i class="fa fa-check"></i><b>6.8</b> Gráficos de líneas suavizas</a></li>
 <li class="chapter" data-level="6.9" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#gráficos-de-caja"><i class="fa fa-check"></i><b>6.9</b> Gráficos de caja</a></li>
 <li class="chapter" data-level="6.10" data-path="gráficos-con-ggplot2.html"><a href="gráficos-con-ggplot2.html#graficando-en-múltiples-paneles"><i class="fa fa-check"></i><b>6.10</b> Graficando en múltiples paneles</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a>
-<ul>
+<li class="chapter" data-level="7" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><i class="fa fa-check"></i><b>7</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a><ul>
 <li class="chapter" data-level="7.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-ancho-a-largo-con-pivot_longer"><i class="fa fa-check"></i><b>7.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
 <li class="chapter" data-level="7.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#de-largo-a-ancho-con-pivot_wider"><i class="fa fa-check"></i><b>7.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
 <li class="chapter" data-level="7.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii.html#uniendo-tablas"><i class="fa fa-check"></i><b>7.3</b> Uniendo tablas</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><i class="fa fa-check"></i><b>8</b> Manipulación de datos ordenados usando {dplyr} y {tidyr} II</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#de-ancho-a-largo-con-pivot_longer-1"><i class="fa fa-check"></i><b>8.1</b> De ancho a largo con <code>pivot_longer()</code></a></li>
-<li class="chapter" data-level="8.2" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#de-largo-a-ancho-con-pivot_wider-1"><i class="fa fa-check"></i><b>8.2</b> De largo a ancho con <code>pivot_wider()</code></a></li>
-<li class="chapter" data-level="8.3" data-path="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html"><a href="manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1.html#uniendo-tablas-1"><i class="fa fa-check"></i><b>8.3</b> Uniendo tablas</a></li>
+<li class="chapter" data-level="8" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>8</b> Tablas</a><ul>
+<li class="chapter" data-level="8.1" data-path="tablas.html"><a href="tablas.html#tablas-simples-con-kable"><i class="fa fa-check"></i><b>8.1</b> Tablas simples con <code>kable</code></a></li>
+<li class="chapter" data-level="8.2" data-path="tablas.html"><a href="tablas.html#supertablas-con-kableextra"><i class="fa fa-check"></i><b>8.2</b> Supertablas con {kableExtra}</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="reportes-ii.html"><a href="reportes-ii.html"><i class="fa fa-check"></i><b>9</b> Reportes II</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="reportes-ii.html"><a href="reportes-ii.html#eligiendo-el-formato-de-salida"><i class="fa fa-check"></i><b>9.1</b> Eligiendo el formato de salida</a></li>
-<li class="chapter" data-level="9.2" data-path="reportes-ii.html"><a href="reportes-ii.html#personalizando-la-salida"><i class="fa fa-check"></i><b>9.2</b> Personalizando la salida</a></li>
-<li class="chapter" data-level="9.3" data-path="reportes-ii.html"><a href="reportes-ii.html#reportes-parametrizados"><i class="fa fa-check"></i><b>9.3</b> Reportes parametrizados</a></li>
-<li class="chapter" data-level="9.4" data-path="reportes-ii.html"><a href="reportes-ii.html#control-de-chunks"><i class="fa fa-check"></i><b>9.4</b> Control de chunks</a></li>
+<li class="chapter" data-level="9" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html"><i class="fa fa-check"></i><b>9</b> Apariencia de gráficos</a><ul>
+<li class="chapter" data-level="9.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas"><i class="fa fa-check"></i><b>9.1</b> Escalas</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escala-de-colores-y-otras"><i class="fa fa-check"></i><b>9.1.1</b> Escala de colores y otras</a></li>
+<li class="chapter" data-level="9.1.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas-de-ejes"><i class="fa fa-check"></i><b>9.1.2</b> Escalas de ejes</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>10</b> Tablas</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="tablas.html"><a href="tablas.html#tablas-simples-con-kable"><i class="fa fa-check"></i><b>10.1</b> Tablas simples con <code>kable</code></a></li>
-<li class="chapter" data-level="10.2" data-path="tablas.html"><a href="tablas.html#supertablas-con-kableextra"><i class="fa fa-check"></i><b>10.2</b> Supertablas con {kableExtra}</a></li>
+<li class="chapter" data-level="9.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#elementos-de-texto"><i class="fa fa-check"></i><b>9.2</b> Elementos de texto</a></li>
+<li class="chapter" data-level="9.3" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#temas"><i class="fa fa-check"></i><b>9.3</b> Temas</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html"><i class="fa fa-check"></i><b>11</b> Apariencia de gráficos</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas"><i class="fa fa-check"></i><b>11.1</b> Escalas</a>
-<ul>
-<li class="chapter" data-level="11.1.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escala-de-colores-y-otras"><i class="fa fa-check"></i><b>11.1.1</b> Escala de colores y otras</a></li>
-<li class="chapter" data-level="11.1.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas-de-ejes"><i class="fa fa-check"></i><b>11.1.2</b> Escalas de ejes</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#elementos-de-texto"><i class="fa fa-check"></i><b>11.2</b> Elementos de texto</a></li>
-<li class="chapter" data-level="11.3" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#temas"><i class="fa fa-check"></i><b>11.3</b> Temas</a></li>
+<li class="chapter" data-level="10" data-path="reportes-ii.html"><a href="reportes-ii.html"><i class="fa fa-check"></i><b>10</b> Reportes II</a><ul>
+<li class="chapter" data-level="10.1" data-path="reportes-ii.html"><a href="reportes-ii.html#eligiendo-el-formato-de-salida"><i class="fa fa-check"></i><b>10.1</b> Eligiendo el formato de salida</a></li>
+<li class="chapter" data-level="10.2" data-path="reportes-ii.html"><a href="reportes-ii.html#personalizando-la-salida"><i class="fa fa-check"></i><b>10.2</b> Personalizando la salida</a></li>
+<li class="chapter" data-level="10.3" data-path="reportes-ii.html"><a href="reportes-ii.html#reportes-parametrizados"><i class="fa fa-check"></i><b>10.3</b> Reportes parametrizados</a></li>
+<li class="chapter" data-level="10.4" data-path="reportes-ii.html"><a href="reportes-ii.html#control-de-chunks"><i class="fa fa-check"></i><b>10.4</b> Control de chunks</a></li>
 </ul></li>
 <li class="appendix"><span><b>Apéndice</b></span></li>
-<li class="chapter" data-level="A" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html"><i class="fa fa-check"></i><b>A</b> Desafíos de práctica</a>
-<ul>
+<li class="chapter" data-level="A" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html"><i class="fa fa-check"></i><b>A</b> Desafíos de práctica</a><ul>
 <li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-1"><i class="fa fa-check"></i>Desafío 1</a></li>
 <li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-2"><i class="fa fa-check"></i>Desafío 2</a></li>
 <li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-3"><i class="fa fa-check"></i>Desafío 3</a></li>
 <li class="chapter" data-level="" data-path="desafíos-de-práctica.html"><a href="desafíos-de-práctica.html#desafío-4"><i class="fa fa-check"></i>Desafío 4</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html"><i class="fa fa-check"></i><b>B</b> Instalando R y RStudio</a>
-<ul>
-<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-r"><i class="fa fa-check"></i>Instalando R</a>
-<ul>
+<li class="chapter" data-level="B" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html"><i class="fa fa-check"></i><b>B</b> Instalando R y RStudio</a><ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-r"><i class="fa fa-check"></i>Instalando R</a><ul>
 <li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#windows"><i class="fa fa-check"></i>Windows</a></li>
 <li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#ubuntu-o-derivados"><i class="fa fa-check"></i>Ubuntu o derivados</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-rstudio"><i class="fa fa-check"></i>Instalando RStudio</a>
-<ul>
+<li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#instalando-rstudio"><i class="fa fa-check"></i>Instalando RStudio</a><ul>
 <li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#windows-1"><i class="fa fa-check"></i>Windows</a></li>
 <li class="chapter" data-level="" data-path="instalando-r-y-rstudio.html"><a href="instalando-r-y-rstudio.html#ubuntu-o-derivados-1"><i class="fa fa-check"></i>Ubuntu o derivados</a></li>
 </ul></li>
@@ -288,29 +262,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="imagenes/cabezal.png">
 </div>
-<div id="apariencia-de-gráficos" class="section level1" number="11">
-<h1><span class="header-section-number">Capítulo 11</span> Apariencia de gráficos</h1>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="apariencia-de-gráficos.html#cb208-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb208-2"><a href="apariencia-de-gráficos.html#cb208-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<div id="apariencia-de-gráficos" class="section level1">
+<h1><span class="header-section-number">Capítulo 9</span> Apariencia de gráficos</h1>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="apariencia-de-gráficos.html#cb155-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb155-2"><a href="apariencia-de-gráficos.html#cb155-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
 <div id="escalas" class="section level2">
-=======
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="apariencia-de-gráficos.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb207-2"><a href="apariencia-de-gráficos.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
-<div id="escalas" class="section level2" number="11.1">
->>>>>>> Stashed changes
-<h2><span class="header-section-number">11.1</span> Escalas</h2>
+<h2><span class="header-section-number">9.1</span> Escalas</h2>
 <p><a href="06-graficos-I.html">Previamente</a> comentamos que el <em>mapeo</em> de una variable en un elemento geométrico, por ejemplo cuando le asignamos distintos colores a los puntos que representan cada continente, usa una <strong>escala</strong> para definir, en este caso, que color le corresponde a cada elemento.</p>
 <p>También cambiamos la apariencia del relleno (o <code>fill</code>) de barras y la forma de los puntos (o <code>shape</code>).
 Para esto, {ggplot2} siempre usa una escala que podemos modificar de acuerdo a nuestro gusto y teniendo en cuenta cómo queremos comunicar nuestros resultados.</p>
 <p>Por supuesto, modificar una escala implica sumar una nueva capa al gráfico sumando una nueva función.
 Todas las funciones de escala comienzan con <code>scale</code> (de escala en inglés), el tipo de apariencia que queremos modificar (<code>color</code>, <code>fill</code>, <code>shape</code>, etc) y en muchos casos un nombre o una característica de esa escala.</p>
 <p>Para mostrar como funciona, vamos a utilizar la base de datos de países y con suerte al final de este documento tendremos un gráfico listo para publicar.</p>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="apariencia-de-gráficos.html#cb209-1"></a>paises &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="apariencia-de-gráficos.html#cb208-1" aria-hidden="true" tabindex="-1"></a>paises <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span></code></pre></div>
->>>>>>> Stashed changes
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="apariencia-de-gráficos.html#cb156-1"></a>paises &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 1704 Columns: 6</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -319,52 +283,30 @@ Todas las funciones de escala comienzan con <code>scale</code> (de escala en ing
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="apariencia-de-gráficos.html#cb213-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb213-2"><a href="apariencia-de-gráficos.html#cb213-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb213-3"><a href="apariencia-de-gráficos.html#cb213-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb213-4"><a href="apariencia-de-gráficos.html#cb213-4"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="apariencia-de-gráficos.html#cb212-1" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb212-2"><a href="apariencia-de-gráficos.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb212-3"><a href="apariencia-de-gráficos.html#cb212-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb212-4"><a href="apariencia-de-gráficos.html#cb212-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
->>>>>>> Stashed changes
-<p><img src="DT6_files/figure-html/unnamed-chunk-127-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<div id="escala-de-colores-y-otras" class="section level3" number="11.1.1">
-<h3><span class="header-section-number">11.1.1</span> Escala de colores y otras</h3>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="apariencia-de-gráficos.html#cb160-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb160-2"><a href="apariencia-de-gráficos.html#cb160-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb160-3"><a href="apariencia-de-gráficos.html#cb160-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb160-4"><a href="apariencia-de-gráficos.html#cb160-4"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-105-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="escala-de-colores-y-otras" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> Escala de colores y otras</h3>
 <p>Lo primero que podemos hacer es cambiar el color de los puntos de a cuerdo al continente.</p>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="apariencia-de-gráficos.html#cb214-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb214-2"><a href="apariencia-de-gráficos.html#cb214-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb214-3"><a href="apariencia-de-gráficos.html#cb214-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb214-4"><a href="apariencia-de-gráficos.html#cb214-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente))</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="apariencia-de-gráficos.html#cb213-1" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb213-2"><a href="apariencia-de-gráficos.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb213-3"><a href="apariencia-de-gráficos.html#cb213-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb213-4"><a href="apariencia-de-gráficos.html#cb213-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> continente))</span></code></pre></div>
->>>>>>> Stashed changes
-<p><img src="DT6_files/figure-html/unnamed-chunk-128-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="apariencia-de-gráficos.html#cb161-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-2"><a href="apariencia-de-gráficos.html#cb161-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-3"><a href="apariencia-de-gráficos.html#cb161-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb161-4"><a href="apariencia-de-gráficos.html#cb161-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-106-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Pero esta escala de colores que usa {ggplot2} por defecto no es de las mejores, de hecho las personas que tienen daltonísmo muy posiblemente no logren diferenciar todos los puntos.
 Una escala o paleta de colores muy usada es <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><strong>viridis</strong></a> que fue creada justamente para resolver este y otros problemas.
 También existe otra gran familia de paletas de colores llamada <a href="https://colorbrewer2.org/"><strong>ColorBrewer</strong></a>.</p>
 <p>Vamos a probar la paleta “Dark2” de ColorBrewer, esta paleta es <em>qualitativa</em> y es justo lo que necesitamos para identificar elementos en categorías como los continentes.
 Cómo estamos modificando el <em>color</em>, la función a usar será <code>scale_color_brewer()</code>:</p>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="apariencia-de-gráficos.html#cb215-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb215-2"><a href="apariencia-de-gráficos.html#cb215-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb215-3"><a href="apariencia-de-gráficos.html#cb215-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb215-4"><a href="apariencia-de-gráficos.html#cb215-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente)) <span class="op">+</span></span>
-<span id="cb215-5"><a href="apariencia-de-gráficos.html#cb215-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="apariencia-de-gráficos.html#cb214-1" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb214-2"><a href="apariencia-de-gráficos.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb214-3"><a href="apariencia-de-gráficos.html#cb214-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb214-4"><a href="apariencia-de-gráficos.html#cb214-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> continente)) <span class="sc">+</span></span>
-<span id="cb214-5"><a href="apariencia-de-gráficos.html#cb214-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
->>>>>>> Stashed changes
-<p><img src="DT6_files/figure-html/unnamed-chunk-129-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="apariencia-de-gráficos.html#cb162-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb162-2"><a href="apariencia-de-gráficos.html#cb162-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb162-3"><a href="apariencia-de-gráficos.html#cb162-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb162-4"><a href="apariencia-de-gráficos.html#cb162-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente)) <span class="op">+</span></span>
+<span id="cb162-5"><a href="apariencia-de-gráficos.html#cb162-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-107-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Nuestro gráfico va quedando mejor y podemos aprovechar la capacidad de {ggplot2} de <em>mapear</em> variables a los elementos del gráfico y mostrar la población de cada país.</p>
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
@@ -372,123 +314,69 @@ Cómo estamos modificando el <em>color</em>, la función a usar será <code>scal
 Para eso tenés que usar <code>scale_color_viridis_d()</code>.
 La “d” del final viene de <em>discrete</em> y se usa para variables discretas o categorías, mientas que si los datos son continuos, se usa “c”.</p>
 </div>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="apariencia-de-gráficos.html#cb216-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb216-2"><a href="apariencia-de-gráficos.html#cb216-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb216-3"><a href="apariencia-de-gráficos.html#cb216-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb216-4"><a href="apariencia-de-gráficos.html#cb216-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion)) <span class="op">+</span></span>
-<span id="cb216-5"><a href="apariencia-de-gráficos.html#cb216-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-130-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="apariencia-de-gráficos.html#cb163-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb163-2"><a href="apariencia-de-gráficos.html#cb163-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb163-3"><a href="apariencia-de-gráficos.html#cb163-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb163-4"><a href="apariencia-de-gráficos.html#cb163-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion)) <span class="op">+</span></span>
+<span id="cb163-5"><a href="apariencia-de-gráficos.html#cb163-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-108-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Esto nos da más información, pero al mismo tiempo vemos que los puntos se superponen.
 Vamos a arreglar eso agregando transparencia y de paso modificar el tamaño de los puntos con la escala correspondiente <code>scale_size()</code> y sacar la legenda con <code>guide = NULL</code>.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="apariencia-de-gráficos.html#cb217-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb217-2"><a href="apariencia-de-gráficos.html#cb217-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb217-3"><a href="apariencia-de-gráficos.html#cb217-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb217-4"><a href="apariencia-de-gráficos.html#cb217-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb217-5"><a href="apariencia-de-gráficos.html#cb217-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb217-6"><a href="apariencia-de-gráficos.html#cb217-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>)</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="apariencia-de-gráficos.html#cb215-1" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb215-2"><a href="apariencia-de-gráficos.html#cb215-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb215-3"><a href="apariencia-de-gráficos.html#cb215-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb215-4"><a href="apariencia-de-gráficos.html#cb215-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> continente, <span class="at">size =</span> poblacion)) <span class="sc">+</span></span>
-<span id="cb215-5"><a href="apariencia-de-gráficos.html#cb215-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-130-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>Esto nos da más información, pero al mismo tiempo vemos que los puntos se superponen.
-Vamos a arreglar eso agregando transparencia y de paso modificar el tamaño de los puntos con la escala correspondiente <code>scale_size()</code> y sacar la legenda con <code>guide = NULL</code>.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="apariencia-de-gráficos.html#cb216-1" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb216-2"><a href="apariencia-de-gráficos.html#cb216-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb216-3"><a href="apariencia-de-gráficos.html#cb216-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb216-4"><a href="apariencia-de-gráficos.html#cb216-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> continente, <span class="at">size =</span> poblacion), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb216-5"><a href="apariencia-de-gráficos.html#cb216-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb216-6"><a href="apariencia-de-gráficos.html#cb216-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">15</span>, <span class="at">guide =</span> <span class="cn">NULL</span>)</span></code></pre></div>
->>>>>>> Stashed changes
-<p><img src="DT6_files/figure-html/unnamed-chunk-131-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="apariencia-de-gráficos.html#cb164-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb164-2"><a href="apariencia-de-gráficos.html#cb164-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb164-3"><a href="apariencia-de-gráficos.html#cb164-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb164-4"><a href="apariencia-de-gráficos.html#cb164-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb164-5"><a href="apariencia-de-gráficos.html#cb164-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb164-6"><a href="apariencia-de-gráficos.html#cb164-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-109-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="escalas-de-ejes" class="section level3" number="11.1.2">
-<h3><span class="header-section-number">11.1.2</span> Escalas de ejes</h3>
+<div id="escalas-de-ejes" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Escalas de ejes</h3>
 <p>Tal vez notaste que el comportamiento entre la esperanza de vida y el PBI no es lineal, de hecho el PBI varía mucho mientras que la esperanza de vida va apenas entre 40 y 80 y algo.
 Eso puede esta indicando que el PBI tiene un comportamiento <em>logarítmico</em> y si bien podríamos transformar los datos antes de hacer el gráfico, también podemos elegir una escala logarítmica para el eje del gráfico correspondiente.</p>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="apariencia-de-gráficos.html#cb218-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb218-2"><a href="apariencia-de-gráficos.html#cb218-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb218-3"><a href="apariencia-de-gráficos.html#cb218-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb218-4"><a href="apariencia-de-gráficos.html#cb218-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb218-5"><a href="apariencia-de-gráficos.html#cb218-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb218-6"><a href="apariencia-de-gráficos.html#cb218-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb218-7"><a href="apariencia-de-gráficos.html#cb218-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>()</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="apariencia-de-gráficos.html#cb217-1" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb217-2"><a href="apariencia-de-gráficos.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb217-3"><a href="apariencia-de-gráficos.html#cb217-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb217-4"><a href="apariencia-de-gráficos.html#cb217-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> continente, <span class="at">size =</span> poblacion), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb217-5"><a href="apariencia-de-gráficos.html#cb217-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb217-6"><a href="apariencia-de-gráficos.html#cb217-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">15</span>, <span class="at">guide =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb217-7"><a href="apariencia-de-gráficos.html#cb217-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>()</span></code></pre></div>
->>>>>>> Stashed changes
-<p><img src="DT6_files/figure-html/unnamed-chunk-132-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="apariencia-de-gráficos.html#cb165-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb165-2"><a href="apariencia-de-gráficos.html#cb165-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb165-3"><a href="apariencia-de-gráficos.html#cb165-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb165-4"><a href="apariencia-de-gráficos.html#cb165-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb165-5"><a href="apariencia-de-gráficos.html#cb165-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb165-6"><a href="apariencia-de-gráficos.html#cb165-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb165-7"><a href="apariencia-de-gráficos.html#cb165-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>()</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-110-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>En este caso las escalas que modifican los ejes justamente comienzan con <code>scala_x_</code> o <code>scale_y_</code> según sea el caso.
 Y por supuesto hay una variedad importante de escalas con muchas opciones.</p>
 </div>
 </div>
-<div id="elementos-de-texto" class="section level2" number="11.2">
-<h2><span class="header-section-number">11.2</span> Elementos de texto</h2>
+<div id="elementos-de-texto" class="section level2">
+<h2><span class="header-section-number">9.2</span> Elementos de texto</h2>
 <p>Ya sumamos 3 escalas, pero el gráfico ya se ve muy bien.
 ¿Cómo hacemos si queremos identificar países individuales?
 Por ahora es difícil, pero podríamos agregar etiquetas de texto con el nombre de cada país al lado de cada punto usando <code>geom_text()</code>, y en este caso la apariencia está dada por <code>label</code> o etiqueta:</p>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="apariencia-de-gráficos.html#cb219-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb219-2"><a href="apariencia-de-gráficos.html#cb219-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb219-3"><a href="apariencia-de-gráficos.html#cb219-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb219-4"><a href="apariencia-de-gráficos.html#cb219-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb219-5"><a href="apariencia-de-gráficos.html#cb219-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb219-6"><a href="apariencia-de-gráficos.html#cb219-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb219-7"><a href="apariencia-de-gráficos.html#cb219-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
-<span id="cb219-8"><a href="apariencia-de-gráficos.html#cb219-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais)) </span></code></pre></div>
-=======
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="apariencia-de-gráficos.html#cb218-1" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb218-2"><a href="apariencia-de-gráficos.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb218-3"><a href="apariencia-de-gráficos.html#cb218-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb218-4"><a href="apariencia-de-gráficos.html#cb218-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> continente, <span class="at">size =</span> poblacion), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb218-5"><a href="apariencia-de-gráficos.html#cb218-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb218-6"><a href="apariencia-de-gráficos.html#cb218-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">15</span>, <span class="at">guide =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb218-7"><a href="apariencia-de-gráficos.html#cb218-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
-<span id="cb218-8"><a href="apariencia-de-gráficos.html#cb218-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> pais)) </span></code></pre></div>
->>>>>>> Stashed changes
-<p><img src="DT6_files/figure-html/unnamed-chunk-133-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="apariencia-de-gráficos.html#cb166-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb166-2"><a href="apariencia-de-gráficos.html#cb166-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb166-3"><a href="apariencia-de-gráficos.html#cb166-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb166-4"><a href="apariencia-de-gráficos.html#cb166-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb166-5"><a href="apariencia-de-gráficos.html#cb166-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb166-6"><a href="apariencia-de-gráficos.html#cb166-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb166-7"><a href="apariencia-de-gráficos.html#cb166-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
+<span id="cb166-8"><a href="apariencia-de-gráficos.html#cb166-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais)) </span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-111-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Pero nos olvidamos que tenemos casi 200 países, es razonable agregarle etiquetas a todos.
 Pero podríamos querer resaltar algunos, tal vez los de un continente en particular o los que cumplen con la condición de tener las mayores poblaciones del mundo.
 Para eso vamos a generarnos una nueva tabla con los países que queremos resaltar y de paso usarla dentro de <code>geom_text()</code>.</p>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="apariencia-de-gráficos.html#cb220-1"></a>mucha_poblacion &lt;-<span class="st"> </span>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb220-2"><a href="apariencia-de-gráficos.html#cb220-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb220-3"><a href="apariencia-de-gráficos.html#cb220-3"></a><span class="st">  </span><span class="kw">filter</span>(poblacion <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000000000</span>) <span class="co"># Países con más de un billón de habitantes!</span></span>
-<span id="cb220-4"><a href="apariencia-de-gráficos.html#cb220-4"></a></span>
-<span id="cb220-5"><a href="apariencia-de-gráficos.html#cb220-5"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb220-6"><a href="apariencia-de-gráficos.html#cb220-6"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb220-7"><a href="apariencia-de-gráficos.html#cb220-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb220-8"><a href="apariencia-de-gráficos.html#cb220-8"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb220-9"><a href="apariencia-de-gráficos.html#cb220-9"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb220-10"><a href="apariencia-de-gráficos.html#cb220-10"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb220-11"><a href="apariencia-de-gráficos.html#cb220-11"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
-<span id="cb220-12"><a href="apariencia-de-gráficos.html#cb220-12"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), </span>
-<span id="cb220-13"><a href="apariencia-de-gráficos.html#cb220-13"></a>            <span class="dt">data =</span> mucha_poblacion)  <span class="co"># Esta capa usa la tabla mucha_población!</span></span></code></pre></div>
-=======
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="apariencia-de-gráficos.html#cb219-1" aria-hidden="true" tabindex="-1"></a>mucha_poblacion <span class="ot">&lt;-</span> paises <span class="sc">%&gt;%</span> </span>
-<span id="cb219-2"><a href="apariencia-de-gráficos.html#cb219-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb219-3"><a href="apariencia-de-gráficos.html#cb219-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(poblacion <span class="sc">&gt;</span> <span class="dv">1000000000</span>) <span class="co"># Países con más de un billón de habitantes!</span></span>
-<span id="cb219-4"><a href="apariencia-de-gráficos.html#cb219-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb219-5"><a href="apariencia-de-gráficos.html#cb219-5" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb219-6"><a href="apariencia-de-gráficos.html#cb219-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb219-7"><a href="apariencia-de-gráficos.html#cb219-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb219-8"><a href="apariencia-de-gráficos.html#cb219-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> continente, <span class="at">size =</span> poblacion), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb219-9"><a href="apariencia-de-gráficos.html#cb219-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb219-10"><a href="apariencia-de-gráficos.html#cb219-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">15</span>, <span class="at">guide =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb219-11"><a href="apariencia-de-gráficos.html#cb219-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
-<span id="cb219-12"><a href="apariencia-de-gráficos.html#cb219-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> pais), </span>
-<span id="cb219-13"><a href="apariencia-de-gráficos.html#cb219-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> mucha_poblacion)  <span class="co"># Esta capa usa la tabla mucha_población!</span></span></code></pre></div>
->>>>>>> Stashed changes
-<p><img src="DT6_files/figure-html/unnamed-chunk-134-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="apariencia-de-gráficos.html#cb167-1"></a>mucha_poblacion &lt;-<span class="st"> </span>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb167-2"><a href="apariencia-de-gráficos.html#cb167-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb167-3"><a href="apariencia-de-gráficos.html#cb167-3"></a><span class="st">  </span><span class="kw">filter</span>(poblacion <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000000000</span>) <span class="co"># Países con más de un billón de habitantes!</span></span>
+<span id="cb167-4"><a href="apariencia-de-gráficos.html#cb167-4"></a></span>
+<span id="cb167-5"><a href="apariencia-de-gráficos.html#cb167-5"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb167-6"><a href="apariencia-de-gráficos.html#cb167-6"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb167-7"><a href="apariencia-de-gráficos.html#cb167-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb167-8"><a href="apariencia-de-gráficos.html#cb167-8"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb167-9"><a href="apariencia-de-gráficos.html#cb167-9"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb167-10"><a href="apariencia-de-gráficos.html#cb167-10"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb167-11"><a href="apariencia-de-gráficos.html#cb167-11"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
+<span id="cb167-12"><a href="apariencia-de-gráficos.html#cb167-12"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), </span>
+<span id="cb167-13"><a href="apariencia-de-gráficos.html#cb167-13"></a>            <span class="dt">data =</span> mucha_poblacion)  <span class="co"># Esta capa usa la tabla mucha_población!</span></span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-112-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <div class="alert alert-success">
 <p>Del código anterior surge algo muy importante: es posible generar capas en un gráfico usando una data.frame <em>distinto</em> al que usamos para graficar las capas anteriores.
 Esto es útil principalmente para definir etiquetas o resaltar determinadas observaciones.</p>
@@ -496,81 +384,46 @@ Esto es útil principalmente para definir etiquetas o resaltar determinadas obse
 </div>
 <p>Veamos ahora una (de varias) maneras agregar o modificar elementos de texto en el gráfico.
 Vamos a usar una nueva función (y una nueva capa!), <code>labs()</code>:</p>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="apariencia-de-gráficos.html#cb221-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-2"><a href="apariencia-de-gráficos.html#cb221-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-3"><a href="apariencia-de-gráficos.html#cb221-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb221-4"><a href="apariencia-de-gráficos.html#cb221-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb221-5"><a href="apariencia-de-gráficos.html#cb221-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb221-6"><a href="apariencia-de-gráficos.html#cb221-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb221-7"><a href="apariencia-de-gráficos.html#cb221-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
-<span id="cb221-8"><a href="apariencia-de-gráficos.html#cb221-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), <span class="dt">data =</span> mucha_poblacion) <span class="op">+</span></span>
-<span id="cb221-9"><a href="apariencia-de-gráficos.html#cb221-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Paises del mundo&quot;</span>,</span>
-<span id="cb221-10"><a href="apariencia-de-gráficos.html#cb221-10"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;Año 2007&quot;</span>,</span>
-<span id="cb221-11"><a href="apariencia-de-gráficos.html#cb221-11"></a>       <span class="dt">caption =</span> <span class="st">&quot;El tamaño de cada circulo representa la población.&quot;</span>,</span>
-<span id="cb221-12"><a href="apariencia-de-gráficos.html#cb221-12"></a>       <span class="dt">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
-<span id="cb221-13"><a href="apariencia-de-gráficos.html#cb221-13"></a>       <span class="dt">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
-<span id="cb221-14"><a href="apariencia-de-gráficos.html#cb221-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="apariencia-de-gráficos.html#cb220-1" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb220-2"><a href="apariencia-de-gráficos.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb220-3"><a href="apariencia-de-gráficos.html#cb220-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb220-4"><a href="apariencia-de-gráficos.html#cb220-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> continente, <span class="at">size =</span> poblacion), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb220-5"><a href="apariencia-de-gráficos.html#cb220-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb220-6"><a href="apariencia-de-gráficos.html#cb220-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">15</span>, <span class="at">guide =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb220-7"><a href="apariencia-de-gráficos.html#cb220-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
-<span id="cb220-8"><a href="apariencia-de-gráficos.html#cb220-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> pais), <span class="at">data =</span> mucha_poblacion) <span class="sc">+</span></span>
-<span id="cb220-9"><a href="apariencia-de-gráficos.html#cb220-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Paises del mundo&quot;</span>,</span>
-<span id="cb220-10"><a href="apariencia-de-gráficos.html#cb220-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Año 2007&quot;</span>,</span>
-<span id="cb220-11"><a href="apariencia-de-gráficos.html#cb220-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;El tamaño de cada circulo representa la población.&quot;</span>,</span>
-<span id="cb220-12"><a href="apariencia-de-gráficos.html#cb220-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
-<span id="cb220-13"><a href="apariencia-de-gráficos.html#cb220-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
-<span id="cb220-14"><a href="apariencia-de-gráficos.html#cb220-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
->>>>>>> Stashed changes
-<p><img src="DT6_files/figure-html/unnamed-chunk-135-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="apariencia-de-gráficos.html#cb168-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb168-2"><a href="apariencia-de-gráficos.html#cb168-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb168-3"><a href="apariencia-de-gráficos.html#cb168-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb168-4"><a href="apariencia-de-gráficos.html#cb168-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb168-5"><a href="apariencia-de-gráficos.html#cb168-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb168-6"><a href="apariencia-de-gráficos.html#cb168-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb168-7"><a href="apariencia-de-gráficos.html#cb168-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
+<span id="cb168-8"><a href="apariencia-de-gráficos.html#cb168-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), <span class="dt">data =</span> mucha_poblacion) <span class="op">+</span></span>
+<span id="cb168-9"><a href="apariencia-de-gráficos.html#cb168-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Paises del mundo&quot;</span>,</span>
+<span id="cb168-10"><a href="apariencia-de-gráficos.html#cb168-10"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;Año 2007&quot;</span>,</span>
+<span id="cb168-11"><a href="apariencia-de-gráficos.html#cb168-11"></a>       <span class="dt">caption =</span> <span class="st">&quot;El tamaño de cada circulo representa la población.&quot;</span>,</span>
+<span id="cb168-12"><a href="apariencia-de-gráficos.html#cb168-12"></a>       <span class="dt">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
+<span id="cb168-13"><a href="apariencia-de-gráficos.html#cb168-13"></a>       <span class="dt">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
+<span id="cb168-14"><a href="apariencia-de-gráficos.html#cb168-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-113-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Agregamos un título, un subtítulo, el epígrafe de la figura (<em>caption</em>) para las aclaraciones y cambiamos el nombre de los ejes para que se vean mejor.
 Pero ademas eliminamos el nombre de la leyenda porque era un poco redundante.</p>
 </div>
-<div id="temas" class="section level2" number="11.3">
-<h2><span class="header-section-number">11.3</span> Temas</h2>
+<div id="temas" class="section level2">
+<h2><span class="header-section-number">9.3</span> Temas</h2>
 <p>Nos queda una última cosa por hacer, cambiar la apariencia global del gráfico.
 {ggplot2} tiene muchos <em>temas</em> disponibles y para todos los gustos.
 Pero además hay otros paquetes que extienden las posibilidades, por ejemplo <a href="https://github.com/jrnold/ggthemes">{ggthemes}</a>.</p>
 <p>Por defecto {ggplot2} usa <code>theme_grey()</code>, probemos <code>theme_light()</code>:</p>
-<<<<<<< Updated upstream
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="apariencia-de-gráficos.html#cb222-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb222-2"><a href="apariencia-de-gráficos.html#cb222-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb222-3"><a href="apariencia-de-gráficos.html#cb222-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
-<span id="cb222-4"><a href="apariencia-de-gráficos.html#cb222-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb222-5"><a href="apariencia-de-gráficos.html#cb222-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
-<span id="cb222-6"><a href="apariencia-de-gráficos.html#cb222-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb222-7"><a href="apariencia-de-gráficos.html#cb222-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
-<span id="cb222-8"><a href="apariencia-de-gráficos.html#cb222-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), <span class="dt">data =</span> mucha_poblacion) <span class="op">+</span></span>
-<span id="cb222-9"><a href="apariencia-de-gráficos.html#cb222-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Paises del mundo&quot;</span>,</span>
-<span id="cb222-10"><a href="apariencia-de-gráficos.html#cb222-10"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;Año 2007&quot;</span>,</span>
-<span id="cb222-11"><a href="apariencia-de-gráficos.html#cb222-11"></a>       <span class="dt">caption =</span> <span class="st">&quot;El tamaño de cada circulo representa la población.&quot;</span>,</span>
-<span id="cb222-12"><a href="apariencia-de-gráficos.html#cb222-12"></a>       <span class="dt">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
-<span id="cb222-13"><a href="apariencia-de-gráficos.html#cb222-13"></a>       <span class="dt">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
-<span id="cb222-14"><a href="apariencia-de-gráficos.html#cb222-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span></span>
-<span id="cb222-15"><a href="apariencia-de-gráficos.html#cb222-15"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="apariencia-de-gráficos.html#cb221-1" aria-hidden="true" tabindex="-1"></a>paises <span class="sc">%&gt;%</span> </span>
-<span id="cb221-2"><a href="apariencia-de-gráficos.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb221-3"><a href="apariencia-de-gráficos.html#cb221-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="sc">+</span></span>
-<span id="cb221-4"><a href="apariencia-de-gráficos.html#cb221-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> continente, <span class="at">size =</span> poblacion), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb221-5"><a href="apariencia-de-gráficos.html#cb221-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb221-6"><a href="apariencia-de-gráficos.html#cb221-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">15</span>, <span class="at">guide =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb221-7"><a href="apariencia-de-gráficos.html#cb221-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
-<span id="cb221-8"><a href="apariencia-de-gráficos.html#cb221-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> pais), <span class="at">data =</span> mucha_poblacion) <span class="sc">+</span></span>
-<span id="cb221-9"><a href="apariencia-de-gráficos.html#cb221-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Paises del mundo&quot;</span>,</span>
-<span id="cb221-10"><a href="apariencia-de-gráficos.html#cb221-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Año 2007&quot;</span>,</span>
-<span id="cb221-11"><a href="apariencia-de-gráficos.html#cb221-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;El tamaño de cada circulo representa la población.&quot;</span>,</span>
-<span id="cb221-12"><a href="apariencia-de-gráficos.html#cb221-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
-<span id="cb221-13"><a href="apariencia-de-gráficos.html#cb221-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
-<span id="cb221-14"><a href="apariencia-de-gráficos.html#cb221-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
-<span id="cb221-15"><a href="apariencia-de-gráficos.html#cb221-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code></pre></div>
->>>>>>> Stashed changes
-<p><img src="DT6_files/figure-html/unnamed-chunk-136-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="apariencia-de-gráficos.html#cb169-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb169-2"><a href="apariencia-de-gráficos.html#cb169-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb169-3"><a href="apariencia-de-gráficos.html#cb169-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
+<span id="cb169-4"><a href="apariencia-de-gráficos.html#cb169-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb169-5"><a href="apariencia-de-gráficos.html#cb169-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
+<span id="cb169-6"><a href="apariencia-de-gráficos.html#cb169-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb169-7"><a href="apariencia-de-gráficos.html#cb169-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
+<span id="cb169-8"><a href="apariencia-de-gráficos.html#cb169-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), <span class="dt">data =</span> mucha_poblacion) <span class="op">+</span></span>
+<span id="cb169-9"><a href="apariencia-de-gráficos.html#cb169-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Paises del mundo&quot;</span>,</span>
+<span id="cb169-10"><a href="apariencia-de-gráficos.html#cb169-10"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;Año 2007&quot;</span>,</span>
+<span id="cb169-11"><a href="apariencia-de-gráficos.html#cb169-11"></a>       <span class="dt">caption =</span> <span class="st">&quot;El tamaño de cada circulo representa la población.&quot;</span>,</span>
+<span id="cb169-12"><a href="apariencia-de-gráficos.html#cb169-12"></a>       <span class="dt">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
+<span id="cb169-13"><a href="apariencia-de-gráficos.html#cb169-13"></a>       <span class="dt">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
+<span id="cb169-14"><a href="apariencia-de-gráficos.html#cb169-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span></span>
+<span id="cb169-15"><a href="apariencia-de-gráficos.html#cb169-15"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-114-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <div class="alert alert-info">
 <p>Ahora es tu turno.
 Elegí un <a href="https://es.r4ds.hadley.nz/images/visualization-themes.png" class="alert-link">tema que te guste</a> y probalo.
@@ -586,16 +439,13 @@ Tiene casi infinitas opciones y si algún momento te desvelas intentando cambiar
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
 <a href="tablas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="desafíos-de-práctica.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reportes-ii.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -44,15 +44,6 @@ manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii
 de-ancho-a-largo-con-pivot_longer
 de-largo-a-ancho-con-pivot_wider
 uniendo-tablas
-manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii-1
-de-ancho-a-largo-con-pivot_longer-1
-de-largo-a-ancho-con-pivot_wider-1
-uniendo-tablas-1
-reportes-ii
-eligiendo-el-formato-de-salida
-personalizando-la-salida
-reportes-parametrizados
-control-de-chunks
 tablas
 tablas-simples-con-kable
 supertablas-con-kableextra
@@ -62,5 +53,10 @@ escala-de-colores-y-otras
 escalas-de-ejes
 elementos-de-texto
 temas
+reportes-ii
+eligiendo-el-formato-de-salida
+personalizando-la-salida
+reportes-parametrizados
+control-de-chunks
 desafíos-de-práctica
 instalando-r-y-rstudio
