@@ -96,7 +96,7 @@ File → Import Dataset → From Text (readr)...
 
 Esto te va abrir una ventana donde podrás elegir el archivo a importar (en este caso el archivo `turistas_edad.csv` que está dentro de la capeta `datos` del proyecto) y otros detalles.
 
-```{r, fig.alt = "Diálogo de importar datos de RStudio."}
+```{r, echo=FALSE, fig.alt = "Diálogo de importar datos de RStudio."}
 knitr::include_graphics("img/importar-edad-xlsx.png")
 ```
 
@@ -145,8 +145,7 @@ En efecto, RStudio provee la misma ayuda para leer este tipo de datos:
 File → Import Dataset → From Excel...
 :::
 
-**CAMBIAR**
-```{r, fig.alt = "Diálogo de importar datos de RStudio."}
+```{r, echo=FALSE, fig.alt = "Diálogo de importar datos de RStudio."}
 knitr::include_graphics("img/importar-edad-xlsx.png")
 ```
 
