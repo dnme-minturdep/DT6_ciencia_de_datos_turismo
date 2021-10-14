@@ -221,14 +221,13 @@ No es necesario que lo intentes hacer ahora pero siempre sirve hacer un diagrama
 ## Uniendo tablas
 
 Hasta ahora todo lo que usaste de dplyr involucra trabajar y modificar con una sola tabla a la vez, pero es muy común tener dos o más tablas con datos relacionados.
-En ese caso, tenemos que *unir* estas tablas.
-a partir de una o más variables en común o *keys*.
+En ese caso, tenemos que *unir* estas tablas a partir de una o más variables en común o *keys*.
 En Excel u otro programa de hojas de cálculo, esto se resuelve con la función "VLOOKUP" o "BUSCARV", en R y en particular dentro del mundo de dplyr hay que usar la familia de funciones `*_join()`.
 Hay una función para cada tipo de unión que queramos hacer.
 
 Asumiendo que querés unir dos data.frames o tablas `x` e `y` que tienen en común una variable `A`:
 
-![](img/join.png)
+![](img/join.png "Esquema de dos tablas, x e y")
 
 -   `full_join()`: devuelve todas las filas y todas las columnas de ambas tablas `x` e `y`.
 Cuando no coinciden los elementos en `y`, devuelve `NA` (dato faltante).
@@ -246,7 +245,7 @@ En otras palabras, `right_join(x, y)` es idéntico a `left_join(y, x)`.
 Si hay múltiples coincidencias entre `x` e `y`, entonces devuelve todas las coincidencias.
 Esto significa que eliminará las filas (observaciones) que no coincidan en ambas tablas, lo que puede ser peligroso.
 
-![](img/join_family.png)
+![Familia de uniones de dplyr](img/join_family.png  "Esquema de uniones de dplyr. full_join() une las filas que coinciden en x e y. En las filas donde no coinciden, agrega NA. left_join() une las filas que coinciden en x e y. Retiene toda slas filas de x pero no las de y. inner_join() une las filas que coinciden en x e y. Retiene sólo las filas donde hay coincidencia.")
 
 Ahora vamos a seguir trabajando con las base de datos de `parques_largo` y de paso unirlo a una nueva base de datos `hoteles` que contiene información de viajeros por región de destino y origen a lo largo del tiempo.
 
