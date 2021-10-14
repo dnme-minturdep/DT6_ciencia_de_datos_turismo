@@ -200,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>8</b> Tablas</a><ul>
 <li class="chapter" data-level="8.1" data-path="tablas.html"><a href="tablas.html#tablas-simples-con-kable"><i class="fa fa-check"></i><b>8.1</b> Tablas simples con <code>kable</code></a></li>
-<li class="chapter" data-level="8.2" data-path="tablas.html"><a href="tablas.html#supertablas-con-kableextra"><i class="fa fa-check"></i><b>8.2</b> Supertablas con {kableExtra}</a></li>
+<li class="chapter" data-level="8.2" data-path="tablas.html"><a href="tablas.html#supertablas-con-kableextra"><i class="fa fa-check"></i><b>8.2</b> Supertablas con kableExtra</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html"><i class="fa fa-check"></i><b>9</b> Apariencia de gráficos</a><ul>
 <li class="chapter" data-level="9.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas"><i class="fa fa-check"></i><b>9.1</b> Escalas</a><ul>
@@ -266,1162 +266,1342 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Capítulo 8</span> Tablas</h1>
 <p>Por defecto, la forma en que R Markdown muestra tablas es bastante feo porque muestra lo que verías si corrieras el código en la consola.</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="tablas.html#cb132-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb132-2"><a href="tablas.html#cb132-2"></a>paises &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/paises.csv&quot;</span>)</span>
-<span id="cb132-3"><a href="tablas.html#cb132-3"></a>paises_seleccion &lt;-<span class="st"> </span>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb132-4"><a href="tablas.html#cb132-4"></a><span class="st">  </span><span class="kw">filter</span>(pais <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Uruguay&quot;</span>, <span class="st">&quot;Chile&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb132-5"><a href="tablas.html#cb132-5"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2007</span>, <span class="dv">2002</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb132-6"><a href="tablas.html#cb132-6"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>continente)</span>
-<span id="cb132-7"><a href="tablas.html#cb132-7"></a>paises_seleccion</span></code></pre></div>
+<span id="cb132-2"><a href="tablas.html#cb132-2"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb132-3"><a href="tablas.html#cb132-3"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb132-4"><a href="tablas.html#cb132-4"></a></span>
+<span id="cb132-5"><a href="tablas.html#cb132-5"></a>parques_ancho &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv&quot;</span>)</span>
+<span id="cb132-6"><a href="tablas.html#cb132-6"></a></span>
+<span id="cb132-7"><a href="tablas.html#cb132-7"></a>parques_largo &lt;-<span class="st"> </span>parques_ancho <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb132-8"><a href="tablas.html#cb132-8"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;indice_tiempo&quot;</span>, <span class="st">&quot;residentes&quot;</span>, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;total&quot;</span>),</span>
+<span id="cb132-9"><a href="tablas.html#cb132-9"></a>               <span class="dt">names_to =</span> <span class="st">&quot;region_visitante&quot;</span>,</span>
+<span id="cb132-10"><a href="tablas.html#cb132-10"></a>               <span class="dt">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb132-11"><a href="tablas.html#cb132-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">region_visitante =</span> stringr<span class="op">::</span><span class="kw">str_replace</span>(region_visitante, <span class="st">&quot;buenos_aires*&quot;</span>, <span class="st">&quot;buenos-aires&quot;</span>),</span>
+<span id="cb132-12"><a href="tablas.html#cb132-12"></a>         <span class="dt">region_visitante =</span> stringr<span class="op">::</span><span class="kw">str_replace</span>(region_visitante, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;noresidentes&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb132-13"><a href="tablas.html#cb132-13"></a><span class="st">  </span><span class="kw">separate</span>(region_visitante, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;region&quot;</span>, <span class="st">&quot;tipo_visitante&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb132-14"><a href="tablas.html#cb132-14"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;residentes&quot;</span>, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;total&quot;</span>))</span>
+<span id="cb132-15"><a href="tablas.html#cb132-15"></a></span>
+<span id="cb132-16"><a href="tablas.html#cb132-16"></a>parques_resumen &lt;-<span class="st">  </span>parques_largo <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb132-17"><a href="tablas.html#cb132-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">indice_tiempo =</span> <span class="kw">ym</span>(indice_tiempo)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb132-18"><a href="tablas.html#cb132-18"></a><span class="st">  </span><span class="kw">group_by</span>(<span class="dt">anio =</span> <span class="kw">year</span>(indice_tiempo), region, tipo_visitante) <span class="op">%&gt;%</span><span class="st">  </span></span>
+<span id="cb132-19"><a href="tablas.html#cb132-19"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">valor =</span> <span class="kw">mean</span>(valor)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb132-20"><a href="tablas.html#cb132-20"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cordoba&quot;</span>, <span class="st">&quot;cuyo&quot;</span>, <span class="st">&quot;patagonia&quot;</span>), </span>
+<span id="cb132-21"><a href="tablas.html#cb132-21"></a>         anio <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2020</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb132-22"><a href="tablas.html#cb132-22"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> <span class="st">&quot;tipo_visitante&quot;</span>, <span class="dt">values_from =</span> <span class="st">&quot;valor&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="tablas.html#cb133-1"></a>parques_resumen</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
-##   pais       anio esperanza_de_vida poblacion pib_per_capita
-##   &lt;chr&gt;     &lt;dbl&gt;             &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;
-## 1 Argentina  2002              74.3  38331121          8798.
-## 2 Argentina  2007              75.3  40301927         12779.
-## 3 Chile      2002              77.9  15497046         10779.
-## 4 Chile      2007              78.6  16284741         13172.
-## 5 Uruguay    2002              75.3   3363085          7727.
-## 6 Uruguay    2007              76.4   3447496         10611.</code></pre>
+## # Groups:   anio, region [6]
+##    anio region    noresidentes residentes   total
+##   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+## 1  2020 cordoba          36.9        626.    663.
+## 2  2020 cuyo             55.2       1104.   1160.
+## 3  2020 patagonia     25615.       66082   91697.
+## 4  2021 cordoba           9.5       1065    1074.
+## 5  2021 cuyo              4.75      1424.   1428.
+## 6  2021 patagonia       170       122002. 122172.</code></pre>
 <div id="tablas-simples-con-kable" class="section level2">
 <h2><span class="header-section-number">8.1</span> Tablas simples con <code>kable</code></h2>
-<p>Existen varios paquetes para mostrar tablas lindas pero una forma simple y sin vueltas es usando la función <code>kable</code> del paquete {knitr}.
-Sólo usando esta función ya devuelve una tabla más que razonable:</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="tablas.html#cb134-1"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb134-2"><a href="tablas.html#cb134-2"></a><span class="kw">kable</span>(paises_seleccion)</span></code></pre></div>
+<p>Existen varios paquetes para mostrar tablas lindas pero una forma simple y sin vueltas es usando la función <code>kable()</code> del paquete <strong>knitr</strong>.
+Sólo usando esta función ya devuelve una tabla con un diseño más limpio y acabado:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="tablas.html#cb135-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb135-2"><a href="tablas.html#cb135-2"></a><span class="kw">kable</span>(parques_resumen)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="left">pais</th>
 <th align="right">anio</th>
-<th align="right">esperanza_de_vida</th>
-<th align="right">poblacion</th>
-<th align="right">pib_per_capita</th>
+<th align="left">region</th>
+<th align="right">noresidentes</th>
+<th align="right">residentes</th>
+<th align="right">total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Argentina</td>
-<td align="right">2002</td>
-<td align="right">74.340</td>
-<td align="right">38331121</td>
-<td align="right">8797.641</td>
+<td align="right">2020</td>
+<td align="left">cordoba</td>
+<td align="right">36.91667</td>
+<td align="right">626.1667</td>
+<td align="right">663.0833</td>
 </tr>
 <tr class="even">
-<td align="left">Argentina</td>
-<td align="right">2007</td>
-<td align="right">75.320</td>
-<td align="right">40301927</td>
-<td align="right">12779.380</td>
+<td align="right">2020</td>
+<td align="left">cuyo</td>
+<td align="right">55.25000</td>
+<td align="right">1104.4167</td>
+<td align="right">1159.6667</td>
 </tr>
 <tr class="odd">
-<td align="left">Chile</td>
-<td align="right">2002</td>
-<td align="right">77.860</td>
-<td align="right">15497046</td>
-<td align="right">10778.784</td>
+<td align="right">2020</td>
+<td align="left">patagonia</td>
+<td align="right">25615.25000</td>
+<td align="right">66082.0000</td>
+<td align="right">91697.1667</td>
 </tr>
 <tr class="even">
-<td align="left">Chile</td>
-<td align="right">2007</td>
-<td align="right">78.553</td>
-<td align="right">16284741</td>
-<td align="right">13171.639</td>
+<td align="right">2021</td>
+<td align="left">cordoba</td>
+<td align="right">9.50000</td>
+<td align="right">1065.0000</td>
+<td align="right">1074.5000</td>
 </tr>
 <tr class="odd">
-<td align="left">Uruguay</td>
-<td align="right">2002</td>
-<td align="right">75.307</td>
-<td align="right">3363085</td>
-<td align="right">7727.002</td>
+<td align="right">2021</td>
+<td align="left">cuyo</td>
+<td align="right">4.75000</td>
+<td align="right">1423.7500</td>
+<td align="right">1428.5000</td>
 </tr>
 <tr class="even">
-<td align="left">Uruguay</td>
-<td align="right">2007</td>
-<td align="right">76.384</td>
-<td align="right">3447496</td>
-<td align="right">10611.463</td>
+<td align="right">2021</td>
+<td align="left">patagonia</td>
+<td align="right">170.00000</td>
+<td align="right">122002.5000</td>
+<td align="right">122172.5000</td>
 </tr>
 </tbody>
 </table>
 <p>La mayoría de las veces, el nombre de las columnas que queremos mostrar no va a ser igual que el nombre de las columnas en R.
-En la tabla <code>paises</code>, los nombres están en minúscula, sin espacios y sin “caracteres especiales” como “ñ” o “í”.
-Esto es útil para comunicarse con R, pero no está bueno para comunicados a seres humanos.
+En la tabla <code>parques_resumen</code>, los nombres están en minúscula, sin espacios y sin “caracteres especiales” como “ñ”.
+Esto es útil para comunicarse con R, pero no está bueno para comunicarse con otras personas.
 El argumento <code>col.names</code> permite especificar el nombre de las columnas para mostrar:</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="tablas.html#cb135-1"></a><span class="kw">kable</span>(paises_seleccion, </span>
-<span id="cb135-2"><a href="tablas.html#cb135-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="tablas.html#cb136-1"></a><span class="kw">kable</span>(parques_resumen, </span>
+<span id="cb136-2"><a href="tablas.html#cb136-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="left">País</th>
 <th align="right">Año</th>
-<th align="right">Esperanza de vida</th>
-<th align="right">Población</th>
-<th align="right">PBI per cápita</th>
+<th align="left">Región</th>
+<th align="right">No Residentes</th>
+<th align="right">Residentes</th>
+<th align="right">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Argentina</td>
-<td align="right">2002</td>
-<td align="right">74.340</td>
-<td align="right">38331121</td>
-<td align="right">8797.641</td>
+<td align="right">2020</td>
+<td align="left">cordoba</td>
+<td align="right">36.91667</td>
+<td align="right">626.1667</td>
+<td align="right">663.0833</td>
 </tr>
 <tr class="even">
-<td align="left">Argentina</td>
-<td align="right">2007</td>
-<td align="right">75.320</td>
-<td align="right">40301927</td>
-<td align="right">12779.380</td>
+<td align="right">2020</td>
+<td align="left">cuyo</td>
+<td align="right">55.25000</td>
+<td align="right">1104.4167</td>
+<td align="right">1159.6667</td>
 </tr>
 <tr class="odd">
-<td align="left">Chile</td>
-<td align="right">2002</td>
-<td align="right">77.860</td>
-<td align="right">15497046</td>
-<td align="right">10778.784</td>
+<td align="right">2020</td>
+<td align="left">patagonia</td>
+<td align="right">25615.25000</td>
+<td align="right">66082.0000</td>
+<td align="right">91697.1667</td>
 </tr>
 <tr class="even">
-<td align="left">Chile</td>
-<td align="right">2007</td>
-<td align="right">78.553</td>
-<td align="right">16284741</td>
-<td align="right">13171.639</td>
+<td align="right">2021</td>
+<td align="left">cordoba</td>
+<td align="right">9.50000</td>
+<td align="right">1065.0000</td>
+<td align="right">1074.5000</td>
 </tr>
 <tr class="odd">
-<td align="left">Uruguay</td>
-<td align="right">2002</td>
-<td align="right">75.307</td>
-<td align="right">3363085</td>
-<td align="right">7727.002</td>
+<td align="right">2021</td>
+<td align="left">cuyo</td>
+<td align="right">4.75000</td>
+<td align="right">1423.7500</td>
+<td align="right">1428.5000</td>
 </tr>
 <tr class="even">
-<td align="left">Uruguay</td>
-<td align="right">2007</td>
-<td align="right">76.384</td>
-<td align="right">3447496</td>
-<td align="right">10611.463</td>
+<td align="right">2021</td>
+<td align="left">patagonia</td>
+<td align="right">170.00000</td>
+<td align="right">122002.5000</td>
+<td align="right">122172.5000</td>
 </tr>
 </tbody>
 </table>
 <p>En Español, en general usamos la coma para separar los decimales y el punto como separador de miles.
+Además, esta tabla tiene el problema de la precisión innecesaria: ¿realmente tiene sentido reportar el promedio de visitantes con 5 decimales?
 Para eso, hay que modificar el argumento <code>format.args</code> de esta manera:</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="tablas.html#cb136-1"></a><span class="kw">kable</span>(paises_seleccion, </span>
-<span id="cb136-2"><a href="tablas.html#cb136-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;),</span></span>
-<span id="cb136-3"><a href="tablas.html#cb136-3"></a><span class="st">      format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="tablas.html#cb137-1"></a><span class="kw">kable</span>(parques_resumen, </span>
+<span id="cb137-2"><a href="tablas.html#cb137-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
+<span id="cb137-3"><a href="tablas.html#cb137-3"></a><span class="st">      format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="left">País</th>
 <th align="right">Año</th>
-<th align="right">Esperanza de vida</th>
-<th align="right">Población</th>
-<th align="right">PBI per cápita</th>
+<th align="left">Región</th>
+<th align="right">No Residentes</th>
+<th align="right">Residentes</th>
+<th align="right">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Argentina</td>
-<td align="right">2.002</td>
-<td align="right">74,340</td>
-<td align="right">38.331.121</td>
-<td align="right">8.797,641</td>
+<td align="right">2.020</td>
+<td align="left">cordoba</td>
+<td align="right">37</td>
+<td align="right">626</td>
+<td align="right">663</td>
 </tr>
 <tr class="even">
-<td align="left">Argentina</td>
-<td align="right">2.007</td>
-<td align="right">75,320</td>
-<td align="right">40.301.927</td>
-<td align="right">12.779,380</td>
+<td align="right">2.020</td>
+<td align="left">cuyo</td>
+<td align="right">55</td>
+<td align="right">1.104</td>
+<td align="right">1.160</td>
 </tr>
 <tr class="odd">
-<td align="left">Chile</td>
-<td align="right">2.002</td>
-<td align="right">77,860</td>
-<td align="right">15.497.046</td>
-<td align="right">10.778,784</td>
+<td align="right">2.020</td>
+<td align="left">patagonia</td>
+<td align="right">25.615</td>
+<td align="right">66.082</td>
+<td align="right">91.697</td>
 </tr>
 <tr class="even">
-<td align="left">Chile</td>
-<td align="right">2.007</td>
-<td align="right">78,553</td>
-<td align="right">16.284.741</td>
-<td align="right">13.171,639</td>
+<td align="right">2.021</td>
+<td align="left">cordoba</td>
+<td align="right">10</td>
+<td align="right">1.065</td>
+<td align="right">1.074</td>
 </tr>
 <tr class="odd">
-<td align="left">Uruguay</td>
-<td align="right">2.002</td>
-<td align="right">75,307</td>
-<td align="right">3.363.085</td>
-<td align="right">7.727,002</td>
+<td align="right">2.021</td>
+<td align="left">cuyo</td>
+<td align="right">5</td>
+<td align="right">1.424</td>
+<td align="right">1.428</td>
 </tr>
 <tr class="even">
-<td align="left">Uruguay</td>
-<td align="right">2.007</td>
-<td align="right">76,384</td>
-<td align="right">3.447.496</td>
-<td align="right">10.611,463</td>
+<td align="right">2.021</td>
+<td align="left">patagonia</td>
+<td align="right">170</td>
+<td align="right">122.002</td>
+<td align="right">122.172</td>
 </tr>
 </tbody>
 </table>
+<p>En esta llamada hay varios elementos que son parte del argumento <code>format.args</code>:</p>
+<ul>
+<li><code>decimal.mark = ","</code>: usar la coma para la marca de decimales,</li>
+<li><code>big.mark = "."</code>: usar el punto para separador de miles,</li>
+<li><code>digits = 1</code>: redondear todo a 1 cifra significativa,</li>
+<li><code>scientific = FALSE</code>: no usar notación científica.</li>
+</ul>
 <p>Uff… pero ponerle el punto de miles a los años queda raro.
 La solución es convertir la columna <code>anio</code> en caracter.
 De esta manera, no se ve afectada por el formato numérico.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="tablas.html#cb137-1"></a>paises_seleccion <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb137-2"><a href="tablas.html#cb137-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb137-3"><a href="tablas.html#cb137-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;),</span></span>
-<span id="cb137-4"><a href="tablas.html#cb137-4"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="tablas.html#cb138-1"></a>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb138-2"><a href="tablas.html#cb138-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb138-3"><a href="tablas.html#cb138-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
+<span id="cb138-4"><a href="tablas.html#cb138-4"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="left">País</th>
 <th align="left">Año</th>
-<th align="right">Esperanza de vida</th>
-<th align="right">Población</th>
-<th align="right">PBI per cápita</th>
+<th align="left">Región</th>
+<th align="right">No Residentes</th>
+<th align="right">Residentes</th>
+<th align="right">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Argentina</td>
-<td align="left">2002</td>
-<td align="right">74,340</td>
-<td align="right">38.331.121</td>
-<td align="right">8.797,641</td>
+<td align="left">2020</td>
+<td align="left">cordoba</td>
+<td align="right">37</td>
+<td align="right">626</td>
+<td align="right">663</td>
 </tr>
 <tr class="even">
-<td align="left">Argentina</td>
-<td align="left">2007</td>
-<td align="right">75,320</td>
-<td align="right">40.301.927</td>
-<td align="right">12.779,380</td>
+<td align="left">2020</td>
+<td align="left">cuyo</td>
+<td align="right">55</td>
+<td align="right">1.104</td>
+<td align="right">1.160</td>
 </tr>
 <tr class="odd">
-<td align="left">Chile</td>
-<td align="left">2002</td>
-<td align="right">77,860</td>
-<td align="right">15.497.046</td>
-<td align="right">10.778,784</td>
+<td align="left">2020</td>
+<td align="left">patagonia</td>
+<td align="right">25.615</td>
+<td align="right">66.082</td>
+<td align="right">91.697</td>
 </tr>
 <tr class="even">
-<td align="left">Chile</td>
-<td align="left">2007</td>
-<td align="right">78,553</td>
-<td align="right">16.284.741</td>
-<td align="right">13.171,639</td>
+<td align="left">2021</td>
+<td align="left">cordoba</td>
+<td align="right">10</td>
+<td align="right">1.065</td>
+<td align="right">1.074</td>
 </tr>
 <tr class="odd">
-<td align="left">Uruguay</td>
-<td align="left">2002</td>
-<td align="right">75,307</td>
-<td align="right">3.363.085</td>
-<td align="right">7.727,002</td>
+<td align="left">2021</td>
+<td align="left">cuyo</td>
+<td align="right">5</td>
+<td align="right">1.424</td>
+<td align="right">1.428</td>
 </tr>
 <tr class="even">
-<td align="left">Uruguay</td>
-<td align="left">2007</td>
-<td align="right">76,384</td>
-<td align="right">3.447.496</td>
-<td align="right">10.611,463</td>
+<td align="left">2021</td>
+<td align="left">patagonia</td>
+<td align="right">170</td>
+<td align="right">122.002</td>
+<td align="right">122.172</td>
 </tr>
 </tbody>
 </table>
-<p>hacer <code>kable</code>, que es una función diseñada para ser simple y hacer pocas cosas.
-Para hacer cosas un poco mas complicadas está el paquete {kableExtra}.</p>
+<p>Un detalle final podría ser convertir en mayúsculas los nombres de las regiones.
+Para eso se puede usar la función <code>str_to_sentence()</code> sel pqeute <strong>stringr</strong>.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="tablas.html#cb139-1"></a>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb139-2"><a href="tablas.html#cb139-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio),</span>
+<span id="cb139-3"><a href="tablas.html#cb139-3"></a>         <span class="dt">region =</span> stringr<span class="op">::</span><span class="kw">str_to_sentence</span>(region)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb139-4"><a href="tablas.html#cb139-4"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
+<span id="cb139-5"><a href="tablas.html#cb139-5"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Año</th>
+<th align="left">Región</th>
+<th align="right">No Residentes</th>
+<th align="right">Residentes</th>
+<th align="right">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">Cordoba</td>
+<td align="right">37</td>
+<td align="right">626</td>
+<td align="right">663</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">Cuyo</td>
+<td align="right">55</td>
+<td align="right">1.104</td>
+<td align="right">1.160</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">Patagonia</td>
+<td align="right">25.615</td>
+<td align="right">66.082</td>
+<td align="right">91.697</td>
+</tr>
+<tr class="even">
+<td align="left">2021</td>
+<td align="left">Cordoba</td>
+<td align="right">10</td>
+<td align="right">1.065</td>
+<td align="right">1.074</td>
+</tr>
+<tr class="odd">
+<td align="left">2021</td>
+<td align="left">Cuyo</td>
+<td align="right">5</td>
+<td align="right">1.424</td>
+<td align="right">1.428</td>
+</tr>
+<tr class="even">
+<td align="left">2021</td>
+<td align="left">Patagonia</td>
+<td align="right">170</td>
+<td align="right">122.002</td>
+<td align="right">122.172</td>
+</tr>
+</tbody>
+</table>
+<p><code>kable</code> es una función diseñada para ser simple y hacer pocas cosas, para hacer cosas un poco mas complicadas está el paquete <strong>kableExtra</strong>.</p>
 </div>
 <div id="supertablas-con-kableextra" class="section level2">
-<h2><span class="header-section-number">8.2</span> Supertablas con {kableExtra}</h2>
-<p>El paquete {kableExtra}, como su nombre lo indica, nació para extender el poder de la función <code>kable</code>.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="tablas.html#cb138-1"></a><span class="kw">library</span>(kableExtra)  <span class="co"># instalar con install.packages(&quot;kableExtra&quot;)</span></span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;kableExtra&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     group_rows</code></pre>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="tablas.html#cb141-1"></a>paises_tabla &lt;-<span class="st"> </span>paises_seleccion <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb141-2"><a href="tablas.html#cb141-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb141-3"><a href="tablas.html#cb141-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;País&quot;</span>, <span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Esperanza de vida&quot;</span>, <span class="st">&quot;Población&quot;, &quot;</span>PBI per cápita<span class="st">&quot;),</span></span>
-<span id="cb141-4"><a href="tablas.html#cb141-4"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;))</span></span></code></pre></div>
+<h2><span class="header-section-number">8.2</span> Supertablas con kableExtra</h2>
+<p>El paquete kableExtra, como su nombre lo indica, nació para extender el poder de la función <code>kable()</code>.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="tablas.html#cb140-1"></a><span class="kw">library</span>(kableExtra)  <span class="co"># instalar con install.packages(&quot;kableExtra&quot;)</span></span></code></pre></div>
+<p>Primero, guardamos la tabla anterior para editarla con las operaciones de kableExtra.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="tablas.html#cb141-1"></a>parques_tabla &lt;-<span class="st"> </span>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb141-2"><a href="tablas.html#cb141-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio),</span>
+<span id="cb141-3"><a href="tablas.html#cb141-3"></a>         <span class="dt">region =</span> stringr<span class="op">::</span><span class="kw">str_to_sentence</span>(region)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb141-4"><a href="tablas.html#cb141-4"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
+<span id="cb141-5"><a href="tablas.html#cb141-5"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
 <p>La primera columna de la tabla de arriba es un tanto redundante.
-Sería mejor agrupar las filas según el país.
-Esto se consigue con la función <code>collapse_rows</code>:</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="tablas.html#cb142-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+Sería mejor agrupar las filas según el año.
+Esto se consigue con la función <code>collapse_rows()</code>:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="tablas.html#cb142-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb142-2"><a href="tablas.html#cb142-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb142-3"><a href="tablas.html#cb142-3"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
-País
-</th>
-<th style="text-align:left;">
 Año
 </th>
-<th style="text-align:right;">
-Esperanza de vida
+<th style="text-align:left;">
+Región
 </th>
 <th style="text-align:right;">
-Población
+No Residentes
 </th>
 <th style="text-align:right;">
-PBI per cápita
+Residentes
+</th>
+<th style="text-align:right;">
+Total
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Argentina
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2020
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
 </td>
 <td style="text-align:right;">
-74,340
+37
 </td>
 <td style="text-align:right;">
-38.331.121
+626
 </td>
 <td style="text-align:right;">
-8.797,641
+663
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Cuyo
 </td>
 <td style="text-align:right;">
-75,320
+55
 </td>
 <td style="text-align:right;">
-40.301.927
+1.104
 </td>
 <td style="text-align:right;">
-12.779,380
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Chile
-</td>
-<td style="text-align:left;">
-2002
-</td>
-<td style="text-align:right;">
-77,860
-</td>
-<td style="text-align:right;">
-15.497.046
-</td>
-<td style="text-align:right;">
-10.778,784
+1.160
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Patagonia
 </td>
 <td style="text-align:right;">
-78,553
+25.615
 </td>
 <td style="text-align:right;">
-16.284.741
+66.082
 </td>
 <td style="text-align:right;">
-13.171,639
+91.697
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Uruguay
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2021
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
 </td>
 <td style="text-align:right;">
-75,307
+10
 </td>
 <td style="text-align:right;">
-3.363.085
+1.065
 </td>
 <td style="text-align:right;">
-7.727,002
+1.074
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Cuyo
 </td>
 <td style="text-align:right;">
-76,384
+5
 </td>
 <td style="text-align:right;">
-3.447.496
+1.424
 </td>
 <td style="text-align:right;">
-10.611,463
+1.428
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Patagonia
+</td>
+<td style="text-align:right;">
+170
+</td>
+<td style="text-align:right;">
+122.002
+</td>
+<td style="text-align:right;">
+122.172
 </td>
 </tr>
 </tbody>
 </table>
 <p>El primer argumento es el número de la columna que queremos agrupar.
-En este caso, la columna <code>pais</code> es la primera.
+En este caso, la columna <code>anio</code> es la primera.
 El segundo argumento es la alineación vertical.
-Por defecto, <code>collapse_rows</code> pone las etiquetas en el centro, pero la convención más general es ponerlas arriba.</p>
+Por defecto, <code>collapse_rows()</code> pone las etiquetas en el centro, pero la convención más general es ponerlas arriba.</p>
 <p>¿Qué es esa <code>kable_styling()</code>?
-{kableExtra} permite cambiar el estilo de las tablas muy fácilmente.
-<code>kable_styling</code> es el estilo por defecto, que es igual al que produce <code>kable</code>, pero tiene muchos otros.
+kableExtra permite cambiar el estilo de las tablas muy fácilmente.
+<code>kable_styling()</code> es el estilo por defecto, que es igual al que produce <code>kable()</code>, pero existen muchos otros.
 Si viste tablas hechas en LaTeX, quizás este estilo te resulte familiar:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="tablas.html#cb143-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="tablas.html#cb143-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb143-2"><a href="tablas.html#cb143-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb143-3"><a href="tablas.html#cb143-3"></a><span class="st">  </span><span class="kw">kable_classic_2</span>()</span></code></pre></div>
 <table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
 <thead>
 <tr>
 <th style="text-align:left;">
-País
-</th>
-<th style="text-align:left;">
 Año
 </th>
-<th style="text-align:right;">
-Esperanza de vida
+<th style="text-align:left;">
+Región
 </th>
 <th style="text-align:right;">
-Población
+No Residentes
 </th>
 <th style="text-align:right;">
-PBI per cápita
+Residentes
+</th>
+<th style="text-align:right;">
+Total
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Argentina
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2020
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
 </td>
 <td style="text-align:right;">
-74,340
+37
 </td>
 <td style="text-align:right;">
-38.331.121
+626
 </td>
 <td style="text-align:right;">
-8.797,641
+663
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Cuyo
 </td>
 <td style="text-align:right;">
-75,320
+55
 </td>
 <td style="text-align:right;">
-40.301.927
+1.104
 </td>
 <td style="text-align:right;">
-12.779,380
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Chile
-</td>
-<td style="text-align:left;">
-2002
-</td>
-<td style="text-align:right;">
-77,860
-</td>
-<td style="text-align:right;">
-15.497.046
-</td>
-<td style="text-align:right;">
-10.778,784
+1.160
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Patagonia
 </td>
 <td style="text-align:right;">
-78,553
+25.615
 </td>
 <td style="text-align:right;">
-16.284.741
+66.082
 </td>
 <td style="text-align:right;">
-13.171,639
+91.697
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Uruguay
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2021
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
 </td>
 <td style="text-align:right;">
-75,307
+10
 </td>
 <td style="text-align:right;">
-3.363.085
+1.065
 </td>
 <td style="text-align:right;">
-7.727,002
+1.074
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Cuyo
 </td>
 <td style="text-align:right;">
-76,384
+5
 </td>
 <td style="text-align:right;">
-3.447.496
+1.424
 </td>
 <td style="text-align:right;">
-10.611,463
+1.428
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Patagonia
+</td>
+<td style="text-align:right;">
+170
+</td>
+<td style="text-align:right;">
+122.002
+</td>
+<td style="text-align:right;">
+122.172
 </td>
 </tr>
 </tbody>
 </table>
-<p>La función <code>column_spec</code> permite cambiar los parámetros gráficos de una o más columnas.
-En este caso cambiamos la primera columna (<code>column = 1</code>) para que las palabras aparezcan italizadas (<code>italic = TRUE</code>):</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="tablas.html#cb144-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb144-2"><a href="tablas.html#cb144-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">italic =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<p>La función <code>column_spec()</code> permite cambiar los parámetros gráficos de una o más columnas.
+En este caso cambiamos la segunda columna (<code>column = 2</code>) para que las palabras aparezcan italizadas (<code>italic = TRUE</code>):</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="tablas.html#cb144-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb144-2"><a href="tablas.html#cb144-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">2</span>, <span class="dt">italic =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
 <span id="cb144-3"><a href="tablas.html#cb144-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
 <span id="cb144-4"><a href="tablas.html#cb144-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
-País
-</th>
-<th style="text-align:left;">
 Año
 </th>
-<th style="text-align:right;">
-Esperanza de vida
+<th style="text-align:left;">
+Región
 </th>
 <th style="text-align:right;">
-Población
+No Residentes
 </th>
 <th style="text-align:right;">
-PBI per cápita
+Residentes
+</th>
+<th style="text-align:right;">
+Total
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;font-style: italic;vertical-align: top !important;" rowspan="2">
-Argentina
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2020
 </td>
-<td style="text-align:left;">
-2002
-</td>
-<td style="text-align:right;">
-74,340
+<td style="text-align:left;font-style: italic;">
+Cordoba
 </td>
 <td style="text-align:right;">
-38.331.121
+37
 </td>
 <td style="text-align:right;">
-8.797,641
+626
+</td>
+<td style="text-align:right;">
+663
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2007
+<td style="text-align:left;font-style: italic;">
+Cuyo
 </td>
 <td style="text-align:right;">
-75,320
+55
 </td>
 <td style="text-align:right;">
-40.301.927
+1.104
 </td>
 <td style="text-align:right;">
-12.779,380
+1.160
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-style: italic;vertical-align: top !important;" rowspan="2">
-Chile
-</td>
-<td style="text-align:left;">
-2002
+<td style="text-align:left;font-style: italic;">
+Patagonia
 </td>
 <td style="text-align:right;">
-77,860
+25.615
 </td>
 <td style="text-align:right;">
-15.497.046
+66.082
 </td>
 <td style="text-align:right;">
-10.778,784
+91.697
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2007
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2021
+</td>
+<td style="text-align:left;font-style: italic;">
+Cordoba
 </td>
 <td style="text-align:right;">
-78,553
+10
 </td>
 <td style="text-align:right;">
-16.284.741
+1.065
 </td>
 <td style="text-align:right;">
-13.171,639
+1.074
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-style: italic;vertical-align: top !important;" rowspan="2">
-Uruguay
-</td>
-<td style="text-align:left;">
-2002
+<td style="text-align:left;font-style: italic;">
+Cuyo
 </td>
 <td style="text-align:right;">
-75,307
+5
 </td>
 <td style="text-align:right;">
-3.363.085
+1.424
 </td>
 <td style="text-align:right;">
-7.727,002
+1.428
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2007
+<td style="text-align:left;font-style: italic;">
+Patagonia
 </td>
 <td style="text-align:right;">
-76,384
+170
 </td>
 <td style="text-align:right;">
-3.447.496
+122.002
 </td>
 <td style="text-align:right;">
-10.611,463
+122.172
 </td>
 </tr>
 </tbody>
 </table>
-<p>Lo notable de <code>column_spec</code> es que en sus argumentos se pueden poner vectores de manera de generar formato condicional.
-Para resaltar con negrita únicamente el país “Argentina”:</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="tablas.html#cb145-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb145-2"><a href="tablas.html#cb145-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> (paises_seleccion<span class="op">$</span>pais <span class="op">==</span><span class="st"> &quot;Argentina&quot;</span>)) <span class="op">%&gt;%</span></span>
+<p>Lo notable de <code>column_spec()</code> es que en sus argumentos se pueden poner vectores de manera de generar formato condicional.
+Para resaltar con negrita el año 2021:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="tablas.html#cb145-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb145-2"><a href="tablas.html#cb145-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> (parques_resumen<span class="op">$</span>anio <span class="op">==</span><span class="st"> </span><span class="dv">2021</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb145-3"><a href="tablas.html#cb145-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
 <span id="cb145-4"><a href="tablas.html#cb145-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
-País
-</th>
-<th style="text-align:left;">
 Año
 </th>
-<th style="text-align:right;">
-Esperanza de vida
+<th style="text-align:left;">
+Región
 </th>
 <th style="text-align:right;">
-Población
+No Residentes
 </th>
 <th style="text-align:right;">
-PBI per cápita
+Residentes
+</th>
+<th style="text-align:right;">
+Total
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;font-weight: bold;vertical-align: top !important;" rowspan="2">
-Argentina
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2020
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
 </td>
 <td style="text-align:right;">
-74,340
+37
 </td>
 <td style="text-align:right;">
-38.331.121
+626
 </td>
 <td style="text-align:right;">
-8.797,641
+663
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Cuyo
 </td>
 <td style="text-align:right;">
-75,320
+55
 </td>
 <td style="text-align:right;">
-40.301.927
+1.104
 </td>
 <td style="text-align:right;">
-12.779,380
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Chile
-</td>
-<td style="text-align:left;">
-2002
-</td>
-<td style="text-align:right;">
-77,860
-</td>
-<td style="text-align:right;">
-15.497.046
-</td>
-<td style="text-align:right;">
-10.778,784
+1.160
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Patagonia
 </td>
 <td style="text-align:right;">
-78,553
+25.615
 </td>
 <td style="text-align:right;">
-16.284.741
+66.082
 </td>
 <td style="text-align:right;">
-13.171,639
+91.697
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Uruguay
+<td style="text-align:left;font-weight: bold;vertical-align: top !important;" rowspan="3">
+2021
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
 </td>
 <td style="text-align:right;">
-75,307
+10
 </td>
 <td style="text-align:right;">
-3.363.085
+1.065
 </td>
 <td style="text-align:right;">
-7.727,002
+1.074
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Cuyo
 </td>
 <td style="text-align:right;">
-76,384
+5
 </td>
 <td style="text-align:right;">
-3.447.496
+1.424
 </td>
 <td style="text-align:right;">
-10.611,463
+1.428
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Patagonia
+</td>
+<td style="text-align:right;">
+170
+</td>
+<td style="text-align:right;">
+122.002
+</td>
+<td style="text-align:right;">
+122.172
 </td>
 </tr>
 </tbody>
 </table>
 <p>Conviene detenerse para mirar un poco con detalle el código.
-La llamada a <code>column_spec</code> está cambiando el formato de la columna 1.
-En particular, va a determinar si el texto es en negrita (bold) o no.
-Y la forma para determinarlo es el vector <code>paises$pais == "Argentina"</code>.
+La llamada a <code>column_spec()</code> está cambiando el formato de la columna 1.
+En particular, va a determinar si el texto está en negrita (bold) o no.
+Y la forma para determinarlo es el vector <code>parques_resumen$anio == 2021</code>.
 ¿Qué es ese vector?</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="tablas.html#cb146-1"></a>paises_seleccion<span class="op">$</span>pais <span class="op">==</span><span class="st"> &quot;Argentina&quot;</span></span></code></pre></div>
-<pre><code>## [1]  TRUE  TRUE FALSE FALSE FALSE FALSE</code></pre>
-<p>Por lo tanto, <code>column_spec(column = 1, bold = (paises$pais == "Argentina"))</code> va a hacer que las dos primera filas de la columna uno estén en negrita, y las demás no.
-Luego, <code>collapse_rows</code> colapsa las filas según el país y entonces esas dos primeras filas se transforman en una.</p>
-<p>Esto da un montón de flexibilidad en el estilo del texto.
-Por ejemplo, se puede hacer que el color del texto cambie según el valor usando <code>column_spec</code> y <code>spec_color</code>.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="tablas.html#cb148-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb148-2"><a href="tablas.html#cb148-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">3</span>, <span class="dt">color =</span> <span class="kw">spec_color</span>(paises_seleccion<span class="op">$</span>esperanza_de_vida)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb148-3"><a href="tablas.html#cb148-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="tablas.html#cb146-1"></a>parques_resumen<span class="op">$</span>anio <span class="op">==</span><span class="st"> </span><span class="dv">2021</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
+<p>Por lo tanto, <code>column_spec(column = 1, bold = (parques_resumen$anio == 2021))</code> va a hacer que las tres últimas filas de la columna uno estén en negrita, y las demás no.
+Luego, <code>collapse_rows()</code> colapsa las filas según el año y entonces esas tres últimas filas se transforman en una.</p>
+<p>En este caso el órden de las operaciones es importante.
+Si primero colapsamos y luego damos formato, el resultado no es el esperado:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="tablas.html#cb148-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb148-2"><a href="tablas.html#cb148-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb148-3"><a href="tablas.html#cb148-3"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> (parques_resumen<span class="op">$</span>anio <span class="op">==</span><span class="st"> </span><span class="dv">2021</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb148-4"><a href="tablas.html#cb148-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
-País
-</th>
-<th style="text-align:left;">
 Año
 </th>
-<th style="text-align:right;">
-Esperanza de vida
+<th style="text-align:left;">
+Región
 </th>
 <th style="text-align:right;">
-Población
+No Residentes
 </th>
 <th style="text-align:right;">
-PBI per cápita
+Residentes
+</th>
+<th style="text-align:right;">
+Total
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Argentina
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2020
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+626
+</td>
+<td style="text-align:right;">
+663
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cuyo
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+1.104
+</td>
+<td style="text-align:right;">
+1.160
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Patagonia
+</td>
+<td style="text-align:right;">
+25.615
+</td>
+<td style="text-align:right;">
+66.082
+</td>
+<td style="text-align:right;">
+91.697
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;font-weight: bold;" rowspan="3">
+2021
+</td>
+<td style="text-align:left;">
+Cordoba
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1.065
+</td>
+<td style="text-align:right;">
+1.074
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Cuyo
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1.424
+</td>
+<td style="text-align:right;">
+1.428
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Patagonia
+</td>
+<td style="text-align:right;">
+170
+</td>
+<td style="text-align:right;">
+122.002
+</td>
+<td style="text-align:right;">
+122.172
+</td>
+</tr>
+</tbody>
+</table>
+<p>Esto da un montón de flexibilidad en el estilo del texto.
+Por ejemplo, se puede hacer que el color del texto cambie según el valor usando <code>column_spec()</code> y <code>spec_color()</code>.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="tablas.html#cb149-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb149-2"><a href="tablas.html#cb149-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">5</span>, <span class="dt">color =</span> <span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb149-3"><a href="tablas.html#cb149-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb149-4"><a href="tablas.html#cb149-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Año
+</th>
+<th style="text-align:left;">
+Región
+</th>
+<th style="text-align:right;">
+No Residentes
+</th>
+<th style="text-align:right;">
+Residentes
+</th>
+<th style="text-align:right;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2020
+</td>
+<td style="text-align:left;">
+Cordoba
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+626
 </td>
 <td style="text-align:right;color: rgba(68, 1, 84, 1) !important;">
-74,340
-</td>
-<td style="text-align:right;">
-38.331.121
-</td>
-<td style="text-align:right;">
-8.797,641
+663
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
-</td>
-<td style="text-align:right;color: rgba(61, 77, 138, 1) !important;">
-75,320
+Cuyo
 </td>
 <td style="text-align:right;">
-40.301.927
+55
 </td>
 <td style="text-align:right;">
-12.779,380
+1.104
 </td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Chile
-</td>
-<td style="text-align:left;">
-2002
-</td>
-<td style="text-align:right;color: rgba(144, 215, 67, 1) !important;">
-77,860
-</td>
-<td style="text-align:right;">
-15.497.046
-</td>
-<td style="text-align:right;">
-10.778,784
+<td style="text-align:right;color: rgba(68, 2, 86, 1) !important;">
+1.160
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Patagonia
+</td>
+<td style="text-align:right;">
+25.615
+</td>
+<td style="text-align:right;">
+66.082
+</td>
+<td style="text-align:right;color: rgba(92, 200, 99, 1) !important;">
+91.697
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2021
+</td>
+<td style="text-align:left;">
+Cordoba
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1.065
+</td>
+<td style="text-align:right;color: rgba(68, 2, 86, 1) !important;">
+1.074
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cuyo
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1.424
+</td>
+<td style="text-align:right;color: rgba(69, 4, 87, 1) !important;">
+1.428
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Patagonia
+</td>
+<td style="text-align:right;">
+170
+</td>
+<td style="text-align:right;">
+122.002
 </td>
 <td style="text-align:right;color: rgba(253, 231, 37, 1) !important;">
-78,553
-</td>
-<td style="text-align:right;">
-16.284.741
-</td>
-<td style="text-align:right;">
-13.171,639
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Uruguay
-</td>
-<td style="text-align:left;">
-2002
-</td>
-<td style="text-align:right;color: rgba(61, 77, 138, 1) !important;">
-75,307
-</td>
-<td style="text-align:right;">
-3.363.085
-</td>
-<td style="text-align:right;">
-7.727,002
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:right;color: rgba(34, 141, 141, 1) !important;">
-76,384
-</td>
-<td style="text-align:right;">
-3.447.496
-</td>
-<td style="text-align:right;">
-10.611,463
+122.172
 </td>
 </tr>
 </tbody>
 </table>
-<p>La función nueva, <code>spec_color</code> genera colores a partir de un vector.
+<p>La función nueva, <code>spec_color()</code>, genera colores a partir de un vector.
 Podés ver cómo funciona en esta linea:</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="tablas.html#cb149-1"></a><span class="kw">spec_color</span>(paises_seleccion<span class="op">$</span>esperanza_de_vida)</span></code></pre></div>
-<pre><code>## [1] &quot;#440154FF&quot; &quot;#3D4D8AFF&quot; &quot;#90D743FF&quot; &quot;#FDE725FF&quot; &quot;#3D4D8AFF&quot; &quot;#228D8DFF&quot;</code></pre>
-<p>Esos números son representaciones en hexadecimal de los colores que ves en la tabla.
-Podés pasarle cualquier serie de colores, no sólo la creada con <code>spec_color</code>.</p>
-<p>Así como se puede cambiar el estilo de las columnas con <code>column_spec</code>, se puede cambiar el estilo de las filas con <code>row_spec</code>.
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="tablas.html#cb150-1"></a><span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total)</span></code></pre></div>
+<pre><code>## [1] &quot;#440154FF&quot; &quot;#440256FF&quot; &quot;#5CC863FF&quot; &quot;#440256FF&quot; &quot;#450457FF&quot; &quot;#FDE725FF&quot;</code></pre>
+<p>Esos números son representaciones en hexadecimal de los colores que ves en la tabla.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="tablas.html#cb152-1"></a>scales<span class="op">::</span><span class="kw">show_col</span>(<span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total))</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-104-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Así como se puede cambiar el estilo de las columnas con <code>column_spec()</code>, se puede cambiar el estilo de las filas con <code>row_spec()</code>.
 Por ejemplo, se puede resaltar cada 2 líneas con este código:</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="tablas.html#cb151-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb151-2"><a href="tablas.html#cb151-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(paises_seleccion), <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;azure&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb151-3"><a href="tablas.html#cb151-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb151-4"><a href="tablas.html#cb151-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="tablas.html#cb153-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb153-2"><a href="tablas.html#cb153-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(parques_resumen), <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;aquamarine&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb153-3"><a href="tablas.html#cb153-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb153-4"><a href="tablas.html#cb153-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
-País
-</th>
-<th style="text-align:left;">
 Año
 </th>
-<th style="text-align:right;">
-Esperanza de vida
+<th style="text-align:left;">
+Región
 </th>
 <th style="text-align:right;">
-Población
+No Residentes
 </th>
 <th style="text-align:right;">
-PBI per cápita
+Residentes
+</th>
+<th style="text-align:right;">
+Total
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Argentina
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2020
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
 </td>
 <td style="text-align:right;">
-74,340
+37
 </td>
 <td style="text-align:right;">
-38.331.121
+626
 </td>
 <td style="text-align:right;">
-8.797,641
+663
 </td>
 </tr>
 <tr>
-<td style="text-align:left;background-color: azure !important;">
-2007
+<td style="text-align:left;background-color: aquamarine !important;">
+Cuyo
 </td>
-<td style="text-align:right;background-color: azure !important;">
-75,320
+<td style="text-align:right;background-color: aquamarine !important;">
+55
 </td>
-<td style="text-align:right;background-color: azure !important;">
-40.301.927
+<td style="text-align:right;background-color: aquamarine !important;">
+1.104
 </td>
-<td style="text-align:right;background-color: azure !important;">
-12.779,380
+<td style="text-align:right;background-color: aquamarine !important;">
+1.160
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Chile
-</td>
 <td style="text-align:left;">
-2002
+Patagonia
 </td>
 <td style="text-align:right;">
-77,860
+25.615
 </td>
 <td style="text-align:right;">
-15.497.046
+66.082
 </td>
 <td style="text-align:right;">
-10.778,784
+91.697
 </td>
 </tr>
 <tr>
-<td style="text-align:left;background-color: azure !important;">
-2007
+<td style="text-align:left;background-color: aquamarine !important;vertical-align: top !important;" rowspan="3">
+2021
 </td>
-<td style="text-align:right;background-color: azure !important;">
-78,553
+<td style="text-align:left;background-color: aquamarine !important;">
+Cordoba
 </td>
-<td style="text-align:right;background-color: azure !important;">
-16.284.741
+<td style="text-align:right;background-color: aquamarine !important;">
+10
 </td>
-<td style="text-align:right;background-color: azure !important;">
-13.171,639
+<td style="text-align:right;background-color: aquamarine !important;">
+1.065
+</td>
+<td style="text-align:right;background-color: aquamarine !important;">
+1.074
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Uruguay
-</td>
 <td style="text-align:left;">
-2002
+Cuyo
 </td>
 <td style="text-align:right;">
-75,307
+5
 </td>
 <td style="text-align:right;">
-3.363.085
+1.424
 </td>
 <td style="text-align:right;">
-7.727,002
+1.428
 </td>
 </tr>
 <tr>
-<td style="text-align:left;background-color: azure !important;">
-2007
+<td style="text-align:left;background-color: aquamarine !important;">
+Patagonia
 </td>
-<td style="text-align:right;background-color: azure !important;">
-76,384
+<td style="text-align:right;background-color: aquamarine !important;">
+170
 </td>
-<td style="text-align:right;background-color: azure !important;">
-3.447.496
+<td style="text-align:right;background-color: aquamarine !important;">
+122.002
 </td>
-<td style="text-align:right;background-color: azure !important;">
-10.611,463
+<td style="text-align:right;background-color: aquamarine !important;">
+122.172
 </td>
 </tr>
 </tbody>
 </table>
-<p><code>row_spec</code> está cambiando el fondo (background) al color “azure” (que es ese celestito) a las filas indicadas por <code>seq(2, nrow(paises_seleccion), by = 2)</code>.
+<p><code>row_spec()</code> está cambiando el fondo (background) al color “aquamarine” (que es ese turquesa <span style="color:#7FFFD4">●</span>) a las filas indicadas por <code>seq(2, nrow(paises_seleccion), by = 2)</code>.
 ¿Qué es eso?
-<code>seq</code> genera una secuencia (de <strong>seq</strong>uence) de números empezando en 2, terminando en la cantidad de filas de <code>paises_seleccion</code> y saltando de a dos.
+<code>seq()</code> genera una secuencia (de <strong>seq</strong>uence) de números empezando en 2, terminando en la cantidad de filas de <code>parques_resumen</code> y saltando de a dos.
 En resumen:</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="tablas.html#cb152-1"></a><span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(paises_seleccion), <span class="dt">by =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="tablas.html#cb154-1"></a><span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(parques_resumen), <span class="dt">by =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 2 4 6</code></pre>
-<p>Como caso especial, se puede usar <code>row = 0</code> en <code>row_spec</code> para cambiar el formato del encabezado.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="tablas.html#cb154-1"></a>paises_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb154-2"><a href="tablas.html#cb154-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="dv">0</span>, <span class="dt">underline =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb154-3"><a href="tablas.html#cb154-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb154-4"><a href="tablas.html#cb154-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<p>Como caso especial, se puede usar <code>row = 0</code> en <code>row_spec()</code> para cambiar el formato del encabezado.</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="tablas.html#cb156-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb156-2"><a href="tablas.html#cb156-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="dv">0</span>, <span class="dt">underline =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb156-3"><a href="tablas.html#cb156-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb156-4"><a href="tablas.html#cb156-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;text-decoration: underline;">
-País
-</th>
-<th style="text-align:left;text-decoration: underline;">
 Año
 </th>
-<th style="text-align:right;text-decoration: underline;">
-Esperanza de vida
+<th style="text-align:left;text-decoration: underline;">
+Región
 </th>
 <th style="text-align:right;text-decoration: underline;">
-Población
+No Residentes
 </th>
 <th style="text-align:right;text-decoration: underline;">
-PBI per cápita
+Residentes
+</th>
+<th style="text-align:right;text-decoration: underline;">
+Total
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Argentina
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2020
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
 </td>
 <td style="text-align:right;">
-74,340
+37
 </td>
 <td style="text-align:right;">
-38.331.121
+626
 </td>
 <td style="text-align:right;">
-8.797,641
+663
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Cuyo
 </td>
 <td style="text-align:right;">
-75,320
+55
 </td>
 <td style="text-align:right;">
-40.301.927
+1.104
 </td>
 <td style="text-align:right;">
-12.779,380
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Chile
-</td>
-<td style="text-align:left;">
-2002
-</td>
-<td style="text-align:right;">
-77,860
-</td>
-<td style="text-align:right;">
-15.497.046
-</td>
-<td style="text-align:right;">
-10.778,784
+1.160
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Patagonia
 </td>
 <td style="text-align:right;">
-78,553
+25.615
 </td>
 <td style="text-align:right;">
-16.284.741
+66.082
 </td>
 <td style="text-align:right;">
-13.171,639
+91.697
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Uruguay
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+2021
 </td>
 <td style="text-align:left;">
-2002
+Cordoba
 </td>
 <td style="text-align:right;">
-75,307
+10
 </td>
 <td style="text-align:right;">
-3.363.085
+1.065
 </td>
 <td style="text-align:right;">
-7.727,002
+1.074
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2007
+Cuyo
 </td>
 <td style="text-align:right;">
-76,384
+5
 </td>
 <td style="text-align:right;">
-3.447.496
+1.424
 </td>
 <td style="text-align:right;">
-10.611,463
+1.428
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Patagonia
+</td>
+<td style="text-align:right;">
+170
+</td>
+<td style="text-align:right;">
+122.002
+</td>
+<td style="text-align:right;">
+122.172
 </td>
 </tr>
 </tbody>
 </table>
-<p>Esto es sólo una mínima parte de lo que se puede hacer con el paquete {kableExtra}.
-Para ejemplos mucho más detallados, te recomendamos leer <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">la viñeta completa</a></p>
 
 </div>
 </div>
