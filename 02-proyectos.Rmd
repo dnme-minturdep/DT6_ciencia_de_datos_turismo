@@ -5,7 +5,7 @@ Trabajar con proyectos de RStudio no solo hace tus análisis más ordenados y re
 Al comienzo posiblemente tengas un script y uno o dos archivos con datos, pero es posible que rápidamente te encuentres con una docena de archivos con nombres parecidos pero que pertenecen a análisis totalmente distintos.
 Antes de que la cosa comience a complicarse te proponemos trabajar con proyectos.
 
-### ¿Qué ventajas tiene?
+## ¿Qué ventajas tiene?
 
 -   Te permite "cuidar" los datos que usas al ordenarnos en carpetas que diferencien entre la versión original o cruda y los datos limpios o los resultados finales.
 -   Te permite compartir tu trabajo fácilmente con otras personas. Solo tendrías que compartir la carpeta del proyecto sabiendo que incluye todo lo necesario para que cualquiera reproduzca tu análisis.
@@ -26,7 +26,7 @@ Antes de que la cosa comience a complicarse te proponemos trabajar con proyectos
 Si todo salió bien, ahora deberías tener una nueva carpeta que se llama *mi_proyecto*.
 Pero si bien es una carpeta común y corriente, le llamamos proyecto porque además contiene un archivo con el mismo nombre *mi_proyecto.Rproj* (o solo *mi_proyecto* si en tu computadora no ves la extensión de los archivos).
 
-### Abrir un proyecto
+## Abrir un proyecto
 
 La manera más simple de abrir un proyecto es abriendo la carpeta que lo contiene y haciendo doble click sobre el archivo *mi_proyecto.Rproj*.
 Al hacer esto se abrirá RStudio y la sesión de R en la misma carpeta y, por defecto, cualquier archivo que quieras abrir o guardar lo hará en esa misma ubicación.
@@ -43,7 +43,7 @@ Si en algún momento trabajas con proyectos en paralelo vas a poder hacerlo sin 
 3.  Hacé doble click en el archivo que tiene el nombre de tu proyecto (y que termina con *.Rproj*) que encontrarás en esa carpeta.
 :::
 
-### ¿Cómo se organiza?
+## ¿Cómo se organiza?
 
 No existe una "mejor" forma de organizar un proyecto pero acá van algunos principios generales que nos hacen la vida más simple::
 
@@ -51,7 +51,7 @@ No existe una "mejor" forma de organizar un proyecto pero acá van algunos princ
 -   **Limpieza de datos** En muchos casos tus datos estarán "sucios", necesitarán un preprocesamiento importante para organizarlos en un formato que R (o cualquier otro lenguaje de programación) pueda analizados fácilmente. Esta tarea se denomina a veces "amasado" o "masticado de datos". Es una buena costumbre guardar el código que te permitió limpiar estos datos por si los volvieras a necesitar. También es recomendable guardar esa versión de los datos limpios, de "sólo lectura", para que puedas usarlos en tu análisis sin necesidad de repetir cada vez todo el proceso de limpieza de los datos.
 -   **Tratar las salidas o resultados generados como descartables** Cualquier resultado (gráficos, tablas, valores) debe poder repetirse o rehacerse a partir del código guardado. Si bien las pruebas rápidas para *ver si el código funciona* se pueden hacer en la consola, es importante guardar el código que genera los resultados y asegurarnos de que sean reproducibles. Aún mejor, si organizas esos resultados en distintas sub-carpetas, luego tendrás todo aún más ordenado.
 
-### Ordenando aún más
+## Ordenando aún más
 
 Si tenés alguna experiencia programando con R es posible que tengas estás lineas al comienzo de alguno de tus scripts o si nunca las usaste, seguro viste que alguien más lo hacia:
 
