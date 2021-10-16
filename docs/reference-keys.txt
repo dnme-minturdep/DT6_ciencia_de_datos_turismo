@@ -53,7 +53,7 @@ escala-de-colores-y-otras
 escalas-de-ejes
 elementos-de-texto
 temas
-reportes-ii
+informes-reproducibles
 eligiendo-el-formato-de-salida
 personalizando-la-salida
 reportes-parametrizados
