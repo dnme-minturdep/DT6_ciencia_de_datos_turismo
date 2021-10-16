@@ -63,7 +63,7 @@ ggplot(data = parques, mapping = aes(x = noresidentes, y = residentes))
 ```
 
 Este código le indica a ggplot que genere un gráfico donde el eje **x** se mapea a la columna `noresidentes` y el eje **y**, a la columna `residentes`. 
-Pero, como se ve, el esto sólo genera el área del gráfico y los ejes. 
+Pero, como se ve, esto sólo genera el área del gráfico y los ejes. 
 Lo que falta es indicar con qué geometrías representar los datos.
 
 
