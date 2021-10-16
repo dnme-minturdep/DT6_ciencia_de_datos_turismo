@@ -1,4 +1,4 @@
-# Reportes II
+# Informes reproducibles
 
 ```{r, include=FALSE}
 chunk <- "```"
@@ -285,9 +285,3 @@ Es posible que knitr no se de cuenta y use la cache, con el resultado de que `da
 Hay formas de decirle a knitr de qué depende cada chunk y así obtener una cache más "inteligente" pero es algo que se vuelve complicado muy rápido. 
 
 En resumen, es bueno usar la cache pero sólo cuando es imprescindible.
-
-
-<div class="btn-group" role="group" aria-label="Navegación">
-  <a href= "09-funciones.html" class = "btn btn-primary">Anterior</a>
-  <a href= "11-tablas.html" class = "btn btn-primary">Siguiente</a>
-</div>
