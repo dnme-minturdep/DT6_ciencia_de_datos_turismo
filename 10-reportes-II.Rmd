@@ -5,7 +5,9 @@ chunk <- "```"
 ```
 
 Durante este curso fuiste creando varios documentos con R Markdown en HTML. 
-Este es un formato que tiene un montón de flexibilidad, pero seguramente no es el único que necesitás. Casi seguro que los informes los tengas que presentar en formato PDF o, incluso, ¡en papel impreso! Rmarkdown, y todo un amplio ecosistema de otros paquetes, permite generar documentos en múltiples formatos usando el mismo archivo de texto plano. 
+Este es un formato que tiene un montón de flexibilidad, pero seguramente no es el único que necesitás. 
+Casi seguro que los informes los tengas que presentar en formato PDF o, incluso, ¡en papel impreso! 
+RMarkdown, y todo un amplio ecosistema de otros paquetes, permite generar documentos en múltiples formatos usando el mismo archivo de texto plano. 
 
 ## Eligiendo el formato de salida
 
@@ -17,7 +19,9 @@ Cuál es el formato de salida de un archivo de R Markdown se determina principal
 
 ![](img/rmd-ejemplo-secciones.png)
 
-Ese `html_document` no es otra cosa que una función de Rmarkdown llamada `html_document`. Como te podrás imaginar, Rmarkdown tiene una serie de otras funciones que definen formatos de salida. Los dos que seguramente te van a servir más son `pdf_document` y `word_document` que justamente generan PDFs y archivos de Word, respectivamente. 
+Ese `html_document` no es otra cosa que una función de rmarkdown llamada `html_document`. 
+Como te podrás imaginar, rmarkdown tiene una serie de otras funciones que definen formatos de salida. 
+Los dos que seguramente te van a servir más son `pdf_document` y `word_document` que justamente generan PDFs y archivos de Word, respectivamente. 
 
 Para crear un documento de R Markdown que genere un archivo PDF basta con cambiar el `output` en el encabezado por esto:
 
@@ -27,7 +31,10 @@ output: pdf_document
 ---
 ```
 
-Para que el documento se genere correctamente hace falta instalar LaTeX, que es un sistema de composición de textos. Aunque parezca mentira, la mejor forma de instalar LaTeX para usar R Markdown es instalando el paquete {[tinytex](https://yihui.org/tinytex/)} con `install.packages("tinytex")` y luego correr `tinytex::install_tinytex()`. Esto va a instalar una versión pequeña de LaTeX en un lugar donde luego Rmarkdown lo puede usar. Esta es la forma altamente recomendada para generar PDFs con R Markdown que va a evitarte un montón de dolores de cabeza. 
+Para que el documento se genere correctamente hace falta instalar LaTeX, que es un sistema de composición de textos. 
+Aunque parezca mentira, la mejor forma de instalar LaTeX para usar R Markdown es instalando el paquete {[tinytex](https://yihui.org/tinytex/)} con `install.packages("tinytex")` y luego correr `tinytex::install_tinytex()`. 
+Esto va a instalar una versión pequeña de LaTeX en un lugar donde luego rmarkdown lo puede usar. 
+Esta es la forma altamente recomendada para generar PDFs con R Markdown que va a evitarte un montón de dolores de cabeza. 
 
 Análogamente, podés generar un archivo de word cambiando el `output` así: 
 
@@ -133,7 +140,9 @@ parques %>%
 
 Si el reporte es largo y usa el nombre de la región en múltiples lugares cambiar "norte" por "patagonia" puede ser tedioso y propenso a error, ya que te obliga a modificar muchas partes del código. Y si después tenés que hacer el mismo reporte para "cordoba"... 
 
-En estas situaciones podés crear un reporte parametrizado. La idea es que el reporte tiene una serie de parámetros que puede modificar la salida. Es como si el archivo de R Markdown fuera una gran función con sus argumentos!
+En estas situaciones podés crear un reporte parametrizado. 
+La idea es que el reporte tiene una serie de parámetros que puede modificar la salida. 
+Es como si el archivo de R Markdown fuera una gran función con sus argumentos!
 
 Para generar un reporte parametrizado hay que agregar un elemento llamado `params` al encabezado con la lista de parámetros y sus valores por default.
 
@@ -169,7 +178,8 @@ parques %>%
 ```
 
 
-Y ahora el mismo código puede funcionar para distintas regiones Para crear reportes distintos para cada región sólo hay que modificar el valor del parámetro en el encabezado:
+Y ahora el mismo código puede funcionar para distintas regiones.
+Para crear reportes distintos para cada región sólo hay que modificar el valor del parámetro en el encabezado:
 
 
 ```yaml
@@ -211,12 +221,15 @@ Hay una serie de opciones particularmente importante es la que controla si el c�
 * `eval = FALSE` evita que se ejecute el código del chunk, de manera que tampoco va a mostrar resultados. Es útil para mostrar códigos de ejemplo si estás escribiendo, por ejemplo un documento para enseñar R.
 
 
-* `echo = FALSE` corre el ejecuta del chunk y muestra los resultados, pero oculta el código en el reporte. Esto es útil para escribir reportes para personas que no necesitan ver el código de R que generó el gráfico o tabla que querés mostrar. 
+* `echo = FALSE` ejecuta el código del chunk y muestra los resultados, pero oculta el código en el reporte. Esto es útil para escribir reportes para personas que no necesitan ver el código de R que generó el gráfico o tabla que querés mostrar. 
 
 * `include = FALSE` corre el código pero oculta tanto el código como los resultados. Es útil para usar en chunks de configuración general donde, por ejemplo, cargas las librerías. 
 
 
-Si estás escribiendo un informe en el que no querés que se muestre ningún código, agregarle `echo = FALSE` a cada chunk nuevo se vuelve tedioso. La solución es cambiar la opción de forma global de manera que aplique a todos los chunks. Esto se hace mediante la función `knitr::opts_chunk$set()`, que setea las opciones globales de los chunks que le siguen. Si querés que todos los chunks tengan `echo = TRUE` crearías un chunk así:
+Si estás escribiendo un informe en el que no querés que se muestre ningún código, agregarle `echo = FALSE` a cada chunk nuevo se vuelve tedioso. 
+La solución es cambiar la opción de forma global de manera que aplique a todos los chunks. 
+Esto se hace mediante la función `knitr::opts_chunk$set()`, que setea las opciones globales de los chunks que le siguen. 
+Si querés que todos los chunks tengan `echo = TRUE` crearías un chunk así:
 
 
     `r chunk`{r setup, include = FALSE}
@@ -225,7 +238,8 @@ Si estás escribiendo un informe en el que no querés que se muestre ningún có
     
 Generalmente tiene sentido poner esto en el primer chunk de un documento, que como suele ser cuestiones de configuración del reporte, también conviene ponerle `include = FALSE`.
 
-Habrás visto que a veces algunas funciones devuelven mensajes sobre lo que hacen. Por ejemplo, cuando `read_csv` lee un archivo describe el tipo de dato de cada columna:
+Habrás visto que a veces algunas funciones devuelven mensajes sobre lo que hacen. 
+Por ejemplo, cuando `read_csv` lee un archivo describe el tipo de dato de cada columna:
 
 ```{r}
 parques <- read_csv("datos/parques.csv")
@@ -237,7 +251,11 @@ Esto es útil cuando uno está haciendo trabajo interactivo pero en general no q
     paises <- read_csv("datos/paises.csv")
     `r chunk`
     
-En general no pasa nada si ignorás los mensajes. Son cuestiones diagnósticas extras que sirven para que vos, como humano, te enteres de lo que hizo una función. Distinto son las advertencias, o "warnings". Una advertencia te está diciendo que hay algo "raro" en el código que puede significar que hay algo mal. No llega al nivel de error, que es algo que literalmente "no computa". Por ejemplo, `sqrt` tira una advertencia cuando recibe números negativos.
+En general no pasa nada si ignorás los mensajes. 
+Son cuestiones diagnósticas extras que sirven para que vos, como humano, te enteres de lo que hizo una función. Distinto son las advertencias, o "warnings".
+Una advertencia te está diciendo que hay algo "raro" en el código que puede significar que hay algo mal. 
+No llega al nivel de error, que es algo que literalmente "no computa". 
+Por ejemplo, `sqrt` tira una advertencia cuando recibe números negativos.
 
 ```{r}
 i <- sqrt(-1)
@@ -250,7 +268,10 @@ Si un chunk tira una advertencia que es esperable pero no querés que aparezca e
     `r chunk`
     
 
-Finalmente, una opción tan poderosa como peligrosa es `cache = TRUE`. Lo que hace es que en vez de correr el código de un chunk cada vez que *kniteás* el documento, guarda el resultado del chunk en el disco para reutilizar la próxima vez que crees el reporte. Esto es muy cómo si en un chunk se un código que tarda mucho en correr. Por ejemplo el siguiente chunk va a tardar 10 minutos en correr la primera vez que knitees el reporte, pero luego va a ser mucho más rápido: 
+Finalmente, una opción tan poderosa como peligrosa es `cache = TRUE`. 
+Lo que hace es que en vez de correr el código de un chunk cada vez que *kniteás* el documento, guarda el resultado del chunk en el disco para reutilizar la próxima vez que crees el reporte. 
+Esto es muy cómo si en chunk tiene un código que tarda mucho en correr. 
+Por ejemplo el siguiente chunk va a tardar 10 minutos en correr la primera vez que knitees el reporte, pero luego va a ser mucho más rápido: 
 
 
     `r chunk`{r cache = FALSE}
@@ -258,7 +279,10 @@ Finalmente, una opción tan poderosa como peligrosa es `cache = TRUE`. Lo que ha
     `r chunk`
 
 
-knitr es bastante inteligente y va a invalidar la cache si cambiás el código del chunk. Pero, ¿qué pasa si cambiás algo del código previo que cambia el valor de `x` o incluso el funcionamiento de `function_que_targa_10_minutos`? knitr no se da cuenta y va a usar la cache, resultando que `datos` va a tener un valor incorrecto. Hay formas de decirle a knitr de qué depende cada chunk y así obtener una cache más "inteligente" pero es algo que se vuelve complicado muy rápido. 
+knitr es bastante inteligente y va a invalidar la cache si cambiás el código del chunk. 
+Pero, ¿qué pasa si cambiás algo del código previo que cambia el valor de `x` o incluso el funcionamiento de `function_que_targa_10_minutos`? 
+Es posible que knitr no se de cuenta y use la cache, con el resultado de que `datos` va a tener un valor incorrecto. 
+Hay formas de decirle a knitr de qué depende cada chunk y así obtener una cache más "inteligente" pero es algo que se vuelve complicado muy rápido. 
 
 En resumen, es bueno usar la cache pero sólo cuando es imprescindible.
 
