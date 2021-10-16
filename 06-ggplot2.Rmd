@@ -1,210 +1,241 @@
 # Gráficos con ggplot2
 
 Visualizar datos es útil para identificar a relación entre distintas variables pero también para comunicar el análisis de los datos y resultados.
-El paquete `ggplot2` permite generar gráficos de gran calidad en pocos pasos.
+El paquete **ggplot2** permite generar gráficos de gran calidad en pocos pasos.
 Cualquier gráfico de ggplot tendrá como mínimo 3 componentes: los **datos**, un **sistema de coordenadas** y una **geometría** (la representación visual de los datos) y se irá construyendo por capas.
 
 ## Primera capa: el área del gráfico
 
-Cómo siempre será necesario cargar los paquetes que vamos a usar y ya que estamos los datos con los que venimos trabajando:
+Cómo siempre, primero hay que cargar los paquetes y los datos. 
+Para esta sección, vamos a leer el archivo parques_tidy.csv, que es una serie de tiempo de visitantes a parques nacionales descargada de [Yvera](http://datos.yvera.gob.ar/dataset/parques-nacionales/archivo/78aea6ed-761c-4659-bdf2-7fcb0f616fad) y modificada un poco para poder trabajar con ella más fácilmente con ggplot2. 
 
-```{r message=FALSE, warning=FALSE}
-library(readr)
-library(ggplot2)
+```{r message=FALSE, warning=FALSE, include=FALSE}
 library(dplyr)
+library(tidyr)
+library(stringr)
 
-turistas_destinos_url <- "http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/b8f0f46d-eb2f-4d68-a182-e66778bbf89a/download/tur_int_turistas_residentes_destino_serie.csv"
-turistas_destinos <- readr::read_csv(turistas_destinos_url)
+parques <- readr::read_csv("http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv")
 
-turistas_destinos <- turistas_destinos %>% 
+parques <- parques %>% 
+  pivot_longer(cols = -c("indice_tiempo", "residentes", "no_residentes", "total"),
+               names_to = "region") %>% 
+  mutate(region = str_replace(region, "buenos_aires*", "buenos-aires"),
+         region = str_replace(region, "no_residentes", "noresidentes")) %>% 
+  separate(region, into = c("region", "tipo_visitante"), sep = "_") %>% 
+  select(-c("residentes", "no_residentes", "total")) %>% 
+  pivot_wider(names_from = tipo_visitante, values_from = value, names_repair = "unique") %>% 
   mutate(indice_tiempo = lubridate::ym(indice_tiempo))
 
-paises <- read_csv("datos/paises.csv")
+readr::write_csv(parques, "datos/parques_tidy.csv")
 ```
 
-La función principal de ggplot2 es justamente `ggplot()` que nos permite *iniciar* el gráfico y además definir las características *globales*.
-El primer argumento de esta función serán los datos que queremos visualizar, siempre en un data.frame.
-En este caso usamos `paises`.
 
-El segundo argumento se llama mapping justamente porque *mapea* o *dibuja* los ejes del gráfico y **siempre** va acompañado de la función `aes()`.
-La función `aes()` recibe las propiedades estéticas del gráfico (o *aesthetic* en inglés) a partir de las variables (o columnas) del data frame estamos usando.
-En este caso le indicamos que en el eje **x** querremos graficar la variable `pib_per_capita` y en eje **y** la variable `esperanza_de_vida`.
-
-Pero esta sola función no es suficiente, solo genera la primera capa: el área del gráfico.
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+parques <- readr::read_csv("datos/parques_tidy.csv")
+```
+Para tener una idea de este conjunto de datos, `head()` muestra las primeras 6 filas
 
 ```{r}
-ggplot(data = turistas_destinos, mapping = aes(x = indice_tiempo, y = turistas))
+head(parques)
 ```
+
+La tabla tiene
+
+- **indice_tiempo**: fecha que representa el mes,
+- **region**: texto con la región,
+- **residentes**: cantidad de visitantes residentes que visitaron cada región en cada fecha,
+- **noresidentes**: cantidad de visitantes no residentes,
+- **total**: cantidad todal de visitantes (la suma de `residentes` y `noresidentes`)
+
+La función principal de ggplot2 es justamente `ggplot()` que permite *iniciar* el gráfico y además definir las características *globales*.
+El primer argumento de esta función serán los datos que vas a visualizar, siempre en un data frame.
+En este caso usamos `parques`.
+
+El segundo argumento se llama "mapping" (*mapeo* en inglés). 
+Este argumento define la relación entre cada columna del data frame y los distintos parámetros gráficos. Por ejemplo, qué columna va a representar el eje x, cuál va a ser el eje y, etc.. 
+Este mapeo se hace **siempre** con la función `aes()` (que viene de *aesthetics*, *estética* en inglés). 
+
+Por ejemplo, si querés hacer un gráfico que muestre la relación entre la cantidad de visitantes residentes y no residentes usarías algo como esto:
+
+```{r}
+ggplot(data = parques, mapping = aes(x = noresidentes, y = residentes))
+```
+
+Este código le indica a ggplot que genere un gráfico donde el eje **x** se mapea a la columna `noresidentes` y el eje **y**, a la columna `residentes`. 
+Pero, como se ve, esto sólo genera el área del gráfico y los ejes. 
+Lo que falta es indicar con qué geometrías representar los datos.
+
 
 ## Segunda capa: geometrías
 
-Necesitamos agregar una nueva capa a nuestro gráfico, los elementos geométricos o *geoms* que representaran los datos.
-Para esto *sumamos* una función geom, por ejemplo si queremos representar los datos con puntos usaremos `geom_point()`
+
+Para agregar geometrías que representen los datos lo que hay que hacer es *sumar* el resultado de una función que devuelva una capa de geometrías. 
+Estas suelen ser funciones que empiezan con "geom_" y luego el nombre de la geometría (en inglés). 
+Para representar los datos usando puntos, hay que uasr `geom_point()`
 
 ```{r}
-ggplot(data = turistas_destinos, mapping = aes(x = indice_tiempo, y = turistas)) +
+ggplot(data = parques, mapping = aes(x = noresidentes, y = residentes)) +
   geom_point()
 ```
 
-¡Nuestro primer gráfico!
+¡Tu primer gráfico!
+
 
 ::: {.alert .alert-info}
 **Primer desafío**
 
 Ahora es tu turno.
-Modifica el gráfico anterior para visualizar cómo cambia la esperanza de vida a lo largo de los años.
+Modifica el gráfico anterior para visualizar cómo cambia la cantidad de visitantes residentes a lo largo de los años.
 
 ¿Te parece útil este gráfico?
 :::
 
-Este gráfico tiene muchísima información porque tiene un punto por cada país para cada año para visualizar la esperanza de vida.
-Pero por ahora no podemos identificar esos países, necesitamos agregar información al gráfico.
+Este gráfico tiene un punto por cada región y cada trimestre, pero es posible identificar a qué región corresponde cada punto. 
+Es necesario agregar información al gráfico.
 
 ```{r}
-# ggplot(data = paises, mapping = aes(x = anio, y = esperanza_de_vida)) +
-#   geom_point()
+ggplot(data = parques, mapping = aes(x = indice_tiempo, y = residentes)) +
+  geom_point()
 ```
+
 
 ## Mapear variables a elementos
 
-Una posible solución sería utilizar otras variables de nuestros datos, por ejemplo `continente` y *mapear* el color de los puntos de a cuerdo al continente que pertenecen.
+Una posible solución sería utilizar otras variables de los datos, por ejemplo `region` y *mapear* el color de los puntos de a cuerdo a la región a la que pertenecen.
 
 ```{r}
-ggplot(data = turistas_destinos, mapping = aes(x = indice_tiempo, y = turistas)) +
-  geom_point(aes(color = region_destino))
+ggplot(data = parques, mapping = aes(x = indice_tiempo, y = residentes)) +
+  geom_point(aes(color = region))
 ```
 
 Ahh, ahora está un poco mejor.
-Por ejemplo ya podemos ver que muchos países de Europa (los puntos celestes) tienen en promedio mayor esperanza de vida a lo largo de los años que muchos países de África (los puntos rojos).
-Aún no podemos identificar los países individualmente pero podemos sacar algo más de información de nuestros datos.
+Se puede ver que la Patagonia (los puntos fucsia) tiene más visitantes que el resto de las regiones. 
+Le sigue la región del Litoral (puntos turquesa). 
 
-Algo muy importante a tener en cuenta: **los puntos toman un color de acuerdo a una variable de los datos**, y para que ggplot2 identifique esa variable (en este caso `continente`) es necesario incluirla dentro de una función `aes()`.
+Algo muy importante a tener en cuenta: **los puntos toman un color de acuerdo a una variable de los datos**, y para que ggplot2 identifique esa variable (en este caso `region`) es necesario incluirla dentro de una función `aes()`.
 
 ## Otras geometrías
 
-Este gráfico posiblemente no sea muy adecuado si queremos visualizar la *evolución* de una variable a lo largo del tiempo, necesitamos cambiar la geometría a lineas usando `geom_line()`
+Este gráfico posiblemente no sea muy adecuado si queremos visualizar la *evolución* de una variable a lo largo del tiempo. 
+Si bien se pueden identificar a qué región correponde cada punto, es muy difícil seguir la evolución de uno en particular; especialmente en la Patagonia, donde hay mucha distancia vertical entre los puntos. 
+Lo más natural es cambiar la geometría a lineas usando `geom_line()`
 
 ```{r}
-ggplot(data = turistas_destinos, mapping = aes(x = indice_tiempo, y = turistas)) +
-  geom_line(aes(color = region_destino))
+ggplot(data = parques, mapping = aes(x = indice_tiempo, y = residentes)) +
+  geom_line(aes(color = region))
 ```
 
 Por suerte las funciones `geom_*()` tienen más o menos nombres amigables.
-Pero el gráfico sigue teniendo problemas, al parecer dibujó una línea por continente.
-Si estuviéramos dibujando este gráfico con lápiz y papel muy posiblemente hubiéramos identificado los puntos que corresponden a cada país y los hubiéramos "unido con líneas", necesitamos que ggplot2 haga esto.
-¿Cómo le indicamos que puntos corresponde a cada país?
-Necesitamos que los *agrupe* por la variable `pais` (¡qué bueno que tenemos toda esa información en nuestra base de datos!).
-
-```{r}
-ggplot(data = paises, mapping = aes(x = anio, y = esperanza_de_vida)) +
-  geom_line(aes(color = continente, group = pais))
-```
-
-Usamos el argumento `group =` y de nuevo, lo incluimos dentro de la función `aes()` para indicarle a ggplot2 que busque la variable `pais` dentro del data.frame que estamos usando.
 
 Y ahora si, conseguimos el gráfico que estamos buscando.
+Las líneas unen puntos consecutivos y permiten que el ojo siga la evolución de cada región. 
+La diferencia entre temporada alta y temporada baja en Patagonia (la estacionalidad) salta inmediatamente. 
 
 ::: {.alert .alert-info}
 **Segundo desafío**
 
-Cuando mencionamos que ggplot2 construye gráficos por capas, lo decíamos en serio!
-Hasta ahora tenemos dos capas: el área del gráfico y una geometría (las líneas).
+Hasta ahora tenemos dos capas: el área del gráfico y una única geometría (las líneas).
 
 1.  Sumá una tercera capa para visualizar puntos además de las líneas.
-2.  ¿Porqué los puntos ahora no siguen los colores de los continentes?
-3.  ¿Qué cambio podrías hacer para que los puntos también tengan color según el continente?
+2.  ¿Porqué los puntos ahora no siguen los colores de las regiones?
+3.  ¿Qué cambio podrías hacer para que los puntos también tengan color según la región?
 :::
 
 Acá surge una característica importante de las capas: pueden tener apariencia independiente si solo *mapeamos* el color en la capa de las líneas y no en la capa de los puntos.
 Al mismo tiempo, si quisiéramos que todas las capas tenga la misma apariencia podemos incluir el argumento `color =`en la función global `ggpplot()` o repetirlo en cada capa.
 
+Es la diferencia entre esto
+
 ```{r}
-# ggplot(paises, aes(anio, esperanza_de_vida)) +
-#   geom_line(aes(color = continente, group = pais)) +
-#   geom_point()
+ggplot(parques, aes(indice_tiempo, residentes)) +
+  geom_line(aes(color = region)) +
+  geom_point()
+```
+
+y esto. 
+
+```{r}
+ggplot(parques, aes(indice_tiempo, residentes, color = region)) +
+  geom_line() +
+  geom_point()
 ```
 
 ::: {.alert .alert-success}
-Si te preguntabas a donde fueron a parar el `data =`, el `mapping =` y los nombres de los argumentos adentro de la función `aes()`, `x =` e `y =`, resulta que estamos aprovechando que tanto ggplot2 como nosotros ahora sabemos en que orden recibe la información cada función.
-Siempre el primer elemento que le *pasemos* o indiquemos a la función `ggplot()` será el data.frame.
+Si te preguntás a donde fueron a parar el `data =`, el `mapping =` y los nombres de los argumentos adentro de la función `aes()`, `x =` e `y =`, resulta que estamos aprovechando que tanto ggplot2 como nosotros ahora sabemos en que orden recibe la información cada función.
+Siempre el primer elemento que le *pases* o indiquemos a la función `ggplot()` será el data frame y el segundo será el `aes()`. 
 :::
 
 Algunos argumentos para cambiar la apariencia de las geometrías son:
 
 -   `color` o `colour` modifica el color de líneas y puntos
--   `fill`modifica el color del área de un elemento, por ejemplo el relleno de un punto
--   `linetype` modifica el tipo de línea (punteada, continua, con guiones, etc.)
--   `pch` modifica el tamaño del punto
+-   `fill` modifica el color *interno* de un elemento, por ejemplo el relleno de una barra
+-   `linetype` modifica el tipo de línea (punteada, continua, con guiones, etc...)
 -   `size` modifica el tamaño de los elementos (por ejemplo el tamaño de puntos o el grosor de líneas)
 -   `alpha` modifica la transparencia de los elementos (1 = opaco, 0 = transparente)
 -   `shape` modifica el tipo de punto (círculos, cuadrados, triángulos, etc.)
 
 El *mapeo* entre una variable y un parámetro de geometría se hace a través de una **escala**.
-La escala de colores es lo que define, por ejemplo, que los puntos donde la variable `continente` toma el valor `"África"` van a tener el color rosa ([●]{style="color:#F77D75"}), donde toma el valor `"Américas"`, mostaza ([●]{style="color:#B7B940"}), etc...
+La escala de colores es lo que define, por ejemplo, que los puntos donde la variable `region` toma el valor `"patagonia"` van a tener el color rosa ([●]{style="color:#FB61D7"}), donde toma el valor `córdoba"`, mostaza ([●]{style="color:#B79F00"}), etc...
 
 ::: {.alert .alert-success}
 **Modificar elementos utilizando un valor único**
 
-Es posible que en algún momento necesites cambiar la apariencia de los elementos o geometrías independientemente de las variables de tu data.frame.
+Es posible que en algún momento necesites cambiar la apariencia de los elementos o geometrías independientemente de las variables de tu data frame.
 Por ejemplo podrías querer que todos los puntos sean de un único color: rojos.
 En este caso `geom_point(aes(color = "red"))` no va a funcionar -ojo que los colores van en inglés-.
-Lo que ese código dice es que mapee el parámetro geométrico "color" a una variable que contiene el valor `"red"` para todas las filas.
-El mapeo se hace a través de la escala, que va a asignarle un valor (rosa [●]{style="color:#F77D75"}) a los puntos correspondientes al valor `"red"`.
+Lo que ese código hace es mapear el parámetro geométrico "color" a una variable que contiene el valor `"red"` para todas las filas.
+El mapeo se hace a través de la escala, que va a asignarle un valor (rosa [●]{style="color:#FB61D7"}) a los puntos correspondientes al valor `"red"`.
 
-Ahora que no nos interesa *mapear* el color a una variable, podemos mover ese argumento **afuera** de la función `aes()`: `geom_point(color = "red")`.
+Como en este caso no te interesa *mapear* el color a una variable, tenés que mover ese argumento **afuera** de la función `aes()`: `geom_point(color = "red")`.
 :::
 
 ## Relación entre variables
 
 Muchas veces no es suficiente con mirar los datos crudos para identificar la relación entre las variables; es necesario usar alguna transformación estadística que resalte esas relaciones, ya sea ajustando una recta o calculando promedios.
 
-Para alguna transformaciones estadísticas comunes, {ggplot2} tiene geoms ya programados, pero muchas veces es posible que necesitemos manipular los datos antes de poder hacer un gráfico.
-A veces esa manipulación será compleja y entonces para no repetir el cálculo muchas veces, guardaremos los datos modificados en una nueva variable.
-Pero también podemos *encadenar* la manipulación de los datos y el gráfico resultante.
+Para alguna transformaciones estadísticas comunes, ggplot2 tiene geoms ya programados, pero muchas veces es posible que necesites manipular los datos antes de poder hacer un gráfico.
+A veces esa manipulación será compleja y su resultado luego va a ser utilizado en otras partes del análisis. 
+En esos casos, te conviene guardar los datos modificados en una nueva variable.
+Pero para transformaciones más simples podés *encadenar* la manipulación de los datos directamente en el gráfico. 
 
-Por ejemplo, calculemos la esperanza de vida media por continente y para cada año usando [`dplyr`](05-dplyr-I.html) y luego grafiquemos la `esperanza_de_vida_media` a los largo de los `anios`:
+Por ejemplo, en un gráfico anterior viste que hay un ciclo estacional bastante notorio en la cantidad de visitantes. 
+Para visualizar el ciclo anual medio de toda la serie podés calcular la cantidad promedio de visitantes por cada mes y región usando [dplyr](05-dplyr-I.html) y luego graficar eso:
 
 ```{r}
 library(dplyr)
 
-paises %>% 
-  group_by(continente, anio) %>% 
-  summarise(esperanza_de_vida_media = mean(esperanza_de_vida)) %>% 
-  ggplot(aes(anio, esperanza_de_vida_media)) +  # Acá se acaban los %>% y comienzan los "+"
-  geom_point()
+parques %>% 
+  group_by(mes = lubridate::month(indice_tiempo), region) %>% 
+  summarise(residentes_medios = mean(residentes)) %>% 
+  ggplot(aes(mes, residentes_medios)) +
+  geom_line(aes(color= region))
+
 ```
 
 Esto es posible gracias al operador `%>%` que le *pasa* el resultado de `summarise()` a la función `ggplot()`.
-Y este resultado no es ni más ni menos que el data.frame que necesitamos para hacer nuestro gráfico.
+Y este resultado no es ni más ni menos que el data frame que necesitás para hacer el gráfico.
 Es importante notar que una vez que comenzamos el gráfico ya **no** se puede usar el operador `%>%` y las capas del gráfico se *suman* como siempre con `+`.
 
-Este gráfico entonces parece mostrar que la esperanza de vida fue aumentado a lo largo de los años pero sería interesante ver esa relación más explícitamente agregando una nueva capa con `geom_smooth()`.
+El gráfico muestra que en un enero típico, los parques de la región Patagonia esperan algo más de 300.000 visitantes residentes, mientras que en junio tienen menos de 25.000. 
+La cantidad de visitas de residentes a los parques del litoral es un poco más constante a lo largo del año. 
+
+Una vez analizado el ciclo anual, podrías querer filtrarlo de los datos para obtener una serie *desestacionada*. 
+Una forma de hacerlo es restando la media así:
 
 ```{r}
-paises %>% 
-  group_by(continente, anio) %>% 
-  summarise(esperanza_de_vida_media = mean(esperanza_de_vida)) %>% 
-  ggplot(aes(anio, esperanza_de_vida_media)) +  
-  geom_point() +
-  geom_smooth()
+parques %>% 
+  group_by(trimestre = lubridate::month(indice_tiempo), region) %>% 
+  mutate(residentes = residentes - mean(residentes)) %>% 
+  ggplot(aes(indice_tiempo, residentes)) +
+  geom_line(aes(color= region)) 
 ```
 
-Como dice en el mensaje, por defecto `geom_smooth()` suaviza los datos usando el método *loess* (regresión lineal local) cuando hay menos de 1000 datos.
-Seguramente va a ser muy común que quieras ajustar una regresión lineal global.
-En ese caso, hay que poner `method = "lm"`:
+Al filtra el ciclo anual medio, saltan a la vista otros patrones de variabilidad. 
+Se puede ver que tanto en la Patagonia como en el Litoral la cantidad de visitantes residentes estuvo aumentando hasta 2020, cuando a causa de la pandemia, la visitas se desplomaron. 
+También se pueden destacar meses interesantes donde los parques recibieron muchos más visitantes de lo que es normal para ese mes. 
 
-```{r}
-paises %>% 
-  group_by(continente, anio) %>% 
-  summarise(esperanza_de_vida_media = mean(esperanza_de_vida)) %>% 
-  ggplot(aes(anio, esperanza_de_vida_media)) +  
-  geom_point() +
-  geom_smooth(method = "lm")
-```
 
-En gris nos muestra el intervalo de confianza al rededor de este suavizado que en este caso es bastante grande porque tenemos pocos datos!
-
-Cómo cualquier geom, podemos modificar el color, el grosor de la línea y casi cualquier cosa que se te ocurra.
 
 ::: {.alert .alert-info}
 **Tercer desafío**
@@ -212,59 +243,97 @@ Cómo cualquier geom, podemos modificar el color, el grosor de la línea y casi 
 Modificá el siguiente código para obtener el gráfico que se muestra más abajo.
 
 ```{r eval=FALSE}
-paises %>% 
-  group_by(continente, _____) %>% 
-  summarise(esperanza_de_vida_media = mean(esperanza_de_vida)) %>% 
-  ggplot(aes(anio, ________________)) +  
-  geom_point(aes(color = continente), size = 3, shape = _____) +
-  geom_smooth(color = continente) 
+parques %>% 
+  mutate(anio = lubridate::year(indice_tiempo)) %>% 
+  group_by(region, ____) %>% 
+  mutate(total = mean(total)) %>% 
+  ggplot(aes(anio, ___)) +  
+  geom_line(aes(color = region)) +
+  geom_point(aes(color = region), shape = ____, size = 3) 
 ```
 
 ```{r echo=FALSE}
-paises %>% 
-  group_by(continente, anio) %>% 
-  summarise(esperanza_de_vida_media = mean(esperanza_de_vida)) %>% 
-  ggplot(aes(anio, esperanza_de_vida_media)) +  
-  geom_smooth(aes(color = continente)) +
-  geom_point(aes(color = continente), shape = 8, size = 3) 
+parques %>% 
+  mutate(anio = lubridate::year(indice_tiempo)) %>% 
+  group_by(region, anio) %>% 
+  mutate(total = mean(total)) %>% 
+  ggplot(aes(anio, total)) +  
+  geom_line(aes(color = region)) +
+  geom_point(aes(color = region), shape = 8, size = 3) 
 ```
 :::
 
 ## Transformaciones estadísticas
 
-Hasta ahora visualizamos los datos tal cual vienen en la base de datos o con ayuda de {dplyr} para transformarlos.
-Pero como adelantamos con `geom_smooth()`, hay ciertas transformaciones comunes que se pueden hacer usando ggplot2.
+Hasta ahora visualizamos los datos tal cual vienen en la base de datos o transformados con ayuda de dplyr, pero hay ciertas transformaciones comunes que se pueden hacer usando ggplot2.
 
-De paso vamos a usar datos incluidos en el paquete `datos` (muchos paquetes traen bases de datos para probar cosas, ¡este en particular son todas bases de datos en español!) que podés descargar como siempre con `install.packages("datos")`.
-Los datos `diamantes` contiene información sobre \~ 54.000 diamantes, incluido el `precio`, el `quilate`, el `color`, la `claridad` y el `corte` de cada uno.
+Para esta sección vamos a usar datos de la [Encuesta de Viajes y Turismo de los Hogares](http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth) (EVYTH). 
+Vamos a seleccionar sólo las columnas que identifican cada hogar y viaje, y el gasto del viaje y el quintil de ingreso del hogar. 
+Como cada fila es una persona y cada hogar puede tener más de una persona, el código de abajo usa `distinct()` para eliminar los valores repetidos. 
 
 ```{r message=FALSE}
-library(ggplot2)
-library(dplyr)
-library(datos)
-str(diamantes)
+gastos <- readr::read_csv("datos/evyth_2019_2021t1.csv") %>% 
+  select(id_hogar, id_viajes, anio, trimestre, 
+         region_destino, gasto = gasto_pc, quintil = quintil_pcf_visitante) %>% 
+  distinct() %>% 
+  mutate(region_destino = factor(region_destino))
 ```
 
 ## Gráficos de frecuencias
 
 Este es un gráfico de barras construido usando la función `geom_bar()`.
-En el eje x muestra el `corte` de los diamantes y en el eje y la cantidad (*count* en inglés) de diamantes en cada categoría.
-Pero `diamantes` no tiene una variable que se llame `count` y tampoco la generamos nosotros.
-¡Es calculada internamente por {ggplot2}!
+En el eje x muestra el `quintil` de cada hogar y en el eje y la cantidad (*count* en inglés) de hogares en ese quintil. 
+Habrás notado que el data frame `gastos` no tiene ninguna variable que se llame `count` y en ninguna parte del código se calcula esa cantidad explícitamente. 
+Esta variable es computada por `geom_bar()`. 
 
 ```{r}
-ggplot(data = diamantes, aes(x = corte)) +
+ggplot(gastos, aes(quintil)) +
   geom_bar()
 ```
 
-Cómo el gráfico de barras, también podemos graficar histogramas con `geom_histogram()` y polígonos de frecuencia con `geom_density()` para visualizar la cantidad de observaciones que caen en cada categoría (si la variable es discreta como el caso del corte de los diamantes) o rango de valores (para variables continuas).
 
-Un ejemplo de variable continua es el `precio` de los diamantes, veamos como se ve un histograma y de paso le cambiamos el color a las barras, pero ojo, solo al borde.
+::: {.alert .alert-info}
+**Tercer desafío**
+
+¿Qué otra variable, además de `count` computa `geom_bar()`? 
+Andá a la documentación de `geom_bar()` (apretando F1 sobre el nombre de la función o ejecutando `?geom_bar` en la consola) y andá a la sección llamada "Computed variables" para verlo. 
+
+:::
+
+Además de contar la cantidad de elementos, `geom_bar()` computa la proporción sobre el total que representa grada grupo con la variable computada `prop`. 
+Para usar esa variable computada como la altura de las barras hay que usar la función `stat()` dentro del `aes()`.
 
 ```{r}
-ggplot(diamantes, aes(precio)) +
-  geom_histogram(color = "darkorange")
+ggplot(gastos, aes(quintil)) +
+  geom_bar(aes(y = stat(prop)))
 ```
+
+Ahora podés ver que casi el 60% de las familias encuestadas pertenecen al quintil 5. 
+
+Para obtener algo parecido pero para variables continuas hay que usar `geom_histogram()`. 
+Un ejemplo de variable continua es el `gasto` asociado a cada viaje. 
+
+```{r}
+ggplot(gastos, aes(gasto)) +
+  geom_histogram() 
+```
+
+
+Algo que sucede muy seguido con medidas de gastos e ingresos, es que esta variable tiene una distribución altamente asimétrica. 
+Es decir, hay muchos viajes con valores muy bajos y muy pocos con valores muy altos. 
+Esto hace que se pierda detalle en el rango de valores donde se encuentra la mayoría de las observaciones. 
+Una forma de resolver esto es transformando los valores con el logaritmo, pero graficar el logaritmo del gasto no sería muy fácil de interpretar. 
+En vez de eso, es recomendable utilizar una transformación de escala en el gráfico. 
+
+Para transformar los valores del eje x con el logaritmo, se usa `scale_x_log10()`. 
+Esto realiza la transformación pero luego muestra las etiquetas en la escala original. 
+
+```{r}
+ggplot(gastos, aes(gasto)) +
+  geom_histogram() +
+  scale_x_log10()
+```
+
 
 ::: {.alert .alert-info}
 **Primer desafío**
@@ -280,81 +349,75 @@ Cambiá el valor de alguno de los dos argumentos y volvé a generar el gráfico,
 También podés revisar la documentación.
 :::
 
-Además de contar la cantidad de elementos, {ggplot2} puede calcular muchas otras transformaciones sobre los datos.
-Por ejemplo si quisiéramos el porcentaje o la proporción que le corresponde a cada categoría de `corte` respecto del total podemos hacerlo *mapeando* esa transformación `prop` al eje y con la función `stat()`.
-
-```{r}
-ggplot(data = diamantes, aes(x = corte)) +
-  geom_bar(aes(y = stat(prop), group = 1))
-```
-
-Fijate que la variable `prop` no es una columna de `diamantes` sino que es el nombre de una variable computada por `geom_bar()`, por eso hay que rodearla de la función `stat()`.
-El nombre de las variables computadas por cada geoms está en su documentación (abajo de todo, antes de los ejemplos).
-
-Ahora podríamos decir que el 40% de los diamantes en la base de datos tienen un corte *ideal*.
-Además de la función `stat()` agregamos `group = 1` y esto no fue sin querer.
-Probá correr el gráfico sin ese argumento.
-
-Al incluir `group = 1`, {ggplot2} junta todas las observaciones en un único grupo (con el valor `1`) y calcula la proporción o el porcentaje que representa cada corte respecto del total de diamantes.
-Si no incluimos eso, {ggplot2} asumirá que cada categoría de corte es un grupo independiente y el cálculo del porcentaje también lo hará por separado.
 
 ### Posición
 
-Ya vimos que la estética del `color` sólo modifica el borde de las barras, si quisieras modificar el relleno necesitamos cambiar el `fill` y al igual que antes podemos *mapear* una variable a esta estética.
+Es posible que la distribución en quintiles de los visitantes no sea igual para cada región, entonces podrías querer dibujar una barra para cada quintil y cada región e identificar cada quintil con un color disitnto. 
+Siguiendo lo anterior, quizás lo primero que se te ocurre es algo como esto:
 
 ```{r}
-ggplot(data = diamantes) +
-  geom_bar(aes(x = corte, fill = claridad))
+ggplot(gastos) +
+  geom_bar(aes(quintil, color = region_destino))
 ```
 
-Al *mapear* una variable distinta, la claridad de los diamantes, podemos visualizar información extra.
-Este "apilamiento" de las barras es la opción de posición por defecto `position = "stack"`, pero podrías usar una de las otras tres opciones: `"identity"`, `"dodge"` o `"fill"`.
-
--   `position = "identity"` colocará cada barra comenzando en cero quedando todas superpuestas. Para ver esa superposición, debemos hacer que las barras sean ligeramente transparentes configurando el `alpha` a un valor pequeño.
+El problema de esto es que el parámetro "color" de las barras define el color del contorno, no el relleno. 
+Para modificar el relleno hay que cambiar el parámetro `fill`.
 
 ```{r}
-ggplot(diamantes) +
-  geom_bar(aes(x = corte, fill = claridad), alpha = 0.2, position = "identity")
+ggplot(gastos) +
+  geom_bar(aes(quintil, fill = region_destino))
 ```
 
--   `position = "fill"` apila las barras al igual que `position = "stack"`, pero transforma los datos para que cada conjunto de barras apiladas tenga la misma altura. Esto hace que sea más fácil comparar proporciones entre grupos.
+Al *mapear* una variable distinta, se puede visualizar información extra.
+En el gráfico, cada barra está compuesta de 8 barras apiladas cuya altura representa la cantidad de hogares que viajaron a cada región y están en cada cuantil.
+Este "apilamiento" de las barras es la opción de posición por defecto, pero puede cambiarse con el argumento "position". 
+
+La posición por defecto es "stack". 
 
 ```{r}
-ggplot(diamantes) +
-  geom_bar(aes(x = corte, fill = claridad), position = "fill")
+ggplot(gastos) +
+  geom_bar(aes(quintil, fill = region_destino), position = "stack")
 ```
 
--   `position = "dodge"` coloca las barras una al lado de la otra. Esto hace que sea más fácil comparar valores individuales.
+`position = "identity"` colocará cada barra comenzando en cero quedando todas superpuestas. 
+Para ver esa superposición, debemos hacer que las barras sean ligeramente transparentes configurando el `alpha` a un valor pequeño.
 
 ```{r}
-ggplot(diamantes) +
-  geom_bar(aes(x = corte, fill = claridad), position = "dodge")
+ggplot(gastos) +
+  geom_bar(aes(quintil, fill = region_destino), alpha = 0.2, position = "identity")
 ```
 
-## Gráficos de líneas suavizas
-
-Cómo vimos antes, los gráficos de líneas suavizadas (smoothers) ajustan un modelo a los datos y luego grafican las predicciones del modelo.
-Sin entrar en muchos detalles, se puede aplicar distintos modelos y la elección del mismo dependerá de los datos.
+`position = "fill"` apila las barras al igual que `position = "stack"`, pero transforma los datos para que cada conjunto de barras apiladas tenga la misma altura.
+Esto hace que sea más fácil comparar proporciones entre grupos.
 
 ```{r}
-ggplot(diamantes, aes(quilate, precio)) +
-  geom_point() +
-  geom_smooth()
+ggplot(gastos) +
+  geom_bar(aes(quintil, fill = region_destino),  position = "fill")
 ```
+
+`position = "dodge"` coloca las barras una al lado de la otra. 
+Esto hace que sea más fácil comparar valores individuales.
+
+```{r}
+ggplot(gastos) +
+  geom_bar(aes(quintil, fill = region_destino),  position = "dodge")
+```
+
 
 ## Gráficos de caja
 
-Los diagramas de caja, mejor conocidos como boxplots calculan un resumen robusto de la distribución y luego muestran una caja con formato especial.
-
-La línea central de la caja corresponde a la **mediana** (el valor que toma el dato central) y los extremos de la caja son los **cuartiles 1 y 3**, definiendo así el **rango intercuartil** (IQR).
-Los extremos están definidos como el valor observado que no esté más lejos de **1.5\*IQR** de la mediana y los puntos son los las observaciones que se escapan de ese rango, que pueden ser considerados **outliers** o **valores extremos**.
+Los diagramas de caja --mejor conocidos como boxplots-- calculan un resumen de los valores centrales y de dispersión de la distribución de los datos. 
 
 ```{r}
-ggplot(diamantes, aes(claridad, precio)) +
-  geom_boxplot()
+ggplot(gastos, aes(region_destino, gasto)) +
+  geom_boxplot() +
+  scale_y_log10()
 ```
 
-Los boxplot dan muchísima información sobre los datos pero al mismo tiempo *esconden* la cantidad de observaciones que se usaron para generarlos y en particular cual es la frecuencia a lo largo del eje y.
+La línea central de la caja corresponde a la **mediana** (el valor que toma el dato central) y los extremos de la caja son los **cuartiles 1 y 3**, definiendo así el **rango intercuartil** (IQR).
+Los extremos están definidos como el valor observado que no esté más lejos de **1.5\*IQR** de la mediana y los puntos son las observaciones que se escapan de ese rango, que pueden ser considerados **outliers** o **valores extremos**.
+
+Los boxplot brindan algo de información sobre la distribución de los datos pero al mismo tiempo *esconden* la forma de la distribución y el número de datos que se usaron para generarlos. 
 Por esta razón también existen `geom_violin()` y `geom_jitter()`.
 
 ::: {.alert .alert-info}
@@ -365,76 +428,158 @@ Por esta razón también existen `geom_violin()` y `geom_jitter()`.
 :::
 
 ```{r}
-ggplot(diamantes, aes(claridad, precio)) +
-  geom_violin() 
+ggplot(gastos, aes(region_destino, gasto)) +
+  geom_violin() +
+  scale_y_log10()
 ```
 
 ```{r}
-ggplot(diamantes, aes(claridad, precio)) +
-  geom_jitter()
+ggplot(gastos, aes(region_destino, gasto)) +
+  geom_jitter(alpha = 0.2, size = 0.1) +
+  scale_y_log10()
 ```
+
+
 
 ::: {.alert .alert-success}
 Cuando nuestra base de datos es muy grande corremos el riesgo de generar de que los elementos del gráfico estén tan juntos que se solapen y no se vean.
 Esto se conoce como **overplotting**.
-La base de datos `diamantes` tiene 53940 observaciones y al graficar un punto por cada una, aún si están separados por la claridad, quedan superpuestos.
+La tabla `gastos` tiene `r nrow(gastos)` observaciones y al graficar un punto por cada una, aún si están separados por la región, quedan superpuestos.
 
-Para resolver este problema se suele modificar la estética de los elementos, cambiando el tamaño o `size` para que ocupen menos lugar y se vean mejor, cambiando la forma o `shape` por alguna que no tenga relleno y permita ver los elementos que hay atrás o modificando la transparencia o `alpha` por la misma razón.
-En bases de datos tan grandes como la de diamantes, muchas veces hay que utilizar varios de estos recursos.
+Por esto es que en el último gráfico los puntos son muy chiquitos y con transparencia.
 :::
 
 ## Graficando en múltiples paneles
 
-Vimos que es posible graficar más de dos variables en un gráfico *mapeando* una variable al `color` o por ejemplo el tipo de línea o `linetype`
+En un gráfico anterior mostramos la cantidad de hogares en cada quintil en función de la región de destino mapeando la variable `region_destino` al relleno de las columnas:
 
 ```{r}
-ggplot(diamantes, aes(quilate, precio)) +
-  geom_point(aes(color = color))
+ggplot(gastos) +
+  geom_bar(aes(quintil, y = stat(prop), fill = region_destino),  position = "dodge")
 ```
 
-En este caso no solo visualizamos la relación entre el precio y el quilate del diamante, también podemos ver que rol juega el color.
-También podríamos haber intentando resolver el problema generando un gráfico por cada color filtrando las observaciones correspondientes.
+Este gráfico permite comparar diferencias entre regiones para un mismo quintil, pero no permite comparar muy bien la distribución de ingresos en función de la región de destino. 
+
+Este problema podría resolverse generando un gráfico por cada región filtrando las observaciones correspondientes.
 
 ```{r}
-diamantes %>% 
-  filter(color == "D") %>% 
-  ggplot(aes(quilate, precio)) +
-  geom_point(aes(color = color))
-
+gastos %>% 
+  filter(region_destino == 1) %>% 
+  ggplot() +
+  geom_bar(aes(quintil, y = stat(prop)),  position = "dodge")
 ```
 
-Pero sería muchísimo trabajo si tenemos que hacer esto para cada una de las 7 categorías de color.
-La buena noticia es que {ggplot2} tiene un par de funciones justo para resolver este problema:
+Pero sería muchísimo trabajo si tenés que hacer esto para cada una de las 8 regiones.
+Excepto que ggplot2 tiene una forma de automatizar eso utilizando paneles:
 
 ```{r}
-ggplot(diamantes, aes(quilate, precio)) +
-  geom_point(aes(color = color)) +
-  facet_wrap(~color)
+ggplot(gastos) +
+  geom_bar(aes(quintil, y = stat(prop)),  position = "dodge") +
+  facet_wrap(~ region_destino)
 ```
 
-Esta nueva capa con `facet_wrap()` divide al gráfico inicial en 7 paneles o *facets*, uno por cada color.
-Esta función requiere saber que variable será la responsable de separar los paneles y para eso se usa la **notación de fórmula** de R: `~color`.
-Esto se lee como generar paneles *"en función del color"*.
+Esta nueva capa con `facet_wrap()` divide al gráfico inicial en 8 paneles o *facets*, uno por cada región.
+Esta función requiere saber que variable será la responsable de separar los paneles y para eso se usa la **notación de fórmula** de R: `~ region_destino`.
+Esto se lee como generar paneles *en función de* `region_destino`.
 
-¿Y si quisiéramos generar paneles a partir de 2 variables?
-Para eso existe `facet_grid()`.
-En este gráfico generamos paneles viendo la *"relación entre el corte y el color"* y por ejemplo en el primer panel arriba a la izquierda podremos observar los diamantes que son al mismo tiempo de color D y corte Regular.
-En este caso *mapear* la variable color al color de los diamantes no parece ser necesario ya que cada columna ya nos permite identificar eso, sin embargo en algunos casos ayuda a leer el gráfico más rápido.
+Una hipótesis razonable podría ser que la distribución de ingresos en cada región también varía según el trimestre. 
+Para ver esto, habría que hacer el gráfico de barras para cada combinación de región de destino y trimestre. 
+En ggplot2 esto se resuelve agregando más variables que definan los paneles "sumando" variables en la fórmula
 
 ```{r}
-ggplot(diamantes, aes(quilate, precio)) +
-  geom_point(aes(color = color)) +
-  facet_grid(corte~color)
+ggplot(gastos) +
+  geom_bar(aes(quintil, y = stat(prop)),  position = "dodge") +
+  facet_wrap(~ region_destino + trimestre)
 ```
+
+Esto se lee como generar paneles *"en función de* `region_destino` y `trimestre`".
+
+Una alternativa que funciona mejor cuando se hacen paneles en función de dos o más variables es que en vez de organizar los paneles uno luego del otro, tengan una organización. 
+Por ejemplo, que los paneles se organicen en filas según la región de destino y en columna según el trimestre. 
+Para eso hay que reemplazar `facet_wrap()` por `facet_grid()` y cambiar la formula un poco. 
+
+```{r}
+ggplot(gastos) +
+  geom_bar(aes(quintil, y = stat(prop)),  position = "dodge") +
+  facet_grid(region_destino ~ trimestre)
+```
+
+¿Ves como quedan los paneles más organizados y fácil es de leer? 
+Esta organización permite comparar regiones para un trimestre en particular comparando gráficos en la vertical, y comparar trimestres para una misma región leyendo los gráficos en horizontal. 
+
+La formula `region_destino ~ trimestre` indica que `region_destino` define las filas y `trimestre` define las columnas. 
+
 
 ::: {.alert .alert-info}
 **Tercer desafío**
 
-Generá boxplots para analizar como se comporta el `precio` según la `claridad` para cada tipo de `corte` como se ve acá.
+Generá boxplots para analizar como se comporta el `gasto` de cada familia en función del quintil al que pertenecen para cada región.   
 
 ```{r echo=FALSE}
-ggplot(diamantes, aes(claridad, precio, fill = claridad)) +
-  geom_boxplot() +
-  facet_wrap(~corte)
+ggplot(gastos, aes(quintil, gasto)) +
+  geom_boxplot() + 
+  scale_y_log10() +
+  facet_wrap(~region_destino) 
 ```
 :::
+
+
+## Gráficos de líneas suavizas
+
+Antes viste este gráfico que parece mostrar que la cantidad de visitantes residentes estuvo aumentando entre 2008 y 2020 hasta que las restricciones por la pandemia hicieron que esta cantidad se desplomara. 
+
+```{r}
+parques %>% 
+  group_by(trimestre = lubridate::month(indice_tiempo), region) %>% 
+  mutate(residentes = residentes - mean(residentes)) %>% 
+  ggplot(aes(indice_tiempo, residentes)) +
+  geom_line(aes(color= region)) 
+```
+
+Una forma de guiar al ojo a ver esta tendencia e ignorar las fluctuaciones trimestre a trimestre es usando una línea suave. 
+Las líneas de suavizado ajustan un modelo a los datos y luego grafican las predicciones del modelo. 
+Sin entrar en muchos detalles, se puede aplicar distintos modelos y la elección del mismo dependerá de los datos.
+
+En ggplot2 se puede agregar una línea suave agregando una capa con `geom_smooth()`.
+
+```{r}
+parques %>% 
+  filter(region == "patagonia") %>% 
+  group_by(trimestre = lubridate::month(indice_tiempo), region) %>% 
+  mutate(residentes = residentes - mean(residentes)) %>% 
+  ggplot(aes(indice_tiempo, residentes)) +
+  geom_line(aes(color = region)) +
+  geom_smooth()
+```
+
+(Este gráfico además filtra sólo la región de Patagonia para que se vea más claramente.)
+
+Como dice en el mensaje, por defecto `geom_smooth()` suaviza los datos usando el método *loess* ([regresión lineal local](https://es.wikipedia.org/wiki/Regresi%C3%B3n_local)). 
+Seguramente va a ser muy común que quieras ajustar una regresión lineal global.
+En ese caso, hay que poner `method = "lm"`:
+
+```{r}
+parques %>% 
+  filter(region == "patagonia") %>% 
+  group_by(trimestre = lubridate::month(indice_tiempo), region) %>% 
+  mutate(residentes = residentes - mean(residentes)) %>% 
+  ggplot(aes(indice_tiempo, residentes)) +
+  geom_line(aes(color = region)) +
+  geom_smooth(method = "lm")
+```
+
+El área gris muestra el intervalo de confianza al rededor de este suavizado. 
+
+Cómo cualquier geom, podemos modificar el color, el grosor de la línea y casi cualquier cosa que se te ocurra.
+
+
+
+```{r}
+parques %>% 
+  group_by(trimestre = lubridate::month(indice_tiempo), region) %>% 
+  mutate(residentes = residentes - mean(residentes)) %>% 
+  ggplot(aes(indice_tiempo, residentes)) +
+  geom_line(aes(color = region)) +
+  geom_smooth(aes(color = region))
+```
+
