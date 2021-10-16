@@ -214,7 +214,7 @@ parques %>%
 ```
 
 Esto es posible gracias al operador `%>%` que le *pasa* el resultado de `summarise()` a la función `ggplot()`.
-Y este resultado no es ni más ni menos que el data frame que neceistás para hacer el gráfico.
+Y este resultado no es ni más ni menos que el data frame que necesitás para hacer el gráfico.
 Es importante notar que una vez que comenzamos el gráfico ya **no** se puede usar el operador `%>%` y las capas del gráfico se *suman* como siempre con `+`.
 
 El gráfico muestra que en un enero típico, los parques de la región Patagonia esperan algo más de 300.000 visitantes residentes, mientras que en junio tienen menos de 25.000. 
