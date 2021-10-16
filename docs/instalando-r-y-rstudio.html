@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Apéndice A Desafíos de práctica | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
+  <title>Apéndice B Instalando R y RStudio | Documento Técnico N°6: Ciencia de Datos para el Turismo</title>
   <meta name="description" content="Ciencia de Datos para el Turismo" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Apéndice A Desafíos de práctica | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta property="og:title" content="Apéndice B Instalando R y RStudio | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Apéndice A Desafíos de práctica | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
+  <meta name="twitter:title" content="Apéndice B Instalando R y RStudio | Documento Técnico N°6: Ciencia de Datos para el Turismo" />
   
   <meta name="twitter:description" content="Ciencia de Datos para el Turismo" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="reportes-ii.html"/>
-<link rel="next" href="instalando-r-y-rstudio.html"/>
+<link rel="prev" href="desafíos-de-práctica.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -262,49 +262,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="imagenes/cabezal.png">
 </div>
-<div id="desafíos-de-práctica" class="section level1">
-<h1><span class="header-section-number">Apéndice A</span> Desafíos de práctica</h1>
-<p>En esta sección te proponemos desafíos y ejercicios para prácticar o revisar lo que vimos en los distintos capítulos. Cada una de las subsección estará asociada a un conjunto de capítulos y buscan relacionar los distintos temas y herramientas.</p>
-<div id="desafío-1" class="section level2 unnumbered">
-<h2>Desafío 1</h2>
-<p><strong>Capítulos asociados:</strong> Instalación de R y Rstudio, Uso de proyectos, Reportes con RMarkdown y lectura de datos.</p>
+<div id="instalando-r-y-rstudio" class="section level1">
+<h1><span class="header-section-number">Apéndice B</span> Instalando R y RStudio</h1>
+<p>En esta sección presentamos instrucciones de instalación de R y RStudio para Windows y derivados de Ubuntu.
+Notá que dado que tanto R como RStudio publican nuevas versiones periódicamente, es posible que estas instrucciones queden desactualizadas con el tiempo.</p>
+<div id="instalando-r" class="section level2 unnumbered">
+<h2>Instalando R</h2>
+<div id="windows" class="section level3 unnumbered">
+<h3>Windows</h3>
 <ol style="list-style-type: decimal">
-<li><p>Seguí las instrucciones que encontrarás en el <a href="instalando-r-y-rstudio.html">Apéndice B</a> para instalar R y Rstudio.
-Tené en cuenta que la instalación en computadoras con Windows requieren algunos pasos extra.</p></li>
-<li><p>Abrí RStudio y creá tu primer proyecto.
-Este proyecto te acompañará a lo largo de todos los desafíos y ejercicios de este libro, por lo que va a necesitar un nombre fácil de recordar.
-Podés revisar las instrucciones <a href="trabajar-con-proyectos-en-rstudio.html">acá</a>.</p></li>
-<li><p>Ahora es momento de instalar algunos paquetes para poder usar luego.
-Por ahora instalemos readr, remotes y datos.</p></li>
+<li><p>Entrá a <a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a> y bajate el instalador haciendo click en el link grandote que dice “Download R x.x.x for Windows”.</p></li>
+<li><p>Una vez que se bajó, hacé doble click en el archivo y seguí las instrucciones del instalador.</p></li>
 </ol>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="desafíos-de-práctica.html#cb205-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;readr&quot;</span>)</span>
-<span id="cb205-2"><a href="desafíos-de-práctica.html#cb205-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb205-3"><a href="desafíos-de-práctica.html#cb205-3"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ciencia_datos/datos&quot;</span>)</span></code></pre></div>
-<p>La tercera linea, si bien distinta a las anteriores, también instala un paquete.
-La diferencia es que instala el paquete desde un repositorio de GitHub donde suelen estar los paquetes en desarrollo en vez de desde el repositorio oficial de R (CRAN).</p>
-<ol start="4" style="list-style-type: decimal">
-<li><p>Creá un nuevo archivo R Markdown que se llame “01-lectura.Rmd” desde File -&gt; New File -&gt; R Markdown.
-Si bien el archivo puede tener cualquer nombre, siempre que sea informativo, te proponemos nombrarlos como número-nombre para poder ordenarlos y que te resulte más fácil encontrarlo dentro del proyecto.
-Es posible que necesites darle permiso a RStudio para que instale nuevos paquetes asociados a R Markdown.
-Te va a aparecer la plantilla por defecto; borrá todas las líneas empezando por la que dice <code>## R Markdown</code> (inclusive) y guardá el archivo.
-(Para guardar tenés podés ir a File -&gt; Save o hacer click en en el disquette 💾).</p></li>
-<li><p>Aprovechemos el archivo recién creado para leer datos.
-Te proponemos que revises el capítulo de <a href="lectura-de-datos-ordenados.html">lectura de datos</a> y sigas las instrucciones para leer los datos.</p></li>
-<li><p>¡Listo! En la próxima sección practicaremos con esos y otros datos.</p></li>
+<p>Una vez que se termine de instalar, te va a aparecer un ícono como este en el escritorio o en los programas instalados: <img src="img/r-logo.jpeg" height="20" alt="Logo de R" />.</p>
+<p>Al ejecutarlo, les tiene que aparecer algo como esto:</p>
+<p><img src="img/r-en-windows.png" title="Captura de la consola de R en windows." alt="Captura de la consola de R en windows." width="100%" style="display: block; margin: auto;" /></p>
+<p>Si ves una ventana así significa que ya tenés instalado R, pero seguí leyendo!
+<strong>Todavía falta unos pasos</strong> para poder sacarle todo el jugo.</p>
+<p>Para instalar algunos paquetes de R vas a necesitar instalar un programa adicional llamado rtools.</p>
+<ol style="list-style-type: decimal">
+<li><p>Entrá a <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a> y descargate el instalador en donde dice “On Windows 64-bit: rtoolsxx-x86_64.exe (recommended: includes both i386 and x64 compilers)”</p></li>
+<li><p>Abrí la consola de R, poné esto y apretá enter:</p></li>
 </ol>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="instalando-r-y-rstudio.html#cb206-1"></a><span class="kw">writeLines</span>(<span class="st">&#39;PATH=&quot;${RTOOLS40_HOME}</span><span class="ch">\\</span><span class="st">usr</span><span class="ch">\\</span><span class="st">bin;${PATH}&quot;&#39;</span>, <span class="dt">con =</span> <span class="st">&quot;~/.Renviron&quot;</span>)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Finalmente, para chequear que todo esté bien, cerrá R, volvé a abrirlo, escribí esto en la cosola y apretá enter:</li>
+</ol>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="instalando-r-y-rstudio.html#cb207-1"></a><span class="kw">Sys.which</span>(<span class="st">&quot;make&quot;</span>)</span></code></pre></div>
+<p>Debería salir algo como esto:</p>
+<pre><code>##                               make 
+## &quot;C:\\rtools40\\usr\\bin\\make.exe&quot;</code></pre>
 </div>
-<div id="desafío-2" class="section level2 unnumbered">
-<h2>Desafío 2</h2>
-<p><strong>Capítulos asociados:</strong> Manipulación de datos con dplyr y la primera parte de gráficos con ggplot2</p>
+<div id="ubuntu-o-derivados" class="section level3 unnumbered">
+<h3>Ubuntu o derivados</h3>
+<p>Para tener la última versión, tenés que agregar los repositorios de CRAN. Para hacerlo, vas a tener que tener permisos de administrador.
+Los detalles están en <a href="https://cran.r-project.org/bin/linux/ubuntu/">esta</a> página, pero el resumen es:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb209-1"><a href="instalando-r-y-rstudio.html#cb209-1"></a><span class="fu">sudo</span> apt update -qq</span>
+<span id="cb209-2"><a href="instalando-r-y-rstudio.html#cb209-2"></a><span class="fu">sudo</span> apt install --no-install-recommends software-properties-common dirmngr</span>
+<span id="cb209-3"><a href="instalando-r-y-rstudio.html#cb209-3"></a><span class="fu">sudo</span> apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9</span>
+<span id="cb209-4"><a href="instalando-r-y-rstudio.html#cb209-4"></a><span class="fu">sudo</span> add-apt-repository <span class="st">&quot;deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> -cs<span class="va">)</span><span class="st">-cran40/&quot;</span></span>
+<span id="cb209-5"><a href="instalando-r-y-rstudio.html#cb209-5"></a><span class="fu">sudo</span> sudo apt install r-base r-base-dev</span></code></pre></div>
+<p>Si todo salió bien, tenés que tener instalado R en tu máquina y podés ejecutarlo con el comando <code>R</code> en la consola.</p>
+<p><img src="img/r-terminal.png" title="Terminal de linux corriendo R." alt="Terminal de linux corriendo R." width="100%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="desafío-3" class="section level2 unnumbered">
-<h2>Desafío 3</h2>
-<p><strong>Capítulos asociados:</strong> Más gráficos con ggplot2 y manipulación de datos con dplyr y tidyr.</p>
 </div>
-<div id="desafío-4" class="section level2 unnumbered">
-<h2>Desafío 4</h2>
-<p><strong>Capítulos asociados:</strong> Tablas, gráficos e informes para publicar.</p>
+<div id="instalando-rstudio" class="section level2 unnumbered">
+<h2>Instalando RStudio</h2>
+<p>Andá a <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a>.
+Abajo de todo está el listado de instaladores para cada plataforma; descargá la que corresponda a tu sistema operativo.</p>
+<p><img src="img/rstudio-descarga.png" title="Página de descarga de RStudio." alt="Página de descarga de RStudio." width="100%" style="display: block; margin: auto;" /></p>
+<div id="windows-1" class="section level3 unnumbered">
+<h3>Windows</h3>
+<p>Como siempre, doble click en el archivo y seguir los pasos de instalación.</p>
+</div>
+<div id="ubuntu-o-derivados-1" class="section level3 unnumbered">
+<h3>Ubuntu o derivados</h3>
+<p>Si tenés instalada una interfaz gráfica para instalar archivos .deb, ejecutando el archivo que descargaste ya vas a poder instalar RStudio.
+Si no, abrí una terminal en el directorio donde bajaste el archivo y ejecutá</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb210-1"><a href="instalando-r-y-rstudio.html#cb210-1"></a><span class="fu">sudo</span> dpkg -i ARCHIVO</span></code></pre></div>
+<p>Reemplazando ARCHIVO por el nombre del archivo instalador.</p>
+<p>Es posible que salte algún error por falta de alguna dependencia, en ese caso usá</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb211-1"><a href="instalando-r-y-rstudio.html#cb211-1"></a><span class="fu">sudo</span> apt-get -f install</span></code></pre></div>
+<p>Y debería estar arreglado.</p>
+<p>Una vez instalado, al ejecutar RStudio les tiene que aparecer una ventana como esta:</p>
+<p><img src="img/rstudio-principal.png" title="Pantalla principal de RStudio." alt="Pantalla principal de RStudio." width="100%" style="display: block; margin: auto;" /></p>
 
+</div>
 </div>
 </div>
             </section>
@@ -312,8 +335,8 @@ Te proponemos que revises el capítulo de <a href="lectura-de-datos-ordenados.ht
           </div>
         </div>
       </div>
-<a href="reportes-ii.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="instalando-r-y-rstudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="desafíos-de-práctica.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

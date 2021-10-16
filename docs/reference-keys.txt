@@ -9,19 +9,11 @@ trabajar-con-proyectos-en-rstudio
 qué-ventajas-tiene
 abrir-un-proyecto
 cómo-se-organiza
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 ordenando-aún-más
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 borrón-y-cuenta-nueva-todos-los-días
 introducción-a-rmarkdown
 creando-archivos-.rmd
 estructura-de-un-.rmd
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 encabezado
 bloques-de-código
 el-texto-propio-del-documento.
@@ -30,22 +22,6 @@ lectura-de-datos-ordenados
 descargando-datos
 leer-datos-csv
 leer-datos-de-excel
-=======
-=======
->>>>>>> Stashed changes
-markdown
-bloques-de-código
-texto-en-línea
-lectura-de-datos-ordenados
-leer-datos-csv
-vectores
-vectorización
-leer-datos-de-excel
-formatos-de-tablas
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 manipulación-de-datos-ordenados
 seleccionando-columnas-con-select
 filtrando-filas-con-filter
@@ -61,21 +37,9 @@ relación-entre-variables
 transformaciones-estadísticas
 gráficos-de-frecuencias
 posición
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-gráficos-de-líneas-suavizas
-gráficos-de-caja
-graficando-en-múltiples-paneles
-=======
 gráficos-de-caja
 graficando-en-múltiples-paneles
 gráficos-de-líneas-suavizas
->>>>>>> Stashed changes
-=======
-gráficos-de-caja
-graficando-en-múltiples-paneles
-gráficos-de-líneas-suavizas
->>>>>>> Stashed changes
 manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii
 de-ancho-a-largo-con-pivot_longer
 de-largo-a-ancho-con-pivot_wider
@@ -89,7 +53,6 @@ escala-de-colores-y-otras
 escalas-de-ejes
 elementos-de-texto
 temas
-<<<<<<< HEAD
 reportes-ii
 eligiendo-el-formato-de-salida
 personalizando-la-salida
@@ -97,16 +60,3 @@ reportes-parametrizados
 control-de-chunks
 desafíos-de-práctica
 instalando-r-y-rstudio
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-desafíos-de-práctica
-desafío-1
-desafío-2
-desafío-3
-desafío-4
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> ggplot2
