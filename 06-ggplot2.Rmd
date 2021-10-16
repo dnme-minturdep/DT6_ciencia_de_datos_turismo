@@ -54,7 +54,7 @@ En este caso usamos `parques`.
 
 El segundo argumento se llama "mapping" (*mapeo* en inglés). 
 Este argumento define la relación entre cada columna del data frame y los distintos parámetros gráficos. Por ejemplo, qué columna va a representar el eje x, cuál va a ser el eje y, etc.. 
-Este mapeo se hace **siempre** con la función `aes()` (que viene de *aesthetics*). 
+Este mapeo se hace **siempre** con la función `aes()` (que viene de *aesthetics*, *estética* en inglés). 
 
 Por ejemplo, si querés hacer un gráfico que muestre la relación entre la cantidad de visitantes residentes y no residentes usarías algo como esto:
 
