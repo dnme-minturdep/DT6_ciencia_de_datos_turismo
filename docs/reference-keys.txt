@@ -60,4 +60,3 @@ reportes-parametrizados
 control-de-chunks
 desafíos-de-práctica
 instalando-r-y-rstudio
-mac
