@@ -21,7 +21,7 @@ Por ahora instalemos readr, remotes y datos.
 ```{r eval=FALSE, include=TRUE}
 install.packages("readr")
 install.packages("remotes")
-remotes::install_github("ciencia_datos/datos")
+remotes::install_github("cienciadedatos/datos")
 ```
 
 La tercera linea, si bien distinta a las anteriores, también instala un paquete. 
