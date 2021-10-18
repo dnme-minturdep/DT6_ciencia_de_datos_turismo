@@ -67,7 +67,13 @@ knitr::include_graphics("img/r-terminal.png")
 
 ### Mac {-}
 
-1. Descarga e instala R para macOS: https://cran.r-project.org
+1. Ir a CRAN: https://cran.r-project.org
+
+2. Hacer click en el link _“Download R for (Mac) OS X”._
+
+3. Descarga el paquete correspondiente a tu sistema operativo.
+
+4. Ejecuta el paquete.
 
 
 ## Instalando RStudio {-}
