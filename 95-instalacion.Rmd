@@ -65,13 +65,10 @@ Si todo salió bien, tenés que tener instalado R en tu máquina y podés ejecut
 knitr::include_graphics("img/r-terminal.png")
 ```
 
-## Mac
+### Mac {-}
 
 1. Descarga e instala R para macOS: https://cran.r-project.org
 
-2. Descarga e instala RStudio: https://www.rstudio.com
-
-La primera vez que abrimos RStudio nos ofrece instalar las herramientas de XCode para línea de comandos. Aceptamos haciendo clic en instalar.
 
 ## Instalando RStudio {-}
 
@@ -112,3 +109,9 @@ Una vez instalado, al ejecutar RStudio les tiene que aparecer una ventana como e
 ```{r, echo=FALSE, fig.alt = "Pantalla principal de RStudio."}
 knitr::include_graphics("img/rstudio-principal.png")
 ```
+
+### Mac {-}
+
+2. Descarga e instala RStudio: https://www.rstudio.com
+
+La primera vez que abrimos RStudio nos ofrece instalar las herramientas de XCode para línea de comandos. Aceptamos haciendo clic en instalar.
