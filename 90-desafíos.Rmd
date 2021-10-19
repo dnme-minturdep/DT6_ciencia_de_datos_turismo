@@ -43,6 +43,40 @@ Te proponemos que revises el capítulo de [lectura de datos](lectura-de-datos-or
 
 **Capítulos asociados:** Manipulación de datos con dplyr y la primera parte de gráficos con ggplot2
 
+Armá un nuevo archivo de R Markdown, borrá todas las líneas empezando por la que dice `## R Markdown` (inclusive) y guardá el archivo con algún nombre descriptivo. 
+
+1. Creá un nuevo bloque de código y pegá estas líneas de código. 
+
+```{r, eval = FALSE}
+library(datos)
+vuelos <- vuelos
+```
+
+Corré el bloque.
+Va a cargar una tabla de ejemplo que vienen en el paquete datos. 
+
+Escribí el código que resuelve cada uno de los siguientes puntos en su propio bloque.
+
+1. Fijate qué es cada columna de la tabla vuelos. Escribí `?vuelos` en la consola. 
+
+2. Usando la función `filter()`, encontrá todos los vuelos que:  
+    a. Tuvieron un retraso de llegada de dos o más horas
+    b. Volaron a Houston (IAH oHOU)
+    c. Fueron operados por United, American o Delta
+    d. Llegaron más de dos horas tarde, pero no salieron tarde
+    e. Partieron entre la medianoche y las 6 a.m. (incluyente)
+
+3. Las variables `horario_salida` y `salida_programada` tienen un formato conveniente para leer, pero es difícil realizar cualquier cálculo con ellas porque no son realmente números continuos. (Ayuda: para hacer la transformación hay que hacer `(horario %/% 100 * 60 + horario %% 100) %% 1440`)
+
+4. Calculá el tiempo de vuelo usando `horario_llegada - horario_salida`. ¿Es igual a `tiempo_vuelo`? ¿Cuál es el problema?
+
+5. Calculá el tiempo de vuelo promedio para cada aeropuerto de origen. 
+
+6. Calculá el retraso medio para cada aerolínea.
+
+7. 🔥🔥¡Esta es la prueba de fuego! 🔥🔥: Kniteá el documento haciendo click en el botón knitr. Si tu código es reproducible, tiene que ejecutar todo sin errores y devolver un documento html con el resultado.
+
+
 ## Desafío 3 {-}
 
 **Capítulos asociados:** Más gráficos con ggplot2 y manipulación de datos con dplyr y tidyr.
