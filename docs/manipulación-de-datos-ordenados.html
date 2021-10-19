@@ -401,7 +401,7 @@ Esto permite escribir el código como una cadena de funciones que van operando s
 ##  9 2014-01        2706215
 ## 10 2014-04        1006238
 ## # … with 26 more rows</code></pre>
-<p>La forma de “leer” esto es “Tomá la variable <code>turistas_edad</code>, <strong>después</strong> aplicale <code>s filter(edad == "Menores de 14")</code>, <strong>después</strong> aplicale <code>fselect(indice_tiempo, turistas)</code>”.</p>
+<p>La forma de “leer” esto es “Tomá la variable <code>turistas_edad</code>, <strong>después</strong> aplicale <code>filter(edad == "Menores de 14")</code>, <strong>después</strong> aplicale <code>select(indice_tiempo, turistas)</code>”.</p>
 <p>Cómo vimos, el primer argumento de todas las funciones de dplyr es el data frame sobre el cual van a operar, pero notá que en las líneas con <code>select()</code> y <code>filter()</code> no escribís la tabla explícitamente.<br />
 Esto es porque la pipe implícitamente pasa el resultado de las líneas anteriores como el primer argumento de la función siguiente.</p>
 <p>Toma el data frame <code>turistas_edad</code> y se lo pasa al primer argumento de <code>select()</code>.
