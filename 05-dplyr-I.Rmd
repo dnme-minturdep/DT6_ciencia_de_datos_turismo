@@ -102,7 +102,7 @@ turistas_edad %>%
   select(indice_tiempo, turistas)
 ```
 
-La forma de "leer" esto es "Tomá la variable `turistas_edad`, **después** aplicale `s filter(edad == "Menores de 14")`, **después** aplicale `fselect(indice_tiempo, turistas)`". 
+La forma de "leer" esto es "Tomá la variable `turistas_edad`, **después** aplicale `filter(edad == "Menores de 14")`, **después** aplicale `select(indice_tiempo, turistas)`". 
 
 Cómo vimos, el primer argumento de todas las funciones de dplyr es el data frame sobre el cual van a operar, pero notá que en las líneas con `select()` y `filter()` no escribís la tabla explícitamente.  
 Esto es porque la pipe implícitamente pasa el resultado de las líneas anteriores como el primer argumento de la función siguiente. 
