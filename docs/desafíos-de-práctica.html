@@ -298,6 +298,31 @@ Te proponemos que revises el capítulo de <a href="lectura-de-datos-ordenados.ht
 <div id="desafío-2" class="section level2 unnumbered">
 <h2>Desafío 2</h2>
 <p><strong>Capítulos asociados:</strong> Manipulación de datos con dplyr y la primera parte de gráficos con ggplot2</p>
+<p>Armá un nuevo archivo de R Markdown, borrá todas las líneas empezando por la que dice <code>## R Markdown</code> (inclusive) y guardá el archivo con algún nombre descriptivo.</p>
+<ol style="list-style-type: decimal">
+<li>Creá un nuevo bloque de código y pegá estas líneas de código.</li>
+</ol>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="desafíos-de-práctica.html#cb206-1"></a><span class="kw">library</span>(datos)</span>
+<span id="cb206-2"><a href="desafíos-de-práctica.html#cb206-2"></a>vuelos &lt;-<span class="st"> </span>vuelos</span></code></pre></div>
+<p>Corré el bloque.
+Va a cargar una tabla de ejemplo que vienen en el paquete datos.</p>
+<p>Escribí el código que resuelve cada uno de los siguientes puntos en su propio bloque.</p>
+<ol style="list-style-type: decimal">
+<li><p>Fijate qué es cada columna de la tabla vuelos. Escribí <code>?vuelos</code> en la consola.</p></li>
+<li><p>Usando la función <code>filter()</code>, encontrá todos los vuelos que:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Tuvieron un retraso de llegada de dos o más horas</li>
+<li>Volaron a Houston (IAH oHOU)</li>
+<li>Fueron operados por United, American o Delta</li>
+<li>Llegaron más de dos horas tarde, pero no salieron tarde</li>
+<li>Partieron entre la medianoche y las 6 a.m. (incluyente)</li>
+</ol></li>
+<li><p>Las variables <code>horario_salida</code> y <code>salida_programada</code> tienen un formato conveniente para leer, pero es difícil realizar cualquier cálculo con ellas porque no son realmente números continuos. (Ayuda: para hacer la transformación hay que hacer <code>(horario %/% 100 * 60 + horario %% 100) %% 1440</code>)</p></li>
+<li><p>Calculá el tiempo de vuelo usando <code>horario_llegada - horario_salida</code>. ¿Es igual a <code>tiempo_vuelo</code>? ¿Cuál es el problema?</p></li>
+<li><p>Calculá el tiempo de vuelo promedio para cada aeropuerto de origen.</p></li>
+<li><p>Calculá el retraso medio para cada aerolínea.</p></li>
+<li><p>🔥🔥¡Esta es la prueba de fuego! 🔥🔥: Kniteá el documento haciendo click en el botón knitr. Si tu código es reproducible, tiene que ejecutar todo sin errores y devolver un documento html con el resultado.</p></li>
+</ol>
 </div>
 <div id="desafío-3" class="section level2 unnumbered">
 <h2>Desafío 3</h2>
