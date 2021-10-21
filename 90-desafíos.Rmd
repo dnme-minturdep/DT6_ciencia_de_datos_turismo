@@ -25,10 +25,10 @@ remotes::install_github("cienciadedatos/datos")
 ```
 
 La tercera linea, si bien distinta a las anteriores, también instala un paquete. 
-La diferencia es que instala el paquete desde un repositorio de GitHub donde suelen estar los paquetes en desarrollo en vez de desde el repositorio oficial de R (CRAN).
+La diferencia es que instala el paquete desde un  `r gdef("repositorio")`  de `r gdef("GitHub")` donde suelen estar los paquetes en desarrollo en vez de desde el repositorio oficial de R (`r gdef("CRAN")`).
 
 4. Creá un nuevo archivo R Markdown que se llame "01-lectura.Rmd" desde File -> New File -> R Markdown.
-Si bien el archivo puede tener cualquer nombre, siempre que sea informativo, te proponemos nombrarlos como número-nombre para poder ordenarlos y que te resulte más fácil encontrarlo dentro del proyecto.
+Si bien el archivo puede tener cualquier nombre, siempre que sea informativo, te proponemos nombrarlos como número-nombre para poder ordenarlos y que te resulte más fácil encontrarlo dentro del proyecto.
 Es posible que necesites darle permiso a RStudio para que instale nuevos paquetes asociados a R Markdown.
 Te va a aparecer la plantilla por defecto; borrá todas las líneas empezando por la que dice `## R Markdown` (inclusive) y guardá el archivo.
 (Para guardar tenés podés ir a File -> Save o hacer click en en el disquette 💾).

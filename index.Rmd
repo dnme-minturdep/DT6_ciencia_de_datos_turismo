@@ -44,5 +44,25 @@ knitr::write_bib(c(
 ), 'packages.bib')
 
 knitr::opts_chunk$set(out.width = '100%', fig.align = 'center')
+
+
+glosario <- yaml::read_yaml("glosario.yml")
+
+gdef <- function(texto, clave = NULL) {
+  if (is.null(clave)) {
+    clave <- gsub(" ", "-", tolower(texto))
+  }
+  
+  def <- glosario[[clave]]$def
+  
+  if (is.null(def)) {
+    stop("No se encontró definición para el término ", clave)
+  }
+  
+  paste0("[", texto, "](#", clave, " \"", def, "\")")
+  
+}
+
 ```
+
 

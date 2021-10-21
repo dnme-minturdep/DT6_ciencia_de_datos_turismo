@@ -10,11 +10,11 @@ El proceso de ciencia de datos en el cual nos vamos a basar se puede ver en el s
 ![Mapa conceptual del proceso de ciencia de datos](img/ciencia-de-datos.png)
 
 Primero, debes **importar** tus datos hacia la herramienta donde vas a procesarlos.
-Típicamente, esto implica tomar datos que están guardados en un archivo o base de datos y cargarlos en tu software para poder trabajar con ellos.
+Típicamente, esto implica tomar datos que están guardados en un archivo o `r gdef("base de datos")` y cargarlos en tu software para poder trabajar con ellos.
 
 Una vez que has importado los datos, el siguiente paso es **ordenarlos** para que tengan un formato adecuado para su análisis.
 Este formato pensado para el análisis tiene la característica que, en los conjuntos de datos ordenados, *cada columna es una variable y cada fila una observación*.
-Tener datos ordenados nos provee una estructura consistente, preparada para analizarlos y podemos enfocar nuestros esfuerzos en las preguntas que queremos contestar con nuestros datos y no tener que acomodarlos cada vez que la pregunta cambie.
+Tener `r gdef("datos ordenados")` nos provee una estructura consistente, preparada para analizarlos y podemos enfocar nuestros esfuerzos en las preguntas que queremos contestar con nuestros datos y no tener que acomodarlos cada vez que la pregunta cambie.
 
 Cuando tus datos están ordenados, podemos necesitar *transformarlos*.
 La transformación implica quedarte con las observaciones que sean de interés (como todos los hoteles de una ciudad o todos los datos del último año), crear nuevas variables que a partir de variables ya existentes (como calcular el porcentaje de ocupación a partir de la cantidad de plazas totales y las ocupadas) y calcular una serie de estadísticos de resumen (como recuentos y medias).
@@ -33,15 +33,15 @@ Los modelos son herramientas estadísticas o computacionales y tienen supuestos 
 El último paso en el proceso de la ciencia de datos es la **comunicación**, una parte crítica de cualquier proyecto de análisis de datos, porque es cuando vas a mostrar tus resultados a otras personas y necesitas que puedan comprenderlos y encontrarlos útiles para utilizarlos.
 
 Alrededor de todas estas herramientas se encuentra la **programación** como herramienta transversal en el proyecto de ciencia de datos.
-No necesitás ser una persona experta en programación para hacer ciencia de datos, pero aprender más sobre programar te ayudará a automatizar tareas recurrentes, compartir tu trabajo de forma reusable y aprovechar el trabajo de otros para resolver problemas similares con mayor facilidad y rapidez.
+No necesitás ser una persona experta en `r gdef("programación")` para hacer ciencia de datos, pero aprender más sobre programar te ayudará a automatizar tareas recurrentes, compartir tu trabajo de forma reusable y aprovechar el trabajo de otras personas para resolver problemas similares con mayor facilidad y rapidez.
 
 En este cuadernillo te mostraremos como realizar cada una de estas etapas utilizando el software R y te dejaremos links donde puedes aprender y profundizar más cada aspecto de este proceso.
 
 ## ¿Por qué R?
 
 Excel es un software admirable.
-Es genial para hacer data entry, para ver los datos crudos y para hacer gráficos rápidos.
-Si venís usándolo hace tiempo, seguro que aprendiste un montón de trucos para sacarle el jugo al máximo, habrás aprendido a usar fórmulas, tablas dinámicas, e incluso macros.
+Es genial para hacer ingreso de datos (_data entry_ en inglés), para ver los datos crudos y para hacer gráficos rápidos.
+Si venís usándolo hace tiempo, seguro que aprendiste un montón de trucos para sacarle el jugo al máximo, habrás aprendido a usar fórmulas, tablas dinámicas, e incluso `r gdef("macros").
 Pero seguro que también sufriste sus limitaciones.
 
 En una hoja de Excel no hay un límite claro entre datos y análisis.
