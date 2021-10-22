@@ -120,6 +120,11 @@ Usando el dataset diamantes del paquete datos intenten replicar los gráficos qu
 
   - Cambiar los títulos de los ejes x, y y la leyenda.  Nombres en español significativos y con la primera letra en mayúsculas.
 
+* Replicar el siguiente gráfico
+
+Este gráfico presenta los quilates en relación con el precio y la claridad.  En el gráfico se marca el valor 5.01 que corresponde al máximo valor de quilates.
+
+![Diamantes por corte](img/diamante-4-desafio-3.png)
 
 ## Desafío 4 {-}
 
