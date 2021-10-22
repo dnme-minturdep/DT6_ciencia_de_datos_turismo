@@ -229,9 +229,12 @@ Para cambiar el nombre de los paneles hay que primero generar un vector que asig
 La forma de hacer esto es creando un vector con nombres. 
 
 ```{r}
-etiquetas_regiones <- c("Buenos Aires", "Córdoba", "Cuyo", "Litoral", "Norte", "Patagonia")
-names(etiquetas_regiones) <- c("buenos-aires", "cordoba", "cuyo", "litoral", "norte", "patagonia")
-
+etiquetas_regiones <- c("Buenos Aires" = "buenos-aires", 
+                        "Córdoba"      = "cordoba", 
+                        "Cuyo"         = "cuyo",
+                        "Litoral"      = "litoral",
+                        "Norte"        = "norte",
+                        "Patagonia"    = "patagonia")
 etiquetas_regiones
 ```
 
@@ -341,8 +344,12 @@ parques <- readr::read_csv("datos/parques_tidy.csv") %>%
 
 pre_pandemia <- filter(parques, lubridate::year(indice_tiempo) < 2020) 
 
-etiquetas_regiones <- c("Buenos Aires", "Córdoba", "Cuyo", "Litoral", "Norte", "Patagonia")
-names(etiquetas_regiones) <- c("buenos-aires", "cordoba", "cuyo", "litoral", "norte", "patagonia")
+etiquetas_regiones <- c("Buenos Aires" = "buenos-aires", 
+                        "Córdoba"      = "cordoba", 
+                        "Cuyo"         = "cuyo",
+                        "Litoral"      = "litoral",
+                        "Norte"        = "norte",
+                        "Patagonia"    = "patagonia")
 
 parques %>% 
   ggplot(aes(indice_tiempo, total)) +
