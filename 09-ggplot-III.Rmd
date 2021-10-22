@@ -1,6 +1,6 @@
 # Apariencia de gráficos
 
-En [el capítulo de ggplot2](gráficos-con-ggplot2.html) vimos el funcionamiento básico de ggplot2.
+En [el capítulo de ggplot2](gráficos-con-ggplot2.html) vimos el funcionamiento básico de esta librería.
 Los gráficos generados en ese capítulo son los típicos gráficos exploratorios: rápidos de hacer, pero sin mucho tiempo dedicado a los detalles.
 No son gráficos que estén listos para presentar en público.
 
@@ -40,17 +40,17 @@ Tratá de describirlo en tus propias palabras.
 
 ## Escalas
 
-Cuando ggplot2 *mapea* distintos colores a los distintos valores de la columna `region`, lo que define qué color le corresponde a qué color de `región` es una **escala**.
+Cuando ggplot2 *mapea* distintos colores a los distintos valores de la columna `region`, lo que define qué color le corresponde a qué categoría de `región` es una **escala**.
 Esto no se limita a los colores; detrás de todo *mapeo* generado por `aes()` hay una escala.
 Si un gráfico no tiene una escala explícita, ggplot2 usa las escalas por defecto.
 
 Para modificar una escala, hay que sumar una nueva capa con una función de escala.
 Así como las funciones de geometrías empiezan con `geom_`, las funciones de escala comienzan con `scale_` (de escala en inglés).
-Luego, sigue el tipo de apariencia que mapean (`color`, `fill`, `shape`, etc) y en muchos casos un nombre o una característica de esa escala.
+Luego, sigue el tipo de apariencia que mapean (`color`, `fill`, `shape`, etc.) y en muchos casos un nombre o una característica de esa escala.
 
-Una distinción importante es entre las escalas continuas y discretas.
+Es importante distinguir entre las escalas continuas y discretas.
 Las escalas continuas mapean valores continuos como números, o fechas, mientras que las discretas, mapean valores categóricos.
-En el caso de nuestro gráfico, donde los colores representan distintas regiones del país, se trata de una variable cateórica, por la que neceistamos escalas discretas.
+En el caso de nuestro gráfico, donde los colores representan distintas regiones del país, se trata de una variable categórica, por lo que necesitamos escalas discretas.
 
 ### Escalas de colores
 
@@ -90,10 +90,11 @@ parques %>%
   facet_wrap(~region, scales = "free_y")
 ```
 
-Esto permite ver la variabilidad existente en todas las regiones independientemente de su escala vertical.
+Esto permite ver la variabilidad existente en todas las regiones independientemente de su escala vertical. 
+Al mismo tiempo ahora los paneles son son fácilmente comparable entre si porque el rango del eje y es distinto en cada uno.
 
 Como cada región está en su panel propio, ahora el color está codificando información redundante.
-A esta altura, estamos ante un momento importante en la creación de un gráfico.
+Llegamos a un momento importante en el proceso de creación de un gráfico.
 Además de agregar capas, escalas y colores, también es importante saber cuándo **sacar**.
 En este caso, podemos sacar la leyenda de colores agregando `guide = "none"` a `scale_color_brewer()`.
 
@@ -148,7 +149,7 @@ parques %>%
   facet_wrap(~region, scales = "free_y")
 ```
 
-Del código anterior surge algo muy importante: es posible generar capas en un gráfico usando una tabla *distinta* al que usamos para graficar las capas anteriores.
+Del código anterior surge algo muy importante: es posible generar capas en un gráfico usando una tabla *distinta* a la que usamos para graficar las capas anteriores.
 Esto es útil principalmente para definir etiquetas o resaltar determinadas observaciones.
 
 Estamos computando la regresión para los datos anteriores a 2020 porque los posteriores son anómalos. 
@@ -170,7 +171,7 @@ parques %>%
   facet_wrap(~region, scales = "free_y")
 ```
 
-En este código, `anotate()` dibuja un rectángulo (el equivalente a `geom_rect()`) donde el límite izquierdo es el primero de enero de 2020, y el derecho es el primero de abril de 2021.
+En este código, `annotate()` dibuja un rectángulo (el equivalente a `geom_rect()`) donde el límite izquierdo es el primero de enero de 2020, y el derecho es el primero de abril de 2021.
 Los límites superiores e inferiores son -Inf y +Inf, lo que indican que tienen que cubrir todos los límites del gráfico. 
 Además, con `alpha = 0.3`, el rectángulo es semitransparente. 
 
@@ -179,7 +180,7 @@ Además, con `alpha = 0.3`, el rectángulo es semitransparente.
 Además de modificar escalas de colores, también se pueden modificar las escalas de posición, es decir, los ejes. 
 
 En este gráfico, los números del eje y son poco amigables; especialmente la notación científica para los paneles de litoral y de patagonia. 
-Entonces vamos a modificar el eje y agregando una capa con `scale_y_continuous()` (porque `total` es una variable continua) y usando el argumento `labels`.
+Entonces vamos a modificar el eje y agregando una capa con `scale_y_continuous()` (porque `total` es una variable continua) usando el argumento `labels` de esa función.
 
 
 ```{r}
@@ -198,7 +199,7 @@ parques %>%
 
 Este código usa la función `nombre_format()` del paquete **scales**. 
 Este es un paquete que no hace falta instalar por separado porque viene con ggplot2 e implementa transformaciones de escala y funciones para dar formato. 
-La función `number_format()` devuelve una función (sí, es una función que devuelve una función) que se encarga de darle un formato bonito a los números, incluyendo redondeo de cifras significativas, separador de miles o de decimales, etc... 
+La función `number_format()` devuelve una función (sí, es una función que devuelve una función) que se encarga de darle un formato bonito a los números, incluyendo redondeo de cifras significativas, separador de miles o de decimales, etc.
 
 ### Etiquetas y texto
 
@@ -224,7 +225,7 @@ parques %>%
 Este código le asigna el texto "Cantidad de visitantes" al eje vertical, y le quita la etiqueta al eje x, ya que se sobreentiende por convención que se trata del eje de tiempo. 
 
 
-Para cambiar el nombre de los pabeles hay que primero generar un vector que asigne cada nombre "de computadora" (o sea, sin espacios ni mayúsculas ni tildes) al nombre "para personas". 
+Para cambiar el nombre de los paneles hay que primero generar un vector que asigne cada nombre "de computadora" (o sea, sin espacios ni mayúsculas ni tildes) al nombre "para personas". 
 La forma de hacer esto es creando un vector con nombres. 
 
 ```{r}
@@ -257,9 +258,9 @@ parques %>%
 ```
 
 
-Un último elemento que conviene agrear a todo gráfico que va a circular en público es el contexto. 
-Algún texto que describa el gráfico y la fuente de datos. 
-Esto se puede lograr agregando título, subtítulo y caption dentro de la función `labs()`.
+Si el gráfico va a circular por distintos lugares o fuera de su contexto inicial, conviene sumar algún texto que describa el gráfico y la fuente de datos.
+ 
+Esto se puede lograr agregando título, subtítulo y caption (mejor conocido como epígrafe) dentro de la función `labs()`.
 
 ```{r}
 parques %>% 
