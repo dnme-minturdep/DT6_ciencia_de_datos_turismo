@@ -54,9 +54,9 @@ En el caso de nuestro gráfico, donde los colores representan distintas regiones
 
 ### Escalas de colores
 
-La escala de colores que usa ggplot2 por defecto no es de las mejores, de hecho las personas que tienen daltonísmo muy posiblemente no logren diferenciar todas las líneas.
-Una escala o paleta de colores continua muy usada es [**viridis**](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) que fue creada justamente para resolver este y otros problemas.
-Para valores discretos existe una gran familia de paletas de colores llamada [**ColorBrewer**](https://colorbrewer2.org/).
+La escala de colores que usa ggplot2 por defecto no es de las mejores, de hecho las personas que tienen daltonismo muy posiblemente no logren diferenciar todas las líneas.
+Una escala o paleta de colores usada (principalmente para valores continuos) es [**viridis**](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) que fue creada justamente para resolver este y otros problemas.
+Otra gran familia de paletas de colores es [**ColorBrewer**](https://colorbrewer2.org/), la cual tiene variantes tanto para valores discretos como para valores continuos. 
 
 Vamos a probar la paleta "Dark2" de ColorBrewer, que es una paleta *qualitativa*.
 Cómo estamos modificando el *color*, la función a usar será `scale_color_brewer()`:
@@ -229,12 +229,12 @@ Para cambiar el nombre de los paneles hay que primero generar un vector que asig
 La forma de hacer esto es creando un vector con nombres. 
 
 ```{r}
-etiquetas_regiones <- c("Buenos Aires" = "buenos-aires", 
-                        "Córdoba"      = "cordoba", 
-                        "Cuyo"         = "cuyo",
-                        "Litoral"      = "litoral",
-                        "Norte"        = "norte",
-                        "Patagonia"    = "patagonia")
+etiquetas_regiones <- c("buenos-aires" = "Buenos Aires",
+                        "cordoba"      = "Córdoba",
+                        "cuyo"         = "Cuyo",
+                        "litoral"      = "Litoral",
+                        "norte"        = "Norte",
+                        "patagonia"    = "Patagonia")
 etiquetas_regiones
 ```
 
@@ -344,12 +344,12 @@ parques <- readr::read_csv("datos/parques_tidy.csv") %>%
 
 pre_pandemia <- filter(parques, lubridate::year(indice_tiempo) < 2020) 
 
-etiquetas_regiones <- c("Buenos Aires" = "buenos-aires", 
-                        "Córdoba"      = "cordoba", 
-                        "Cuyo"         = "cuyo",
-                        "Litoral"      = "litoral",
-                        "Norte"        = "norte",
-                        "Patagonia"    = "patagonia")
+etiquetas_regiones <- c("buenos-aires" = "Buenos Aires",
+                        "cordoba"      = "Córdoba",
+                        "cuyo"         = "Cuyo",
+                        "litoral"      = "Litoral",
+                        "norte"        = "Norte",
+                        "patagonia"    = "Patagonia")
 
 parques %>% 
   ggplot(aes(indice_tiempo, total)) +
