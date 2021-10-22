@@ -79,7 +79,18 @@ Escribí el código que resuelve cada uno de los siguientes puntos en su propio 
 
 ## Desafío 3 {-}
 
-**Capítulos asociados:** Más gráficos con ggplot2 y manipulación de datos con dplyr y tidyr.
+Usando el dataset diamantes del paquete datos intenten replicar los gráficos que aparecen a continuación:
+
+### Cantidad de diamantes por corte y claridad
+
+![Diamantes por corte](img/diamante-1-desafio-3.png)
+### Proporción de diamantes por corte y claridad
+
+![Proporción por corte](img/diamante-2-desafio-3.png)
+
+### Cantidad de diamantes por corte y claridad
+
+![Diamantes por corte](img/diamante-3-desafio-3.png)
 
 ## Desafío 4 {-}
 
