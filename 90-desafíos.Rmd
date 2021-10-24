@@ -92,6 +92,18 @@ Usando el dataset diamantes del paquete datos intenten replicar los gráficos qu
 
 ![Diamantes por corte](img/diamante-3-desafio-3.png)
 
+
+
+* Grafico 4: Replicar el siguiente gráfico
+
+Este gráfico presenta los quilates en relación con el precio y la claridad.  En el gráfico se marca el valor 5.01 que corresponde al máximo valor de quilates.
+
+![Diamantes por corte](img/diamante-4-desafio-3.png)
+
+::: {.alert .alert-info}
+**Desafío opcional**
+:::
+
 * Sobre el gráfico 1:
 
   - Agregar título: Cantidad de diamantes por tipo y claridad
@@ -119,12 +131,6 @@ Usando el dataset diamantes del paquete datos intenten replicar los gráficos qu
   - Agregar como nota al pie: Fuente: conjunto de datos diamantes del paquete datos.
 
   - Cambiar los títulos de los ejes x, y y la leyenda.  Nombres en español significativos y con la primera letra en mayúsculas.
-
-* Replicar el siguiente gráfico
-
-Este gráfico presenta los quilates en relación con el precio y la claridad.  En el gráfico se marca el valor 5.01 que corresponde al máximo valor de quilates.
-
-![Diamantes por corte](img/diamante-4-desafio-3.png)
 
 ## Desafío 4 {-}
 
