@@ -292,14 +292,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="tablas.html#cb147-1"></a>parques_resumen</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ## # Groups:   anio, region [6]
-##    anio region    noresidentes residentes   total
-##   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-## 1  2020 cordoba          36.9        626.    663.
-## 2  2020 cuyo             55.2       1104.   1160.
-## 3  2020 patagonia     25615.       66082   91697.
-## 4  2021 cordoba           9.5       1065    1074.
-## 5  2021 cuyo              4.75      1424.   1428.
-## 6  2021 patagonia       170       122002. 122172.</code></pre>
+##    anio region    noresidentes residentes  total
+##   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+## 1  2020 cordoba          36.9        626.   663.
+## 2  2020 cuyo             55.2       1104.  1160.
+## 3  2020 patagonia     25615.       66082  91697.
+## 4  2021 cordoba           8.38       958.   966.
+## 5  2021 cuyo              3.62      1586.  1590.
+## 6  2021 patagonia       113.       77502. 77615</code></pre>
 <div id="tablas-simples-con-kable" class="section level2">
 <h2><span class="header-section-number">8.1</span> Tablas simples con <code>kable</code></h2>
 <p>Existen varios paquetes para mostrar tablas lindas pero una forma simple y sin vueltas es usando la función <code>kable()</code> del paquete <strong>knitr</strong>.
@@ -341,23 +341,23 @@ Sólo usando esta función ya devuelve una tabla con un diseño más limpio y ac
 <tr class="even">
 <td align="right">2021</td>
 <td align="left">cordoba</td>
-<td align="right">9.50000</td>
-<td align="right">1065.0000</td>
-<td align="right">1074.5000</td>
+<td align="right">8.37500</td>
+<td align="right">958.1250</td>
+<td align="right">966.5000</td>
 </tr>
 <tr class="odd">
 <td align="right">2021</td>
 <td align="left">cuyo</td>
-<td align="right">4.75000</td>
-<td align="right">1423.7500</td>
-<td align="right">1428.5000</td>
+<td align="right">3.62500</td>
+<td align="right">1586.1250</td>
+<td align="right">1589.7500</td>
 </tr>
 <tr class="even">
 <td align="right">2021</td>
 <td align="left">patagonia</td>
-<td align="right">170.00000</td>
-<td align="right">122002.5000</td>
-<td align="right">122172.5000</td>
+<td align="right">112.62500</td>
+<td align="right">77502.3750</td>
+<td align="right">77615.0000</td>
 </tr>
 </tbody>
 </table>
@@ -402,23 +402,23 @@ El argumento <code>col.names</code> permite especificar el nombre de las columna
 <tr class="even">
 <td align="right">2021</td>
 <td align="left">cordoba</td>
-<td align="right">9.50000</td>
-<td align="right">1065.0000</td>
-<td align="right">1074.5000</td>
+<td align="right">8.37500</td>
+<td align="right">958.1250</td>
+<td align="right">966.5000</td>
 </tr>
 <tr class="odd">
 <td align="right">2021</td>
 <td align="left">cuyo</td>
-<td align="right">4.75000</td>
-<td align="right">1423.7500</td>
-<td align="right">1428.5000</td>
+<td align="right">3.62500</td>
+<td align="right">1586.1250</td>
+<td align="right">1589.7500</td>
 </tr>
 <tr class="even">
 <td align="right">2021</td>
 <td align="left">patagonia</td>
-<td align="right">170.00000</td>
-<td align="right">122002.5000</td>
-<td align="right">122172.5000</td>
+<td align="right">112.62500</td>
+<td align="right">77502.3750</td>
+<td align="right">77615.0000</td>
 </tr>
 </tbody>
 </table>
@@ -463,23 +463,23 @@ Para eso, hay que modificar el argumento <code>format.args</code> de esta manera
 <tr class="even">
 <td align="right">2.021</td>
 <td align="left">cordoba</td>
-<td align="right">10</td>
-<td align="right">1.065</td>
-<td align="right">1.074</td>
+<td align="right">8</td>
+<td align="right">958</td>
+<td align="right">966</td>
 </tr>
 <tr class="odd">
 <td align="right">2.021</td>
 <td align="left">cuyo</td>
-<td align="right">5</td>
-<td align="right">1.424</td>
-<td align="right">1.428</td>
+<td align="right">4</td>
+<td align="right">1.586</td>
+<td align="right">1.590</td>
 </tr>
 <tr class="even">
 <td align="right">2.021</td>
 <td align="left">patagonia</td>
-<td align="right">170</td>
-<td align="right">122.002</td>
-<td align="right">122.172</td>
+<td align="right">113</td>
+<td align="right">77.502</td>
+<td align="right">77.615</td>
 </tr>
 </tbody>
 </table>
@@ -532,23 +532,23 @@ De esta manera, no se ve afectada por el formato numérico.</p>
 <tr class="even">
 <td align="left">2021</td>
 <td align="left">cordoba</td>
-<td align="right">10</td>
-<td align="right">1.065</td>
-<td align="right">1.074</td>
+<td align="right">8</td>
+<td align="right">958</td>
+<td align="right">966</td>
 </tr>
 <tr class="odd">
 <td align="left">2021</td>
 <td align="left">cuyo</td>
-<td align="right">5</td>
-<td align="right">1.424</td>
-<td align="right">1.428</td>
+<td align="right">4</td>
+<td align="right">1.586</td>
+<td align="right">1.590</td>
 </tr>
 <tr class="even">
 <td align="left">2021</td>
 <td align="left">patagonia</td>
-<td align="right">170</td>
-<td align="right">122.002</td>
-<td align="right">122.172</td>
+<td align="right">113</td>
+<td align="right">77.502</td>
+<td align="right">77.615</td>
 </tr>
 </tbody>
 </table>
@@ -594,23 +594,23 @@ Para eso se puede usar la función <code>str_to_sentence()</code> sel pqeute <st
 <tr class="even">
 <td align="left">2021</td>
 <td align="left">Cordoba</td>
-<td align="right">10</td>
-<td align="right">1.065</td>
-<td align="right">1.074</td>
+<td align="right">8</td>
+<td align="right">958</td>
+<td align="right">966</td>
 </tr>
 <tr class="odd">
 <td align="left">2021</td>
 <td align="left">Cuyo</td>
-<td align="right">5</td>
-<td align="right">1.424</td>
-<td align="right">1.428</td>
+<td align="right">4</td>
+<td align="right">1.586</td>
+<td align="right">1.590</td>
 </tr>
 <tr class="even">
 <td align="left">2021</td>
 <td align="left">Patagonia</td>
-<td align="right">170</td>
-<td align="right">122.002</td>
-<td align="right">122.172</td>
+<td align="right">113</td>
+<td align="right">77.502</td>
+<td align="right">77.615</td>
 </tr>
 </tbody>
 </table>
@@ -706,13 +706,13 @@ Patagonia
 Cordoba
 </td>
 <td style="text-align:right;">
-10
+8
 </td>
 <td style="text-align:right;">
-1.065
+958
 </td>
 <td style="text-align:right;">
-1.074
+966
 </td>
 </tr>
 <tr>
@@ -720,13 +720,13 @@ Cordoba
 Cuyo
 </td>
 <td style="text-align:right;">
-5
+4
 </td>
 <td style="text-align:right;">
-1.424
+1.586
 </td>
 <td style="text-align:right;">
-1.428
+1.590
 </td>
 </tr>
 <tr>
@@ -734,13 +734,13 @@ Cuyo
 Patagonia
 </td>
 <td style="text-align:right;">
-170
+113
 </td>
 <td style="text-align:right;">
-122.002
+77.502
 </td>
 <td style="text-align:right;">
-122.172
+77.615
 </td>
 </tr>
 </tbody>
@@ -830,13 +830,13 @@ Patagonia
 Cordoba
 </td>
 <td style="text-align:right;">
-10
+8
 </td>
 <td style="text-align:right;">
-1.065
+958
 </td>
 <td style="text-align:right;">
-1.074
+966
 </td>
 </tr>
 <tr>
@@ -844,13 +844,13 @@ Cordoba
 Cuyo
 </td>
 <td style="text-align:right;">
-5
+4
 </td>
 <td style="text-align:right;">
-1.424
+1.586
 </td>
 <td style="text-align:right;">
-1.428
+1.590
 </td>
 </tr>
 <tr>
@@ -858,13 +858,13 @@ Cuyo
 Patagonia
 </td>
 <td style="text-align:right;">
-170
+113
 </td>
 <td style="text-align:right;">
-122.002
+77.502
 </td>
 <td style="text-align:right;">
-122.172
+77.615
 </td>
 </tr>
 </tbody>
@@ -949,13 +949,13 @@ Patagonia
 Cordoba
 </td>
 <td style="text-align:right;">
-10
+8
 </td>
 <td style="text-align:right;">
-1.065
+958
 </td>
 <td style="text-align:right;">
-1.074
+966
 </td>
 </tr>
 <tr>
@@ -963,13 +963,13 @@ Cordoba
 Cuyo
 </td>
 <td style="text-align:right;">
-5
+4
 </td>
 <td style="text-align:right;">
-1.424
+1.586
 </td>
 <td style="text-align:right;">
-1.428
+1.590
 </td>
 </tr>
 <tr>
@@ -977,13 +977,13 @@ Cuyo
 Patagonia
 </td>
 <td style="text-align:right;">
-170
+113
 </td>
 <td style="text-align:right;">
-122.002
+77.502
 </td>
 <td style="text-align:right;">
-122.172
+77.615
 </td>
 </tr>
 </tbody>
@@ -1068,13 +1068,13 @@ Patagonia
 Cordoba
 </td>
 <td style="text-align:right;">
-10
+8
 </td>
 <td style="text-align:right;">
-1.065
+958
 </td>
 <td style="text-align:right;">
-1.074
+966
 </td>
 </tr>
 <tr>
@@ -1082,13 +1082,13 @@ Cordoba
 Cuyo
 </td>
 <td style="text-align:right;">
-5
+4
 </td>
 <td style="text-align:right;">
-1.424
+1.586
 </td>
 <td style="text-align:right;">
-1.428
+1.590
 </td>
 </tr>
 <tr>
@@ -1096,13 +1096,13 @@ Cuyo
 Patagonia
 </td>
 <td style="text-align:right;">
-170
+113
 </td>
 <td style="text-align:right;">
-122.002
+77.502
 </td>
 <td style="text-align:right;">
-122.172
+77.615
 </td>
 </tr>
 </tbody>
@@ -1196,13 +1196,13 @@ Patagonia
 Cordoba
 </td>
 <td style="text-align:right;">
-10
+8
 </td>
 <td style="text-align:right;">
-1.065
+958
 </td>
 <td style="text-align:right;">
-1.074
+966
 </td>
 </tr>
 <tr>
@@ -1210,13 +1210,13 @@ Cordoba
 Cuyo
 </td>
 <td style="text-align:right;">
-5
+4
 </td>
 <td style="text-align:right;">
-1.424
+1.586
 </td>
 <td style="text-align:right;">
-1.428
+1.590
 </td>
 </tr>
 <tr>
@@ -1224,13 +1224,13 @@ Cuyo
 Patagonia
 </td>
 <td style="text-align:right;">
-170
+113
 </td>
 <td style="text-align:right;">
-122.002
+77.502
 </td>
 <td style="text-align:right;">
-122.172
+77.615
 </td>
 </tr>
 </tbody>
@@ -1303,7 +1303,7 @@ Patagonia
 <td style="text-align:right;">
 66.082
 </td>
-<td style="text-align:right;color: rgba(92, 200, 99, 1) !important;">
+<td style="text-align:right;color: rgba(253, 231, 37, 1) !important;">
 91.697
 </td>
 </tr>
@@ -1315,13 +1315,13 @@ Patagonia
 Cordoba
 </td>
 <td style="text-align:right;">
-10
+8
 </td>
 <td style="text-align:right;">
-1.065
+958
 </td>
 <td style="text-align:right;color: rgba(68, 2, 86, 1) !important;">
-1.074
+966
 </td>
 </tr>
 <tr>
@@ -1329,13 +1329,13 @@ Cordoba
 Cuyo
 </td>
 <td style="text-align:right;">
-5
+4
 </td>
 <td style="text-align:right;">
-1.424
+1.586
 </td>
-<td style="text-align:right;color: rgba(69, 4, 87, 1) !important;">
-1.428
+<td style="text-align:right;color: rgba(69, 5, 89, 1) !important;">
+1.590
 </td>
 </tr>
 <tr>
@@ -1343,13 +1343,13 @@ Cuyo
 Patagonia
 </td>
 <td style="text-align:right;">
-170
+113
 </td>
 <td style="text-align:right;">
-122.002
+77.502
 </td>
-<td style="text-align:right;color: rgba(253, 231, 37, 1) !important;">
-122.172
+<td style="text-align:right;color: rgba(152, 216, 62, 1) !important;">
+77.615
 </td>
 </tr>
 </tbody>
@@ -1357,7 +1357,7 @@ Patagonia
 <p>La función nueva, <code>spec_color()</code>, genera colores a partir de un vector.
 Podés ver cómo funciona en esta linea:</p>
 <div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="tablas.html#cb164-1"></a><span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total)</span></code></pre></div>
-<pre><code>## [1] &quot;#440154FF&quot; &quot;#440256FF&quot; &quot;#5CC863FF&quot; &quot;#440256FF&quot; &quot;#450457FF&quot; &quot;#FDE725FF&quot;</code></pre>
+<pre><code>## [1] &quot;#440154FF&quot; &quot;#440256FF&quot; &quot;#FDE725FF&quot; &quot;#440256FF&quot; &quot;#450559FF&quot; &quot;#98D83EFF&quot;</code></pre>
 <p>Esos números son representaciones en hexadecimal de los colores que ves en la tabla.</p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="tablas.html#cb166-1"></a>scales<span class="op">::</span><span class="kw">show_col</span>(<span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total))</span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-112-1.png" width="100%" style="display: block; margin: auto;" /></p>
@@ -1441,13 +1441,13 @@ Patagonia
 Cordoba
 </td>
 <td style="text-align:right;background-color: aquamarine !important;">
-10
+8
 </td>
 <td style="text-align:right;background-color: aquamarine !important;">
-1.065
+958
 </td>
 <td style="text-align:right;background-color: aquamarine !important;">
-1.074
+966
 </td>
 </tr>
 <tr>
@@ -1455,13 +1455,13 @@ Cordoba
 Cuyo
 </td>
 <td style="text-align:right;">
-5
+4
 </td>
 <td style="text-align:right;">
-1.424
+1.586
 </td>
 <td style="text-align:right;">
-1.428
+1.590
 </td>
 </tr>
 <tr>
@@ -1469,13 +1469,13 @@ Cuyo
 Patagonia
 </td>
 <td style="text-align:right;background-color: aquamarine !important;">
-170
+113
 </td>
 <td style="text-align:right;background-color: aquamarine !important;">
-122.002
+77.502
 </td>
 <td style="text-align:right;background-color: aquamarine !important;">
-122.172
+77.615
 </td>
 </tr>
 </tbody>
@@ -1565,13 +1565,13 @@ Patagonia
 Cordoba
 </td>
 <td style="text-align:right;">
-10
+8
 </td>
 <td style="text-align:right;">
-1.065
+958
 </td>
 <td style="text-align:right;">
-1.074
+966
 </td>
 </tr>
 <tr>
@@ -1579,13 +1579,13 @@ Cordoba
 Cuyo
 </td>
 <td style="text-align:right;">
-5
+4
 </td>
 <td style="text-align:right;">
-1.424
+1.586
 </td>
 <td style="text-align:right;">
-1.428
+1.590
 </td>
 </tr>
 <tr>
@@ -1593,13 +1593,13 @@ Cuyo
 Patagonia
 </td>
 <td style="text-align:right;">
-170
+113
 </td>
 <td style="text-align:right;">
-122.002
+77.502
 </td>
 <td style="text-align:right;">
-122.172
+77.615
 </td>
 </tr>
 </tbody>
