@@ -79,7 +79,58 @@ Escribí el código que resuelve cada uno de los siguientes puntos en su propio 
 
 ## Desafío 3 {-}
 
-**Capítulos asociados:** Más gráficos con ggplot2 y manipulación de datos con dplyr y tidyr.
+Usando el dataset diamantes del paquete datos intenten replicar los gráficos que aparecen a continuación:
+
+* Gráfico 1: Cantidad de diamantes por corte y claridad
+
+![Diamantes por corte](img/diamante-1-desafio-3.png)
+* Gráfico 2: Proporción de diamantes por corte y claridad
+
+![Proporción por corte](img/diamante-2-desafio-3.png)
+
+* Gráfico 3: Cantidad de diamantes por corte y claridad
+
+![Diamantes por corte](img/diamante-3-desafio-3.png)
+
+
+
+* Grafico 4: Replicar el siguiente gráfico
+
+Este gráfico presenta los quilates en relación con el precio y la claridad.  En el gráfico se marca el valor 5.01 que corresponde al máximo valor de quilates.
+
+![Diamantes por corte](img/diamante-4-desafio-3.png)
+
+::: {.alert .alert-info}
+**Desafío opcional**
+:::
+
+* Sobre el gráfico 1:
+
+  - Agregar título: Cantidad de diamantes por tipo y claridad
+
+  - Agregar como nota al pie: Fuente: conjunto de datos diamantes del paquete datos.
+
+  - Cambiar los títulos de los ejes x, y y la leyenda.  Nombres en español y con la primera letra en mayúsculas.
+
+* Sobre el gráfico 2:
+
+  - Agregar título: Diamantes por corte y claridad
+
+  - Agregar subtítulo: proporciones de la claridad en cada tipo de corte.
+
+  - Agregar como nota al pie: Fuente: conjunto de datos diamantes del paquete datos.
+
+  - Cambiar los títulos de los ejes x, y y la leyenda.  Nombres en español significativos y con la primera letra en mayúsculas.
+
+* Sobre el gráfico 3:
+
+  - Agregar título: Diamantes por corte y claridad
+
+  - Agregar subtítulo: cantidades de acuerdo a la claridad en cada tipo de corte.
+
+  - Agregar como nota al pie: Fuente: conjunto de datos diamantes del paquete datos.
+
+  - Cambiar los títulos de los ejes x, y y la leyenda.  Nombres en español significativos y con la primera letra en mayúsculas.
 
 ## Desafío 4 {-}
 
