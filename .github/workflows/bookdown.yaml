@@ -29,8 +29,8 @@ jobs:
       #     key: bookdown-${{ hashFiles('**/*Rmd') }}
       #     restore-keys: bookdown-
 
-      - name: Install tinytex
-        run: Rscript -r "tinytex::install_tinytex()"
+      - uses: r-lib/actions/setup-tinytex@v1
+
       - name: Build site
         run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE, output_format = "all")'
 
