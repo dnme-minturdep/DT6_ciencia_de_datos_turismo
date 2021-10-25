@@ -707,10 +707,10 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.33",
+      "Version": "0.34",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "6e0ad90ac5669e35d5456cb61b295acb"
+      "Hash": "043daa786f4d254f0031534150e28d42"
     },
     "tzdb": {
       "Package": "tzdb",

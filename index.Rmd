@@ -44,5 +44,7 @@ knitr::write_bib(c(
 ), 'packages.bib')
 
 knitr::opts_chunk$set(out.width = '100%', fig.align = 'center', fig.pos = "!H",  out.extra = "")
+
+library(tinytex)  # para que renv lo descrubra
 ```
 
