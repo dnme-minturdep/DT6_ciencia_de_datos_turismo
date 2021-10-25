@@ -204,11 +204,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html"><i class="fa fa-check"></i><b>9</b> Apariencia de gráficos</a><ul>
 <li class="chapter" data-level="9.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas"><i class="fa fa-check"></i><b>9.1</b> Escalas</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escala-de-colores-y-otras"><i class="fa fa-check"></i><b>9.1.1</b> Escala de colores y otras</a></li>
-<li class="chapter" data-level="9.1.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas-de-ejes"><i class="fa fa-check"></i><b>9.1.2</b> Escalas de ejes</a></li>
+<li class="chapter" data-level="9.1.1" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escalas-de-colores"><i class="fa fa-check"></i><b>9.1.1</b> Escalas de colores</a></li>
+<li class="chapter" data-level="9.1.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#escala-de-ejes"><i class="fa fa-check"></i><b>9.1.2</b> Escala de ejes</a></li>
+<li class="chapter" data-level="9.1.3" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#etiquetas-y-texto"><i class="fa fa-check"></i><b>9.1.3</b> Etiquetas y texto</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#elementos-de-texto"><i class="fa fa-check"></i><b>9.2</b> Elementos de texto</a></li>
-<li class="chapter" data-level="9.3" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#temas"><i class="fa fa-check"></i><b>9.3</b> Temas</a></li>
+<li class="chapter" data-level="9.2" data-path="apariencia-de-gráficos.html"><a href="apariencia-de-gráficos.html#temas"><i class="fa fa-check"></i><b>9.2</b> Temas</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="informes-reproducibles.html"><a href="informes-reproducibles.html"><i class="fa fa-check"></i><b>10</b> Informes reproducibles</a><ul>
 <li class="chapter" data-level="10.1" data-path="informes-reproducibles.html"><a href="informes-reproducibles.html#eligiendo-el-formato-de-salida"><i class="fa fa-check"></i><b>10.1</b> Eligiendo el formato de salida</a></li>
@@ -286,11 +286,11 @@ Notá que dado que tanto R como RStudio publican nuevas versiones periódicament
 <li><p>Entrá a <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a> y descargate el instalador en donde dice “On Windows 64-bit: rtoolsxx-x86_64.exe (recommended: includes both i386 and x64 compilers)”</p></li>
 <li><p>Abrí la consola de R, poné esto y apretá enter:</p></li>
 </ol>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="instalando-r-y-rstudio.html#cb207-1"></a><span class="kw">writeLines</span>(<span class="st">&#39;PATH=&quot;${RTOOLS40_HOME}</span><span class="ch">\\</span><span class="st">usr</span><span class="ch">\\</span><span class="st">bin;${PATH}&quot;&#39;</span>, <span class="dt">con =</span> <span class="st">&quot;~/.Renviron&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="instalando-r-y-rstudio.html#cb216-1"></a><span class="kw">writeLines</span>(<span class="st">&#39;PATH=&quot;${RTOOLS40_HOME}</span><span class="ch">\\</span><span class="st">usr</span><span class="ch">\\</span><span class="st">bin;${PATH}&quot;&#39;</span>, <span class="dt">con =</span> <span class="st">&quot;~/.Renviron&quot;</span>)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Finalmente, para chequear que todo esté bien, cerrá R, volvé a abrirlo, escribí esto en la cosola y apretá enter:</li>
 </ol>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="instalando-r-y-rstudio.html#cb208-1"></a><span class="kw">Sys.which</span>(<span class="st">&quot;make&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="instalando-r-y-rstudio.html#cb217-1"></a><span class="kw">Sys.which</span>(<span class="st">&quot;make&quot;</span>)</span></code></pre></div>
 <p>Debería salir algo como esto:</p>
 <pre><code>##                               make 
 ## &quot;C:\\rtools40\\usr\\bin\\make.exe&quot;</code></pre>
@@ -299,11 +299,11 @@ Notá que dado que tanto R como RStudio publican nuevas versiones periódicament
 <h3>Ubuntu o derivados</h3>
 <p>Para tener la última versión, tenés que agregar los repositorios de CRAN. Para hacerlo, vas a tener que tener permisos de administrador.
 Los detalles están en <a href="https://cran.r-project.org/bin/linux/ubuntu/">esta</a> página, pero el resumen es:</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb210-1"><a href="instalando-r-y-rstudio.html#cb210-1"></a><span class="fu">sudo</span> apt update -qq</span>
-<span id="cb210-2"><a href="instalando-r-y-rstudio.html#cb210-2"></a><span class="fu">sudo</span> apt install --no-install-recommends software-properties-common dirmngr</span>
-<span id="cb210-3"><a href="instalando-r-y-rstudio.html#cb210-3"></a><span class="fu">sudo</span> apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9</span>
-<span id="cb210-4"><a href="instalando-r-y-rstudio.html#cb210-4"></a><span class="fu">sudo</span> add-apt-repository <span class="st">&quot;deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> -cs<span class="va">)</span><span class="st">-cran40/&quot;</span></span>
-<span id="cb210-5"><a href="instalando-r-y-rstudio.html#cb210-5"></a><span class="fu">sudo</span> sudo apt install r-base r-base-dev</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb219-1"><a href="instalando-r-y-rstudio.html#cb219-1"></a><span class="fu">sudo</span> apt update -qq</span>
+<span id="cb219-2"><a href="instalando-r-y-rstudio.html#cb219-2"></a><span class="fu">sudo</span> apt install --no-install-recommends software-properties-common dirmngr</span>
+<span id="cb219-3"><a href="instalando-r-y-rstudio.html#cb219-3"></a><span class="fu">sudo</span> apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9</span>
+<span id="cb219-4"><a href="instalando-r-y-rstudio.html#cb219-4"></a><span class="fu">sudo</span> add-apt-repository <span class="st">&quot;deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> -cs<span class="va">)</span><span class="st">-cran40/&quot;</span></span>
+<span id="cb219-5"><a href="instalando-r-y-rstudio.html#cb219-5"></a><span class="fu">sudo</span> sudo apt install r-base r-base-dev</span></code></pre></div>
 <p>Si todo salió bien, tenés que tener instalado R en tu máquina y podés ejecutarlo con el comando <code>R</code> en la consola.</p>
 <p><img src="img/r-terminal.png" title="Terminal de linux corriendo R." alt="Terminal de linux corriendo R." width="100%"  style="display: block; margin: auto;" /></p>
 </div>
@@ -330,10 +330,10 @@ Abajo de todo está el listado de instaladores para cada plataforma; descargá l
 <h3>Ubuntu o derivados</h3>
 <p>Si tenés instalada una interfaz gráfica para instalar archivos .deb, ejecutando el archivo que descargaste ya vas a poder instalar RStudio.
 Si no, abrí una terminal en el directorio donde bajaste el archivo y ejecutá</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb211-1"><a href="instalando-r-y-rstudio.html#cb211-1"></a><span class="fu">sudo</span> dpkg -i ARCHIVO</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb220-1"><a href="instalando-r-y-rstudio.html#cb220-1"></a><span class="fu">sudo</span> dpkg -i ARCHIVO</span></code></pre></div>
 <p>Reemplazando ARCHIVO por el nombre del archivo instalador.</p>
 <p>Es posible que salte algún error por falta de alguna dependencia, en ese caso usá</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb212-1"><a href="instalando-r-y-rstudio.html#cb212-1"></a><span class="fu">sudo</span> apt-get -f install</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb221-1"><a href="instalando-r-y-rstudio.html#cb221-1"></a><span class="fu">sudo</span> apt-get -f install</span></code></pre></div>
 <p>Y debería estar arreglado.</p>
 <p>Una vez instalado, al ejecutar RStudio les tiene que aparecer una ventana como esta:</p>
 <p><img src="img/rstudio-principal.png" title="Pantalla principal de RStudio." alt="Pantalla principal de RStudio." width="100%"  style="display: block; margin: auto;" /></p>

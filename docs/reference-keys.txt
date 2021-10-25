@@ -49,9 +49,9 @@ tablas-simples-con-kable
 supertablas-con-kableextra
 apariencia-de-gráficos
 escalas
-escala-de-colores-y-otras
-escalas-de-ejes
-elementos-de-texto
+escalas-de-colores
+escala-de-ejes
+etiquetas-y-texto
 temas
 informes-reproducibles
 eligiendo-el-formato-de-salida
