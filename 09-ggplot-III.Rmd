@@ -1,60 +1,72 @@
 # Apariencia de gráficos
 
+En [el capítulo de ggplot2](gráficos-con-ggplot2.html) vimos el funcionamiento básico de esta librería.
+Los gráficos generados en ese capítulo son los típicos gráficos exploratorios: rápidos de hacer, pero sin mucho tiempo dedicado a los detalles.
+No son gráficos que estén listos para presentar en público.
 
-```{r}
-library(ggplot2)
+Modificar la apariencia de un gráfico no es sólo cuestión de cambiarle los colores o la fuente para que sea "lindo".
+Implica pensar sobre cómo hacer que el mensaje del gráfico sea fácil de entender rápidamente.
+
+En este capítulo, vamos a empezar con un gráfico de líneas que hicimos antes que muestra la evolución de la anomalía trimestral de la cantidad total de visitantes a parques nacionales de distintas regiones.
+
+```{r message=FALSE}
 library(dplyr)
+library(ggplot2)
+
+parques <- readr::read_csv("datos/parques_tidy.csv") %>% 
+  group_by(mes = lubridate::month(indice_tiempo), region) %>% 
+  mutate(total = total - mean(total)) %>% 
+  ungroup()
+
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  geom_line(aes(color = region))
 ```
+
+Pero este gráfico no es algo que podamos publicar.
+Los números del eje y en notación científica no son muy amigables, los títulos en los ejes son nombres de variables en minúscula y sin espacios y la escala de colores es medio fea.
+
+Vamos a ir mejorando este gráfico para que sea mucho más presentable y fácil de leer.
+
+::: {.alert .alert-info}
+**Desafío**
+
+Antes de seguir analizá el bloque de código anterior.
+¿Podés entender todo lo que hace cada línea?
+Tratá de describirlo en tus propias palabras.
+:::
+
+
 
 ## Escalas
 
-[Previamente](06-graficos-I.html) comentamos que el *mapeo* de una variable en un elemento geométrico, por ejemplo cuando le asignamos distintos colores a los puntos que representan cada continente, usa una **escala** para definir, en este caso, que color le corresponde a cada elemento.
+Cuando ggplot2 *mapea* distintos colores a los distintos valores de la columna `region`, lo que define qué color le corresponde a qué categoría de `región` es una **escala**.
+Esto no se limita a los colores; detrás de todo *mapeo* generado por `aes()` hay una escala.
+Si un gráfico no tiene una escala explícita, ggplot2 usa las escalas por defecto.
 
-También cambiamos la apariencia del relleno (o `fill`) de barras y la forma de los puntos (o `shape`).
-Para esto, {ggplot2} siempre usa una escala que podemos modificar de acuerdo a nuestro gusto y teniendo en cuenta cómo queremos comunicar nuestros resultados.
+Para modificar una escala, hay que sumar una nueva capa con una función de escala.
+Así como las funciones de geometrías empiezan con `geom_`, las funciones de escala comienzan con `scale_` (de escala en inglés).
+Luego, sigue el tipo de apariencia que mapean (`color`, `fill`, `shape`, etc.) y en muchos casos un nombre o una característica de esa escala.
 
-Por supuesto, modificar una escala implica sumar una nueva capa al gráfico sumando una nueva función.
-Todas las funciones de escala comienzan con `scale` (de escala en inglés), el tipo de apariencia que queremos modificar (`color`, `fill`, `shape`, etc) y en muchos casos un nombre o una característica de esa escala.
+Es importante distinguir entre las escalas continuas y discretas.
+Las escalas continuas mapean valores continuos como números, o fechas, mientras que las discretas, mapean valores categóricos.
+En el caso de nuestro gráfico, donde los colores representan distintas regiones del país, se trata de una variable categórica, por lo que necesitamos escalas discretas.
 
-Para mostrar como funciona, vamos a utilizar la base de datos de países y con suerte al final de este documento tendremos un gráfico listo para publicar.
+### Escalas de colores
 
-```{r}
-paises <- readr::read_csv("datos/paises.csv")
+La escala de colores que usa ggplot2 por defecto no es de las mejores, de hecho las personas que tienen daltonismo muy posiblemente no logren diferenciar todas las líneas.
+Una escala o paleta de colores usada (principalmente para valores continuos) es [**viridis**](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) que fue creada justamente para resolver este y otros problemas.
+Otra gran familia de paletas de colores es [**ColorBrewer**](https://colorbrewer2.org/), la cual tiene variantes tanto para valores discretos como para valores continuos. 
 
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point()
-
-```
-
-### Escala de colores y otras
-
-Lo primero que podemos hacer es cambiar el color de los puntos de a cuerdo al continente.
-
-```{r}
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point(aes(color = continente))
-```
-
-Pero esta escala de colores que usa {ggplot2} por defecto no es de las mejores, de hecho las personas que tienen daltonísmo muy posiblemente no logren diferenciar todos los puntos.
-Una escala o paleta de colores muy usada es [**viridis**](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) que fue creada justamente para resolver este y otros problemas.
-También existe otra gran familia de paletas de colores llamada [**ColorBrewer**](https://colorbrewer2.org/).
-
-Vamos a probar la paleta "Dark2" de ColorBrewer, esta paleta es *qualitativa* y es justo lo que necesitamos para identificar elementos en categorías como los continentes.
+Vamos a probar la paleta "Dark2" de ColorBrewer, que es una paleta *qualitativa*.
 Cómo estamos modificando el *color*, la función a usar será `scale_color_brewer()`:
 
 ```{r}
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point(aes(color = continente)) +
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  geom_line(aes(color = region)) +
   scale_color_brewer(type = "qual", palette = "Dark2")
 ```
-
-Nuestro gráfico va quedando mejor y podemos aprovechar la capacidad de {ggplot2} de *mapear* variables a los elementos del gráfico y mostrar la población de cada país.
 
 ::: {.alert .alert-info}
 **Desafío**
@@ -64,136 +76,250 @@ Para eso tenés que usar `scale_color_viridis_d()`.
 La "d" del final viene de *discrete* y se usa para variables discretas o categorías, mientas que si los datos son continuos, se usa "c".
 :::
 
-```{r}
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point(aes(color = continente, size = poblacion)) +
-  scale_color_brewer(type = "qual", palette = "Dark2")
-```
+Como las variaciones en los visitantes de Patagonia y el Litoral son mucho más grandes en magnitud que las del resto de las regiones, éstas últimas aparecen casi como una línea recta constante en cero.
+Este es un problema que ninguna escala de colores puede solucionar.
 
-Esto nos da más información, pero al mismo tiempo vemos que los puntos se superponen.
-Vamos a arreglar eso agregando transparencia y de paso modificar el tamaño de los puntos con la escala correspondiente `scale_size()` y sacar la legenda con `guide = NULL`.
+Si queremos mostrar líneas de tiempo con escalas muy distintas, hay que usar paneles con escalas libres.
+Esto se hace poniendo `scales = "free_y"` en `facet_wrap()` para especificar que cada panel tiene su propia escala del eje vertical.
 
 ```{r}
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point(aes(color = continente, size = poblacion), alpha = 0.5) +
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  geom_line(aes(color = region)) +
   scale_color_brewer(type = "qual", palette = "Dark2") +
-  scale_size_area(max_size = 15, guide = NULL)
+  facet_wrap(~region, scales = "free_y")
 ```
 
-### Escalas de ejes
+Esto permite ver la variabilidad existente en todas las regiones independientemente de su escala vertical. 
+Al mismo tiempo ahora los paneles son son fácilmente comparable entre si porque el rango del eje y es distinto en cada uno.
 
-Tal vez notaste que el comportamiento entre la esperanza de vida y el PBI no es lineal, de hecho el PBI varía mucho mientras que la esperanza de vida va apenas entre 40 y 80 y algo.
-Eso puede esta indicando que el PBI tiene un comportamiento *logarítmico* y si bien podríamos transformar los datos antes de hacer el gráfico, también podemos elegir una escala logarítmica para el eje del gráfico correspondiente.
+Como cada región está en su panel propio, ahora el color está codificando información redundante.
+Llegamos a un momento importante en el proceso de creación de un gráfico.
+Además de agregar capas, escalas y colores, también es importante saber cuándo **sacar**.
+En este caso, podemos sacar la leyenda de colores agregando `guide = "none"` a `scale_color_brewer()`.
 
 ```{r}
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point(aes(color = continente, size = poblacion), alpha = 0.5) +
-  scale_color_brewer(type = "qual", palette = "Dark2") +
-  scale_size_area(max_size = 15, guide = NULL) +
-  scale_x_log10()
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  geom_line(aes(color = region)) +
+  scale_color_brewer(type = "qual", palette = "Dark2", guide = "none") +
+  facet_wrap(~region, scales = "free_y")
 ```
 
-En este caso las escalas que modifican los ejes justamente comienzan con `scala_x_` o `scale_y_` según sea el caso.
-Y por supuesto hay una variedad importante de escalas con muchas opciones.
-
-## Elementos de texto
-
-Ya sumamos 3 escalas, pero el gráfico ya se ve muy bien.
-¿Cómo hacemos si queremos identificar países individuales?
-Por ahora es difícil, pero podríamos agregar etiquetas de texto con el nombre de cada país al lado de cada punto usando `geom_text()`, y en este caso la apariencia está dada por `label` o etiqueta:
+Pero más radical es directamente sacar el mapeo del color.
+A veces la mejor escala de colores es sin escala de colores. 
 
 ```{r}
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point(aes(color = continente, size = poblacion), alpha = 0.5) +
-  scale_color_brewer(type = "qual", palette = "Dark2") +
-  scale_size_area(max_size = 15, guide = NULL) +
-  scale_x_log10() +
-  geom_text(aes(label = pais)) 
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  geom_line() +
+  facet_wrap(~region, scales = "free_y")
 ```
 
-Pero nos olvidamos que tenemos casi 200 países, es razonable agregarle etiquetas a todos.
-Pero podríamos querer resaltar algunos, tal vez los de un continente en particular o los que cumplen con la condición de tener las mayores poblaciones del mundo.
-Para eso vamos a generarnos una nueva tabla con los países que queremos resaltar y de paso usarla dentro de `geom_text()`.
+
+Ahora que cada región tiene su propio panel, se pueden ver las tendencias a largo plazo fácilmente. 
+En casi todas las regiones la cantidad de visitantes estuvo en crecimiento desde 2008 y luego colapsó con la pandemia. 
+Buenos Aires y Cuyo parecen ser la excepción; ambas regiones estaban estables antes de la pandemia. 
+
+Una buena forma de resaltar la tendencia a largo plazo es agregando una recta de regresión lineal. 
+Vimos que una forma rápida de agregar una línea de tendencia es agregando una capa con la función `geom_smooth(method = "lm")`
 
 ```{r}
-mucha_poblacion <- paises %>% 
-  filter(anio == 2007) %>% 
-  filter(poblacion > 1000000000) # Países con más de un billón de habitantes!
-
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point(aes(color = continente, size = poblacion), alpha = 0.5) +
-  scale_color_brewer(type = "qual", palette = "Dark2") +
-  scale_size_area(max_size = 15, guide = NULL) +
-  scale_x_log10() +
-  geom_text(aes(label = pais), 
-            data = mucha_poblacion)  # Esta capa usa la tabla mucha_población!
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  geom_line() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~region, scales = "free_y")
 ```
 
-::: {.alert .alert-success}
-Del código anterior surge algo muy importante: es posible generar capas en un gráfico usando una data.frame *distinto* al que usamos para graficar las capas anteriores.
+Pero esto tiene un problema. 
+El colapso de los visitantes en  2020 y 2021 están generando una línea de tendencia chata o incluso negativa. 
+¿Cómo hacer para calcular la línea de tendencia usando sólo los datos anteriores a 2020?
+
+Lo que se puede hacer es generar una variable extra con los datos pre-pandemia y luego usar esos datos en el `geom_smooth()`:
+
+```{r}
+pre_pandemia <- filter(parques, lubridate::year(indice_tiempo) < 2020) 
+
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  geom_line() +
+  geom_smooth(data = pre_pandemia, 
+              method = "lm") +
+  facet_wrap(~region, scales = "free_y")
+```
+
+Del código anterior surge algo muy importante: es posible generar capas en un gráfico usando una tabla *distinta* a la que usamos para graficar las capas anteriores.
 Esto es útil principalmente para definir etiquetas o resaltar determinadas observaciones.
 
-Y el truco está en que ambos data.frames tienen las variables `pib_per_capita` y `esperanza_de_vida` y entonces {ggplot2} puede identificar en que parte del gráfico (en que valores de x y en que valores de y) colocar cada elemento.
-:::
+Estamos computando la regresión para los datos anteriores a 2020 porque los posteriores son anómalos. 
+Sería buena idea indicar en el gráfico dónde empiezan los datos anómalos con un recuadro grisado. 
 
-Veamos ahora una (de varias) maneras agregar o modificar elementos de texto en el gráfico.
-Vamos a usar una nueva función (y una nueva capa!), `labs()`:
+La tarea de "anotar" un gráfico con geometrías que no hacen referencia a los datos se hace con la función `annotate()`. 
+Toma el nombre de un geom y luego los parámetros estéticos **fuera** del `aes()`. 
 
 ```{r}
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point(aes(color = continente, size = poblacion), alpha = 0.5) +
-  scale_color_brewer(type = "qual", palette = "Dark2") +
-  scale_size_area(max_size = 15, guide = NULL) +
-  scale_x_log10() +
-  geom_text(aes(label = pais), data = mucha_poblacion) +
-  labs(title = "Paises del mundo",
-       subtitle = "Año 2007",
-       caption = "El tamaño de cada circulo representa la población.",
-       x = "PBI per capita",
-       y = "Esperanza de vida",
-       color = "")
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  annotate("rect", 
+           xmin = as.Date("2020-01-01"), xmax = as.Date("2021-04-01"), 
+           ymin = -Inf, ymax = Inf, 
+           alpha = 0.3) +
+  geom_line() +
+  geom_smooth(data = pre_pandemia, 
+              method = "lm") +
+  facet_wrap(~region, scales = "free_y")
 ```
 
-Agregamos un título, un subtítulo, el epígrafe de la figura (*caption*) para las aclaraciones y cambiamos el nombre de los ejes para que se vean mejor.
-Pero ademas eliminamos el nombre de la leyenda porque era un poco redundante.
+En este código, `annotate()` dibuja un rectángulo (el equivalente a `geom_rect()`) donde el límite izquierdo es el primero de enero de 2020, y el derecho es el primero de abril de 2021.
+Los límites superiores e inferiores son -Inf y +Inf, lo que indican que tienen que cubrir todos los límites del gráfico. 
+Además, con `alpha = 0.3`, el rectángulo es semitransparente. 
+
+### Escala de ejes
+
+Además de modificar escalas de colores, también se pueden modificar las escalas de posición, es decir, los ejes. 
+
+En este gráfico, los números del eje y son poco amigables; especialmente la notación científica para los paneles de litoral y de patagonia. 
+Entonces vamos a modificar el eje y agregando una capa con `scale_y_continuous()` (porque `total` es una variable continua) usando el argumento `labels` de esa función.
+
+
+```{r}
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  annotate("rect", 
+           xmin = as.Date("2020-01-01"), xmax = as.Date("2021-04-01"), 
+           ymin = -Inf, ymax = Inf, 
+           alpha = 0.3) +
+  geom_line() +
+  geom_smooth(data = pre_pandemia, 
+              method = "lm") +
+  facet_wrap(~region, scales = "free_y") +
+  scale_y_continuous(labels = scales::number_format()) 
+```
+
+Este código usa la función `nombre_format()` del paquete **scales**. 
+Este es un paquete que no hace falta instalar por separado porque viene con ggplot2 e implementa transformaciones de escala y funciones para dar formato. 
+La función `number_format()` devuelve una función (sí, es una función que devuelve una función) que se encarga de darle un formato bonito a los números, incluyendo redondeo de cifras significativas, separador de miles o de decimales, etc.
+
+### Etiquetas y texto
+
+
+Algo que hay que arreglar sí o sí en este gráfico antes publicarlo es el nombre de los ejes y los paneles. 
+Primero, cambiemos las etiquetas de los ejes agregando una nueva capa con la función `labs()`.
+
+```{r}
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  annotate("rect", 
+           xmin = as.Date("2020-01-01"), xmax = as.Date("2021-04-01"), 
+           ymin = -Inf, ymax = Inf, 
+           alpha = 0.3) +
+  geom_line() +
+  geom_smooth(data = pre_pandemia, 
+              method = "lm") +
+  facet_wrap(~region, scales = "free_y") +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(y = "Cantidad de visitantes",
+       x = NULL)
+```
+Este código le asigna el texto "Cantidad de visitantes" al eje vertical, y le quita la etiqueta al eje x, ya que se sobreentiende por convención que se trata del eje de tiempo. 
+
+
+Para cambiar el nombre de los paneles hay que primero generar un vector que asigne cada nombre "de computadora" (o sea, sin espacios ni mayúsculas ni tildes) al nombre "para personas". 
+La forma de hacer esto es creando un vector con nombres. 
+
+```{r}
+etiquetas_regiones <- c("buenos-aires" = "Buenos Aires",
+                        "cordoba"      = "Córdoba",
+                        "cuyo"         = "Cuyo",
+                        "litoral"      = "Litoral",
+                        "norte"        = "Norte",
+                        "patagonia"    = "Patagonia")
+etiquetas_regiones
+```
+
+Fijate que el contenido del vector son las regiones como queremos que se muestren en el gráfico, y luego cada elemento tiene como nombre el texto como está en los datos. 
+
+Ahora podemos usar ese vector como un "labeller". 
+En jerga de ggplot2, los "labellers" son funciones que "etiquetan" los paneles. 
+
+```{r}
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  annotate("rect", 
+           xmin = as.Date("2020-01-01"), xmax = as.Date("2021-04-01"), 
+           ymin = -Inf, ymax = Inf, 
+           alpha = 0.3) +
+  geom_line() +
+  geom_smooth(data = pre_pandemia, 
+              method = "lm") +
+  facet_wrap(~region, scales = "free_y", 
+             labeller = labeller(region = etiquetas_regiones)) +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(y = "Cantidad de visitantes",
+       x = NULL)
+```
+
+
+Si el gráfico va a circular por distintos lugares o fuera de su contexto inicial, conviene sumar algún texto que describa el gráfico y la fuente de datos.
+ 
+Esto se puede lograr agregando título, subtítulo y caption (mejor conocido como epígrafe) dentro de la función `labs()`.
+
+```{r}
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  annotate("rect", 
+           xmin = as.Date("2020-01-01"), xmax = as.Date("2021-04-01"), 
+           ymin = -Inf, ymax = Inf, 
+           alpha = 0.3) +
+  geom_line() +
+  geom_smooth(data = pre_pandemia, 
+              method = "lm") +
+  facet_wrap(~region, scales = "free_y", 
+             labeller = labeller(region = etiquetas_regiones)) +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(y = "Cantidad de visitantes",
+       x = NULL, 
+       title = "Visitas a parques nacionales con respecto a la media mensual",
+       subtitle = "En casi todas las regiones, la cantidad de vicitantes aumentó antes de la pandemia",
+       caption = "Fuente: elaboración propia en base a datos del MINTUR.")
+```
 
 ## Temas
 
-Nos queda una última cosa por hacer, cambiar la apariencia global del gráfico.
-{ggplot2} tiene muchos *temas* disponibles y para todos los gustos.
-Pero además hay otros paquetes que extienden las posibilidades, por ejemplo [{ggthemes}](https://github.com/jrnold/ggthemes).
+Hasta ahora llegamos a un gráfico muy funcional. 
+Muestra los datos, resalta las características más importantes y tiene etiquetas legibles. 
+Pero es medio aburrido. 
+Peor, al tener los colores por defecto de ggplot2, no tiene ningún toque personal que lo haga resaltar.
+Entonces, lo último que queda por hacer es cambiar la apariencia global del gráfico usando los *temas*.
 
-Por defecto {ggplot2} usa `theme_grey()`, probemos `theme_light()`:
+ggplot2 tiene muchos *temas* disponibles y para todos los gustos.
+Además hay otros paquetes que extienden las posibilidades, por ejemplo [{ggthemes}](https://github.com/jrnold/ggthemes).
+
+Por defecto ggplot2 usa `theme_grey()`, probemos `theme_minimal()`.
+
 
 ```{r}
-paises %>% 
-  filter(anio == 2007) %>% 
-  ggplot(aes(pib_per_capita, esperanza_de_vida)) +
-  geom_point(aes(color = continente, size = poblacion), alpha = 0.5) +
-  scale_color_brewer(type = "qual", palette = "Dark2") +
-  scale_size_area(max_size = 15, guide = NULL) +
-  scale_x_log10() +
-  geom_text(aes(label = pais), data = mucha_poblacion) +
-  labs(title = "Paises del mundo",
-       subtitle = "Año 2007",
-       caption = "El tamaño de cada circulo representa la población.",
-       x = "PBI per capita",
-       y = "Esperanza de vida",
-       color = "") +
-  theme_light()
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  annotate("rect", 
+           xmin = as.Date("2020-01-01"), xmax = as.Date("2021-04-01"), 
+           ymin = -Inf, ymax = Inf, 
+           alpha = 0.3) +
+  geom_line() +
+  geom_smooth(data = pre_pandemia, 
+              method = "lm") +
+  facet_wrap(~region, scales = "free_y", 
+             labeller = labeller(region = etiquetas_regiones)) +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(y = "Cantidad de visitantes",
+       x = NULL, 
+       title = "Visitas a parques nacionales con respecto a la media mensual",
+       subtitle = "En casi todas las regiones, la cantidad de vicitantes aumentó antes de la pandemia",
+       caption = "Fuente: elaboración propia en base a datos del MINTUR.") +
+  theme_minimal()
 ```
+
 
 ::: {.alert .alert-info}
 Ahora es tu turno.
@@ -206,6 +332,43 @@ Junto con las funciones `theme_...()`, hay una función llamada `theme()` que pe
 Tiene casi infinitas opciones y si algún momento te desvelas intentando cambiar esa línea o ese borde, seguro que `theme()` tiene alguna opción para hacer eso.
 :::
 
-::: {.btn-group role="group" aria-label="Navegación"}
-<a href= "11-tablas.html" class = "btn btn-primary">Anterior</a> <a href= "hoja-de-ruta.html" class = "btn btn-primary">Hoja de ruta</a>
-:::
+
+Finalmente, así quedó el código que genera el gráfico final.
+
+```{r message=FALSE, warning=FALSE}
+parques <- readr::read_csv("datos/parques_tidy.csv") %>% 
+  group_by(mes = lubridate::month(indice_tiempo), region) %>% 
+  mutate(total = total - mean(total)) %>% 
+  ungroup()
+
+
+pre_pandemia <- filter(parques, lubridate::year(indice_tiempo) < 2020) 
+
+etiquetas_regiones <- c("buenos-aires" = "Buenos Aires",
+                        "cordoba"      = "Córdoba",
+                        "cuyo"         = "Cuyo",
+                        "litoral"      = "Litoral",
+                        "norte"        = "Norte",
+                        "patagonia"    = "Patagonia")
+
+parques %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  annotate("rect", 
+           xmin = as.Date("2020-01-01"), xmax = as.Date("2021-04-01"), 
+           ymin = -Inf, ymax = Inf, 
+           alpha = 0.3) +
+  geom_line() +
+  geom_smooth(data = pre_pandemia, 
+              method = "lm") +
+  facet_wrap(~region, scales = "free_y", 
+             labeller = labeller(region = etiquetas_regiones)) +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(y = "Cantidad de visitantes",
+       x = NULL, 
+       title = "Visitas a parques nacionales con respecto a la media mensual",
+       subtitle = "En casi todas las regiones, la cantidad de vicitantes aumentó antes de la pandemia",
+       caption = "Fuente: elaboración propia en base a datos del MINTUR.") +
+  theme_minimal()
+```
+
+
