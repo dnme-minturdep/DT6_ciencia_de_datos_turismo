@@ -289,7 +289,7 @@ Todas las funciones de escala comienzan con <code>scale</code> (de escala en ing
 <span id="cb176-2"><a href="apariencia-de-gráficos.html#cb176-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb176-3"><a href="apariencia-de-gráficos.html#cb176-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
 <span id="cb176-4"><a href="apariencia-de-gráficos.html#cb176-4"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-117-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-117-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <div id="escala-de-colores-y-otras" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> Escala de colores y otras</h3>
 <p>Lo primero que podemos hacer es cambiar el color de los puntos de a cuerdo al continente.</p>
@@ -297,7 +297,7 @@ Todas las funciones de escala comienzan con <code>scale</code> (de escala en ing
 <span id="cb177-2"><a href="apariencia-de-gráficos.html#cb177-2"></a><span class="st">  </span><span class="kw">filter</span>(anio <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb177-3"><a href="apariencia-de-gráficos.html#cb177-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
 <span id="cb177-4"><a href="apariencia-de-gráficos.html#cb177-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente))</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-118-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-118-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <p>Pero esta escala de colores que usa {ggplot2} por defecto no es de las mejores, de hecho las personas que tienen daltonísmo muy posiblemente no logren diferenciar todos los puntos.
 Una escala o paleta de colores muy usada es <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><strong>viridis</strong></a> que fue creada justamente para resolver este y otros problemas.
 También existe otra gran familia de paletas de colores llamada <a href="https://colorbrewer2.org/"><strong>ColorBrewer</strong></a>.</p>
@@ -308,7 +308,7 @@ Cómo estamos modificando el <em>color</em>, la función a usar será <code>scal
 <span id="cb178-3"><a href="apariencia-de-gráficos.html#cb178-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
 <span id="cb178-4"><a href="apariencia-de-gráficos.html#cb178-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente)) <span class="op">+</span></span>
 <span id="cb178-5"><a href="apariencia-de-gráficos.html#cb178-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-119-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-119-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <p>Nuestro gráfico va quedando mejor y podemos aprovechar la capacidad de {ggplot2} de <em>mapear</em> variables a los elementos del gráfico y mostrar la población de cada país.</p>
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
@@ -321,7 +321,7 @@ La “d” del final viene de <em>discrete</em> y se usa para variables discreta
 <span id="cb179-3"><a href="apariencia-de-gráficos.html#cb179-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(pib_per_capita, esperanza_de_vida)) <span class="op">+</span></span>
 <span id="cb179-4"><a href="apariencia-de-gráficos.html#cb179-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion)) <span class="op">+</span></span>
 <span id="cb179-5"><a href="apariencia-de-gráficos.html#cb179-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>)</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-120-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-120-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <p>Esto nos da más información, pero al mismo tiempo vemos que los puntos se superponen.
 Vamos a arreglar eso agregando transparencia y de paso modificar el tamaño de los puntos con la escala correspondiente <code>scale_size()</code> y sacar la legenda con <code>guide = NULL</code>.</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="apariencia-de-gráficos.html#cb180-1"></a>paises <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -330,7 +330,7 @@ Vamos a arreglar eso agregando transparencia y de paso modificar el tamaño de l
 <span id="cb180-4"><a href="apariencia-de-gráficos.html#cb180-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> continente, <span class="dt">size =</span> poblacion), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
 <span id="cb180-5"><a href="apariencia-de-gráficos.html#cb180-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
 <span id="cb180-6"><a href="apariencia-de-gráficos.html#cb180-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>)</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-121-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-121-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 </div>
 <div id="escalas-de-ejes" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> Escalas de ejes</h3>
@@ -343,7 +343,7 @@ Eso puede esta indicando que el PBI tiene un comportamiento <em>logarítmico</em
 <span id="cb181-5"><a href="apariencia-de-gráficos.html#cb181-5"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;qual&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></span>
 <span id="cb181-6"><a href="apariencia-de-gráficos.html#cb181-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
 <span id="cb181-7"><a href="apariencia-de-gráficos.html#cb181-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>()</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-122-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-122-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <p>En este caso las escalas que modifican los ejes justamente comienzan con <code>scala_x_</code> o <code>scale_y_</code> según sea el caso.
 Y por supuesto hay una variedad importante de escalas con muchas opciones.</p>
 </div>
@@ -361,7 +361,7 @@ Por ahora es difícil, pero podríamos agregar etiquetas de texto con el nombre 
 <span id="cb182-6"><a href="apariencia-de-gráficos.html#cb182-6"></a><span class="st">  </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">15</span>, <span class="dt">guide =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
 <span id="cb182-7"><a href="apariencia-de-gráficos.html#cb182-7"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
 <span id="cb182-8"><a href="apariencia-de-gráficos.html#cb182-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais)) </span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-123-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-123-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <p>Pero nos olvidamos que tenemos casi 200 países, es razonable agregarle etiquetas a todos.
 Pero podríamos querer resaltar algunos, tal vez los de un continente en particular o los que cumplen con la condición de tener las mayores poblaciones del mundo.
 Para eso vamos a generarnos una nueva tabla con los países que queremos resaltar y de paso usarla dentro de <code>geom_text()</code>.</p>
@@ -378,7 +378,7 @@ Para eso vamos a generarnos una nueva tabla con los países que queremos resalta
 <span id="cb183-11"><a href="apariencia-de-gráficos.html#cb183-11"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
 <span id="cb183-12"><a href="apariencia-de-gráficos.html#cb183-12"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> pais), </span>
 <span id="cb183-13"><a href="apariencia-de-gráficos.html#cb183-13"></a>            <span class="dt">data =</span> mucha_poblacion)  <span class="co"># Esta capa usa la tabla mucha_población!</span></span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-124-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-124-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <div class="alert alert-success">
 <p>Del código anterior surge algo muy importante: es posible generar capas en un gráfico usando una data.frame <em>distinto</em> al que usamos para graficar las capas anteriores.
 Esto es útil principalmente para definir etiquetas o resaltar determinadas observaciones.</p>
@@ -400,7 +400,7 @@ Vamos a usar una nueva función (y una nueva capa!), <code>labs()</code>:</p>
 <span id="cb184-12"><a href="apariencia-de-gráficos.html#cb184-12"></a>       <span class="dt">x =</span> <span class="st">&quot;PBI per capita&quot;</span>,</span>
 <span id="cb184-13"><a href="apariencia-de-gráficos.html#cb184-13"></a>       <span class="dt">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
 <span id="cb184-14"><a href="apariencia-de-gráficos.html#cb184-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-125-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-125-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <p>Agregamos un título, un subtítulo, el epígrafe de la figura (<em>caption</em>) para las aclaraciones y cambiamos el nombre de los ejes para que se vean mejor.
 Pero ademas eliminamos el nombre de la leyenda porque era un poco redundante.</p>
 </div>
@@ -425,7 +425,7 @@ Pero además hay otros paquetes que extienden las posibilidades, por ejemplo <a 
 <span id="cb185-13"><a href="apariencia-de-gráficos.html#cb185-13"></a>       <span class="dt">y =</span> <span class="st">&quot;Esperanza de vida&quot;</span>,</span>
 <span id="cb185-14"><a href="apariencia-de-gráficos.html#cb185-14"></a>       <span class="dt">color =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span></span>
 <span id="cb185-15"><a href="apariencia-de-gráficos.html#cb185-15"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-126-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="DT6_files/figure-html/unnamed-chunk-126-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <div class="alert alert-info">
 <p>Ahora es tu turno.
 Elegí un <a href="https://es.r4ds.hadley.nz/images/visualization-themes.png" class="alert-link">tema que te guste</a> y probalo.

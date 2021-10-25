@@ -273,20 +273,20 @@ El Ministerio de Turismo mantiene un portal de datos abierto llamado <a href="ht
 <p>En esta sección vamos a descargar una serie de tiempo a partir de la Encuesta de Viajes y Turismo de los Hogares (EVyTH).</p>
 <p>Primero, ingresá a <a href="http://datos.yvera.gob.ar/">http://datos.yvera.gob.ar/</a>, donde te vas a encontrar con la páigna principal de Yvera.</p>
 
-<p><img src="img/yvera-principal.png" title="Captura de pantalla de la página principal de la plataforma de datos abiertos Yvera." alt="Captura de pantalla de la página principal de la plataforma de datos abiertos Yvera." width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="img/yvera-principal.png" title="Captura de pantalla de la página principal de la plataforma de datos abiertos Yvera." alt="Captura de pantalla de la página principal de la plataforma de datos abiertos Yvera." width="100%"  style="display: block; margin: auto;" /></p>
 <p>La base de datos que vamos a descargar está en el área de Turismo Interno así que hacé click en <a href="http://datos.yvera.gob.ar/dataset?groups=turismo-interno">ese ícono</a> para navegar a la sección de datasets correspondiente.</p>
 
-<p><img src="img/yvera-interno.png" title="Captura de pantalla de la página principal de búsqueda de yvera, mostrando los datos asociados a Turismo Interno." alt="Captura de pantalla de la página principal de búsqueda de yvera, mostrando los datos asociados a Turismo Interno." width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="img/yvera-interno.png" title="Captura de pantalla de la página principal de búsqueda de yvera, mostrando los datos asociados a Turismo Interno." alt="Captura de pantalla de la página principal de búsqueda de yvera, mostrando los datos asociados a Turismo Interno." width="100%"  style="display: block; margin: auto;" /></p>
 <p>Al momento que escribimos esta guía el primer set de datos que aparece es la Encuesta de Viajes y Turismo de los Hogares (EVyTH). Hacé click ahí para ir a <a href="http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth">la página de este set de datos</a>.</p>
 
-<p><img src="img/yvera-evyth.png" title="Captura de pantalla de la página con los datos relacionados la EVyTH." alt="Captura de pantalla de la página con los datos relacionados la EVyTH." width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="img/yvera-evyth.png" title="Captura de pantalla de la página con los datos relacionados la EVyTH." alt="Captura de pantalla de la página con los datos relacionados la EVyTH." width="100%"  style="display: block; margin: auto;" /></p>
 <p>Este set de datos tiene distintos recursos.
 Varios son datos, como “Turistas residentes por región de destino del viaje” o “Turistas residentes por edad”, pero también hay un recurso llamado “Ficha Técnica: EVyTH”.
 Este es <a href="http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/f41af122-ca31-4654-907b-a9cd57b80651/download/2021.01.05_evyth.pdf">un PDF</a> con la descripción de los datos así como consideraciones metodológicas relevantes.
 Es importante que si vas a usar datos siempre mires la ficha técnica para hacerte una idea de las limitaciones metodológicas que pueden tener estos datos.</p>
 <p>Por ahora vamos a descargar la <a href="http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth/archivo/abdacfcd-4a6c-4283-9abb-c1352def52e1">serie de Turistas residentes por edad</a>.</p>
 
-<p><img src="img/yvera-evyth-edad.png" title="Captura de pantalla de la página de la serie de tiempo de turistas residentes por edad." alt="Captura de pantalla de la página de la serie de tiempo de turistas residentes por edad." width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="img/yvera-evyth-edad.png" title="Captura de pantalla de la página de la serie de tiempo de turistas residentes por edad." alt="Captura de pantalla de la página de la serie de tiempo de turistas residentes por edad." width="100%"  style="display: block; margin: auto;" /></p>
 <p>En esta pantalla te vas a encontrar con una descripción del set de datos y sus variables.
 Para descargar los datos hay que hacer click en el botón que dice “<a href="http://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/abdacfcd-4a6c-4283-9abb-c1352def52e1/download/tur_int_turistas_residentes_edad_serie.csv">DESCARGAR</a>”.
 Guardalo en una carpeta dentro del proyecto (recomedamos organizar los datos en una carpeta llamada “datos”) y ya está listo para leer.</p>
@@ -315,7 +315,7 @@ Para datos tabulares, la forma más útil es el formato csv, que es un archivo d
 <p>File → Import Dataset → From Text (readr)…</p>
 </div>
 <p>Esto te va abrir una ventana donde podrás elegir el archivo a importar (en este caso el archivo <code>turistas_edad.csv</code> que está dentro de la capeta <code>datos</code> del proyecto) y otros detalles.</p>
-<p><img src="img/importar-edad-xlsx.png" title="Diálogo de importar datos de RStudio." alt="Diálogo de importar datos de RStudio." width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="img/importar-edad-xlsx.png" title="Diálogo de importar datos de RStudio." alt="Diálogo de importar datos de RStudio." width="100%"  style="display: block; margin: auto;" /></p>
 <p>En la pantalla principal vas a poder previsualizar los datos y ver que pinta tienen.
 Abajo a la izquierda tenés varias opciones: el nombre que vas a usar para la variable (en este caso llamaremos <code>turistas_edad</code>), si la primera fila contiene los nombres de las columnas (<code>First Row as Names</code>), qué delimitador tienen los datos (en este caso <code>comma</code>, pero podría ser punto y coma u otro), etc…</p>
 <p>Y abajo a la derecha es el código que vas a necesitar para efectivamente importar los datos.
@@ -367,7 +367,7 @@ En efecto, RStudio provee la misma ayuda para leer este tipo de datos:</p>
 <div class="alert alert-secondary">
 <p>File → Import Dataset → From Excel…</p>
 </div>
-<p><img src="img/importar-edad-xlsx.png" title="Diálogo de importar datos de RStudio." alt="Diálogo de importar datos de RStudio." width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="img/importar-edad-xlsx.png" title="Diálogo de importar datos de RStudio." alt="Diálogo de importar datos de RStudio." width="100%"  style="display: block; margin: auto;" /></p>
 <p>Notá que entre las opciones de abajo a la izquierda aparecen dos variables importantes.
 Podés seleccionar de qué hoja leer los datos y qué rango usar.
 Esto seguro que te va a ser muy útil para esos archivos de Excel con múltiples tablas en un archivo, o incluso múltiples tablas en cada hoja!</p>
