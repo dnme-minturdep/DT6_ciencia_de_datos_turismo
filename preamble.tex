@@ -1,9 +1,8 @@
-  %%% REFERENCIAS
-        \usepackage{hyperref}
-        % links del indice en negro; citas y URL en azul
-        \hypersetup{colorlinks = true, urlcolor={blue}, 
-        citecolor={blue}, linkcolor ={blue}}
-\usepackage[spanish]{babel} % Idiomas en los que se escribe el documento. 
+%%% REFERENCIAS
+\usepackage{hyperref}
+% links del indice en negro; citas y URL en azul
+\hypersetup{colorlinks = true, urlcolor={blue}, citecolor={blue}, linkcolor ={blue}}
+\usepackage[spanish,shorthands=off]{babel} % Idiomas en los que se escribe el documento. 
 \usepackage{booktabs}
 \usepackage{amsthm}
 
@@ -17,3 +16,5 @@
 \makeatother
 \let\oldmaketitle\maketitle
 \AtBeginDocument{\let\maketitle\relax}
+\definecolor{aquamarine}{rgb}{0.4980392, 1.0000000, 0.8313725}
+\usepackage{float}

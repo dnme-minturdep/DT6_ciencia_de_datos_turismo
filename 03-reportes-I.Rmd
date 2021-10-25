@@ -226,7 +226,8 @@ Resultado: [texto que se muestra con el link](http://google.com)
 
 Podés incluir una imagen: `![descripción de la figura](https://placekitten.com/200/100)`: Resultado: 
 
-![descripción de la figura](https://placekitten.com/200/100)
+
+![descripción de la figura](img/kitty100.jpeg)
 
 Y también podés agregar ecuaciones (usando [LaTeX](https://es.wikipedia.org/wiki/LaTeX)) en la misma línea (esto:`$E = mc^2$` se ve así: $E = mc^2$) o en una línea propia.
 Esto:
