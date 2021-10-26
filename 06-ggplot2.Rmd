@@ -180,8 +180,22 @@ Algunos argumentos para cambiar la apariencia de las geometrías son:
 -   `alpha` modifica la transparencia de los elementos (1 = opaco, 0 = transparente)
 -   `shape` modifica el tipo de punto (círculos, cuadrados, triángulos, etc.)
 
+```{r include=FALSE}
+circle <- function(color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor[HTML]{%s}{%s}", gsub("#", "", toupper(color)), "$\\bullet$")
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color,
+      "●")
+  } else "●"
+}
+```
+
+\textcolor[HTML]{FB61D7}{\circ}
+
 El *mapeo* entre una variable y un parámetro de geometría se hace a través de una **escala**.
-La escala de colores es lo que define, por ejemplo, que los puntos donde la variable `region` toma el valor `"patagonia"` van a tener el color rosa ([●]{style="color:#FB61D7"}), donde toma el valor `córdoba"`, mostaza ([●]{style="color:#B79F00"}), etc...
+La escala de colores es lo que define, por ejemplo, que los puntos donde la variable `region` toma el valor `"patagonia"` van a tener el color rosa (`r circle("#FB61D7")`), donde toma el valor `"córdoba"`, mostaza (`r circle("#B79F00")`), etc...
+
 
 ::: {.alert .alert-success}
 **Modificar elementos utilizando un valor único**
