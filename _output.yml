@@ -22,7 +22,7 @@ bookdown::pdf_book:
     in_header: preamble.tex
     before_body: before_body.tex
   latex_engine: xelatex
-  citation_package: none
+  citation_package: default
   pandoc_args: [ "--csl", "estudios-hispanicos.csl" ]
   keep_tex: yes
 bookdown::epub_book: 
