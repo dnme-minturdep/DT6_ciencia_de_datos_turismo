@@ -9,6 +9,11 @@ Cualquier gráfico de ggplot tendrá como mínimo 3 componentes: los **datos**, 
 Cómo siempre, primero hay que cargar los paquetes y los datos. 
 Para esta sección, vamos a leer el archivo parques_tidy.csv, que es una serie de tiempo de visitantes a parques nacionales descargada de [Yvera](http://datos.yvera.gob.ar/dataset/parques-nacionales/archivo/78aea6ed-761c-4659-bdf2-7fcb0f616fad) y modificada un poco para poder trabajar con ella más fácilmente con ggplot2. 
 
+```{r include=FALSE}
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 library(dplyr)
 library(tidyr)
@@ -209,7 +214,7 @@ parques %>%
   group_by(mes = lubridate::month(indice_tiempo), region) %>% 
   summarise(residentes_medios = mean(residentes)) %>% 
   ggplot(aes(mes, residentes_medios)) +
-  geom_line(aes(color= region))
+  geom_line(aes(color = region))
 
 ```
 
@@ -228,7 +233,7 @@ parques %>%
   group_by(trimestre = lubridate::month(indice_tiempo), region) %>% 
   mutate(residentes = residentes - mean(residentes)) %>% 
   ggplot(aes(indice_tiempo, residentes)) +
-  geom_line(aes(color= region)) 
+  geom_line(aes(color = region)) 
 ```
 
 Al filtra el ciclo anual medio, saltan a la vista otros patrones de variabilidad. 
@@ -328,7 +333,7 @@ En vez de eso, es recomendable utilizar una transformación de escala en el grá
 Para transformar los valores del eje x con el logaritmo, se usa `scale_x_log10()`. 
 Esto realiza la transformación pero luego muestra las etiquetas en la escala original. 
 
-```{r}
+```{r, message = TRUE}
 ggplot(gastos, aes(gasto)) +
   geom_histogram() +
   scale_x_log10()
@@ -427,13 +432,13 @@ Por esta razón también existen `geom_violin()` y `geom_jitter()`.
 2.  ¿Qué ventajas y desventajas encuentran respecto de `geom_boxplot()`?
 :::
 
-```{r}
+```{r, eval = FALSE}
 ggplot(gastos, aes(region_destino, gasto)) +
   geom_violin() +
   scale_y_log10()
 ```
 
-```{r}
+```{r, eval = FALSE}
 ggplot(gastos, aes(region_destino, gasto)) +
   geom_jitter(alpha = 0.2, size = 0.1) +
   scale_y_log10()
@@ -486,7 +491,7 @@ Una hipótesis razonable podría ser que la distribución de ingresos en cada re
 Para ver esto, habría que hacer el gráfico de barras para cada combinación de región de destino y trimestre. 
 En ggplot2 esto se resuelve agregando más variables que definan los paneles "sumando" variables en la fórmula
 
-```{r}
+```{r, fig.height=7}
 ggplot(gastos) +
   geom_bar(aes(quintil, y = stat(prop)),  position = "dodge") +
   facet_wrap(~ region_destino + trimestre)
@@ -533,7 +538,7 @@ parques %>%
   group_by(trimestre = lubridate::month(indice_tiempo), region) %>% 
   mutate(residentes = residentes - mean(residentes)) %>% 
   ggplot(aes(indice_tiempo, residentes)) +
-  geom_line(aes(color= region)) 
+  geom_line(aes(color = region)) 
 ```
 
 Una forma de guiar al ojo a ver esta tendencia e ignorar las fluctuaciones trimestre a trimestre es usando una línea suave. 
@@ -583,3 +588,6 @@ parques %>%
   geom_smooth(aes(color = region))
 ```
 
+```{r include=FALSE}
+knitr::opts_chunk$set(warning = TRUE)
+```
