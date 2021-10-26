@@ -447,7 +447,7 @@ También se pueden destacar meses interesantes donde los parques recibieron much
 <div id="transformaciones-estadísticas" class="section level2">
 <h2><span class="header-section-number">6.6</span> Transformaciones estadísticas</h2>
 <p>Hasta ahora visualizamos los datos tal cual vienen en la base de datos o transformados con ayuda de dplyr, pero hay ciertas transformaciones comunes que se pueden hacer usando ggplot2.</p>
-<p>Para esta sección vamos a usar datos de la <a href="http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth">Encuesta de Viajes y Turismo de los Hogares</a> (EVYTH).
+<p>Para esta sección vamos a usar la tabla de microdatos de la <a href="http://datos.yvera.gob.ar/dataset/encuesta-de-viajes-y-turismo-de-los-hogares-evyth-microdatos">Encuesta de Viajes y Turismo de los Hogares</a> (EVYTH).
 Vamos a seleccionar sólo las columnas que identifican cada hogar y viaje, y el gasto del viaje y el quintil de ingreso del hogar.
 Como cada fila es una persona y cada hogar puede tener más de una persona, el código de abajo usa <code>distinct()</code> para eliminar los valores repetidos.</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="gráficos-con-ggplot2.html#cb80-1"></a>gastos &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;datos/evyth_2019_2021t1.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
