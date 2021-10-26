@@ -413,10 +413,14 @@ Pero hay tantos métodos estadísticos como gente haciendo estadística así que
 La solución es que podés “agregarle” a R funciones que no vienen instaladas por defecto pero que escribieron otras personas en forma de “paquetes”.
 ¡Este es el poder de <strong>la comunidad de R</strong>!</p>
 <p>Para instalar paquetes de R, la forma mas fácil es con la función <code>install.packages()</code>.
+Esta función se conecta a internet y descarga paquetes publicados en un repositorio oficial
 Entonces, por ejemplo,</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ciencia-de-datos.html#cb11-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;readr&quot;</span>)</span></code></pre></div>
-<p>te instala un paquete que contiene funciones para leer datos.
-Luego, usando el comando</p>
+<p>descarga e instala un paquete que contiene funciones para leer datos.</p>
+<div class="alert alert-success">
+<p><strong>Nota</strong>: Para instalar paquetes de esta forma es necesario tener conexión de internet.</p>
+</div>
+<p>Luego, usando el comando</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ciencia-de-datos.html#cb12-1"></a><span class="kw">library</span>(readr)</span></code></pre></div>
 <p>le decís a R que cargue las funciones que vienen en el paquete readr para usarlas.</p>
 <div class="alert alert-info">
