@@ -188,13 +188,20 @@ La solución es que podés "agregarle" a R funciones que no vienen instaladas po
 ¡Este es el poder de **la comunidad de R**!
 
 Para instalar paquetes de R, la forma mas fácil es con la función `install.packages()`.
+Esta función se conecta a internet y descarga paquetes publicados en un repositorio oficial 
 Entonces, por ejemplo,
 
 ```{r, eval=FALSE}
 install.packages("readr")
 ```
 
-te instala un paquete que contiene funciones para leer datos.
+descarga e instala un paquete que contiene funciones para leer datos.
+
+
+::: {.alert .alert-success}
+**Nota**: Para instalar paquetes de esta forma es necesario tener conexión de internet. 
+:::
+
 Luego, usando el comando
 
 ```{r}
