@@ -267,7 +267,7 @@ parques %>%
 
 Hasta ahora visualizamos los datos tal cual vienen en la base de datos o transformados con ayuda de dplyr, pero hay ciertas transformaciones comunes que se pueden hacer usando ggplot2.
 
-Para esta sección vamos a usar datos de la [Encuesta de Viajes y Turismo de los Hogares](http://datos.yvera.gob.ar/dataset/encuesta-viajes-turismo-hogares-evyth) (EVYTH). 
+Para esta sección vamos a usar la tabla de microdatos de la [Encuesta de Viajes y Turismo de los Hogares](http://datos.yvera.gob.ar/dataset/encuesta-de-viajes-y-turismo-de-los-hogares-evyth-microdatos) (EVYTH). 
 Vamos a seleccionar sólo las columnas que identifican cada hogar y viaje, y el gasto del viaje y el quintil de ingreso del hogar. 
 Como cada fila es una persona y cada hogar puede tener más de una persona, el código de abajo usa `distinct()` para eliminar los valores repetidos. 
 
