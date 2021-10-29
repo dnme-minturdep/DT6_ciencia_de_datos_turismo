@@ -144,7 +144,7 @@ Llegaste al final del libro y con suerte al final de los desafíos. Es hora de g
 Abrí tu proyecto desde el explorador de archivos (haciendo doble click en el archivo .Rproj) o desde a interfaz de RStudio. 
 Trabajá sobre el mismo Rmd, que ya va tomando forma.
 
-2. Seleccioná los gráficos y/o tablas que quieran incluir en tu "informe final" y copia **todo** el código necesario para generarlos. 
+2. Seleccioná los gráficos y/o tablas que generarte durante los desafíos o las clases y que quieran incluir en tu "informe final" y copia **todo** el código necesario para generarlos. 
 Esto incluye el codigo que leer y modifica los datos. 
 
 3. Agregá títulos y mejorá las etiquetas en tus gráficos, si querés, también podés cambiar el tema o alguna escala para que tenga una apariencia distinta (tenés todo [acá](gráficos-con-ggplot2.html)).
