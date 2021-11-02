@@ -81,7 +81,7 @@ parques_resumen %>%
 ```
 
 Un detalle final podría ser convertir en mayúsculas los nombres de las regiones. 
-Para eso se puede usar la función `str_to_sentence()` sel pqeute **stringr**. 
+Para eso se puede usar la función `str_to_sentence()` del paquete **stringr**. 
 
 
 ```{r}
