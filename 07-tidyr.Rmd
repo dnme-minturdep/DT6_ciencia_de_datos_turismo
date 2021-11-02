@@ -338,5 +338,5 @@ Intentá unir las dos tablas con las que estuvimos trabajando cambiando el orden
 
 :::
 
-Hasta ahora en las uniones usamos columnas que tenian el mismo nombre en ambas tablas. ¿Qué ocurre cuando las columnas no se llaman igual?.  Una solución es renombrar las columnas en alguna de la tablas (como en los ejemplos). La otra opción es indicar como se llaman las columnas que tenemos que unir en el parámetro `by` de la función join.  Por ejemplo, si en la tabla parques region se llama _region_ y en la tabla hoteles se llama _regiones_, el parámetro by debe ser especificado como: `r by = c("region" = "regiones")`
+Hasta ahora en las uniones usamos columnas que tenian el mismo nombre en ambas tablas. ¿Qué ocurre cuando las columnas no se llaman igual?.  Una solución es renombrar las columnas en alguna de la tablas (como en los ejemplos). La otra opción es indicar como se llaman las columnas que tenemos que unir en el parámetro `by` de la función join.  Por ejemplo, si en la tabla parques region se llama _region_ y en la tabla hoteles se llama _regiones_, el parámetro by debe ser especificado como: `by = c("region" = "regiones")`
 
