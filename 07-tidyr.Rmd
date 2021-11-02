@@ -324,7 +324,7 @@ parques_hoteles_2018
 ```
 
 En este caso, perdemos las filas de `hoteles_2018` que no encontraron coincidencia en `parques_2018`, es decir la región de CABA. 
-La tabla resultante es igual a la tabla que generamos en el ejemplo anterior con `r nrow(parques_hoteles_2018)` fialas.
+La tabla resultante es igual a la tabla que generamos en el ejemplo anterior con `r nrow(parques_hoteles_2018)` filas.
 
 ::: {.alert .alert-info}
 **Desafío**
@@ -337,3 +337,6 @@ Intentá unir las dos tablas con las que estuvimos trabajando cambiando el orden
 2.  Si encontras alguna diferencia, intentá explicar a que se debe. Si no hay diferencias, pensá por qué.
 
 :::
+
+Hasta ahora en las uniones usamos columnas que tenian el mismo nombre en ambas tablas. ¿Qué ocurre cuando las columnas no se llaman igual?.  Una solución es renombrar las columnas en alguna de la tablas (como en los ejemplos). La otra opción es indicar como se llaman las columnas que tenemos que unir en el parámetro `by` de la función join.  Por ejemplo, si en la tabla parques region se llama _region_ y en la tabla hoteles se llama _regiones_, el parámetro by debe ser especificado como: `r by = c("region" = "regiones")`
+
