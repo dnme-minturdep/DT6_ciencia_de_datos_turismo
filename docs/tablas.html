@@ -553,7 +553,7 @@ De esta manera, no se ve afectada por el formato numérico.</p>
 </tbody>
 </table>
 <p>Un detalle final podría ser convertir en mayúsculas los nombres de las regiones.
-Para eso se puede usar la función <code>str_to_sentence()</code> sel pqeute <strong>stringr</strong>.</p>
+Para eso se puede usar la función <code>str_to_sentence()</code> del paquete <strong>stringr</strong>.</p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="tablas.html#cb142-1"></a>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb142-2"><a href="tablas.html#cb142-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio),</span>
 <span id="cb142-3"><a href="tablas.html#cb142-3"></a>         <span class="dt">region =</span> stringr<span class="op">::</span><span class="kw">str_to_sentence</span>(region)) <span class="op">%&gt;%</span><span class="st"> </span></span>
