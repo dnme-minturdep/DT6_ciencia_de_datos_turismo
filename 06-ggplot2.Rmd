@@ -543,7 +543,7 @@ ggplot(gastos, aes(quintil, gasto)) +
 :::
 
 
-## Gráficos de líneas suavizas
+## Gráficos de líneas suavizadas
 
 Antes viste este gráfico que parece mostrar que la cantidad de visitantes residentes estuvo aumentando entre 2008 y 2020 hasta que las restricciones por la pandemia hicieron que esta cantidad se desplomara. 
 
