@@ -39,7 +39,7 @@ gráficos-de-frecuencias
 posición
 gráficos-de-caja
 graficando-en-múltiples-paneles
-gráficos-de-líneas-suavizas
+gráficos-de-líneas-suavizadas
 manipulación-de-datos-ordenados-usando-dplyr-y-tidyr-ii
 de-ancho-a-largo-con-pivot_longer
 de-largo-a-ancho-con-pivot_wider
