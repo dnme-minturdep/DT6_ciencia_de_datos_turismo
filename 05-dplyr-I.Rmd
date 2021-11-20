@@ -157,12 +157,12 @@ turistas_edad %>%
 `summarise()` devuelve una tabla con una columna para la edad y otra nueva, llamada "turistas_promedio" que contiene el promedio de `turistas` para cada grupo.
 Esta operación es equivalente a esta tabla dinámica en Excel:
 
-**rehacer el video**
+
 <figure>
 
 <video width=770px controls>
 
-<source src="img/pivot-vid.webm" type="video/webm">
+<source src="img/img_pivot-vid.webm" type="video/webm">
 
 </video>
 
