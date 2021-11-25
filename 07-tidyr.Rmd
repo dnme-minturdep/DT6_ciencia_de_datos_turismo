@@ -56,7 +56,7 @@ Cómo siempre, recordá que esto sólo se hace una vez y es recomendable hacerlo
 
 Y luego cargá tidyr y dplyr (que usaste en [una sección anterior](manipulación-de-datos-ordenados.html)) con:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidyr)
 library(dplyr)
 ```
@@ -66,8 +66,14 @@ library(dplyr)
 En secciones anteriores usaste una versión de los datos asociados a parques nacionales.
 Ahora vas a leer los datos en su formato original:
 
-```{r}
+```{r, eval = FALSE}
 parques_ancho <- readr::read_csv("http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv")
+
+parques_ancho
+```
+
+```{r include=FALSE}
+parques_ancho <- readr::read_csv("datos/parques_ancho.csv")
 
 parques_ancho
 ```
@@ -251,7 +257,28 @@ Ahora vamos a seguir trabajando con las base de datos de `parques_largo` y de pa
 
 Para que los datos sean más manejables y poder ver que es lo que sucede vamos a quedarnos sólo con la información de 2018.
 
-```{r, message=FALSE}
+```{r, include = FALSE}
+library(lubridate)
+library(stringr)
+
+parques_2018 <- parques_largo %>% 
+  mutate(indice_tiempo = ym(indice_tiempo)) %>% 
+  filter(year(indice_tiempo) == 2018)
+
+hoteles <- readr::read_csv("datos/hoteles.csv")
+hoteles_2018 <- hoteles %>% 
+  mutate(region_de_destino = tolower(region_de_destino) %>% 
+           str_replace(" ", "-") %>% 
+           str_replace("ó", "o")) %>% 
+  pivot_wider(names_from  = origen_viajeros, values_from = viajeros) %>% 
+  rename(hoteles_noresidentes = `No residentes`, 
+         hoteles_residentes = Residentes, 
+         region = region_de_destino) %>% 
+  mutate(indice_tiempo = lubridate::ym(indice_tiempo)) %>% 
+  filter(lubridate::year(indice_tiempo) == 2018)
+```
+
+```{r, message=FALSE, eval = FALSE}
 library(lubridate)
 library(stringr)
 

@@ -14,7 +14,9 @@ knitr::opts_chunk$set(warning = FALSE)
 ```
 
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE, eval = FALSE}
+# Esto se corre una sola vez para bajar los datos. 
+# (debería estar en otro lado, pero ya fue)
 library(dplyr)
 library(tidyr)
 library(stringr)
@@ -39,6 +41,7 @@ readr::write_csv(parques, "datos/parques_tidy.csv")
 library(ggplot2)
 parques <- readr::read_csv("datos/parques_tidy.csv")
 ```
+
 Para tener una idea de este conjunto de datos, `head()` muestra las primeras 6 filas
 
 ```{r}
