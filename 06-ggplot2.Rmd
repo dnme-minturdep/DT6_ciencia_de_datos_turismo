@@ -14,7 +14,7 @@ knitr::opts_chunk$set(warning = FALSE)
 ```
 
 
-```{r message=FALSE, warning=FALSE, eval = FALSE}
+```{r message=FALSE, warning=FALSE, eval = FALSE, include = FALSE}
 # Esto se corre una sola vez para bajar los datos. 
 # (debería estar en otro lado, pero ya fue)
 library(dplyr)
