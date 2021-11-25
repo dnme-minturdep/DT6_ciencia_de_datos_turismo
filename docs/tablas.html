@@ -267,29 +267,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tablas" class="section level1">
 <h1><span class="header-section-number">Capítulo 8</span> Tablas</h1>
 <p>Por defecto, la forma en que R Markdown muestra tablas es bastante feo porque muestra lo que verías si corrieras el código en la consola.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="tablas.html#cb131-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb131-2"><a href="tablas.html#cb131-2"></a><span class="kw">library</span>(tidyr)</span>
-<span id="cb131-3"><a href="tablas.html#cb131-3"></a><span class="kw">library</span>(lubridate)</span>
-<span id="cb131-4"><a href="tablas.html#cb131-4"></a></span>
-<span id="cb131-5"><a href="tablas.html#cb131-5"></a>parques_ancho &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv&quot;</span>)</span>
-<span id="cb131-6"><a href="tablas.html#cb131-6"></a></span>
-<span id="cb131-7"><a href="tablas.html#cb131-7"></a>parques_largo &lt;-<span class="st"> </span>parques_ancho <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb131-8"><a href="tablas.html#cb131-8"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;indice_tiempo&quot;</span>, <span class="st">&quot;residentes&quot;</span>, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;total&quot;</span>),</span>
-<span id="cb131-9"><a href="tablas.html#cb131-9"></a>               <span class="dt">names_to =</span> <span class="st">&quot;region_visitante&quot;</span>,</span>
-<span id="cb131-10"><a href="tablas.html#cb131-10"></a>               <span class="dt">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb131-11"><a href="tablas.html#cb131-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">region_visitante =</span> stringr<span class="op">::</span><span class="kw">str_replace</span>(region_visitante, <span class="st">&quot;buenos_aires*&quot;</span>, <span class="st">&quot;buenos-aires&quot;</span>),</span>
-<span id="cb131-12"><a href="tablas.html#cb131-12"></a>         <span class="dt">region_visitante =</span> stringr<span class="op">::</span><span class="kw">str_replace</span>(region_visitante, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;noresidentes&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb131-13"><a href="tablas.html#cb131-13"></a><span class="st">  </span><span class="kw">separate</span>(region_visitante, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;region&quot;</span>, <span class="st">&quot;tipo_visitante&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb131-14"><a href="tablas.html#cb131-14"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;residentes&quot;</span>, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;total&quot;</span>))</span>
-<span id="cb131-15"><a href="tablas.html#cb131-15"></a></span>
-<span id="cb131-16"><a href="tablas.html#cb131-16"></a>parques_resumen &lt;-<span class="st">  </span>parques_largo <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb131-17"><a href="tablas.html#cb131-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">indice_tiempo =</span> <span class="kw">ym</span>(indice_tiempo)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb131-18"><a href="tablas.html#cb131-18"></a><span class="st">  </span><span class="kw">group_by</span>(<span class="dt">anio =</span> <span class="kw">year</span>(indice_tiempo), region, tipo_visitante) <span class="op">%&gt;%</span><span class="st">  </span></span>
-<span id="cb131-19"><a href="tablas.html#cb131-19"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">valor =</span> <span class="kw">mean</span>(valor)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb131-20"><a href="tablas.html#cb131-20"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cordoba&quot;</span>, <span class="st">&quot;cuyo&quot;</span>, <span class="st">&quot;patagonia&quot;</span>), </span>
-<span id="cb131-21"><a href="tablas.html#cb131-21"></a>         anio <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2020</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb131-22"><a href="tablas.html#cb131-22"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> <span class="st">&quot;tipo_visitante&quot;</span>, <span class="dt">values_from =</span> <span class="st">&quot;valor&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="tablas.html#cb132-1"></a>parques_resumen</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="tablas.html#cb130-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb130-2"><a href="tablas.html#cb130-2"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb130-3"><a href="tablas.html#cb130-3"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb130-4"><a href="tablas.html#cb130-4"></a></span>
+<span id="cb130-5"><a href="tablas.html#cb130-5"></a>parques_ancho &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv&quot;</span>)</span>
+<span id="cb130-6"><a href="tablas.html#cb130-6"></a></span>
+<span id="cb130-7"><a href="tablas.html#cb130-7"></a>parques_largo &lt;-<span class="st"> </span>parques_ancho <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb130-8"><a href="tablas.html#cb130-8"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;indice_tiempo&quot;</span>, <span class="st">&quot;residentes&quot;</span>, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;total&quot;</span>),</span>
+<span id="cb130-9"><a href="tablas.html#cb130-9"></a>               <span class="dt">names_to =</span> <span class="st">&quot;region_visitante&quot;</span>,</span>
+<span id="cb130-10"><a href="tablas.html#cb130-10"></a>               <span class="dt">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb130-11"><a href="tablas.html#cb130-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">region_visitante =</span> stringr<span class="op">::</span><span class="kw">str_replace</span>(region_visitante, <span class="st">&quot;buenos_aires*&quot;</span>, <span class="st">&quot;buenos-aires&quot;</span>),</span>
+<span id="cb130-12"><a href="tablas.html#cb130-12"></a>         <span class="dt">region_visitante =</span> stringr<span class="op">::</span><span class="kw">str_replace</span>(region_visitante, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;noresidentes&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb130-13"><a href="tablas.html#cb130-13"></a><span class="st">  </span><span class="kw">separate</span>(region_visitante, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;region&quot;</span>, <span class="st">&quot;tipo_visitante&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb130-14"><a href="tablas.html#cb130-14"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;residentes&quot;</span>, <span class="st">&quot;no_residentes&quot;</span>, <span class="st">&quot;total&quot;</span>))</span>
+<span id="cb130-15"><a href="tablas.html#cb130-15"></a></span>
+<span id="cb130-16"><a href="tablas.html#cb130-16"></a>parques_resumen &lt;-<span class="st">  </span>parques_largo <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb130-17"><a href="tablas.html#cb130-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">indice_tiempo =</span> <span class="kw">ym</span>(indice_tiempo)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb130-18"><a href="tablas.html#cb130-18"></a><span class="st">  </span><span class="kw">group_by</span>(<span class="dt">anio =</span> <span class="kw">year</span>(indice_tiempo), region, tipo_visitante) <span class="op">%&gt;%</span><span class="st">  </span></span>
+<span id="cb130-19"><a href="tablas.html#cb130-19"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">valor =</span> <span class="kw">mean</span>(valor)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb130-20"><a href="tablas.html#cb130-20"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cordoba&quot;</span>, <span class="st">&quot;cuyo&quot;</span>, <span class="st">&quot;patagonia&quot;</span>), </span>
+<span id="cb130-21"><a href="tablas.html#cb130-21"></a>         anio <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2020</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb130-22"><a href="tablas.html#cb130-22"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> <span class="st">&quot;tipo_visitante&quot;</span>, <span class="dt">values_from =</span> <span class="st">&quot;valor&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="tablas.html#cb131-1"></a>parques_resumen</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ## # Groups:   anio, region [6]
 ##    anio region    noresidentes residentes  total
@@ -304,8 +304,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.1</span> Tablas simples con <code>kable</code></h2>
 <p>Existen varios paquetes para mostrar tablas lindas pero una forma simple y sin vueltas es usando la función <code>kable()</code> del paquete <strong>knitr</strong>.
 Sólo usando esta función ya devuelve una tabla con un diseño más limpio y acabado:</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="tablas.html#cb134-1"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb134-2"><a href="tablas.html#cb134-2"></a><span class="kw">kable</span>(parques_resumen)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="tablas.html#cb133-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb133-2"><a href="tablas.html#cb133-2"></a><span class="kw">kable</span>(parques_resumen)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -365,8 +365,8 @@ Sólo usando esta función ya devuelve una tabla con un diseño más limpio y ac
 En la tabla <code>parques_resumen</code>, los nombres están en minúscula, sin espacios y sin “caracteres especiales” como “ñ”.
 Esto es útil para comunicarse con R, pero no está bueno para comunicarse con otras personas.
 El argumento <code>col.names</code> permite especificar el nombre de las columnas para mostrar:</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="tablas.html#cb135-1"></a><span class="kw">kable</span>(parques_resumen, </span>
-<span id="cb135-2"><a href="tablas.html#cb135-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="tablas.html#cb134-1"></a><span class="kw">kable</span>(parques_resumen, </span>
+<span id="cb134-2"><a href="tablas.html#cb134-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -425,9 +425,9 @@ El argumento <code>col.names</code> permite especificar el nombre de las columna
 <p>En Español, en general usamos la coma para separar los decimales y el punto como separador de miles.
 Además, esta tabla tiene el problema de la precisión innecesaria: ¿realmente tiene sentido reportar el promedio de visitantes con 5 decimales?
 Para eso, hay que modificar el argumento <code>format.args</code> de esta manera:</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="tablas.html#cb136-1"></a><span class="kw">kable</span>(parques_resumen, </span>
-<span id="cb136-2"><a href="tablas.html#cb136-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
-<span id="cb136-3"><a href="tablas.html#cb136-3"></a><span class="st">      format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="tablas.html#cb135-1"></a><span class="kw">kable</span>(parques_resumen, </span>
+<span id="cb135-2"><a href="tablas.html#cb135-2"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
+<span id="cb135-3"><a href="tablas.html#cb135-3"></a><span class="st">      format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -493,10 +493,10 @@ Para eso, hay que modificar el argumento <code>format.args</code> de esta manera
 <p>Uff… pero ponerle el punto de miles a los años queda raro.
 La solución es convertir la columna <code>anio</code> en caracter.
 De esta manera, no se ve afectada por el formato numérico.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="tablas.html#cb137-1"></a>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb137-2"><a href="tablas.html#cb137-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb137-3"><a href="tablas.html#cb137-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
-<span id="cb137-4"><a href="tablas.html#cb137-4"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="tablas.html#cb136-1"></a>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb136-2"><a href="tablas.html#cb136-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb136-3"><a href="tablas.html#cb136-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
+<span id="cb136-4"><a href="tablas.html#cb136-4"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -554,11 +554,11 @@ De esta manera, no se ve afectada por el formato numérico.</p>
 </table>
 <p>Un detalle final podría ser convertir en mayúsculas los nombres de las regiones.
 Para eso se puede usar la función <code>str_to_sentence()</code> del paquete <strong>stringr</strong>.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="tablas.html#cb138-1"></a>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb138-2"><a href="tablas.html#cb138-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio),</span>
-<span id="cb138-3"><a href="tablas.html#cb138-3"></a>         <span class="dt">region =</span> stringr<span class="op">::</span><span class="kw">str_to_sentence</span>(region)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb138-4"><a href="tablas.html#cb138-4"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
-<span id="cb138-5"><a href="tablas.html#cb138-5"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="tablas.html#cb137-1"></a>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb137-2"><a href="tablas.html#cb137-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio),</span>
+<span id="cb137-3"><a href="tablas.html#cb137-3"></a>         <span class="dt">region =</span> stringr<span class="op">::</span><span class="kw">str_to_sentence</span>(region)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb137-4"><a href="tablas.html#cb137-4"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
+<span id="cb137-5"><a href="tablas.html#cb137-5"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -619,19 +619,19 @@ Para eso se puede usar la función <code>str_to_sentence()</code> del paquete <s
 <div id="supertablas-con-kableextra" class="section level2">
 <h2><span class="header-section-number">8.2</span> Supertablas con kableExtra</h2>
 <p>El paquete kableExtra, como su nombre lo indica, nació para extender el poder de la función <code>kable()</code>.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="tablas.html#cb139-1"></a><span class="kw">library</span>(kableExtra)  <span class="co"># instalar con install.packages(&quot;kableExtra&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="tablas.html#cb138-1"></a><span class="kw">library</span>(kableExtra)  <span class="co"># instalar con install.packages(&quot;kableExtra&quot;)</span></span></code></pre></div>
 <p>Primero, guardamos la tabla anterior para editarla con las operaciones de kableExtra.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="tablas.html#cb140-1"></a>parques_tabla &lt;-<span class="st"> </span>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb140-2"><a href="tablas.html#cb140-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio),</span>
-<span id="cb140-3"><a href="tablas.html#cb140-3"></a>         <span class="dt">region =</span> stringr<span class="op">::</span><span class="kw">str_to_sentence</span>(region)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb140-4"><a href="tablas.html#cb140-4"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
-<span id="cb140-5"><a href="tablas.html#cb140-5"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="tablas.html#cb139-1"></a>parques_tabla &lt;-<span class="st"> </span>parques_resumen <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb139-2"><a href="tablas.html#cb139-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anio =</span> <span class="kw">as.character</span>(anio),</span>
+<span id="cb139-3"><a href="tablas.html#cb139-3"></a>         <span class="dt">region =</span> stringr<span class="op">::</span><span class="kw">str_to_sentence</span>(region)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb139-4"><a href="tablas.html#cb139-4"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Año&quot;</span>, <span class="st">&quot;Región&quot;, &quot;</span>No Residentes<span class="st">&quot;, &quot;</span>Residentes<span class="st">&quot;, &quot;</span>Total<span class="st">&quot;),</span></span>
+<span id="cb139-5"><a href="tablas.html#cb139-5"></a><span class="st">        format.args = list(decimal.mark = &quot;</span>,<span class="st">&quot;, big.mark = &quot;</span>.<span class="st">&quot;, digits = 1, scientific = FALSE))</span></span></code></pre></div>
 <p>La primera columna de la tabla de arriba es un tanto redundante.
 Sería mejor agrupar las filas según el año.
 Esto se consigue con la función <code>collapse_rows()</code>:</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="tablas.html#cb141-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb141-2"><a href="tablas.html#cb141-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb141-3"><a href="tablas.html#cb141-3"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="tablas.html#cb140-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb140-2"><a href="tablas.html#cb140-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb140-3"><a href="tablas.html#cb140-3"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -753,9 +753,9 @@ Por defecto, <code>collapse_rows()</code> pone las etiquetas en el centro, pero 
 kableExtra permite cambiar el estilo de las tablas muy fácilmente.
 <code>kable_styling()</code> es el estilo por defecto, que es igual al que produce <code>kable()</code>, pero existen muchos otros.
 Si viste tablas hechas en LaTeX, quizás este estilo te resulte familiar:</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="tablas.html#cb142-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb142-2"><a href="tablas.html#cb142-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb142-3"><a href="tablas.html#cb142-3"></a><span class="st">  </span><span class="kw">kable_classic_2</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="tablas.html#cb141-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb141-2"><a href="tablas.html#cb141-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb141-3"><a href="tablas.html#cb141-3"></a><span class="st">  </span><span class="kw">kable_classic_2</span>()</span></code></pre></div>
 <table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
 <thead>
 <tr>
@@ -871,10 +871,10 @@ Patagonia
 </table>
 <p>La función <code>column_spec()</code> permite cambiar los parámetros gráficos de una o más columnas.
 En este caso cambiamos la segunda columna (<code>column = 2</code>) para que las palabras aparezcan italizadas (<code>italic = TRUE</code>):</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="tablas.html#cb143-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb143-2"><a href="tablas.html#cb143-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">2</span>, <span class="dt">italic =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
-<span id="cb143-3"><a href="tablas.html#cb143-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb143-4"><a href="tablas.html#cb143-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="tablas.html#cb142-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb142-2"><a href="tablas.html#cb142-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">2</span>, <span class="dt">italic =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb142-3"><a href="tablas.html#cb142-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb142-4"><a href="tablas.html#cb142-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -990,10 +990,10 @@ Patagonia
 </table>
 <p>Lo notable de <code>column_spec()</code> es que en sus argumentos se pueden poner vectores de manera de generar formato condicional.
 Para resaltar con negrita el año 2021:</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="tablas.html#cb144-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb144-2"><a href="tablas.html#cb144-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> (parques_resumen<span class="op">$</span>anio <span class="op">==</span><span class="st"> </span><span class="dv">2021</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb144-3"><a href="tablas.html#cb144-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb144-4"><a href="tablas.html#cb144-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="tablas.html#cb143-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb143-2"><a href="tablas.html#cb143-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> (parques_resumen<span class="op">$</span>anio <span class="op">==</span><span class="st"> </span><span class="dv">2021</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb143-3"><a href="tablas.html#cb143-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb143-4"><a href="tablas.html#cb143-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1112,16 +1112,16 @@ La llamada a <code>column_spec()</code> está cambiando el formato de la columna
 En particular, va a determinar si el texto está en negrita (bold) o no.
 Y la forma para determinarlo es el vector <code>parques_resumen$anio == 2021</code>.
 ¿Qué es ese vector?</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="tablas.html#cb145-1"></a>parques_resumen<span class="op">$</span>anio <span class="op">==</span><span class="st"> </span><span class="dv">2021</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="tablas.html#cb144-1"></a>parques_resumen<span class="op">$</span>anio <span class="op">==</span><span class="st"> </span><span class="dv">2021</span></span></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
 <p>Por lo tanto, <code>column_spec(column = 1, bold = (parques_resumen$anio == 2021))</code> va a hacer que las tres últimas filas de la columna uno estén en negrita, y las demás no.
 Luego, <code>collapse_rows()</code> colapsa las filas según el año y entonces esas tres últimas filas se transforman en una.</p>
 <p>En este caso el órden de las operaciones es importante.
 Si primero colapsamos y luego damos formato, el resultado no es el esperado:</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="tablas.html#cb147-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb147-2"><a href="tablas.html#cb147-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb147-3"><a href="tablas.html#cb147-3"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> (parques_resumen<span class="op">$</span>anio <span class="op">==</span><span class="st"> </span><span class="dv">2021</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb147-4"><a href="tablas.html#cb147-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="tablas.html#cb146-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb146-2"><a href="tablas.html#cb146-2"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb146-3"><a href="tablas.html#cb146-3"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> (parques_resumen<span class="op">$</span>anio <span class="op">==</span><span class="st"> </span><span class="dv">2021</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb146-4"><a href="tablas.html#cb146-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1237,10 +1237,10 @@ Patagonia
 </table>
 <p>Esto da un montón de flexibilidad en el estilo del texto.
 Por ejemplo, se puede hacer que el color del texto cambie según el valor usando <code>column_spec()</code> y <code>spec_color()</code>.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="tablas.html#cb148-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb148-2"><a href="tablas.html#cb148-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">5</span>, <span class="dt">color =</span> <span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb148-3"><a href="tablas.html#cb148-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb148-4"><a href="tablas.html#cb148-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="tablas.html#cb147-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb147-2"><a href="tablas.html#cb147-2"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">5</span>, <span class="dt">color =</span> <span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb147-3"><a href="tablas.html#cb147-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb147-4"><a href="tablas.html#cb147-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1356,17 +1356,17 @@ Patagonia
 </table>
 <p>La función nueva, <code>spec_color()</code>, genera colores a partir de un vector.
 Podés ver cómo funciona en esta linea:</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="tablas.html#cb149-1"></a><span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="tablas.html#cb148-1"></a><span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total)</span></code></pre></div>
 <pre><code>## [1] &quot;#440154FF&quot; &quot;#440256FF&quot; &quot;#FDE725FF&quot; &quot;#440256FF&quot; &quot;#450559FF&quot; &quot;#98D83EFF&quot;</code></pre>
 <p>Esos números son representaciones en hexadecimal de los colores que ves en la tabla.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="tablas.html#cb151-1"></a>scales<span class="op">::</span><span class="kw">show_col</span>(<span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total))</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="tablas.html#cb150-1"></a>scales<span class="op">::</span><span class="kw">show_col</span>(<span class="kw">spec_color</span>(parques_resumen<span class="op">$</span>total))</span></code></pre></div>
 <p><img src="DT6_files/figure-html/unnamed-chunk-118-1.png" width="100%"  style="display: block; margin: auto;" /></p>
 <p>Así como se puede cambiar el estilo de las columnas con <code>column_spec()</code>, se puede cambiar el estilo de las filas con <code>row_spec()</code>.
 Por ejemplo, se puede resaltar cada 2 líneas con este código:</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="tablas.html#cb152-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb152-2"><a href="tablas.html#cb152-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(parques_resumen), <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;aquamarine&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb152-3"><a href="tablas.html#cb152-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb152-4"><a href="tablas.html#cb152-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="tablas.html#cb151-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb151-2"><a href="tablas.html#cb151-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(parques_resumen), <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;aquamarine&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb151-3"><a href="tablas.html#cb151-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb151-4"><a href="tablas.html#cb151-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1484,13 +1484,13 @@ Patagonia
 ¿Qué es eso?
 <code>seq()</code> genera una secuencia (de <strong>seq</strong>uence) de números empezando en 2, terminando en la cantidad de filas de <code>parques_resumen</code> y saltando de a dos.
 En resumen:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="tablas.html#cb153-1"></a><span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(parques_resumen), <span class="dt">by =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="tablas.html#cb152-1"></a><span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">nrow</span>(parques_resumen), <span class="dt">by =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 2 4 6</code></pre>
 <p>Como caso especial, se puede usar <code>row = 0</code> en <code>row_spec()</code> para cambiar el formato del encabezado.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="tablas.html#cb155-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb155-2"><a href="tablas.html#cb155-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="dv">0</span>, <span class="dt">underline =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb155-3"><a href="tablas.html#cb155-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
-<span id="cb155-4"><a href="tablas.html#cb155-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="tablas.html#cb154-1"></a>parques_tabla <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb154-2"><a href="tablas.html#cb154-2"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dt">row =</span> <span class="dv">0</span>, <span class="dt">underline =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb154-3"><a href="tablas.html#cb154-3"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dt">columns =</span> <span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb154-4"><a href="tablas.html#cb154-4"></a><span class="st">  </span><span class="kw">kable_styling</span>() </span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>

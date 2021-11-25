@@ -280,17 +280,17 @@ RMarkdown, y todo un amplio ecosistema de otros paquetes, permite generar docume
 Como te podrás imaginar, rmarkdown tiene una serie de otras funciones que definen formatos de salida.
 Los dos que seguramente te van a servir más son <code>pdf_document</code> y <code>word_document</code> que justamente generan PDFs y archivos de Word, respectivamente.</p>
 <p>Para crear un documento de R Markdown que genere un archivo PDF basta con cambiar el <code>output</code> en el encabezado por esto:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb180-1"><a href="informes-reproducibles.html#cb180-1"></a><span class="pp">---</span></span>
-<span id="cb180-2"><a href="informes-reproducibles.html#cb180-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> pdf_document</span></span>
-<span id="cb180-3"><a href="informes-reproducibles.html#cb180-3"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb179-1"><a href="informes-reproducibles.html#cb179-1"></a><span class="pp">---</span></span>
+<span id="cb179-2"><a href="informes-reproducibles.html#cb179-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> pdf_document</span></span>
+<span id="cb179-3"><a href="informes-reproducibles.html#cb179-3"></a><span class="pp">---</span></span></code></pre></div>
 <p>Para que el documento se genere correctamente hace falta instalar LaTeX, que es un sistema de composición de textos.
 Aunque parezca mentira, la mejor forma de instalar LaTeX para usar R Markdown es instalando el paquete {<a href="https://yihui.org/tinytex/">tinytex</a>} con <code>install.packages("tinytex")</code> y luego correr <code>tinytex::install_tinytex()</code>.
 Esto va a instalar una versión pequeña de LaTeX en un lugar donde luego rmarkdown lo puede usar.
 Esta es la forma altamente recomendada para generar PDFs con R Markdown que va a evitarte un montón de dolores de cabeza.</p>
 <p>Análogamente, podés generar un archivo de word cambiando el <code>output</code> así:</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb181-1"><a href="informes-reproducibles.html#cb181-1"></a><span class="pp">---</span></span>
-<span id="cb181-2"><a href="informes-reproducibles.html#cb181-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> word_document</span></span>
-<span id="cb181-3"><a href="informes-reproducibles.html#cb181-3"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb180-1"><a href="informes-reproducibles.html#cb180-1"></a><span class="pp">---</span></span>
+<span id="cb180-2"><a href="informes-reproducibles.html#cb180-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> word_document</span></span>
+<span id="cb180-3"><a href="informes-reproducibles.html#cb180-3"></a><span class="pp">---</span></span></code></pre></div>
 <p>Y ya está. En la gran mayoría de los casos no vas a tener que modificar nada más del código ni el texto.</p>
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
@@ -300,24 +300,24 @@ Esta es la forma altamente recomendada para generar PDFs con R Markdown que va a
 <div id="personalizando-la-salida" class="section level2">
 <h2><span class="header-section-number">10.2</span> Personalizando la salida</h2>
 <p>Cada función de formato viene con sus opciones de personalización que podés acceder leyendo su documentación. Para ver la documentación de <code>html_document</code>, usa este comando:</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="informes-reproducibles.html#cb182-1"></a>?rmarkdown<span class="op">::</span>html_document</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="informes-reproducibles.html#cb181-1"></a>?rmarkdown<span class="op">::</span>html_document</span></code></pre></div>
 <p>Vas a ver que tiene un montón de argumentos que modifican la salida. La forma de setear estos argumentos en un documento de R Markdown es, de nuevo, en el encabezado. Cada argumento de la función de salida (<code>html_document</code> en este caso) es un elemento debajo de la función de output.</p>
 <p>Por ejemplo, para que un documento de html tenga una tabla de contenidos hay que setear el argumento <code>toc</code> (de <strong>t</strong>able <strong>o</strong>f <strong>c</strong>ontents) a <code>TRUE</code>. En el encabezado, esto queda así:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb183-1"><a href="informes-reproducibles.html#cb183-1"></a><span class="pp">---</span></span>
-<span id="cb183-2"><a href="informes-reproducibles.html#cb183-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb183-3"><a href="informes-reproducibles.html#cb183-3"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
-<span id="cb183-4"><a href="informes-reproducibles.html#cb183-4"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span>
-<span id="cb183-5"><a href="informes-reproducibles.html#cb183-5"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb182-1"><a href="informes-reproducibles.html#cb182-1"></a><span class="pp">---</span></span>
+<span id="cb182-2"><a href="informes-reproducibles.html#cb182-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb182-3"><a href="informes-reproducibles.html#cb182-3"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb182-4"><a href="informes-reproducibles.html#cb182-4"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span>
+<span id="cb182-5"><a href="informes-reproducibles.html#cb182-5"></a><span class="pp">---</span></span></code></pre></div>
 <p>Conviene mirar eso con un poco de detenimiento porque requiere “traducir” código de R –cual los argumentos de una función se fijan entre paréntesis y con <code>=</code>– en código de yaml –donde los argumentos de la función son una lista cuyos elementos se definen con <code>:</code>.</p>
 <p>En R lo que vemos como <code>html_document(toc = TRUE)</code> se traduce a yaml como</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb184-1"><a href="informes-reproducibles.html#cb184-1"></a><span class="fu">html_document</span><span class="kw">:</span></span>
-<span id="cb184-2"><a href="informes-reproducibles.html#cb184-2"></a><span class="at">  </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb183-1"><a href="informes-reproducibles.html#cb183-1"></a><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb183-2"><a href="informes-reproducibles.html#cb183-2"></a><span class="at">  </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span></code></pre></div>
 <p>Si vas a la ayuda de <code>pdf_document</code> vas a ver que también tiene un argumento llamado <code>toc</code>. Algunos argumentos son compartidos, lo cual hace que se aún más fácil generar un mismo reporte en muchos formatos haciendo muy pocos cambios.</p>
 <p>Una forma rápida de hacer tus informes más vistosos es cambiarle el tema visual. <code>html_document</code> permite elegir entre una serie de temas usando el argumento <code>theme</code>. Por ejemplo, poniendo esto en el encabezado, generás un documento HTML con un fondo oscuro</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb185-1"><a href="informes-reproducibles.html#cb185-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb185-2"><a href="informes-reproducibles.html#cb185-2"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
-<span id="cb185-3"><a href="informes-reproducibles.html#cb185-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span>
-<span id="cb185-4"><a href="informes-reproducibles.html#cb185-4"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> darkly</span></span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb184-1"><a href="informes-reproducibles.html#cb184-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb184-2"><a href="informes-reproducibles.html#cb184-2"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb184-3"><a href="informes-reproducibles.html#cb184-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">TRUE</span></span>
+<span id="cb184-4"><a href="informes-reproducibles.html#cb184-4"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> darkly</span></span></code></pre></div>
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
 <p>Andá a la ayuda de <code>html_document</code> y fijate cuáles son los valores válidos para el argumento <code>theme</code>. ¡Probá algunos!</p>
@@ -327,6 +327,18 @@ Esta es la forma altamente recomendada para generar PDFs con R Markdown que va a
 <h2><span class="header-section-number">10.3</span> Reportes parametrizados</h2>
 <p>Es muy común tener que hacer un reporte cuyo resultado dependa de ciertos parámetros.</p>
 <p>Por ejemplo, podrías tener un reporte que analiza la evolución de visitantes en parques nacionales en una determinada región de Argentina con el siguiente código:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="informes-reproducibles.html#cb185-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb185-2"><a href="informes-reproducibles.html#cb185-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb185-3"><a href="informes-reproducibles.html#cb185-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb185-4"><a href="informes-reproducibles.html#cb185-4"></a></span>
+<span id="cb185-5"><a href="informes-reproducibles.html#cb185-5"></a>parques &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/parques_tidy.csv&quot;</span>)</span>
+<span id="cb185-6"><a href="informes-reproducibles.html#cb185-6"></a></span>
+<span id="cb185-7"><a href="informes-reproducibles.html#cb185-7"></a>parques <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb185-8"><a href="informes-reproducibles.html#cb185-8"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">==</span><span class="st"> &quot;norte&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb185-9"><a href="informes-reproducibles.html#cb185-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(indice_tiempo, total)) <span class="op">+</span></span>
+<span id="cb185-10"><a href="informes-reproducibles.html#cb185-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="DT6_files/figure-html/unnamed-chunk-139-1.png" width="100%"  style="display: block; margin: auto;" /></p>
+<p>Si ahora querés hacer el mismo reporte pero para la región de Patagonia, tenés que abrir el archivo y modificar la llamada a <code>filter</code> para quedarte sólo con esa región:</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="informes-reproducibles.html#cb186-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb186-2"><a href="informes-reproducibles.html#cb186-2"></a><span class="kw">library</span>(dplyr)</span>
 <span id="cb186-3"><a href="informes-reproducibles.html#cb186-3"></a><span class="kw">library</span>(ggplot2)</span>
@@ -334,46 +346,34 @@ Esta es la forma altamente recomendada para generar PDFs con R Markdown que va a
 <span id="cb186-5"><a href="informes-reproducibles.html#cb186-5"></a>parques &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/parques_tidy.csv&quot;</span>)</span>
 <span id="cb186-6"><a href="informes-reproducibles.html#cb186-6"></a></span>
 <span id="cb186-7"><a href="informes-reproducibles.html#cb186-7"></a>parques <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb186-8"><a href="informes-reproducibles.html#cb186-8"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">==</span><span class="st"> &quot;norte&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb186-8"><a href="informes-reproducibles.html#cb186-8"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">==</span><span class="st"> &quot;patagonia&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb186-9"><a href="informes-reproducibles.html#cb186-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(indice_tiempo, total)) <span class="op">+</span></span>
 <span id="cb186-10"><a href="informes-reproducibles.html#cb186-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
-<p><img src="DT6_files/figure-html/unnamed-chunk-139-1.png" width="100%"  style="display: block; margin: auto;" /></p>
-<p>Si ahora querés hacer el mismo reporte pero para la región de Patagonia, tenés que abrir el archivo y modificar la llamada a <code>filter</code> para quedarte sólo con esa región:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="informes-reproducibles.html#cb187-1"></a><span class="kw">library</span>(readr)</span>
-<span id="cb187-2"><a href="informes-reproducibles.html#cb187-2"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb187-3"><a href="informes-reproducibles.html#cb187-3"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb187-4"><a href="informes-reproducibles.html#cb187-4"></a></span>
-<span id="cb187-5"><a href="informes-reproducibles.html#cb187-5"></a>parques &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/parques_tidy.csv&quot;</span>)</span>
-<span id="cb187-6"><a href="informes-reproducibles.html#cb187-6"></a></span>
-<span id="cb187-7"><a href="informes-reproducibles.html#cb187-7"></a>parques <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb187-8"><a href="informes-reproducibles.html#cb187-8"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">==</span><span class="st"> &quot;patagonia&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb187-9"><a href="informes-reproducibles.html#cb187-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(indice_tiempo, total)) <span class="op">+</span></span>
-<span id="cb187-10"><a href="informes-reproducibles.html#cb187-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
 <p>Si el reporte es largo y usa el nombre de la región en múltiples lugares cambiar “norte” por “patagonia” puede ser tedioso y propenso a error, ya que te obliga a modificar muchas partes del código. Y si después tenés que hacer el mismo reporte para “cordoba”…</p>
 <p>En estas situaciones podés crear un reporte parametrizado.
 La idea es que el reporte tiene una serie de parámetros que puede modificar la salida.
 Es como si el archivo de R Markdown fuera una gran función con sus argumentos!</p>
 <p>Para generar un reporte parametrizado hay que agregar un elemento llamado <code>params</code> al encabezado con la lista de parámetros y sus valores por default.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb188-1"><a href="informes-reproducibles.html#cb188-1"></a><span class="fu">params</span><span class="kw">:</span></span>
-<span id="cb188-2"><a href="informes-reproducibles.html#cb188-2"></a><span class="at">  </span><span class="fu">region</span><span class="kw">:</span><span class="at"> norte</span></span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb187-1"><a href="informes-reproducibles.html#cb187-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb187-2"><a href="informes-reproducibles.html#cb187-2"></a><span class="at">  </span><span class="fu">region</span><span class="kw">:</span><span class="at"> norte</span></span></code></pre></div>
 <p>Luego, en el código de R vas a tener acceso a una variable llamada <code>params</code> que es una lista que contiene los parámetros y su valor. Para acceder al valor de cada parámetros se usa el operador <code>$</code> de la siguiente manera:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="informes-reproducibles.html#cb189-1"></a>params<span class="op">$</span>region</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="informes-reproducibles.html#cb188-1"></a>params<span class="op">$</span>region</span></code></pre></div>
 <pre><code>## [1] &quot;norte&quot;</code></pre>
 <p>De esta manera, el código original se puede modificar para usar el valor de la región almacenado en <code>params$region</code></p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="informes-reproducibles.html#cb191-1"></a><span class="kw">library</span>(readr)</span>
-<span id="cb191-2"><a href="informes-reproducibles.html#cb191-2"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb191-3"><a href="informes-reproducibles.html#cb191-3"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb191-4"><a href="informes-reproducibles.html#cb191-4"></a></span>
-<span id="cb191-5"><a href="informes-reproducibles.html#cb191-5"></a>parques &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/parques_tidy.csv&quot;</span>)</span>
-<span id="cb191-6"><a href="informes-reproducibles.html#cb191-6"></a></span>
-<span id="cb191-7"><a href="informes-reproducibles.html#cb191-7"></a>parques <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb191-8"><a href="informes-reproducibles.html#cb191-8"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">==</span><span class="st"> </span>params<span class="op">$</span>region) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb191-9"><a href="informes-reproducibles.html#cb191-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(indice_tiempo, total)) <span class="op">+</span></span>
-<span id="cb191-10"><a href="informes-reproducibles.html#cb191-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="informes-reproducibles.html#cb190-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb190-2"><a href="informes-reproducibles.html#cb190-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb190-3"><a href="informes-reproducibles.html#cb190-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb190-4"><a href="informes-reproducibles.html#cb190-4"></a></span>
+<span id="cb190-5"><a href="informes-reproducibles.html#cb190-5"></a>parques &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/parques_tidy.csv&quot;</span>)</span>
+<span id="cb190-6"><a href="informes-reproducibles.html#cb190-6"></a></span>
+<span id="cb190-7"><a href="informes-reproducibles.html#cb190-7"></a>parques <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb190-8"><a href="informes-reproducibles.html#cb190-8"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">==</span><span class="st"> </span>params<span class="op">$</span>region) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb190-9"><a href="informes-reproducibles.html#cb190-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(indice_tiempo, total)) <span class="op">+</span></span>
+<span id="cb190-10"><a href="informes-reproducibles.html#cb190-10"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
 <p>Y ahora el mismo código puede funcionar para distintas regiones.
 Para crear reportes distintos para cada región sólo hay que modificar el valor del parámetro en el encabezado:</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb192-1"><a href="informes-reproducibles.html#cb192-1"></a><span class="fu">params</span><span class="kw">:</span></span>
-<span id="cb192-2"><a href="informes-reproducibles.html#cb192-2"></a><span class="at">  </span><span class="fu">pais</span><span class="kw">:</span><span class="at"> patagonia</span></span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb191-1"><a href="informes-reproducibles.html#cb191-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb191-2"><a href="informes-reproducibles.html#cb191-2"></a><span class="at">  </span><span class="fu">pais</span><span class="kw">:</span><span class="at"> patagonia</span></span></code></pre></div>
 <div class="alert alert-info">
 <p><strong>Desafío</strong></p>
 <p>Agregá al menos un parámetro al reporte que venís armando.</p>
@@ -440,7 +440,7 @@ Son cuestiones diagnósticas extras que sirven para que vos, como humano, te ent
 Una advertencia te está diciendo que hay algo “raro” en el código que puede significar que hay algo mal.
 No llega al nivel de error, que es algo que literalmente “no computa”.
 Por ejemplo, <code>sqrt</code> tira una advertencia cuando recibe números negativos.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="informes-reproducibles.html#cb197-1"></a>i &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="informes-reproducibles.html#cb196-1"></a>i &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## Warning in sqrt(-1): NaNs produced</code></pre>
 <p>Si un chunk tira una advertencia que es esperable pero no querés que aparezca en el reporte, podés ocultarlas con la opción <code>warning = FALSE</code>.</p>
 <p><code>{r warning = FALSE}     i &lt;- sqrt(-1)</code></p>
