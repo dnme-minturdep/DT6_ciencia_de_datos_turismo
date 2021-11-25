@@ -1,0 +1,79 @@
+---
+title: "Informe"
+author: "Paola Corrales"
+date: "11/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+library(readr)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(ggplot2)
+library(knitr)
+```
+
+## Analisis de visitantes en partes nacionales 
+
+La cantidad de visitantes en parques nacionales presenta una importante variación a lo largo de los años. En particular en el año 2021 se observó un aumento respecto del año anterior generado por la reactivación de la actividad turistica durante los meses donde las restricciones asociadas a la pandemia de COVID-19 fueron suavizadas. 
+
+```{r tabla, echo=FALSE, message=FALSE, warning=FALSE}
+parques_ancho <- readr::read_csv("http://datos.yvera.gob.ar/dataset/458bcbe1-855c-4bc3-a1c9-cd4e84fedbbc/resource/78aea6ed-761c-4659-bdf2-7fcb0f616fad/download/serie-tiempo-parques-nacionales-mensual.csv")
+
+parques_largo <- parques_ancho %>% 
+  pivot_longer(cols = -c("indice_tiempo", "residentes", "no_residentes", "total"),
+               names_to = "region_visitante",
+               values_to = "valor") %>% 
+  mutate(region_visitante = stringr::str_replace(region_visitante, "buenos_aires*", "buenos-aires"),
+         region_visitante = stringr::str_replace(region_visitante, "no_residentes", "noresidentes")) %>% 
+  separate(region_visitante, into = c("region", "tipo_visitante"), sep = "_") %>% 
+  select(-c("residentes", "no_residentes", "total"))
+
+parques_resumen <-  parques_largo %>% 
+  mutate(indice_tiempo = ym(indice_tiempo)) %>% 
+  group_by(anio = year(indice_tiempo), region, tipo_visitante) %>%  
+  summarise(valor = mean(valor)) %>% 
+  filter(region %in% c("cordoba", "cuyo", "patagonia"), 
+         anio >= 2021) %>% 
+  pivot_wider(names_from = "tipo_visitante", values_from = "valor")
+
+parques_resumen %>% 
+  mutate(anio = as.character(anio),
+         region = stringr::str_to_sentence(region)) %>% 
+  kable(col.names = c("Año", "Región", "No Residentes", "Residentes", "Total"),
+        format.args = list(decimal.mark = ",", big.mark = ".", digits = 1, scientific = FALSE))
+```
+
+
+### Región norte
+
+En la siguiente figura se observa la variación de visitantes a lo largo del tiempo para la región Norte. 
+
+```{r}
+parques <- read_csv("https://raw.githubusercontent.com/dnme-minturdep/DT6_ciencia_de_datos_turismo/master/datos/parques_tidy.csv")
+
+pre_pandemia <- filter(parques, 
+                       lubridate::year(indice_tiempo) < 2020 & region == "norte") 
+
+parques %>% 
+  filter(region == "norte") %>% 
+  ggplot(aes(indice_tiempo, total)) +
+  annotate("rect", 
+           xmin = as.Date("2020-01-01"), xmax = as.Date("2021-04-01"), 
+           ymin = -Inf, ymax = Inf, 
+           alpha = 0.3) +
+  geom_line() +
+  geom_smooth(data = pre_pandemia, 
+              method = "lm") +
+  labs(title = "Visitas a parques nacionales",
+       subtitle = "La cantidad de vicitantes aumentó antes de la pandemia",
+       y = "Cantidad de visitantes",
+       x = NULL) +
+  theme_minimal()
+```
+
+
+
